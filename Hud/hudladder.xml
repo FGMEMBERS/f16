@@ -20,7 +20,7 @@
   <enable_velocity_vector>false</enable_velocity_vector>
   <enable_drift_marker>false</enable_drift_marker>
   <enable_alpha_bracket>false</enable_alpha_bracket>
-  <enable_energy_marker>fale</enable_energy_marker>
+  <enable_energy_marker>false</enable_energy_marker>
   <enable_climb_dive_marker>false</enable_climb_dive_marker>
   <enable_glide_slope_marker>false</enable_glide_slope_marker>
   <glide_slope>0.0</glide_slope>
