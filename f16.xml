@@ -147,7 +147,7 @@
      </COMPONENT>
      <COMPONENT NAME="Flaps Control" TYPE="KINEMAT">
        INPUT        gear/gear-cmd-norm
-       DETENTS      1
+       DETENTS      2
                     0    0
                     25   3
        OUTPUT      fcs/flap-pos-deg
