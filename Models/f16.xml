@@ -8,41 +8,43 @@
    <z-m>0.0</z-m>
  </offsets>
 
-<!--
  <animation>
   <type>rotate</type>
-  <object-name>right_aileron</object-name>
+  <object-name>right_upper_aileron</object-name>
+  <object-name>right_lower_aileron</object-name>
   <property>/surface-positions/left-aileron-pos-norm</property>
   <factor>-30</factor>
   <center>
-   <x-m>2.465</x-m>
-   <y-m>0.0</y-m>
-   <z-m>0.19</z-m>
+   <x-m>1.825</x-m>
+   <y-m>4.11</y-m>
+   <z-m>0.02</z-m>
   </center>
   <axis>
-   <x>0.0</x>
-   <y>1.0</y>
+   <x>0.09</x>
+   <y>-0.783</y>
    <z>0.0</z>
   </axis>
  </animation>
 
  <animation>
   <type>rotate</type>
-  <object-name>left_aileron</object-name>
+  <object-name>left_upper_aileron</object-name>
+  <object-name>left_lower_aileron</object-name>
   <property>/surface-positions/left-aileron-pos-norm</property>
   <factor>30</factor>
   <center>
-   <x-m>2.465</x-m>
-   <y-m>0.0</y-m>
-   <z-m>0.19</z-m>
+   <x-m>1.825</x-m>
+   <y-m>-4.11</y-m>
+   <z-m>0.02</z-m>
   </center>
   <axis>
-   <x>0.0</x>
-   <y>1.0</y>
+   <x>0.09</x>
+   <y>-0.783</y>
    <z>0.0</z>
   </axis>
  </animation>
 
+<!--
  <animation>
   <type>rotate</type>
   <object-name>right_inbound_flap</object-name>
@@ -72,40 +74,6 @@
   </center>
   <axis>
    <x>-0.1469</x>
-   <y>1.0</y>
-   <z>0.0</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>right_outbound_flap</object-name>
-  <property>/surface-positions/flap-pos-norm</property>
-  <factor>35</factor>
-  <center>
-   <x-m>2.4</x-m>
-   <y-m>0.0</y-m>
-   <z-m>-0.05</z-m>
-  </center>
-  <axis>
-   <x>0.092</x>
-   <y>1.0</y>
-   <z>0.0</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>left_outbound_flap</object-name>
-  <property>/surface-positions/flap-pos-norm</property>
-  <factor>35</factor>
-  <center>
-   <x-m>2.4</x-m>
-   <y-m>0.0</y-m>
-   <z-m>-0.05</z-m>
-  </center>
-  <axis>
-   <x>-0.092</x>
    <y>1.0</y>
    <z>0.0</z>
   </axis>
