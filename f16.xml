@@ -37,7 +37,7 @@
     AC_IZZ      63100.0
     AC_IXZ        982.0
     AC_EMPTYWT  17400.0
-    AC_CGLOC            -203.0  0.0  -5.1
+    AC_CGLOC            -193.0  0.0  -5.1
     AC_AERORP           -189.5  0.0   3.9
     AC_EYEPTLOC         -336.2  0.0  29.5
     AC_POINTMASS  230.0 -336.2  0.0   0.0
@@ -105,7 +105,7 @@
    </COMPONENT>
    <COMPONENT NAME="g load p" TYPE="PURE_GAIN">
      INPUT          fcs/g-load-error
-     GAIN           0.6
+     GAIN           0.66
    </COMPONENT>
    <COMPONENT NAME="g load i" TYPE="INTEGRATOR">
      INPUT          fcs/g-load-error
