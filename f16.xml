@@ -1,0 +1,1128 @@
+<FDM_CONFIG NAME="F-16" VERSION="1.58">
+
+<!--                                                                                             -
+  File:        f16.xml
+  Author:      Erik Hofman
+  CVS Version: $Id$
+
+  Function: Models an F-16A Block-32 (Basic US configuration)
+-->
+
+  <METRICS>
+
+    <!--
+    Wing area (ft^2)
+    Wing span (ft)
+    Wing avg. chord (ft)
+    H. Tail Area (ft^2)
+    Wing MAC to H.Tail MAC (ft)
+    V. Tail Area (ft^2)
+    Wing MAC to V.Tail MAC (ft)
+    Ixx
+    Iyy
+    Izz
+    Ixz
+    Empty weight
+
+    Center of gravity location, empty weight, in aircraft's own structural coord
+    system. X, Y, Z, in inches; X is positive out the tail, Y positive out the
+    right wing.
+
+    Pilot's eyepoint location, in aircraft's own coord system, FROM cg.
+    X, Y, Z, in inches
+    -->
+
+    AC_WINGAREA   300.0
+    AC_WINGSPAN    30.0  <!-- 31.0 with tip missile launchers and 32.83 with missiles also -->
+    AC_CHORD       11.32 <!-- ft  -->
+    AC_HTAILAREA   63.7  <!-- ft2 -->
+    AC_HTAILARM   190.43 <!-- ft  -->
+    AC_VTAILAREA   54.75 <!-- ft2 -->
+    AC_LV         190.43 <!-- ft  -->
+    AC_IXX       9496.0
+    AC_IYY      55814.0
+    AC_IZZ      63100.0
+    AC_IXZ        982.0
+    AC_EMPTYWT  17400.0	 <!-- w. oil, oxygen, unusable fuel and tip missile launchers -->
+    AC_CGLOC        0.0  0.0   0.0
+    AC_AERORP       1.1  0.0   0.0
+    AC_EYEPTLOC   228.5  0.0  23.2
+    AC_POINTMASS  228.5  0.0  23.2 160.0 <!-- pilot -->
+
+  </METRICS>
+
+  <UNDERCARRIAGE>
+
+    <!--
+    the gear parameters that can be specified are as follows, IN ORDER OF APPEARANCE:
+
+    AC_GEAR
+    <name>                           name of gear entry - no spaces allowed
+    <X> <Y> <Z>                      Gear location in aircraft body coords in inches
+    <spring constant>                spring constant in lbs/ft
+    <damping coefficient>            damping coefficient in lbs/ft/sec
+    <dynamic friction coefficient>   Self-explanatory: sliding friction coefficient
+    <static friction coefficient>    Self-explanatory: "onset" friction coefficient
+    <rolling resistance coefficient> Self-explanatory: rolling resistance coefficient
+    <steerability attribute>         One of <STEERABLE | FIXED | CASTERED>
+    <brake group membership>         One of <LEFT | CENTER | RIGHT | NOSE | TAIL | NONE>
+    <max steer angle>                Maximum steerable angle in degrees
+    -->
+
+    <!--   Legenda:
+       -    LG   Landing Gear       MLG   Main Landing Gear
+       -    WT   Wing Tip           VFT   Ventral Fin Tip
+       -    VS   Vertical Stabilizer
+      -->
+    AC_GEAR NOSE_LG    150.7    0.0  -79.6   1621   700 0.05 0.08 0.2 STEERABLE NOSE  72.0 RETRACT
+    AC_GEAR LEFT_MLG    -5.2  -46.5  -79.6  22704 10000 0.05 0.08 0.2 FIXED     LEFT   0   RETRACT
+    AC_GEAR RIGHT_MLG   -5.2   46.5  -79.6  22704 10000 0.05 0.08 0.2 FIXED     RIGHT  0   RETRACT
+    AC_GEAR LEFT_WT    -66.1 -186.0   -5.0  10000  2000 0.2  0.2  0.2 FIXED     NONE   0   FIXED
+    AC_GEAR RIGHT_WT   -66.1  186.0   -5.0  10000  2000 0.2  0.2  0.2 FIXED     NONE   0   FIXED
+    AC_GEAR TOP_VS    -188.5    0.0  120.9  10000  2000 0.2  0.2  0.2 FIXED     NONE   0   FIXED
+    AC_GEAR LEFT_VFT   -88.3  -20.7  -68.6    200  5000 0.2  0.2  0.2 FIXED     NONE   0   FIXED
+    AC_GEAR RIGHT_VFT  -88.3   20.7  -68.6    200  5000 0.2  0.2  0.2 FIXED     NONE   0   FIXED
+    AC_GEAR INTAKE     107.2    0.0  -16.1  10000  2000 0.2  0.2  0.2 FIXED     NONE   0   FIXED
+    AC_GEAR RADOME     364.8    0.0  -17.7  10000  2000 0.2  0.2  0.2 FIXED     NONE   0   FIXED
+
+  </UNDERCARRIAGE>
+
+  <PROPULSION>
+
+    <!--
+      TANKS SECTION
+
+      Tank locations and characteristics, empty weight, in aircraft's own coord system:
+      X, Y, Z, in inches
+      effective radius of tank, in inches (for fuel slosh, if/when modeled)
+      capacity in pounds
+      Current contents, in pounds
+
+      ENGINE[S] SECTION
+
+      Engine[s] is|are specified by giving engine name (which corresponds to an engine
+      definition file in the "engines" directory) followed by x, y, z placement and
+      pitch and yaw orientation. Coordinates are given in inches in the structural
+      coordinate frame. Angles for pitch and yaw are specified in radians.
+
+      AC_ENGINE name x y z pitch yaw
+
+      THRUSTER[S] SECTION
+
+      AC_THRUSTER name x y z pitch yaw
+    -->
+
+    <AC_ENGINE FILE="low_bypass_turbofan">
+      XLOC      -93.0
+      YLOC        0.0
+      ZLOC        0.0
+      PITCH       0.0
+      YAW         0.0
+      FEED          0
+      FEED          1
+    </AC_ENGINE>
+
+    <AC_THRUSTER FILE="direct">
+      XLOC      191.5
+      YLOC        0.0
+      ZLOC        0.0
+      PITCH       0.0
+      YAW         0.0
+    </AC_THRUSTER>
+
+    <AC_TANK TYPE="FUEL" NUMBER="1">
+      XLOC        0.0
+      YLOC       92.1
+      ZLOC       -5.0
+      RADIUS     78.8
+      CAPACITY 3486.0
+      CONTENTS 3486.0
+    </AC_TANK>
+
+    <AC_TANK TYPE="FUEL" NUMBER="2">
+      XLOC        0.0
+      YLOC      -92.1
+      ZLOC       -5.0
+      RADIUS     78.8
+      CAPACITY 3486.0
+      CONTENTS 3486.0
+    </AC_TANK>	
+
+  </PROPULSION>
+
+  <!--
+  In the following section for flight controls the TYPE parameter may be one of
+  the following:
+
+    LAG_FILTER
+    LEAD_LAG_FILTER
+    SECOND_ORDER_FILTER
+    WASHOUT_FILTER
+    INTEGRATOR
+    PURE_GAIN
+    SCHEDULED_GAIN
+    HYSTERESIS
+    SUMMER
+    DEADBAND
+    GRADIENT
+    AEROSURFACE_SCALE
+
+  Most flight control systems should be able to be modeled by the above
+  components.
+
+  According to Etkin, (From the Flight Safety Foundation Human Engineering
+  Bulletin 56-5H) the stick and rudder forces a pilot may be expected to apply
+  are as follows (averaged, for a right-handed pilot):
+
+  Stick Pull:  50 lbs.
+        Push:  50
+        Right: 20
+        Left:  20
+
+  Pedal Push: 300 lbs.
+
+  It is assumed that most flight control systems will list the pilot input in
+  pounds force (or the metric equivalent). It is also assumed that the aerosurfaces
+  will all have limits specified, and that the joystick inputs from FlightGear will be
+  from -1 to 0 to +1. Given all those parameters, it should be possible to
+  calculate a scaling factor that will convert the +/-1 range into a push/pull
+  force command ready for input to the FCS.
+
+  The MAX and MIN pilot input forces in AEROSURFACE_SCALE types below are given in
+  pounds.
+  -->
+
+  <FLIGHT_CONTROL NAME="F-16 Direct">
+    <COMPONENT NAME="Pitch Trim Sum" TYPE="SUMMER">
+       ID            0
+       INPUT        FG_ELEVATOR_CMD
+       INPUT        FG_PITCH_TRIM_CMD
+       CLIPTO       -1 1
+    </COMPONENT>
+    <COMPONENT NAME="Elevator Control" TYPE="AEROSURFACE_SCALE">
+       ID            1
+       INPUT         0
+       MIN          -25
+       MAX           25
+       OUTPUT        FG_ELEVATOR_POS
+       GAIN          0.01745
+     </COMPONENT>
+     <COMPONENT NAME="Roll Trim Sum" TYPE="SUMMER">
+       ID            2
+       INPUT         FG_AILERON_CMD
+       INPUT         FG_ROLL_TRIM_CMD
+       CLIPTO        -1 1
+     </COMPONENT>
+     <COMPONENT NAME="Left Aileron Control" TYPE="AEROSURFACE_SCALE">
+       ID            3
+       INPUT         2
+       MIN          -21.5
+       MAX           21.5
+       GAIN          0.01745
+       OUTPUT        FG_LEFT_AILERON_POS
+     </COMPONENT>
+      <COMPONENT NAME="Right Aileron Control" TYPE="AEROSURFACE_SCALE">
+       ID            4
+       INPUT         2
+       MIN          -21.5
+       MAX           21.5
+       INVERT
+       GAIN          0.01745
+       OUTPUT        FG_RIGHT_AILERON_POS
+     </COMPONENT>
+     <COMPONENT NAME="Yaw Trim Sum" TYPE="SUMMER">
+       ID            5
+       INPUT        FG_RUDDER_CMD
+       INPUT        FG_YAW_TRIM_CMD
+       CLIPTO       -1 1
+     </COMPONENT>
+     <COMPONENT NAME="Rudder Control" TYPE="AEROSURFACE_SCALE">
+       ID            6
+       INPUT        5
+       MIN         -30
+       MAX          30
+       GAIN         0.01745
+       OUTPUT       FG_RUDDER_POS
+     </COMPONENT>
+  </FLIGHT_CONTROL>
+
+  <AERODYNAMICS>
+
+    <!--
+    For Multiplier parameter identifiers, see the definition for enum eParam in FGDefs.h
+
+    The aerodynamics section is arranged as follows:
+
+     <AERODYNAMICS>
+       <AXIS NAME="LIFT">                   // {LIFT|DRAG|SIDE|ROLL|PITCH|YAW}
+
+         <COEFFICIENT NAME="CLalpha" TYPE="VECTOR">   // example for CLalpha
+
+           Lift_due_to_alpha                // e.g. Lift_at_zero_alpha (no embedded spaces)
+           [[rows] cols]                    // calc_type: {TABLE|VECTOR|TABLE|EQUATION}
+                                            // number of rows and number of columns
+                                            // are present depending on calc_type
+           row_lookup column_lookup         // the lookup parameters for row and column
+                                            // based on the above chart, i.e. if the
+                                            // row and column lookups are 16384 &
+                                            // 32768 that means the rows are indexed
+                                            // by mach and the columns by altitude
+                                            // if the type is VECTOR, then the table
+                                            // is referenced only by a single lookup.
+           multipliers                      // this is an OR'ed value of all the
+                                            // parameters this coefficient must be
+                                            // multiplied by to get a force or moment,
+                                            // i.e.0  these are the non-dimensionalizing
+                                            // values. Alternatively, the values can
+                                            // be given as the FG_* descriptors
+                                            // delimited with the "|" pipe character.
+           column_value                     // if a TABLE, the row values for _this_
+                                            // column follow. I.e.0  if the column
+                                            // represents altitude and this value is
+                                            // 40,000, then what follows are the rows
+                                            // of data for this coefficient at this
+                                            // altitude
+           row_value coeff_value            // The actual value for the data at this
+                                            // row, where for instance, 0.0 might
+                                            // a mach number of 0; and the second value
+                                            // represents the coefficient value for
+                                            // this column at this row. Using the
+                                            // example mentioned: 2.4 0.98 would mean,
+                                            // for this column of data and at mach 2.4,
+                                            // the value of the coefficient is 0.98.
+           <...> <...>                      // a <row> <coeff> value entry is present
+                                            // each row of data. ADDITIONALLY, for each
+                                            // column, the row_value series must be
+                                            // identical.
+           column_value2                    // repeat row/coeff value mapping for
+           row_value coeff_value            // each column in the table
+              0...> <...>                      //
+           </COEFFICIENT>
+
+         </AXIS>
+    -->
+
+    AC_ALPHALIMITS -0.3491 0.6109
+
+    <AXIS NAME="LIFT">
+
+      <COEFFICIENT NAME="CLq" TYPE="VECTOR">
+         Lift_due_to_pitch_rate
+         20
+         FG_ALPHA
+         FG_QBAR|FG_WINGAREA|FG_CI2VEL|FG_AEROQ
+        -0.3491 22.132
+        -0.2618 23.856
+        -0.1745 24.273
+        -0.0873 29.917
+        0.0000  29.779
+        0.0873  30.573
+        0.1745  30.967
+        0.2618  29.181
+        0.3491  25.871
+        0.4363  25.048
+        0.5236  24.307
+        0.6109  23.449
+        0.6981  28.622
+        0.7854  23.933
+        0.8727  20.048
+        0.9599  15.385
+        1.0472  11.998
+        1.2217  11.358
+        1.3963  1.405
+        1.5708  -0.156
+     </COEFFICIENT>
+
+     <COEFFICIENT NAME="CLDe" TYPE="TABLE">
+        Lift_due_to_Elevator_Deflection
+        20 5
+        FG_ALPHA FG_ELEVATOR_POS
+        FG_QBAR|FG_WINGAREA|FG_ELEVATOR_POS
+                -0.4363 -0.1745 0.0     0.1745  0.4363
+        -0.3491 -0.128  -0.079  0.000   0.072   0.398   
+        -0.2618 -0.156  -0.079  0.000   0.107   0.475   
+        -0.1745 -0.180  -0.099  0.000   0.098   0.496   
+        -0.0873 -0.167  -0.064  0.000   0.085   0.171   
+        0.0000  -0.175  -0.084  0.003   0.089   0.199   
+        0.0873  -0.185  -0.082  0.000   0.114   0.191   
+        0.1745  -0.225  -0.099  0.000   0.082   0.156   
+        0.2618  -0.261  -0.129  0.000   0.052   0.105   
+        0.3491  -0.252  -0.106  0.000   0.009   0.077   
+        0.4363  -0.202  -0.054  0.000   0.085   0.076   
+        0.5236  -0.251  -0.117  0.000   0.032   0.017   
+        0.6109  -0.210  -0.070  0.000   0.076   -0.016  
+        0.6981  -0.203  -0.067  0.000   0.040   -0.057  
+        0.7854  -0.174  -0.029  0.000   -0.033  -0.050  
+        0.8727  -0.179  -0.104  0.000   -0.034  -0.089
+        0.9599  -0.086  -0.073  0.000   -0.036  -0.073  
+        1.0472  -0.081  -0.062  0.000   -0.037  -0.074  
+        1.2217  0.003   -0.014  0.000   0.018   -0.032  
+        1.3963  0.046   0.022   0.000   -0.041  -0.111  
+        1.5708  0.081   0.040   0.000   -0.036  -0.103
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CLalpha" TYPE="TABLE">
+        Lift_due_to_alpha
+        20 7
+        FG_ALPHA FG_ABETA
+        FG_QBAR|FG_WINGAREA
+                0.0     0.0873   0.1745  0.2618  0.3490  0.4363  0.5326
+        -0.3491 -1.017  -1.061  -1.092  -1.073  -1.052  -1.004  -0.954
+        -0.2618 -0.901  -0.901  -0.914  -0.921  -0.905  -0.883  -0.850
+        -0.1745 -0.664  -0.675  -0.681  -0.684  -0.682  -0.687  -0.686
+        -0.0873 -0.279  -0.285  -0.267  -0.256  -0.254  -0.243  -0.250
+        0.0000  0.025   0.029   0.035   0.049   0.044   0.032   0.006
+        0.0873  0.365   0.366   0.364   0.367   0.351   0.324   0.282
+        0.1745  0.747   0.739   0.725   0.713   0.677   0.621   0.555
+        0.2618  1.102   1.096   1.066   1.034   0.980   0.908   0.824
+        0.3491  1.376   1.372   1.341   1.298   1.240   1.174   1.087
+        0.4363  1.558   1.555   1.533   1.482   1.427   1.363   1.296
+        0.5236  1.816   1.802   1.738   1.670   1.581   1.474   1.379
+        0.6109  1.894   1.862   1.761   1.664   1.570   1.462   1.373
+        0.6981  1.883   1.839   1.781   1.673   1.582   1.490   1.396
+        0.7854  1.732   1.716   1.659   1.555   1.424   1.221   1.262
+        0.8727  1.593   1.554   1.508   1.424   1.337   1.240   1.119
+        0.9599  1.390   1.354   1.337   1.262   1.219   1.194   1.115
+        1.0472  1.203   1.174   1.157   1.087   1.081   1.069   1.034
+        1.2217  0.826   0.817   0.767   0.745   0.762   0.751   0.744
+        1.3963  0.429   0.430   0.418   0.430   0.433   0.432   0.425
+        1.5708  0.086   0.084   0.083   0.081   0.078   0.080   0.083
+      </COEFFICIENT>
+
+    </AXIS>
+
+    <AXIS NAME="DRAG">
+
+      <COEFFICIENT NAME="CDq" TYPE="VECTOR">
+         Drag_due_to_pitch_rate
+         20
+         FG_ALPHA
+         FG_QBAR|FG_WINGAREA|FG_AEROQ|FG_CI2VEL
+        -0.3491 -9.071
+        -0.2618 -7.576
+        -0.1745 -5.431
+        -0.0873 -4.333
+        0.0000  -2.003
+        0.0873  0.160
+        0.1745  2.520
+        0.2618  4.521
+        0.3491  6.697
+        0.4363  9.695
+        0.5236  12.618
+        0.6109  15.002
+        0.6981  22.085
+        0.7854  22.728
+        0.8727  22.353
+        0.9599  19.739
+        1.0472  19.593
+        1.2217  22.625
+        1.3963  7.131
+        1.5708  0.201
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CDalpha" TYPE="TABLE">
+        Drag_due_to_alpha
+        20 7
+        FG_ALPHA FG_ABETA
+        FG_QBAR|FG_WINGAREA
+                0.0     0.0873   0.1745  0.2618  0.3490  0.4363  0.5326
+        -0.3491 0.469   0.489   0.508   0.502   0.498   0.473   0.457
+        -0.2618 0.343   0.342   0.345   0.350   0.349   0.344   0.332
+        -0.1745 0.217   0.212   0.211   0.213   0.212   0.213   0.208
+        -0.0873 0.103   0.102   0.095   0.088   0.085   0.080   0.076
+        0.0000  0.049   0.047   0.044   0.041   0.040   0.037   0.035
+        0.0873  0.039   0.037   0.035   0.031   0.029   0.028   0.026
+        0.1745  0.082   0.079   0.077   0.076   0.073   0.063   0.061
+        0.2618  0.184   0.183   0.179   0.176   0.166   0.156   0.140
+        0.3491  0.364   0.361   0.353   0.345   0.323   0.297   0.271
+        0.4363  0.583   0.576   0.566   0.544   0.517   0.486   0.466
+        0.5236  0.871   0.864   0.838   0.806   0.771   0.713   0.682
+        0.6109  1.130   1.112   1.061   1.011   0.955   0.897   0.844
+        0.6981  1.377   1.348   1.314   1.242   1.177   1.094   1.025
+        0.7854  1.536   1.527   1.475   1.384   1.253   1.054   1.091
+        0.8727  1.700   1.659   1.609   1.520   1.414   1.298   1.162
+        0.9599  1.776   1.728   1.705   1.607   1.548   1.503   1.401
+        1.0472  1.855   1.804   1.781   1.673   1.654   1.633   1.583
+        1.2217  1.970   1.940   1.845   1.799   1.828   1.798   1.780
+        1.3963  1.959   1.971   1.939   1.996   2.010   1.994   1.935
+        1.5708  2.140   2.122   2.067   2.042   1.969   2.019   2.010
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CDDe" TYPE="TABLE">
+        Drag_due_to_elevator_Deflection
+        20 5
+        FG_ALPHA FG_ELEVATOR_POS
+        FG_QBAR|FG_WINGAREA|FG_ELEVATOR_POS
+                -0.4363 -0.1745 0.0     0.1745  0.4363
+        -0.3491 0.142   0.060   0.000   -0.031  -0.125
+        -0.2618 0.132   0.043   0.000   -0.025  -0.085
+        -0.1745 0.112   0.034   0.000   -0.006  -0.030
+        -0.0873 0.080   0.017   0.000   0.004   0.038
+        0.0000  0.064   0.013   0.000   0.012   0.057
+        0.0873  0.045   0.003   0.000   0.023   0.085
+        0.1745  0.020   -0.008  0.000   0.034   0.107
+        0.2618  -0.013  -0.030  0.000   0.039   0.115
+        0.3491  -0.052  -0.042  0.000   0.037   0.136
+        0.4363  -0.071  -0.037  0.000   0.079   0.149
+        0.5236  -0.131  -0.081  0.000   0.068   0.139
+        0.6109  -0.154  -0.072  0.000   0.103   0.117
+        0.6981  -0.194  -0.088  0.000   0.089   0.089
+        0.7854  -0.216  -0.070  0.000   0.021   0.087
+        0.8727  -0.279  -0.167  0.000   -0.009  0.013
+        0.9599  -0.219  -0.149  0.000   -0.016  0.004
+        1.0472  -0.249  -0.152  0.000   -0.015  0.013
+        1.2217  -0.186  -0.126  0.000   0.048   0.060
+        1.3963  -0.180  -0.096  0.000   -0.042  -0.071
+        1.5708  -0.139  -0.104  0.000   -0.063  -0.077
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CDDa" TYPE="VECTOR">
+        Drag_due_to_aileron_Deflection
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_AILERON_POS
+        -0.3491 1.0246
+        -0.2618 0.7612
+        -0.1745 0.5239
+        -0.0873 0.3504
+        0.0000  0.2772
+        0.0873  0.2707
+        0.1745  0.3396
+        0.2618  0.5077
+        0.3491  0.7801
+        0.4363  1.1377
+        0.5236  1.5730
+        0.6109  1.9367
+        0.6981  2.3152
+        0.7854  2.5023
+        0.8727  2.7723
+        0.9599  3.0413
+        1.0472  3.2439
+        1.2217  3.5173
+        1.3963  3.7808
+        1.5708  3.9032
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CDDr" TYPE="VECTOR">
+        Drag_due_to_rudder_Deflection
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_RUDDER_POS
+        -0.3491 -1.3488
+        -0.2618 -0.9293
+        -0.1745 -0.5327
+        -0.0873 -0.1437
+        0.0000  0.0012
+        0.0873  0.0347
+        0.1745  -0.0788
+        0.2618  -0.3679
+        0.3491  -0.8416
+        0.4363  -1.4469
+        0.5236  -2.2307
+        0.6109  -2.8359
+        0.6981  -3.4998
+        0.7854  -3.7968
+        0.8727  -4.2353
+        0.9599  -4.6062
+        1.0472  -4.9025
+        1.2217  -5.3112
+        1.3963  -5.6791
+        1.5708  -5.8979
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CDbeta" TYPE="TABLE">
+        Drag_due_to_sideslip
+        20 2
+        FG_ALPHA FG_ABETA
+        FG_QBAR|FG_WINGAREA|FG_ABETA
+                0.0     0.5326
+        -0.3491 -0.376  0.362
+        -0.2618 -0.245  0.362
+        -0.1745 -0.119  0.372
+        -0.0873 -0.025  0.480
+        0.0000  0.000   0.566
+        0.0873  -0.032  0.614
+        0.1745  -0.131  0.637
+        0.2618  -0.291  0.648
+        0.3491  -0.493  0.600
+        0.4363  -0.713  0.520
+        0.5236  -1.025  0.509
+        0.6109  -1.291  0.471
+        0.6981  -1.533  0.432
+        0.7854  -1.675  0.269
+        0.8727  -1.828  0.223
+        0.9599  -1.896  0.231
+        1.0472  -1.970  0.254
+        1.2217  -2.073  0.286
+        1.3963  -2.041  0.306
+        1.5708  -2.226  0.320
+      </COEFFICIENT>
+
+    </AXIS>
+
+    <AXIS NAME="SIDE">
+
+      <COEFFICIENT NAME="CYb" TYPE="VECTOR">
+        Side_force_due_to_beta
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_BETA|FG_AILERON_POS
+        -0.3491 0.6101
+        -0.2618 0.5979
+        -0.1745 0.7722
+        -0.0873 0.9831
+        0.0000  1.1085
+        0.0873  1.1757
+        0.1745  1.1987
+        0.2618  1.1306
+        0.3491  1.0149
+        0.4363  0.9461
+        0.5236  0.7980
+        0.6109  0.7075
+        0.6981  0.7318
+        0.7854  0.3809
+        0.8727  0.4469
+        0.9599  0.6401
+        1.0472  0.6671
+        1.2217  0.5295
+        1.3963  0.6467
+        1.5708  0.6131
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CYDa" TYPE="TABLE">
+        Side_force_due_to_aileron
+        20 3
+        FG_ALPHA FG_BETA
+        FG_QBAR|FG_WINGAREA|FG_AILERON_POS
+                -0.5326   0.0    0.5326
+        -0.3491 -3.430  -0.054  -3.883
+        -0.2618 -3.787  -0.045  -3.672
+        -0.1745 -4.264  -0.046  -4.331
+        -0.0873 -5.749  -0.044  -5.999
+        0.0000  -6.261  -0.067  -6.455
+        0.0873  -6.550  -0.083  -6.705
+        0.1745  -6.630  -0.081  -6.842
+        0.2618  -6.331  -0.064  -6.691
+        0.3491  -6.189  -0.052  -5.488
+        0.4363  -5.503  -0.040  -5.614
+        0.5236  -3.966  -0.041  -4.815
+        0.6109  -3.348  -0.019  -4.110
+        0.6981  -2.955  -0.001  -3.571
+        0.7854  -2.122  0.072   -5.300
+        0.8727  -2.784  0.118   -4.318
+        0.9599  -3.662  0.156   -4.180
+        1.0472  -4.009  0.142   -3.654
+        1.2217  -3.444  0.060   -2.979
+        1.3963  -3.621  0.023   -3.636
+        1.5708  -3.501  0.017   -3.646
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CYDr" TYPE="VECTOR">
+        Side_force_due_to_rudder
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_RUDDER_POS
+        -0.3491 -0.056
+        -0.2618 -0.035
+        -0.1745 -0.038
+        -0.0873 -0.004
+        0.0000  0.145
+        0.0873  0.211
+        0.1745  0.115
+        0.2618  0.130
+        0.3491  0.187
+        0.4363  0.188
+        0.5236  0.234
+        0.6109  0.229
+        0.6981  0.610
+        0.7854  0.155
+        0.8727  0.164
+        0.9599  0.177
+        1.0472  0.198
+        1.2217  0.154
+        1.3963  0.178
+        1.5708  0.172
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CYp" TYPE="VECTOR">
+        Side_force_due_to_roll_rate
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_BI2VEL|FG_ROLLRATE
+        -0.3491 -0.643
+        -0.2618 -0.631
+        -0.1745 -0.805
+        -0.0873 -0.806
+        0.0000  -1.114
+        0.0873  -1.244
+        0.1745  -1.509
+        0.2618  -1.365
+        0.3491  -1.359
+        0.4363  -1.308
+        0.5236  -1.409
+        0.6109  -1.237
+        0.6981  -1.030
+        0.7854  1.889
+        0.8727  -1.418
+        0.9599  -1.660
+        1.0472  -3.567
+        1.2217  -0.980
+        1.3963  -0.353
+        1.5708  -0.352
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CYr" TYPE="VECTOR">
+        Side_force_due_to_yaw_rate
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_BI2VEL|FG_YAWRATE
+        -0.3491 -2.050
+        -0.2618 -2.038
+        -0.1745 -2.212
+        -0.0873 -2.033
+        0.0000  -2.089
+        0.0873  -2.115
+        0.1745  -2.198
+        0.2618  -2.112
+        0.3491  -1.834
+        0.4363  -1.429
+        0.5236  -1.388
+        0.6109  -1.918
+        0.6981  -0.239
+        0.7854  0.659
+        0.8727  0.763
+        0.9599  0.940
+        1.0472  0.703
+        1.2217  -0.504
+        1.3963  -0.520
+        1.5708  -0.806
+      </COEFFICIENT>
+
+    </AXIS>
+
+    <AXIS NAME="ROLL">
+
+      <COEFFICIENT NAME="Clp" TYPE="VECTOR">
+        Roll_moment_due_to_roll_rate_(roll_damping)
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_BI2VEL|FG_ROLLRATE
+        -0.3491 -0.366
+        -0.2618 -0.366
+        -0.1745 -0.366
+        -0.0873 -0.377
+        0.0000  -0.345
+        0.0873  -0.434
+        0.1745  -0.408
+        0.2618  -0.388
+        0.3491  0.329
+        0.4363  -0.294
+        0.5236  -0.230
+        0.6109  -0.210
+        0.6981  -0.120
+        0.7854  -0.100
+        0.8727  -0.100
+        0.9599  -0.120
+        1.0472  -0.140
+        1.2217  -0.100
+        1.3963  -0.150
+        1.5708  -0.200
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="Clr" TYPE="VECTOR">
+        Roll_moment_due_to_yaw_rate
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_BI2VEL|FG_YAWRATE
+        -0.3491 -0.155
+        -0.2618 -0.155
+        -0.1745 -0.155
+        -0.0873 -0.201
+        0.0000  -0.002
+        0.0873  0.088
+        0.1745  0.205
+        0.2618  0.220
+        0.3491  0.319
+        0.4363  0.437
+        0.5236  0.680
+        0.6109  0.100
+        0.6981  0.447
+        0.7854  -0.330
+        0.8727  -0.068
+        0.9599  0.118
+        1.0472  0.080
+        1.2217  0.053
+        1.3963  0.087
+        1.5708  -0.018
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="Clb" TYPE="VECTOR">
+        Roll_moment_due_to_beta
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_WINGSPAN|FG_BETA
+        -0.3491 0.036
+        -0.2618 0.024
+        -0.1745 0.020
+        -0.0873 -0.017
+        0.0000  -0.030
+        0.0873  -0.060
+        0.1745  -0.097
+        0.2618  -0.138
+        0.3491  -0.170
+        0.4363  -0.169
+        0.5236  -0.174
+        0.6109  -0.145
+        0.6981  -0.147
+        0.7854  -0.145
+        0.8727  -0.109
+        0.9599  -0.115
+        1.0472  -0.120
+        1.2217  -0.124
+        1.3963  -0.128
+        1.5708  -0.129
+      </COEFFICIENT>
+      <COEFFICIENT NAME="ClDa" TYPE="VECTOR">
+        Roll_moment_due_to_aileron
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_WINGSPAN|FG_AILERON_POS
+        -0.3491 -0.056
+        -0.2618 -0.037
+        -0.1745 -0.003
+        -0.0873 -0.020
+        0.0000  1.287
+        0.0873  -0.040
+        0.1745  -0.032
+        0.2618  -0.057
+        0.3491  -0.217
+        0.4363  -0.125
+        0.5236  -0.087
+        0.6109  -0.096
+        0.6981  -0.056
+        0.7854  -0.024
+        0.8727  -0.024
+        0.9599  -0.014
+        1.0472  -0.020
+        1.2217  -0.058
+        1.3963  -0.013
+        1.5708  0.013
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="ClDr" TYPE="VECTOR">
+        Roll_moment_due_to_rudder
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_WINGSPAN|FG_RUDDER_POS
+        -0.3491 0.034
+        -0.2618 0.046
+        -0.1745 0.034
+        -0.0873 -0.013
+        0.0000  -0.004
+        0.0873  0.002
+        0.1745  -0.004
+        0.2618  0.001
+        0.3491  -0.020
+        0.4363  0.009
+        0.5236  0.012
+        0.6109  0.034
+        0.6981  0.055
+        0.7854  -0.013
+        0.8727  0.007
+        0.9599  0.004
+        1.0472  0.006
+        1.2217  0.002
+        1.3963  0.005
+        1.5708  0.254
+      </COEFFICIENT>
+
+    </AXIS>
+
+    <AXIS NAME="PITCH">
+      <COEFFICIENT NAME="Cmalpha" TYPE="TABLE">
+        Pitch_moment_due_to_alpha
+        20 7
+        FG_ALPHA FG_ABETA
+        FG_QBAR|FG_WINGAREA|FG_CBAR
+                0.0     0.0873   0.1745  0.2618  0.3490  0.4363  0.5326
+        -0.3491 0.013   0.002   0.012   0.049   0.068   0.078   0.104
+        -0.2618 -0.076  -0.053  -0.026  0.014   0.024   0.033   0.051
+        -0.1745 -0.103  -0.064  -0.042  -0.009  0.019   0.015   0.033
+        -0.0873 -0.074  -0.079  -0.076  -0.056  -0.040  -0.025  -0.025
+        0.0000  -0.060  -0.062  -0.064  -0.062  -0.059  -0.047  -0.053
+        0.0873  -0.050  -0.051  -0.053  -0.053  -0.056  -0.063  -0.056
+        0.1745  -0.044  -0.047  -0.050  -0.053  -0.056  -0.062  -0.066
+        0.2618  -0.041  -0.045  -0.051  -0.056  -0.064  -0.074  -0.064
+        0.3491  -0.034  -0.044  -0.052  -0.057  -0.066  -0.076  -0.062
+        0.4363  -0.051  -0.052  -0.055  -0.066  -0.077  -0.088  -0.064
+        0.5236  -0.046  -0.053  -0.073  -0.088  -0.088  -0.101  -0.041
+        0.6109  -0.061  -0.063  -0.077  -0.091  -0.095  -0.075  -0.025
+        0.6981  -0.084  -0.092  -0.089  -0.083  -0.075  -0.018  0.024
+        0.7854  -0.092  -0.104  -0.109  -0.108  -0.075  -0.067  -0.015
+        0.8727  -0.083  -0.098  -0.100  -0.079  -0.051  -0.039  -0.036
+        0.9599  -0.074  -0.082  -0.074  -0.080  -0.090  -0.038  -0.078
+        1.0472  -0.141  -0.133  -0.152  -0.171  -0.174  -0.148  -0.184
+        1.2217  -0.322  -0.310  -0.368  -0.368  -0.363  -0.379  -0.364
+        1.3963  -0.468  -0.476  -0.484  -0.504  -0.526  -0.516  -0.481
+        1.5708  -0.618  -0.616  -0.609  -0.618  -0.619  -0.633  -0.636
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CmDe" TYPE="TABLE">
+        Pitch_moment_due_to_elevator_Deflection
+        20 5
+        FG_ALPHA FG_ELEVATOR_POS
+        FG_QBAR|FG_WINGAREA|FG_CBAR
+                -0.4363 -0.1745 0.0     0.1745  0.4363
+        -0.3491 0.154   0.070   0.000   -0.086  -0.200
+        -0.2618 0.178   0.082   0.000   -0.090  -0.217
+        -0.1745 0.188   0.077   0.000   -0.108  -0.222
+        -0.0873 0.199   0.086   0.000   -0.108  -0.189
+        0.0000  0.204   0.103   0.000   -0.093  -0.176
+        0.0873  0.210   0.104   0.000   -0.095  -0.177
+        0.1745  0.225   0.097   0.000   -0.085  -0.164
+        0.2618  0.249   0.114   0.000   -0.087  -0.146
+        0.3491  0.250   0.102   0.000   -0.071  -0.140
+        0.4363  0.242   0.096   0.000   -0.074  -0.128
+        0.5236  0.228   0.090   0.000   -0.081  -0.105
+        0.6109  0.197   0.071   0.000   -0.088  -0.087
+        0.6981  0.172   0.056   0.000   -0.069  -0.055
+        0.7854  0.155   0.041   0.000   -0.070  -0.027
+        0.8727  0.098   0.042   0.000   -0.046  -0.050
+        0.9599  0.080   0.039   0.000   -0.022  -0.057
+        1.0472  0.084   0.048   0.000   -0.013  -0.007
+        1.2217  0.099   0.026   0.000   0.027   0.027
+        1.3963  0.135   0.049   0.000   -0.008  0.020
+        1.5708  0.120   0.036   0.000   0.008   0.040
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="Cmq" TYPE="VECTOR">
+        Pitch_moment_due_to_pitch_rate
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_CI2VEL|FG_PITCHRATE
+        -0.3491 -6.840
+        -0.2618 -6.840
+        -0.1745 -6.840
+        -0.0873 -3.420
+        0.0000  -5.480
+        0.0873  -5.450
+        0.1745  -6.020
+        0.2618  -6.700
+        0.3491  -5.690
+        0.4363  -6.000
+        0.5236  -6.200
+        0.6109  -6.400
+        0.6981  -6.600
+        0.7854  -6.000
+        0.8727  -5.500
+        0.9599  -5.000
+        1.0472  -4.500
+        1.2217  -3.500
+        1.3963  -5.600
+        1.5708  -4.040
+      </COEFFICIENT>
+
+    </AXIS>
+
+    <AXIS NAME="YAW">
+
+      <COEFFICIENT NAME="Cnr" TYPE="VECTOR">
+        Yaw_moment_due_to_yaw_rate
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_BI2VEL|FG_YAWRATE
+        -0.3491 -0.517
+        -0.2618 -0.517
+        -0.1745 -0.517
+        -0.0873 -0.461
+        0.0000  -0.414
+        0.0873  -0.397
+        0.1745  -0.373
+        0.2618  -0.455
+        0.3491  -0.550
+        0.4363  -0.582
+        0.5236  -0.595
+        0.6109  -0.637
+        0.6981  -1.020
+        0.7854  -0.840
+        0.8727  -0.541
+        0.9599  -0.350
+        1.0472  -0.350
+        1.2217  -0.070
+        1.3963  -0.150
+        1.5708  -0.150
+      </COEFFICIENT>
+      <COEFFICIENT NAME="Cnp" TYPE="VECTOR">
+        Yaw_moment_due_to_roll_rate
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_BI2VEL|FG_ROLLRATE
+        -0.3491 -0.001
+        -0.2618 -0.001
+        -0.1745 -0.001
+        -0.0873 0.042
+        0.0000  -0.008
+        0.0873  -0.021
+        0.1745  -0.032
+        0.2618  -0.032
+        0.3491  0.050
+        0.4363  0.150
+        0.5236  0.130
+        0.6109  0.158
+        0.6981  0.240
+        0.7854  0.150
+        0.8727  0.000
+        0.9599  -0.200
+        1.0472  -0.300
+        1.2217  0.150
+        1.3963  0.000
+        1.5708  0.000
+      </COEFFICIENT>
+      <COEFFICIENT NAME="Cnb" TYPE="VECTOR">
+        Yaw_moment_due_to_beta
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_WINGSPAN|FG_BETA
+        -0.3491 0.092
+        -0.2618 0.106
+        -0.1745 0.128
+        -0.0873 0.175
+        0.0000  0.202
+        0.0873  0.206
+        0.1745  0.189
+        0.2618  0.158
+        0.3491  0.130
+        0.4363  0.103
+        0.5236  0.064
+        0.6109  0.028
+        0.6981  0.022
+        0.7854  -0.001
+        0.8727  0.020
+        0.9599  0.036
+        1.0472  0.028
+        1.2217  -0.050
+        1.3963  -0.045
+        1.5708  -0.042
+      </COEFFICIENT>
+      <COEFFICIENT NAME="CnDa" TYPE="VECTOR">
+        Yaw_moment_due_to_aileron
+        20
+        FG_ALPHA
+        FG_QBAR|FG_WINGAREA|FG_WINGSPAN|FG_AILERON_POS
+        -0.3491 0.006
+        -0.2618 0.021
+        -0.1745 0.053
+        -0.0873 -0.030
+        0.0000  -0.034
+        0.0873  -0.034
+        0.1745  -0.025
+        0.2618  -0.038
+        0.3491  0.028
+        0.4363  0.073
+        0.5236  0.033
+        0.6109  0.038
+        0.6981  0.028
+        0.7854  0.040
+        0.8727  0.016
+        0.9599  0.033
+        1.0472  0.051
+        1.2217  0.002
+        1.3963  0.004
+        1.5708  -0.022
+      </COEFFICIENT>
+
+      <COEFFICIENT NAME="CnDr" TYPE="TABLE">
+        Yaw_moment_due_to_rudder
+        20 3
+        FG_ALPHA FG_RUDDER_POS
+        FG_QBAR|FG_WINGAREA|FG_WINGSPAN|FG_RUDDER_POS
+                -0.436  0.0     0.436
+        -0.3491 -0.463  -0.267  -0.228
+        -0.2618 -0.480  -0.111  -0.228
+        -0.1745 -0.554  -0.335  -0.224
+        -0.0873 -0.853  -0.420  -0.117
+        0.0000  -0.960  -0.471  -0.099
+        0.0873  -0.973  -0.479  -0.103
+        0.1745  -0.915  -0.445  -0.096
+        0.2618  -0.778  -0.386  -0.094
+        0.3491  -0.711  -0.338  -0.085
+        0.4363  -0.576  -0.288  -0.080
+        0.5236  -0.340  -0.217  -0.057
+        0.6109  -0.224  -0.139  -0.015
+        0.6981  -0.147  -0.104  -0.061
+        0.7854  -0.086  -0.028  -0.078
+        0.8727  -0.182  -0.054  -0.059
+        0.9599  -0.201  -0.076  -0.050
+        1.0472  -0.113  -0.057  -0.045
+        1.2217  0.193   0.093   0.009
+        1.3963  0.168   0.075   0.001
+        1.5708  0.112   0.075   0.014
+      </COEFFICIENT>
+
+    </AXIS>
+
+  </AERODYNAMICS>
+
+  <!--
+    OUTPUT section definition
+
+    The following specifies the way that JSBSim writes out data.
+
+    NAME is the filename you want the output to go to
+
+    TYPE can be:
+      CSV       Comma separated data. If a filename is supplied then the data
+                goes to that file. If COUT or cout is specified, the data goes
+                to stdout. If the filename is a null filename the data goes to
+                stdout, as well.
+      SOCKET    Will eventually send data to a socket output, where NAME
+                would then be the IP address of the machine the data should be
+                sent to. DON'T USE THIS YET!
+      TABULAR   Columnar data. NOT IMPLEMENTED YET!
+      TERMINAL  Output to terminal. NOT IMPLEMENTED YET!
+      NONE      Specifies to do nothing. THis setting makes it easy to turn on and
+                off the data output without having to mess with anything else.
+
+    The arguments that can be supplied, currently, are
+
+    RATE_IN_HZ  An integer rate in times-per-second that the data is output. This
+                value may not be *exactly* what you want, due to the dependence
+                on dt, the cycle rate for the FDM.
+
+    The following parameters tell which subsystems of data to output:
+
+    SIMULATION       ON|OFF
+    ATMOSPHERE       ON|OFF
+    MASSPROPS        ON|OFF
+    AEROSURFACES     ON|OFF
+    RATES            ON|OFF
+    VELOCITIES       ON|OFF
+    FORCES           ON|OFF
+    MOMENTS          ON|OFF
+    POSITION         ON|OFF
+    COEFFICIENTS     ON|OFF
+    GROUND_REACTIONS ON|OFF
+    FCS              ON|OFF
+    PROPULSION       ON|OFF
+
+    NOTE that Time is always output with the data.
+  -->
+
+  <OUTPUT NAME="f16.csv" TYPE="NONE">
+    RATE_IN_HZ       20
+    SIMULATION       ON
+    ATMOSPHERE       OFF
+    MASSPROPS        OFF
+    AEROSURFACES     ON
+    RATES            ON
+    VELOCITIES       ON
+    FORCES           ON
+    MOMENTS          ON
+    POSITION         ON
+    COEFFICIENTS     OFF
+    GROUND_REACTIONS ON
+    FCS              ON
+    PROPULSION       ON
+  </OUTPUT>
+
+</FDM_CONFIG>
