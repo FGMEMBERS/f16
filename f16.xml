@@ -538,7 +538,7 @@
         Side_force_due_to_roll_rate
         12
         aero/alpha-rad
-        aero/qbar-psf|metrics/Sw-sqft|aero/bi2vel|velocities/r-aero-rad_sec
+        aero/qbar-psf|metrics/Sw-sqft|aero/bi2vel|velocities/p-aero-rad_sec
         -0.175 -0.108
         -0.087 -0.108
          0.0   -0.188
