@@ -19,7 +19,6 @@
   </systems> 
   
   <sound>
-   <audible>true</audible>
    <path>Aircraft/f16/f16-sound.xml</path>
   </sound>
 
