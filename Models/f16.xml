@@ -28,7 +28,7 @@
  </model>
 
  <model>
-  <name>MISC</name>
+  <name>LEFT</name>
   <path>Aircraft/f16/Models/left_front.ac</path>
   <offsets>
    <x-m>-4.660</x-m>
@@ -42,6 +42,7 @@
 
 <!-- Instruments -->
 
+<!--
  <model>
   <name>ASI</name>
   <path>Aircraft/Instruments-3d/asi/asi.xml</path>
@@ -71,8 +72,10 @@
    <z-m>0.28</z-m>
   </offsets>
  </model>
+-->
 
  <!-- Visible up to 10km (6mi) -->
+<!--
  <animation>
   <type>range</type>
   <min-m>0</min-m>
@@ -84,7 +87,11 @@
   <object-name>ASI</object-name>
   <object-name>AI</object-name>
   <object-name>ALT</object-name>
+  <object-name>ICP</object-name>
+  <object-name>MISC</object-name>
+  <object-name>LEFT</object-name>
  </animation>
+-->
 
 
 <!-- fuselage animations -->
