@@ -10,7 +10,7 @@ _______________________________________________________________________
 <PropertyList>
 
  <name>F16 Panel</name>
- <!-- background>Aircraft/f16/Panels/Textures/f16c-2d-panel.rgb</background -->
+ <background>Aircraft/f16/Panels/Textures/f16panel-00.rgb</background>
  <multibackground>Aircraft/f16/Panels/Textures/f16panel-00.rgb</multibackground>
  <multibackground>Aircraft/f16/Panels/Textures/f16panel-01.rgb</multibackground>
  <multibackground>Aircraft/f16/Panels/Textures/f16panel-06.rgb</multibackground>

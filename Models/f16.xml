@@ -4,6 +4,55 @@
 
  <path>f16.ac</path>
 
+<!-- Instruments -->
+
+ <model>
+  <name>ASI</name>
+  <path>Aircraft/Instruments-3d/asi/asi.xml</path>
+  <offsets>
+   <x-m>-4.0667</x-m>
+   <y-m>0.43</y-m>
+   <z-m>-0.04667</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ALT</name>
+  <path>Aircraft/Instruments-3d/alt/alt.xml</path>
+  <offsets>
+   <x-m>-4.3667</x-m>
+   <y-m>0.43</y-m>
+   <z-m>0.04667</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>AI</name>
+  <path>Aircraft/Instruments-3d/ai/ai.xml</path>
+  <offsets>
+   <x-m>-4.64</x-m>
+   <y-m>0.28</y-m>
+   <z-m>0.0</z-m>
+  </offsets>
+ </model>
+
+ <!-- Visible up to 10km (6mi) -->
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>10000</max-m>
+ </animation>
+
+ <animation>
+  <name>InstrumentGroup</name>
+  <object-name>ASI</object-name>
+  <object-name>AI</object-name>
+  <object-name>ALT</object-name>
+ </animation>
+
+
+<!-- fuselage animations -->
+
  <animation>
   <type>select</type>
   <object-name>internal_flame</object-name>
