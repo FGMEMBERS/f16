@@ -7,6 +7,10 @@
  
   <flight-model>jsb</flight-model>
   <aero>f16</aero>
+
+  <startup>
+   <splash-texture>Aircraft/f16/f16-splash.rgb</splash-texture>
+  </startup>
   
   <systems>
    <electrical>
