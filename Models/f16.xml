@@ -9,6 +9,27 @@
  </offsets>
 
  <animation>
+  <type>select</type>
+  <object-name>outside_flame</object-name>
+  <condition>
+   <equals>
+    <property>/engines/engine[0]/augmentation</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>inside_flame</object-name>
+  <object-name>outside_flame</object-name>
+  <property>/engines/engine[0]/EGT_degC</property>
+  <factor>-0.00135135135135</factor>
+  <offset>1.5</offset>
+ </animation>
+
+<!--
+ <animation>
   <type>rotate</type>
   <object-name>right_upper_aileron</object-name>
   <object-name>right_lower_aileron</object-name>
@@ -44,7 +65,6 @@
   </axis>
  </animation>
 
-<!--
  <animation>
   <type>rotate</type>
   <object-name>right_inbound_flap</object-name>
