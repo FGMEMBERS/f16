@@ -38,6 +38,12 @@
    <path>Aircraft/f16/Models/f16-block32.xml</path>
   </model>
 
+  <engines>
+   <engine n="0">
+    <running>true</running>
+   </engine>
+  </engines>
+
   <view>
    <config>
      <pitch-offset-deg>-11.8</pitch-offset-deg>
