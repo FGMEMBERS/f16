@@ -20,7 +20,7 @@
   
   <sound>
    <audible>true</audible>
-   <path>Aircraft/a4/a4-sound.xml</path>
+   <path>Aircraft/f16/f16-sound.xml</path>
   </sound>
 
   <!-- virtual-cockpit archive="y">true</virtual-cockpit -->

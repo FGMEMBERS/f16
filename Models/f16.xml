@@ -9,8 +9,16 @@
  </offsets>
 
  <animation>
+  <type>blend</type>
+  <object-name>internal_flame</object-name>
+  <property>/engines/engine[0]/EGT_degC</property>
+  <factor>-0.00135135135135</factor>
+  <offset>1.5</offset>
+ </animation>
+
+ <animation>
   <type>select</type>
-  <object-name>outside_flame</object-name>
+  <object-name>external_flame</object-name>
   <condition>
    <equals>
     <property>/engines/engine[0]/augmentation</property>
@@ -21,11 +29,11 @@
 
  <animation>
   <type>blend</type>
-  <object-name>inside_flame</object-name>
-  <object-name>outside_flame</object-name>
+  <object-name>external_flame</object-name>
   <property>/engines/engine[0]/EGT_degC</property>
-  <factor>-0.00135135135135</factor>
-  <offset>1.5</offset>
+  <factor>-0.00207207207</factor>
+  <offset>2.0</offset>
+  <max>1.0</max>
  </animation>
 
 <!--

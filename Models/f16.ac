@@ -13394,7 +13394,7 @@ refs 3
 132 0.401248 0.499995
 kids 0
 OBJECT poly
-name "inside_flame"
+name "internal_flame"
 loc 0.764186 0 0.764186
 texture "f16.rgb"
 texrep 0.122 0.12
@@ -13509,7 +13509,7 @@ refs 3
 15 0.494477 0.5
 kids 0
 OBJECT poly
-name "outside_flame"
+name "external_flame"
 loc 7.38304 0.0187895 -0.0325404
 texture "f16.rgb"
 texrep 0.26 0.013
