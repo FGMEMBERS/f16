@@ -39,6 +39,36 @@
   </offsets>
  </model>
 
+ <model>
+  <name>MFD1</name>
+  <path>Aircraft/f16/Models/mfd.ac</path>
+  <offsets>
+   <x-m>-4.780</x-m>
+   <y-m>-0.15</y-m>
+   <z-m>0.49</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MFD2</name>
+  <path>Aircraft/f16/Models/mfd.ac</path>
+  <offsets>
+   <x-m>-4.780</x-m>
+   <y-m>0.15</y-m>
+   <z-m>0.49</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>EJECT</name>
+  <path>Aircraft/f16/Models/ejection_handle.ac</path>
+  <offsets>
+   <x-m>-4.570</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.26</z-m>
+  </offsets>
+ </model>
+
 <!-- Instruments -->
 
 <!--
