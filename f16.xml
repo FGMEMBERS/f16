@@ -90,34 +90,37 @@
     </AC_TANK>
   </PROPULSION>
   <FLIGHT_CONTROL NAME="F-16 FC">
+   <COMPONENT NAME="elevator cmd limiter" TYPE="SUMMER">
+     INPUT          fcs/elevator-cmd-norm
+     INPUT          fcs/pitch-trim-cmd-norm
+     CLIPTO         -1.0 0.44
+   </COMPONENT>
    <COMPONENT NAME="g load norm" TYPE="PURE_GAIN">
      INPUT          accelerations/n-pilot-z-norm
      GAIN           -0.111111
    </COMPONENT>
    <COMPONENT NAME="g load error" TYPE="SUMMER">
-     INPUT          fcs/elevator-cmd-norm
+     INPUT          fcs/elevator-cmd-limiter
      INPUT          fcs/g-load-norm
    </COMPONENT>
    <COMPONENT NAME="g load p" TYPE="PURE_GAIN">
      INPUT          fcs/g-load-error
-     GAIN           3.0
+     GAIN           1.02
+   </COMPONENT>
+   <COMPONENT NAME="g load i" TYPE="INTEGRATOR">
+     INPUT          fcs/g-load-error
+     C1             0.0001
    </COMPONENT>
    <COMPONENT NAME="g load d" TYPE="LEAD_LAG_FILTER">
      INPUT          fcs/g-load-error
-     C1             0.05
+     C1             0.005
      C2             0.0
      C3             0.0
      C4             1.0
    </COMPONENT>
-   <COMPONENT NAME="g load i" TYPE="INTEGRATOR">
-     INPUT          fcs/g-load-error
-     C1             0.005
-   </COMPONENT>
    <COMPONENT NAME="g load command" TYPE="SUMMER">
      INPUT          fcs/g-load-p
-     INPUT          fcs/g-load-d
      INPUT          fcs/g-load-i
-     INPUT          fcs/pitch-trim-cmd-norm
      CLIPTO         -1 1
     </COMPONENT>
     <COMPONENT NAME="Elevator Control" TYPE="AEROSURFACE_SCALE">
