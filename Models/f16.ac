@@ -2086,7 +2086,7 @@ refs 3
 7 1 1
 kids 0
 OBJECT poly
-name "nose_aft_strut"
+name "front_aft_strut"
 loc -2.65412 -0.996353 0.00158168
 numvert 8
 -0.294408 -0.203903 0.0248895

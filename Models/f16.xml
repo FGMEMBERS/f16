@@ -9,11 +9,14 @@
  </offsets>
 
  <animation>
-  <type>blend</type>
+  <type>select</type>
   <object-name>internal_flame</object-name>
-  <property>/engines/engine[0]/EGT_degC</property>
-  <factor>-0.00135135135135</factor>
-  <offset>1.5</offset>
+  <condition>
+   <equals>
+    <property>/engines/engine[0]/augmentation</property>
+    <value>true</value>
+   </equals>
+  </condition>
  </animation>
 
  <animation>
@@ -32,16 +35,16 @@
   <object-name>right_upper_aileron</object-name>
   <object-name>right_lower_aileron</object-name>
   <property>/surface-positions/left-aileron-pos-norm</property>
-  <factor>-30</factor>
+  <factor>21.5</factor>
   <center>
-   <x-m>1.81</x-m>
-   <y-m>4.12</y-m>
+   <x-m>1.815</x-m>
+   <y-m>4.11</y-m>
    <z-m>0.05</z-m>
   </center>
   <axis>
-   <x>0.25</x>
-   <y>0.84</y>
-   <z>0.02</z>
+   <x>0.167465</x>
+   <y>0.985090</y>
+   <z>-0.039404</z>
   </axis>
  </animation>
 
@@ -50,20 +53,19 @@
   <object-name>left_upper_aileron</object-name>
   <object-name>left_lower_aileron</object-name>
   <property>/surface-positions/left-aileron-pos-norm</property>
-  <factor>-30</factor>
+  <factor>21.5</factor>
   <center>
-   <x-m>1.81</x-m>
-   <y-m>-4.12</y-m>
+   <x-m>1.815</x-m>
+   <y-m>-4.11</y-m>
    <z-m>0.05</z-m>
   </center>
   <axis>
-   <x>0.25</x>
-   <y>-0.84</y>
-   <z>-0.02</z>
+   <x>0.167465</x>
+   <y>-0.985090</y>
+   <z>-0.039404</z>
   </axis>
  </animation>
 
-<!--
  <animation>
   <type>rotate</type>
   <object-name>right_upper_flap</object-name>
@@ -76,9 +78,9 @@
    <z-m>0.12</z-m>
   </center>
   <axis>
-   <x>0.282051</x>
-   <y>0.844622</y>
-   <z>0.043825</z>
+   <x>0.150157</x>
+   <y>0.987872</y>
+   <z>-0.039515</z>
   </axis>
  </animation>
 
@@ -87,34 +89,33 @@
   <object-name>left_upper_flap</object-name>
   <object-name>left_lower_flap</object-name>
   <property>/surface-positions/flap-pos-norm</property>
-  <factor>-35</factor>
+  <factor>-25</factor>
   <center>
    <x-m>1.54</x-m>
    <y-m>-2.35</y-m>
    <z-m>0.12</z-m>
   </center>
   <axis>
-   <x>0.282051</x>
-   <y>-0.844622</y>
-   <z>0.043825</z>
+   <x>0.150157</x>
+   <y>-0.987872</y>
+   <z>-0.039515</z>
   </axis>
  </animation>
--->
 
  <animation>
   <type>rotate</type>
   <object-name>rudder</object-name>
   <property>/surface-positions/rudder-pos-norm</property>
-  <factor>25</factor>
+  <factor>30</factor>
   <center>
-   <x-m>4.92</x-m>
+   <x-m>4.915</x-m>
    <y-m>0.0</y-m>
-   <z-m>2.09</z-m>
+   <z-m>2.095</z-m>
   </center>
   <axis>
-   <x>0.630208</x>
+   <x>0.547371</x>
    <y>0.0</y>
-   <z>1.0</z>
+   <z>0.836890</z>
   </axis>
  </animation>
 
@@ -125,14 +126,14 @@
   <property>/surface-positions/elevator-pos-norm</property>
   <factor>25</factor>
   <center>
-   <x-m>4.31</x-m>
-   <y-m>0.0</y-m>
-   <z-m>0.07</z-m>
+   <x-m>4.36</x-m>
+   <y-m>1.965</y-m>
+   <z-m>-0.1</z-m>
   </center>
   <axis>
-   <x>-0.0837</x>
-   <y>1.0</y>
-   <z>0.0</z>
+   <x>0.0</x>
+   <y>0.981645</y>
+   <z>-0.190720</z>
   </axis>
  </animation>
 
@@ -141,28 +142,28 @@
   <object-name>left_upper_horizontal_tail</object-name>
   <object-name>left_lower_horizontal_tail</object-name>
   <property>/surface-positions/elevator-pos-norm</property>
+  <factor>-25</factor>
   <factor>25</factor>
   <center>
-   <x-m>4.31</x-m>
-   <y-m>0.0</y-m>
-   <z-m>0.07</z-m>
+   <x-m>4.36</x-m>
+   <y-m>-1.965</y-m>
+   <z-m>-0.1</z-m>
   </center>
   <axis>
-   <x>-0.0837</x>
-   <y>1.0</y>
-   <z>0.0</z>
+   <x>0.0</x>
+   <y>-0.981645</y>
+   <z>-0.190720</z>
   </axis>
  </animation>
 
-<!--
  <animation>
   <type>rotate</type>
-  <object-name>nose_wheel</object-name>
-  <object-name>nose_front_strut</object-name>
+  <object-name>front_wheel</object-name>
+  <object-name>front_lower_strut</object-name>
   <property>/surface-positions/rudder-pos-norm</property>
   <factor>-35</factor>
   <center>
-   <x-m>-12.23</x-m>
+   <x-m>-2.97</x-m>
    <y-m>0.0</y-m>
    <z-m>0.0</z-m>
   </center>
@@ -173,6 +174,7 @@
   </axis>
  </animation>
 
+<!--
  <animation>
   <type>rotate</type>
   <object-name>nose_wheel</object-name>
