@@ -35,7 +35,7 @@
   </hud>
 
   <model>
-   <path>Aircraft/f16/Models/f16-block32.xml</path>
+   <path>Aircraft/f16/Models/f16.ac</path>
   </model>
 
   <engines>
