@@ -153,6 +153,11 @@
       2.99         0.0
       3.00         1.0
      </COMPONENT>
+     <COMPONENT NAME="Rudder Sum" TYPE="SUMMER">
+      INPUT   fcs/rudder-command-sum
+      INPUT   fcs/yaw-damper-final
+      CLIPTO  -1 1
+     </COMPONENT>
      <COMPONENT NAME="Rudder Control" TYPE="AEROSURFACE_SCALE">
        INPUT        fcs/rudder-sum
        MIN         -0.524
