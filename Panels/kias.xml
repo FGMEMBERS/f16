@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<!--
+Indicated airspeed instrument.
+-->
+
+<PropertyList>
+
+ <name>Knots Indicated Airspeed</name>
+ 
+   <w-base>128</w-base>
+   <h-base>128</h-base>
+   
+   <layers>
+    <layer>
+     <name>kias face</name>
+     <texture>   
+     <path>Aircraft/f16/Panels/Textures/faces1.rgb</path>
+     <x1>0.0</x1>
+     <y1>0.49</y1>
+     <x2>0.495</x2>
+     <y2>1.015</y2>
+     </texture>
+     <w>110</w>
+     <h>115</h>
+    </layer>
+
+    <layer>
+     <name>mach face</name>
+     <texture>
+     <path>Aircraft/f16/Panels/Textures/faces1.rgb</path>
+     <x1>0.53</x1>
+     <y1>0.52</y1>
+     <x2>1.0</x2>
+     <y2>1.0</y2>
+     </texture>
+     <w>74</w>
+     <h>74</h>
+    </layer>
+
+    <layer>
+     <name>gauge knob</name>
+     <texture>
+     <path>Aircraft/f16/Panels/Textures/faces1.rgb</path>
+     <x1>0.87</x1>
+     <y1>0.28</y1>
+     <x2>0.91</x2>
+     <y2>0.35</y2>
+     </texture>
+     <w>20</w>
+     <h>20</h>
+    </layer>
+
+    <layer>
+     <name>gauge border</name>
+     <texture>
+     <path>Aircraft/f16/Panels/Textures/misc2.rgb</path>
+     <x1>0.0</x1>
+     <y1>0.5</y1>
+     <x2>0.5</x2>
+     <y2>1.0</y2>
+     </texture>
+     <w>129</w>
+     <h>129</h>
+    </layer>
+   </layers>
+</PropertyList>
