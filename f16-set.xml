@@ -4,6 +4,7 @@
 
  <sim>
   <description>General Dynamics F-16</description>
+  <author>Erik Hofman, Martin "Pegasus" Schmitt (panel textures)</author>
   <status>early-production</status>
  
   <flight-model>jsb</flight-model>
