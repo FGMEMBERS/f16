@@ -3,9 +3,24 @@
 <PropertyList>
 
  <path>f16.ac</path>
+ <offsets>
+  <z-m>0.15</z-m>
+  <pitch-deg>0.3</pitch-deg>
+ </offsets>
+
+<!-- Submodels -->
+ <model>
+  <name>RudderPedals</name>
+  <path>Aircraft/f16/Models/rudder_pedals.xml</path>
+  <offsets>
+   <x-m>-5.05</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.14</z-m>
+  </offsets>
+ </model>
+
 
 <!-- Panels -->
-
  <model>
   <name>ICP</name>
   <path>Aircraft/f16/Models/icp.ac</path>
@@ -174,7 +189,7 @@
   <object-name>right_upper_aileron</object-name>
   <object-name>right_lower_aileron</object-name>
   <property>surface-positions/left-aileron-pos-norm</property>
-  <factor>21.5</factor>
+  <factor>-21.5</factor>
   <center>
    <x-m>1.815</x-m>
    <y-m>4.11</y-m>
@@ -192,7 +207,7 @@
   <object-name>left_upper_aileron</object-name>
   <object-name>left_lower_aileron</object-name>
   <property>surface-positions/left-aileron-pos-norm</property>
-  <factor>21.5</factor>
+  <factor>-21.5</factor>
   <center>
    <x-m>1.815</x-m>
    <y-m>-4.11</y-m>
@@ -378,38 +393,17 @@
   <property>gear/gear[0]/position-norm</property>
   <factor>420</factor>
   <offset-deg>-100</offset-deg>
-  <min-deg>-90</min-deg>
+  <min-deg>-91</min-deg>
   <max-deg>0</max-deg>
   <center>
    <x-m>-2.5</x-m>
-   <y-m>0.27</y-m>
-   <z-m>-0.84</z-m>
+   <y-m>0.28</y-m>
+   <z-m>-0.805</z-m>
   </center>
   <axis>
-   <x>0.999874</x>
-   <y>0.0</y>
-   <z>0.015871</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>internal_left_main_door</object-name>
-  <object-name>external_left_main_door</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <factor>360</factor>
-  <offset-deg>-80</offset-deg>
-  <min-deg>-80</min-deg>
-  <max-deg>0</max-deg>
-  <center>
-   <x-m>-0.11</x-m>
-   <y-m>-0.74</y-m>
-   <z-m>-0.34</z-m>
-  </center>
-  <axis>
-   <x>-1.0</x>
-   <y>0.0</y>
-   <z>0.0</z>
+   <x>0.999843</x>
+   <y>0.015871</y>
+   <z>0.007935</z>
   </axis>
  </animation>
 
@@ -417,18 +411,37 @@
   <type>rotate</type>
   <object-name>internal_right_main_door</object-name>
   <object-name>external_right_main_door</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <factor>360</factor>
-  <offset-deg>-80</offset-deg>
-  <min-deg>-80</min-deg>
-  <max-deg>0</max-deg>
+  <property>gear/gear[2]/position-norm</property>
+  <factor>460</factor>
+  <min-deg>0</min-deg>
+  <max-deg>85</max-deg>
   <center>
-   <x-m>-0.11</x-m>
-   <y-m>0.74</y-m>
-   <z-m>-0.34</z-m>
+   <x-m>-0.755</x-m>
+   <y-m>0.76</y-m>
+   <z-m>-0.43</z-m>
   </center>
   <axis>
    <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>internal_left_main_door</object-name>
+  <object-name>external_left_main_door</object-name>
+  <property>gear/gear[1]/position-norm</property>
+  <factor>460</factor>
+  <min-deg>0</min-deg>
+  <max-deg>85</max-deg>
+  <center>
+   <x-m>-0.755</x-m>
+   <y-m>-0.76</y-m>
+   <z-m>-0.43</z-m>
+  </center>
+  <axis>
+   <x>-1.0</x>
    <y>0.0</y>
    <z>0.0</z>
   </axis>
