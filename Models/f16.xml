@@ -35,8 +35,7 @@
    <y-m>-0.295</y-m>
    <z-m>0.335</z-m>
    <pitch-deg>-46.0</pitch-deg>
-   <roll-deg>2.0</roll-deg>
-   <yaw-deg>-15.0</yaw-deg>
+   <heading-deg>-4.0</heading-deg>
   </offsets>
  </model>
 
