@@ -113,7 +113,7 @@
    </COMPONENT>
    <COMPONENT NAME="g load d" TYPE="LEAD_LAG_FILTER">
      INPUT          fcs/g-load-error
-     C1             0.00125
+     C1             0.000125
      C2             0.0
      C3             0.0
      C4             1.0
@@ -130,61 +130,80 @@
        MAX           0.436
        OUTPUT        fcs/elevator-pos-rad
      </COMPONENT>
-     <COMPONENT NAME="Roll Trim Sum" TYPE="SUMMER">
+     <COMPONENT NAME="roll rate norm" TYPE="PURE_GAIN">
+       INPUT         velocities/p-aero-rad_sec
+       GAIN          0.318309886
+     </COMPONENT>
+     <COMPONENT NAME="roll trim error" TYPE="SUMMER">
        INPUT         fcs/aileron-cmd-norm
        INPUT         fcs/roll-trim-cmd-norm
-       CLIPTO        -1 1
+       INPUT         -fcs/roll-rate-norm
+     </COMPONENT>
+     <COMPONENT NAME="roll rate p" TYPE="PURE_GAIN">
+       INPUT          fcs/roll-trim-error
+       GAIN           3.0
+     </COMPONENT>
+     <COMPONENT NAME="roll rate i" TYPE="INTEGRATOR">
+       INPUT          fcs/roll-trim-error
+       C1             0.05
+     </COMPONENT>
+     <COMPONENT NAME="roll rate d" TYPE="LEAD_LAG_FILTER">
+       INPUT          fcs/roll-trim-error
+       C1             0.00125
+       C2             0.0
+       C3             0.0
+       C4             1.0
+     </COMPONENT>
+     <COMPONENT NAME="roll rate command" TYPE="SUMMER">
+       INPUT          fcs/roll-rate-p
+       INPUT          fcs/roll-rate-i
+       INPUT          fcs/roll-rate-d
+       CLIPTO         -1 1
      </COMPONENT>
      <COMPONENT NAME="Left Aileron Control" TYPE="AEROSURFACE_SCALE">
-       INPUT         fcs/roll-trim-sum
+       INPUT         fcs/roll-rate-command
        MIN          -0.375
        MAX           0.375
        OUTPUT        fcs/left-aileron-pos-rad
      </COMPONENT>
       <COMPONENT NAME="Right Aileron Control" TYPE="AEROSURFACE_SCALE">
-       INPUT        -fcs/roll-trim-sum
+       INPUT        -fcs/roll-rate-command
        MIN          -0.375
        MAX           0.375
        OUTPUT        fcs/right-aileron-pos-rad
      </COMPONENT>
-     <COMPONENT NAME="Rudder Command Sum" TYPE="SUMMER">
-      INPUT   fcs/rudder-cmd-norm
-      INPUT   fcs/yaw-trim-cmd-norm
-      CLIPTO  -1 1
+     <COMPONENT NAME="yaw rate norm" TYPE="PURE_GAIN">
+       INPUT         velocities/r-aero-rad_sec
+       GAIN          0.318309886
      </COMPONENT>
-     <COMPONENT NAME="Yaw Damper Rate" TYPE="SCHEDULED_GAIN">
-      INPUT        velocities/r-aero-rad_sec
-      SCHEDULED_BY aero/qbar-psf
-      ROWS         2
-        3.00       0.00
-       11.00       2.00
+     <COMPONENT NAME="yaw trim error" TYPE="SUMMER">
+       INPUT         fcs/rudder-cmd-norm
+       INPUT         fcs/yaw-trim-cmd-norm
+       INPUT         fcs/yaw-rate-norm
      </COMPONENT>
-     <COMPONENT NAME="Yaw Damper Beta" TYPE="SCHEDULED_GAIN">
-      INPUT        aero/beta-rad
-      SCHEDULED_BY aero/qbar-psf
-      ROWS         2
-       3.00        0.00
-      11.00        0.00
+     <COMPONENT NAME="yaw rate p" TYPE="PURE_GAIN">
+       INPUT          fcs/yaw-trim-error
+       GAIN           3.0
      </COMPONENT>
-     <COMPONENT NAME="Yaw Damper Sum" TYPE="SUMMER">
-      INPUT        fcs/yaw-damper-beta
-      INPUT        fcs/yaw-damper-rate
-      CLIPTO      -0.2 0.2
+     <COMPONENT NAME="yaw rate i" TYPE="INTEGRATOR">
+       INPUT          fcs/yaw-trim-error
+       C1             0.05
      </COMPONENT>
-     <COMPONENT NAME="Yaw Damper Final" TYPE="SCHEDULED_GAIN">
-      INPUT        fcs/yaw-damper-sum
-      SCHEDULED_BY aero/qbar-psf
-      ROWS         2
-      2.99         0.0
-      3.00         1.0
+     <COMPONENT NAME="yaw rate d" TYPE="LEAD_LAG_FILTER">
+       INPUT          fcs/yaw-trim-error
+       C1             0.00125
+       C2             0.0
+       C3             0.0
+       C4             1.0
      </COMPONENT>
-     <COMPONENT NAME="Rudder Sum" TYPE="SUMMER">
-      INPUT   fcs/rudder-command-sum
-      INPUT   fcs/yaw-damper-final
-      CLIPTO  -1 1
+     <COMPONENT NAME="yaw rate command" TYPE="SUMMER">
+       INPUT          fcs/yaw-rate-p
+       INPUT          fcs/yaw-rate-i
+       INPUT          fcs/yaw-rate-d
+       CLIPTO         -1 1
      </COMPONENT>
      <COMPONENT NAME="Rudder Control" TYPE="AEROSURFACE_SCALE">
-       INPUT        fcs/rudder-sum
+       INPUT        fcs/yaw-rate-command
        MIN         -0.524
        MAX          0.524
        OUTPUT       fcs/rudder-pos-rad
@@ -595,33 +614,20 @@
          0.698  0.027  0.023  0.018  0.017  0.016  0.011  0.007
          0.785  0.017  0.016  0.014  0.012  0.011 -0.010  0.008
       </COEFFICIENT>
-      <!-- This is probably aileron only
-           But the F-16 FCS schedules differential horizontal stabalizer
-           for rolls beyond mach 0.6
       <COEFFICIENT NAME="Clda_M" TYPE="VECTOR">
        Change_in_Roll_moment_due_to_aileron_due_to_mach
        3
        velocities/mach-norm
-       aero/qbar-psf|metrics/Sw-sqft|metrics/bw-ft|fcs/left-aileron-pos-rad
+       aero/qbar-psf|metrics/Sw-sqft|metrics/bw-ft|aero/alpha-rad|fcs/left-aileron-pos-rad
        0.6      0.0
        1.2     -0.063
        1.6     -0.063
-      </COEFFICIENT>
-      -->
-      <COEFFICIENT NAME="Clda_M" TYPE="VECTOR">
-       Change_in_Roll_moment_due_to_aileron_due_to_mach
-       3
-       velocities/mach-norm
-       aero/qbar-psf|metrics/Sw-sqft|metrics/bw-ft|fcs/left-aileron-pos-rad
-       0.6      0.0
-       1.2     -0.03
-       1.6     -0.03
       </COEFFICIENT>
       <COEFFICIENT NAME="Cldr_M" TYPE="VECTOR">
        Change_in_Roll_moment_due_to_rudder_due_to_mach
        2
        velocities/mach-norm
-       aero/qbar-psf|metrics/Sw-sqft|metrics/bw-ft|fcs/rudder-pos-rad
+       aero/qbar-psf|metrics/Sw-sqft|metrics/bw-ft|aero/alpha-rad|fcs/rudder-pos-rad
        0.6      0.0
        1.6     -0.0201
       </COEFFICIENT>
@@ -825,7 +831,7 @@
         Change_in_Yaw_moment_due_to_rudder_due_to_mach
         3
         velocities/mach-norm
-        aero/qbar-psf|metrics/Sw-sqft|metrics/bw-ft|fcs/rudder-pos-rad
+        aero/qbar-psf|metrics/Sw-sqft|metrics/bw-ft|aero/alpha-rad|fcs/rudder-pos-rad
         0.6     0.0
         1.2     0.0401
         1.6     0.0716
