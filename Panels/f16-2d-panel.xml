@@ -18,7 +18,7 @@ _______________________________________________________________________
  <multibackground>Aircraft/f16/Panels/Textures/f16panel-07.rgb</multibackground>
  <multibackground>Aircraft/f16/Panels/Textures/f16panel-03.rgb</multibackground>
  <multibackground>Aircraft/f16/Panels/Textures/f16panel-00.rgb</multibackground>
- <multibackground>Aircraft/f16/Panels/Textures/f16panel-04.rg</multibackground>
+ <multibackground>Aircraft/f16/Panels/Textures/f16panel-04.rgb</multibackground>
  <w>1024</w>
  <h>768</h>
  <y-offset>0</y-offset>
@@ -53,17 +53,17 @@ _______________________________________________________________________
   <instrument include="kias.xml">
    <name>KIAS Indicator</name>
    <x>448</x>
-   <y>59</y>
-   <w>124</w>
-   <h>124</h>
+   <y>58</y>
+   <w>120</w>
+   <h>120</h>
   </instrument>
 
   <instrument include="alt.xml">
    <name>Altitude Indicator</name>
    <x>572</x>
-   <y>61</y>
-   <w>125</w>
-   <h>125</h>
+   <y>59</y>
+   <w>120</w>
+   <h>120</h>
   </instrument>
 
  </instruments>
