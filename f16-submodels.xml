@@ -18,4 +18,17 @@
     <eda>1.5</eda>
   </submodel>
 
+  <submodel>
+    <name>contrail</name>
+    <model>Models/Geometry/puff.xml</model>
+    <trigger>systems/submodels/submodel[0]/smoke</trigger>
+    <speed>100.0</speed>
+    <repeat>true</repeat>
+    <delay>0.25</delay>
+    <yaw-offset>-180.0</yaw-offset>
+    <count>-1</count>
+    <life>4.0</life>
+    <eda>1000</eda>
+  </submodel>
+
 </PropertyList>
