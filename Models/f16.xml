@@ -4,6 +4,42 @@
 
  <path>f16.ac</path>
 
+<!-- Panels -->
+
+ <model>
+  <name>ICP</name>
+  <path>Aircraft/f16/Models/icp.ac</path>
+  <offsets>
+   <x-m>-4.635</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.617</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MISC</name>
+  <path>Aircraft/f16/Models/misc.ac</path>
+  <offsets>
+   <x-m>-4.760</x-m>
+   <y-m>-0.2625</y-m>
+   <z-m>0.485</z-m>
+   <pitch-deg>-5.4</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MISC</name>
+  <path>Aircraft/f16/Models/left_front.ac</path>
+  <offsets>
+   <x-m>-4.660</x-m>
+   <y-m>-0.295</y-m>
+   <z-m>0.335</z-m>
+   <pitch-deg>-46.0</pitch-deg>
+   <roll-deg>2.0</roll-deg>
+   <yaw-deg>-15.0</yaw-deg>
+  </offsets>
+ </model>
+
 <!-- Instruments -->
 
  <model>
@@ -11,8 +47,8 @@
   <path>Aircraft/Instruments-3d/asi/asi.xml</path>
   <offsets>
    <x-m>-4.0667</x-m>
-   <y-m>0.43</y-m>
-   <z-m>-0.04667</z-m>
+   <y-m>0.04667</y-m>
+   <z-m>0.43</z-m>
   </offsets>
  </model>
 
@@ -21,8 +57,8 @@
   <path>Aircraft/Instruments-3d/alt/alt.xml</path>
   <offsets>
    <x-m>-4.3667</x-m>
-   <y-m>0.43</y-m>
-   <z-m>0.04667</z-m>
+   <y-m>-0.04667</y-m>
+   <z-m>0.43</z-m>
   </offsets>
  </model>
 
@@ -31,8 +67,8 @@
   <path>Aircraft/Instruments-3d/ai/ai.xml</path>
   <offsets>
    <x-m>-4.64</x-m>
-   <y-m>0.28</y-m>
-   <z-m>0.0</z-m>
+   <y-m>0.0</y-m>
+   <z-m>0.28</z-m>
   </offsets>
  </model>
 

@@ -1,0 +1,53 @@
+AC3Db
+MATERIAL "ac3dmat0" rgb 0 0.031 0  amb 0.055 0.071 0.059  emis 0 0 0  spec 0.102 0.102 0.102  shi 5  trans 0
+MATERIAL "ac3dmat0" rgb 0.114 0.059 0.067  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.102 0.102 0.102  shi 5  trans 0
+OBJECT world
+kids 1
+OBJECT poly
+name "ded"
+loc 4.74518 -0.594342 0.136493
+numvert 6
+-4.74402 0.569928 -0.0898619
+-4.74402 0.616722 -0.0898619
+-4.74403 0.616819 -0.183055
+-4.74402 0.569928 -0.183044
+-4.79573 0.57011 -0.0898619
+-4.79573 0.57011 -0.183044
+numsurf 6
+SURF 0x0
+mat 1
+refs 3
+0 1 0
+1 1 1
+4 0 1
+SURF 0x0
+mat 0
+refs 3
+3 1 0
+1 0 1
+0 0 0
+SURF 0x0
+mat 1
+refs 3
+4 1 0
+3 0 1
+0 0 0
+SURF 0x0
+mat 0
+refs 3
+1 0 1
+3 1 0
+2 1 1
+SURF 0x0
+mat 1
+refs 3
+2 0 1
+3 0 0
+5 1 0
+SURF 0x0
+mat 1
+refs 3
+3 0 1
+4 1 0
+5 1 1
+kids 0
