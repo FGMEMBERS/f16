@@ -95,10 +95,6 @@
        INPUT        fcs/pitch-trim-cmd-norm
        CLIPTO       -1 1
     </COMPONENT>
-    <COMPONENT NAME="Pitch Damper Gain" TYPE="PURE_GAIN">
-       INPUT        velocities/q-rad_sec
-       GAIN         4.0
-    </COMPONENT>
     <COMPONENT NAME="Elevator Control" TYPE="AEROSURFACE_SCALE">
        INPUT         fcs/pitch-trim-sum
        MIN          -0.436
