@@ -78,7 +78,6 @@
    <longitude>false</longitude>
   </sim>
 
-<!--
   <gload>
    <name>G Load</name>
    <x>258</x>
@@ -97,7 +96,6 @@
    <latitude>false</latitude>
    <longitude>false</longitude>
   </gload>
--->
 
   <mach>
    <name>machno</name>
