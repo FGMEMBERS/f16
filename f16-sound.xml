@@ -9,6 +9,14 @@
    <path>Sounds/jet.wav</path>
    <mode>looped</mode>
    <property>/engines/engine/running</property>
+   <orientation>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>180.0</z>
+    <inner-cone>180.0</inner-cone>
+    <outer-cone>360.0</outer-cone>
+    <outer-gain>0.2</outer-gain>
+   </orientation>
    <volume>
     <property>/engines/engine/thrust_lb</property>
     <type>lin</type>
@@ -17,14 +25,37 @@
   </engine>
 
   <engine>
+   <name>engine</name>
+   <path>Sounds/rumble.wav</path>
+   <mode>looped</mode>
+   <property>engines/engine/augmentation</property>
+   <orientation>
+    <x>0.0</x>
+    <y>0.0</y>
+    <z>180.0</z>
+    <inner-cone>180.0</inner-cone>
+    <outer-cone>360.0</outer-cone>
+    <outer-gain>0.2</outer-gain>
+   </orientation>
+  </engine>
+
+  <engine>
    <name>whine</name>
    <path>Sounds/whine.wav</path>
    <mode>looped</mode>
    <property>/engines/engine/running</property>
+   <orientation>
+    <x>0.0</x>
+    <y>-5.0</y>
+    <z>0.0</z>
+    <inner-cone>50.0</inner-cone>
+    <outer-cone>360.0</outer-cone>
+    <outer-gain>0.0</outer-gain>
+   </orientation>
    <pitch>
     <property>/engines/engine/n1</property>
     <type>lin</type>
-    <factor>.008</factor>
+    <factor>.016</factor>
    </pitch>
    <volume>
     <property>/engines/engine/n1</property>
