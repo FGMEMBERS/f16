@@ -242,7 +242,7 @@
                    -2    0.5
                     0    0
                     20   3
-       OUTPUT      fcs/flap-pos-deg
+       OUTPUT       fcs/flap-pos-deg
      </COMPONENT>
      <COMPONENT NAME="Speedbrake Control" TYPE="KINEMAT">
        INPUT        fcs/speedbrake-cmd-norm
