@@ -3,7 +3,6 @@
 <PropertyList>
 
  <sim>
-
   <description>General Dynamics F-16</description>
  
   <flight-model>jsb</flight-model>
@@ -38,11 +37,7 @@
    <path>Aircraft/f16/Models/f16.xml</path>
   </model>
 
-  <engines>
-   <engine n="0">
-    <running>true</running>
-   </engine>
-  </engines>
+  <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
 
   <view>
    <config>
@@ -50,7 +45,23 @@
      <default-field-of-view-deg>60</default-field-of-view-deg>
    </config>
   </view>
-
  </sim>
+
+ <engines>
+  <engine n="0">
+   <running>true</running>
+  </engine>
+ </engines>
+
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us archive="y">500</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us archive="y">500</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
 
 </PropertyList>
