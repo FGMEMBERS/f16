@@ -12,7 +12,7 @@
    <volume>
     <property>/engines/engine/thrust_lb</property>
     <type>lin</type>
-    <factor>0.00006897</factor>
+    <factor>0.00003448</factor>
    </volume>
   </engine>
 
@@ -47,7 +47,7 @@
    <volume>
     <property>/velocities/airspeed-kt</property>
     <type>lin</type>
-    <factor>.012</factor>
+    <factor>.004</factor>
    </volume>
   </rumble>
 
@@ -110,7 +110,7 @@
    <path>Sounds/flaps.wav</path>
    <property>/surface-positions/flap-pos-norm</property>
    <volume>
-    <offset>0.25</offset>
+    <max>0.25</max>
    </volume>
   </flap>
 
@@ -145,8 +145,11 @@
    <property>/sim/alarms/stall-warning</property>
    <volume>
     <property>/velocities/airspeed-kt</property>
-    <min>30.0</min>
+    <max>0.3</max>
    </volume>
+   <pitch>
+    <max>0.5</max>
+   </pitch>
   </stall>
  
 </fx>

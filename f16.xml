@@ -96,8 +96,8 @@
      CLIPTO         -1.0 0.44
    </COMPONENT>
    <COMPONENT NAME="g load norm" TYPE="PURE_GAIN">
-     INPUT          accelerations/n-pilot-z-norm
-     GAIN           0.111111
+     INPUT          -accelerations/n-pilot-z-norm
+     GAIN           0.125
    </COMPONENT>
    <COMPONENT NAME="g load error" TYPE="SUMMER">
      INPUT          fcs/elevator-cmd-limiter
@@ -222,6 +222,11 @@
        OUTPUT      fcs/lef-pos-deg
      </COMPONENT>
 -->
+     <COMPONENT NAME="Throttle1" TYPE="PURE_GAIN">
+      INPUT        fcs/throttle-cmd-norm[0]
+      GAIN         2.0
+      OUTPUT       fcs/throttle-pos-norm[0]
+     </COMPONENT>
      <COMPONENT NAME="Flaps Control" TYPE="KINEMAT">
        INPUT        gear/gear-cmd-norm
        DETENTS      3
