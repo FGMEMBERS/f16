@@ -22,12 +22,12 @@
    <mode>looped</mode>
    <property>/engines/engine/running</property>
    <pitch>
-    <property>/engines/engine/N1</property>
+    <property>/engines/engine/n1</property>
     <type>lin</type>
     <factor>.008</factor>
    </pitch>
    <volume>
-    <property>/engines/engine/N1</property>
+    <property>/engines/engine/n1</property>
     <type>log</type>
     <factor>0.1</factor> <!-- 10-100% rpm == 0.1 - 1 factor -->
    </volume>
