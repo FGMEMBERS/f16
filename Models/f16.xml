@@ -631,4 +631,41 @@
   </axis>
  </animation>
 
+ <animation>
+  <type>select</type>
+  <object-name>green_pos_light</object-name>
+  <object-name>red_pos_light</object-name>
+  <object-name>wing_red_pos_light</object-name>
+  <object-name>wing_green_pos_light</object-name>
+  <condition>
+   <equals>
+    <property>/controls/lighting/nav-lights</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>aft_pos_light</object-name>
+  <condition>
+   <equals>
+    <property>/controls/lighting/logo-lights</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>low_formation_light</object-name>
+  <object-name>fwd_formation_light</object-name>
+  <condition>
+   <equals>
+    <property>/controls/lighting/formation-lights</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
 </PropertyList>
