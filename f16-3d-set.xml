@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<PropertyList include="f16-jsbsim-set.xml">
+<PropertyList include="f16-set.xml">
 
  <sim>
   <description>General Dynamics F-16 w. 3d cockpit</description>
