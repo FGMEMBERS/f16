@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <submodel>
+    <name>flares</name>
+    <model>Models/Geometry/flare.xml</model>
+    <trigger>systems/submodels/submodel[0]/flare-release</trigger>
+    <speed>50.0</speed>
+    <repeat>true</repeat>
+    <delay>1.0</delay>
+    <count>40</count>
+    <x-offset>-4.26</x-offset>
+    <y-offset>-0.12</y-offset>
+    <z-offset>0.91</z-offset>
+    <yaw-offset>-90.0</yaw-offset>
+    <pitch-offset>60.0</pitch-offset>
+    <eda>8.0</eda>
+  </submodel>
+
+</PropertyList>

@@ -16,6 +16,10 @@
    <electrical>
     <path>Aircraft/Generic/generic-electrical.xml</path>
    </electrical>
+   <submodels>
+    <serviceable type="bool">1</serviceable>
+    <path>Aircraft/f16/f16-submodels.xml</path>
+   </submodels>
   </systems> 
   
   <sound>
@@ -49,6 +53,27 @@
    </config>
   </view>
  </sim>
+
+ <input>
+   <keyboard>
+    <key n="6">
+     <name>Ctrl-F</name>
+     <desc>Trigger flare release</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/systems/submodels/submodel[0]/flare-release</property>
+      <value type="bool">true</value>
+     </binding>
+     <mod-up>
+      <binding>
+       <command>property-assign</command>
+       <property>/systems/submodels/submodel[0]/flare-release</property>
+       <value type="bool">false</value>
+      </binding>
+     </mod-up>
+    </key>
+   </keyboard>
+  </input>
 
  <engines>
   <engine n="0">
