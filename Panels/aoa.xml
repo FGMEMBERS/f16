@@ -20,7 +20,7 @@
     <y2>0.484</y2>
    </texture>
    <condition>
-    <property>/controls/gear-down</property>
+    <property>/controls/gear/gear-down</property>
     <greater-than>
      <property>/velocities/glideslope</property>
      <value>-0.192</value>
@@ -46,7 +46,7 @@
     <y2>0.496</y2>
    </texture>
    <condition>
-    <property>/controls/gear-down</property>
+    <property>/controls/gear/gear-down</property>
     <greater-than>
      <property>/velocities/glideslope</property>
      <value>-0.2618</value>
@@ -76,7 +76,7 @@
     <y2>0.484</y2>
    </texture>
    <condition>
-    <property>/controls/gear-down</property>
+    <property>/controls/gear/gear-down</property>
     <less-than>
      <property>/velocities/glideslope</property>
      <value>-0.2618</value>
