@@ -27,15 +27,6 @@
   </condition>
  </animation>
 
- <animation>
-  <type>blend</type>
-  <object-name>external_flame</object-name>
-  <property>/engines/engine[0]/EGT_degC</property>
-  <factor>-0.00207207207</factor>
-  <offset>2.0</offset>
-  <max>1.0</max>
- </animation>
-
 <!--
  <animation>
   <type>rotate</type>
