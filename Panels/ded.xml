@@ -96,7 +96,7 @@
     </chunk>
     <chunk>
      <type>number-value</type>
-     <property>/radios/comm/frequencies/selected-mhz</property>
+     <property>/instrumentation/comm/frequencies/selected-mhz</property>
      <format>%3.2f</format>
     </chunk>
    </chunks>
