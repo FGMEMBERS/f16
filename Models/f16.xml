@@ -668,4 +668,20 @@
   </condition>
  </animation>
 
+ <animation>
+  <name>StrobeFlasher</name>
+  <type>timed</type>
+  <object-name>anti_collision_strobe</object-name>
+  <object-name>anti_collision_strobe_off</object-name>
+  <duration-sec>1.0</duration-sec>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>StrobeFlasher</object-name>
+  <condition>
+   <property>/controls/lighting/strobe</property>
+  </condition>
+ </animation>
+
 </PropertyList>
