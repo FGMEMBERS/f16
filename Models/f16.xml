@@ -9,7 +9,7 @@
   <object-name>internal_flame</object-name>
   <condition>
    <equals>
-    <property>/engines/engine[0]/augmentation</property>
+    <property>engines/engine[0]/augmentation</property>
     <value>true</value>
    </equals>
   </condition>
@@ -20,7 +20,7 @@
   <object-name>external_flame</object-name>
   <condition>
    <equals>
-    <property>/engines/engine[0]/augmentation</property>
+    <property>engines/engine[0]/augmentation</property>
     <value>true</value>
    </equals>
   </condition>
@@ -30,7 +30,7 @@
   <type>rotate</type>
   <object-name>right_upper_aileron</object-name>
   <object-name>right_lower_aileron</object-name>
-  <property>/surface-positions/left-aileron-pos-norm</property>
+  <property>surface-positions/left-aileron-pos-norm</property>
   <factor>21.5</factor>
   <center>
    <x-m>1.815</x-m>
@@ -48,7 +48,7 @@
   <type>rotate</type>
   <object-name>left_upper_aileron</object-name>
   <object-name>left_lower_aileron</object-name>
-  <property>/surface-positions/left-aileron-pos-norm</property>
+  <property>surface-positions/left-aileron-pos-norm</property>
   <factor>21.5</factor>
   <center>
    <x-m>1.815</x-m>
@@ -66,7 +66,7 @@
   <type>rotate</type>
   <object-name>right_upper_flap</object-name>
   <object-name>right_lower_flap</object-name>
-  <property>/surface-positions/flap-pos-norm</property>
+  <property>surface-positions/flap-pos-norm</property>
   <factor>35</factor>
   <center>
    <x-m>1.54</x-m>
@@ -84,7 +84,7 @@
   <type>rotate</type>
   <object-name>left_upper_flap</object-name>
   <object-name>left_lower_flap</object-name>
-  <property>/surface-positions/flap-pos-norm</property>
+  <property>surface-positions/flap-pos-norm</property>
   <factor>-25</factor>
   <center>
    <x-m>1.54</x-m>
@@ -101,7 +101,7 @@
  <animation>
   <type>rotate</type>
   <object-name>rudder</object-name>
-  <property>/surface-positions/rudder-pos-norm</property>
+  <property>surface-positions/rudder-pos-norm</property>
   <factor>30</factor>
   <center>
    <x-m>4.915</x-m>
@@ -119,7 +119,7 @@
   <type>rotate</type>
   <object-name>right_upper_horizontal_tail</object-name>
   <object-name>right_lower_horizontal_tail</object-name>
-  <property>/surface-positions/elevator-pos-norm</property>
+  <property>surface-positions/elevator-pos-norm</property>
   <factor>25</factor>
   <center>
    <x-m>4.36</x-m>
@@ -137,7 +137,7 @@
   <type>rotate</type>
   <object-name>left_upper_horizontal_tail</object-name>
   <object-name>left_lower_horizontal_tail</object-name>
-  <property>/surface-positions/elevator-pos-norm</property>
+  <property>surface-positions/elevator-pos-norm</property>
   <factor>-25</factor>
   <factor>25</factor>
   <center>
@@ -156,7 +156,7 @@
   <type>rotate</type>
   <object-name>front_wheel</object-name>
   <object-name>front_lower_strut</object-name>
-  <property>/surface-positions/rudder-pos-norm</property>
+  <property>surface-positions/rudder-pos-norm</property>
   <factor>-35</factor>
   <center>
    <x-m>-2.97</x-m>
@@ -176,7 +176,7 @@
   <object-name>front_lower_strut</object-name>
   <object-name>front_upper_strut</object-name>
   <object-name>front_aft_strut</object-name>
-  <property>/gear/gear[0]/position-norm</property>
+  <property>gear/gear[0]/position-norm</property>
   <factor>92</factor>
   <offset-deg>-92</offset-deg>
   <center>
@@ -194,7 +194,7 @@
  <animation>
   <type>rotate</type>
   <object-name>front_aft_strut</object-name>
-  <property>/gear/gear[0]/position-norm</property>
+  <property>gear/gear[0]/position-norm</property>
   <factor>-120</factor>
   <offset-deg>120</offset-deg>
   <center>
@@ -213,7 +213,7 @@
   <type>rotate</type>
   <object-name>front_wheel</object-name>
   <object-name>front_lower_strut</object-name>
-  <property>/gear/gear[0]/position-norm</property>
+  <property>gear/gear[0]/position-norm</property>
   <factor>90</factor>
   <offset-deg>-90</offset-deg>
   <center>
@@ -232,7 +232,7 @@
   <type>rotate</type>
   <object-name>internal_front_gear_door</object-name>
   <object-name>external_front_gear_door</object-name>
-  <property>/gear/gear[0]/position-norm</property>
+  <property>gear/gear[0]/position-norm</property>
   <factor>420</factor>
   <offset-deg>-100</offset-deg>
   <min-deg>-90</min-deg>
@@ -253,7 +253,7 @@
   <type>rotate</type>
   <object-name>internal_left_main_door</object-name>
   <object-name>external_left_main_door</object-name>
-  <property>/gear/gear[2]/position-norm</property>
+  <property>gear/gear[2]/position-norm</property>
   <factor>360</factor>
   <offset-deg>-80</offset-deg>
   <min-deg>-80</min-deg>
@@ -274,7 +274,7 @@
   <type>rotate</type>
   <object-name>internal_right_main_door</object-name>
   <object-name>external_right_main_door</object-name>
-  <property>/gear/gear[1]/position-norm</property>
+  <property>gear/gear[1]/position-norm</property>
   <factor>360</factor>
   <offset-deg>-80</offset-deg>
   <min-deg>-80</min-deg>
@@ -296,7 +296,7 @@
   <type>translate</type>
   <object-name>front_wheel</object-name>
   <object-name>front_lower_strut</object-name>
-  <property>/gear/gear/compression-norm</property>
+  <property>gear/gear/compression-norm</property>
   <factor>0.5</factor>
   <axis>
    <x>0</x>
@@ -312,7 +312,7 @@
   <object-name>left_main_strut</object-name>
   <object-name>left_upper_main_strut</object-name>
   <object-name>left_lower_main_strut</object-name>
-  <property>/gear/gear[2]/position-norm</property>
+  <property>gear/gear[2]/position-norm</property>
   <factor>-95</factor>
   <offset-deg>95</offset-deg>
   <center>
@@ -331,7 +331,7 @@
   <type>rotate</type>
   <object-name>left_upper_main_strut</object-name>
   <object-name>left_lower_main_strut</object-name>
-  <property>/gear/gear[2]/position-norm</property>
+  <property>gear/gear[2]/position-norm</property>
   <factor>-55</factor>
   <offset-deg>55</offset-deg>
   <center>
@@ -349,7 +349,7 @@
  <animation>
   <type>rotate</type>
   <object-name>left_upper_main_strut</object-name>
-  <property>/gear/gear[2]/position-norm</property>
+  <property>gear/gear[2]/position-norm</property>
   <factor>55</factor>
   <offset-deg>-55</offset-deg>
   <center>
@@ -367,7 +367,7 @@
  <animation>
   <type>rotate</type>
   <object-name>left_main_wheel</object-name>
-  <property>/gear/gear[2]/position-norm</property>
+  <property>gear/gear[2]/position-norm</property>
   <factor>-90</factor>
   <offset-deg>90</offset-deg>
   <center>
@@ -388,7 +388,7 @@
   <object-name>right_main_strut</object-name>
   <object-name>right_upper_main_strut</object-name>
   <object-name>right_lower_main_strut</object-name>
-  <property>/gear/gear[1]/position-norm</property>
+  <property>gear/gear[1]/position-norm</property>
   <factor>95</factor>
   <offset-deg>-95</offset-deg>
   <center>
@@ -407,7 +407,7 @@
   <type>rotate</type>
   <object-name>right_upper_main_strut</object-name>
   <object-name>right_lower_main_strut</object-name>
-  <property>/gear/gear[1]/position-norm</property>
+  <property>gear/gear[1]/position-norm</property>
   <factor>55</factor>
   <offset-deg>-55</offset-deg>
   <center>
@@ -425,7 +425,7 @@
  <animation>
   <type>rotate</type>
   <object-name>right_upper_main_strut</object-name>
-  <property>/gear/gear[1]/position-norm</property>
+  <property>gear/gear[1]/position-norm</property>
   <factor>-55</factor>
   <offset-deg>55</offset-deg>
   <center>
@@ -443,7 +443,7 @@
  <animation>
   <type>rotate</type>
   <object-name>right_main_wheel</object-name>
-  <property>/gear/gear[1]/position-norm</property>
+  <property>gear/gear[1]/position-norm</property>
   <factor>90</factor>
   <offset-deg>-90</offset-deg>
   <center>
@@ -461,7 +461,7 @@
  <animation>
   <type>rotate</type>
   <object-name>right_upper_speedbrake</object-name>
-  <property>/surface-positions/speedbrake-pos-norm</property>
+  <property>surface-positions/speedbrake-pos-norm</property>
   <factor>-60</factor>
   <center>
    <x-m>4.55</x-m>
@@ -478,7 +478,7 @@
  <animation>
   <type>rotate</type>
   <object-name>right_lower_speedbrake</object-name>
-  <property>/surface-positions/speedbrake-pos-norm</property>
+  <property>surface-positions/speedbrake-pos-norm</property>
   <factor>60</factor>
   <center>
    <x-m>4.55</x-m>
@@ -495,7 +495,7 @@
  <animation>
   <type>rotate</type>
   <object-name>left_upper_speedbrake</object-name>
-  <property>/surface-positions/speedbrake-pos-norm</property>
+  <property>surface-positions/speedbrake-pos-norm</property>
   <factor>-60</factor>
   <center>
    <x-m>4.55</x-m>
@@ -512,7 +512,7 @@
  <animation>
   <type>rotate</type>
   <object-name>left_lower_speedbrake</object-name>
-  <property>/surface-positions/speedbrake-pos-norm</property>
+  <property>surface-positions/speedbrake-pos-norm</property>
   <factor>60</factor>
   <center>
    <x-m>4.55</x-m>
@@ -537,7 +537,7 @@
   <condition>
    <not>
    <equals>
-    <property>/gear/gear[0]/position-norm</property>
+    <property>gear/gear[0]/position-norm</property>
     <value>0</value>
    </equals>
    </not>
@@ -554,7 +554,7 @@
   <condition>
    <not>
    <equals>
-    <property>/gear/gear[2]/position-norm</property>
+    <property>gear/gear[2]/position-norm</property>
     <value>0</value>
    </equals>
    </not>
@@ -571,7 +571,7 @@
   <condition>
    <not>
    <equals>
-    <property>/gear/gear[1]/position-norm</property>
+    <property>gear/gear[1]/position-norm</property>
     <value>0</value>
    </equals>
    </not>
@@ -582,7 +582,7 @@
  <animation>
   <type>rotate</type>
   <object-name>shadow_plan</object-name>
-  <property>/orientation/pitch-deg</property>
+  <property>orientation/pitch-deg</property>
   <factor>-1.0</factor>
   <center>
    <x-m>0</x-m>
@@ -599,7 +599,7 @@
  <animation>
   <type>rotate</type>
   <object-name>shadow_plan</object-name>
-  <property>/orientation/roll-deg</property>
+  <property>orientation/roll-deg</property>
   <factor>1.0</factor>
   <center>
    <x-m>0</x-m>
@@ -616,7 +616,7 @@
  <animation>
   <type>translate</type>
   <object-name>shadow_plan</object-name>
-  <property>/position/altitude-agl-ft</property>
+  <property>position/altitude-agl-ft</property>
   <factor>-0.3</factor>
   <offset-m>-6.0</offset-m>
   <center>
@@ -639,7 +639,7 @@
   <object-name>wing_green_pos_light</object-name>
   <condition>
    <equals>
-    <property>/controls/lighting/nav-lights</property>
+    <property>controls/lighting/nav-lights</property>
     <value>true</value>
    </equals>
   </condition>
@@ -650,7 +650,7 @@
   <object-name>aft_pos_light</object-name>
   <condition>
    <equals>
-    <property>/controls/lighting/logo-lights</property>
+    <property>controls/lighting/logo-lights</property>
     <value>true</value>
    </equals>
   </condition>
@@ -662,7 +662,7 @@
   <object-name>fwd_formation_light</object-name>
   <condition>
    <equals>
-    <property>/controls/lighting/formation-lights</property>
+    <property>controls/lighting/formation-lights</property>
     <value>true</value>
    </equals>
   </condition>
@@ -680,7 +680,7 @@
   <type>select</type>
   <object-name>StrobeFlasher</object-name>
   <condition>
-   <property>/controls/lighting/strobe</property>
+   <property>controls/lighting/strobe</property>
   </condition>
  </animation>
 
