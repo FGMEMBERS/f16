@@ -1,0 +1,86 @@
+<PropertyList>
+
+ <labels>
+<!--
+  <kias>
+   <name>KIAS</name>
+   <x>25</x>
+   <y>430</y> 
+   <width>50</width>
+   <height>40</height>
+   <data_source>speed</data_source>
+   <label_format>%4.0f</label_format>
+   <pre_label_string>NULL</pre_label_string>
+   <post_label_string>NULL</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>2</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+   <latitude>false</latitude>
+   <longitude>false</longitude>
+  </kias>
+-->
+  <mach>
+   <name>machno</name>
+   <x>220</x>
+   <y>310</y> 
+   <width>50</width>
+   <height>40</height>
+   <data_source>mach</data_source>
+   <label_format>%4.2f</label_format>
+   <pre_label_string>Mach </pre_label_string>
+   <post_label_string>NULL</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>2</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+   <latitude>false</latitude>
+   <longitude>false</longitude>
+  </mach>
+
+  <alpha>
+   <name>alpha</name>
+   <x>334</x>
+   <y>310</y>
+   <width>50</width>
+   <height>10</height>
+   <data_source>aoa</data_source>
+   <label_format>%4.1f%</label_format>
+   <pre_label_string>AOA:</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+   <latitude>false</latitude>
+   <longitude>false</longitude>
+  </alpha>
+
+
+
+<!--
+  <framerate>
+   <name>framerate</name>
+   <x>530</x>
+   <y>25</y>
+   <width>1</width>
+   <height>10</height>
+   <data_source>framerate</data_source>
+   <label_format>%5.1f%</label_format>
+   <pre_label_string>framerate:</pre_label_string>
+   <post_label_string>blank</post_label_string>
+   <scale_data>1.0</scale_data>
+   <options>4</options>
+   <justification>0</justification>
+   <blinking>0</blinking>
+   <working>true</working>
+   <latitude>false</latitude>
+   <longitude>false</longitude>
+  </framerate>
+-->
+</labels>
+
+</PropertyList>

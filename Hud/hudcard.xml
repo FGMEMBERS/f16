@@ -1,0 +1,97 @@
+<PropertyList>
+
+ <cards>
+
+  <c1>
+   <name>heading</name>
+   <x>271</x>
+   <y>430</y>
+   <width>99</width>
+   <height>15</height>
+   <loadfn>heading</loadfn>
+   <options>4</options>		<!--  Read ReadMe.xmlhud for Values  -->
+   <maxValue>360.0</maxValue>
+   <minValue>0.0</minValue>
+   <disp_scaling>1.0</disp_scaling>
+   <major_divs>5</major_divs>
+   <minor_divs>1</minor_divs>
+   <modulator>360</modulator>
+   <value_span>25.0</value_span>
+   <type>tape</type>
+   <tick_bottom>false</tick_bottom>
+   <tick_top>false</tick_top>
+   <tick_right>true</tick_right>
+   <tick_left>true</tick_left>
+   <cap_bottom>true</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>false</cap_right>
+   <cap_left>false</cap_left>
+   <marker_offset>0.0</marker_offset>
+   <enable_pointer>true</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </c1>
+
+  <c2>
+   <name>Altitude-MSL</name>
+   <x>373</x>
+   <y>325</y> 
+   <width>10</width>
+   <height>100</height>
+   <loadfn>altitude</loadfn>
+   <options>6</options>
+   <maxValue>5000.0</maxValue>
+   <minValue>-1000.0</minValue>
+   <disp_scaling>1.0</disp_scaling>
+   <major_divs>100</major_divs>
+   <minor_divs>25</minor_divs>
+   <modulator>0</modulator>
+   <value_span>500.0</value_span>
+   <type>tape</type>
+   <tick_bottom>true</tick_bottom>
+   <tick_top>true</tick_top>
+   <tick_right>false</tick_right>
+   <tick_left>false</tick_left>
+   <cap_bottom>false</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>true</cap_right>
+   <cap_left>false</cap_left>
+   <marker_offset>0.0</marker_offset>
+   <enable_pointer>true</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </c2>
+
+  <c3>
+   <name>KIAS</name>
+   <x>259</x>
+   <y>326</y>
+   <width>10</width>
+   <height>100</height>
+   <loadfn>speed</loadfn>
+   <options>10</options>
+   <maxValue>200.0</maxValue>
+   <minValue>0.0</minValue>
+   <disp_scaling>1.0</disp_scaling>
+   <major_divs>10</major_divs>
+   <minor_divs>5</minor_divs>
+   <modulator>0</modulator>
+   <value_span>50.0</value_span>
+   <type>tape</type>
+   <tick_bottom>true</tick_bottom>
+   <tick_top>true</tick_top>
+   <tick_right>false</tick_right>
+   <tick_left>false</tick_left>
+   <cap_bottom>false</cap_bottom>
+   <cap_top>false</cap_top>
+   <cap_right>false</cap_right>
+   <cap_left>true</cap_left>
+   <marker_offset>0.0</marker_offset>
+   <enable_pointer>true</enable_pointer>
+   <pointer_type>fixed</pointer_type>
+   <working>true</working>
+  </c3>
+
+ </cards>
+
+</PropertyList>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<!--
+F-16 panel. 16 Feb 2003
+Based on F-16 panel art by Erik Hofman, erik@ehofman.com
+David Culp, davidculp2@attbi.com
+_______________________________________________________________________
+-->
+
+<PropertyList>
+ <name>F16 Panel</name>
+ <background>Aircraft/f16/Panels/Textures/f16c-2d-panel.rgb</background>
+ <w>1024</w>
+ <h>768</h>
+ <y-offset>0</y-offset>
+ <view-height>1024</view-height>
+</PropertyList>
