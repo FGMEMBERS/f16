@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>left_front.ac</path>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>gear_lever</object-name>
+  <property>/controls/gear/gear-down</property>
+  <factor>90</factor>
+  <offset-deg>-45</offset-deg>
+  <center>
+   <x-m>-0.01</x-m>
+   <y-m>0.07</y-m>
+   <z-m>0.04</z-m>
+  </center>
+  <axis>
+   <x>0</x>
+   <y>1</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>nose_gear_light</object-name>
+  <condition>
+   <equals>
+    <property>/gear/gear[0]/position-norm</property>
+    <value>1.0</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>left_gear_light</object-name>
+  <condition>
+   <equals>
+    <property>/gear/gear[1]/position-norm</property>
+    <value>1.0</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>right_gear_light</object-name>
+  <condition>
+   <equals>
+    <property>/gear/gear[2]/position-norm</property>
+    <value>1.0</value>
+   </equals>
+  </condition>
+ </animation>
+
+</PropertyList>

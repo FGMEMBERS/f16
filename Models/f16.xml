@@ -17,25 +17,47 @@
  </model>
 
  <model>
+  <name>DED</name>
+  <path>Aircraft/f16/Models/ded.ac</path>
+  <offsets>
+   <x-m>-4.76</x-m>
+   <y-m>0.13</y-m>
+   <z-m>0.63</z-m>
+  </offsets>
+ </model>
+
+ <model>
   <name>MISC</name>
   <path>Aircraft/f16/Models/misc.ac</path>
   <offsets>
    <x-m>-4.760</x-m>
-   <y-m>-0.2625</y-m>
-   <z-m>0.485</z-m>
-   <pitch-deg>-5.4</pitch-deg>
+   <y-m>-0.25</y-m>
+   <z-m>0.48</z-m>
+   <pitch-deg>-5.45</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ENGINE</name>
+  <path>Aircraft/f16/Models/engine.ac</path>
+  <offsets>
+   <x-m>-4.760</x-m>
+   <y-m>0.25</y-m>
+   <z-m>0.48</z-m>
+   <pitch-deg>-5.45</pitch-deg>
   </offsets>
  </model>
 
  <model>
   <name>LEFT</name>
-  <path>Aircraft/f16/Models/left_front.ac</path>
+  <path>Aircraft/f16/Models/left_front.xml</path>
   <offsets>
-   <x-m>-4.660</x-m>
-   <y-m>-0.295</y-m>
-   <z-m>0.335</z-m>
+   <x-m>-4.66</x-m>
+   <y-m>-0.31</y-m>
+   <z-m>0.33</z-m>
+   <!-- roll-deg>-5.0</roll-deg -->
    <pitch-deg>-46.0</pitch-deg>
-   <heading-deg>-4.0</heading-deg>
+   <heading-deg>-4.2</heading-deg>
   </offsets>
  </model>
 
