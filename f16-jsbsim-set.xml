@@ -19,10 +19,10 @@
    <path>Aircraft/a4/a4-sound.xml</path>
   </sound>
 
-  <virtual-cockpit archive="y">true</virtual-cockpit>
+  <!-- virtual-cockpit archive="y">true</virtual-cockpit -->
   <panel>
    <path>Aircraft/f16/Panels/f16-2d-panel.xml</path>
-   <visibility archive="y">false</visibility>
+   <visibility archive="y">true</visibility>
   </panel>
   <panel_2>
    <visibility>false</visibility>
@@ -40,13 +40,9 @@
   <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
 
   <view>
-   <internal archive="y">true</internal>
    <config>
-     <pitch-offset-deg>-9.8</pitch-offset-deg>
-     <!-- default-field-of-view-deg>60</default-field-of-view-deg -->
-     <x-offset-m archive="y">0.0</x-offset-m>
-     <y-offset-m archive="y">0.76</y-offset-m>
-     <z-offset-m archive="y">-4.15</z-offset-m>
+     <pitch-offset-deg>-11.8</pitch-offset-deg>
+     <default-field-of-view-deg>60</default-field-of-view-deg>
    </config>
   </view>
  </sim>
@@ -69,3 +65,4 @@
  </consumables>
 
 </PropertyList>
+
