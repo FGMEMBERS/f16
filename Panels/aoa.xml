@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!-- Angle of Attack indexer, as used on US Navy carrier aircraft.  The
+     operation of these things is simple.  When the AoA is too low, the
+     bottom arrow glows red.  This indicates to the pilot that they
+     should pull back on the stick to raise the nose and slow down.
+     When the AoA is too high, the pilot gets a green, downward
+     pointing top arrow telling him to push the stick forward, lower
+     the nose, and speed up.
+
+     This instrument needs its angle thresholds supplied externally
+     (probably from the aircraft -set file), in these four properties:
+       /sim/aoa-indexer/too-slow-deg  (usually target +1.5 deg)
+       /sim/aoa-indexer/slow-deg      (target +0.5 deg)
+       /sim/aoa-indexer/fast-deg      (target -0.5 deg)
+       /sim/aoa-indexer/too-fast-deg  (target -1.5 deg)
+
+     Note that there is no instrument background texture.  This just
+     applies alpha-blended "lights" to something else in the 3D
+     cockpit.
+-->
+
+<PropertyList>
+
+ <name>Angle of Attack Indexer</name>
+ <w-base>8.0</w-base>
+ <h-base>8.0</h-base>
+
+ <layers>
+
+  <layer>
+   <name>too high</name>
+   <w>8</w>
+   <h>8</h>
+   <texture>
+    <path>Aircraft/f16/Panels/Textures/misc1.rgb</path>
+    <x1>0.578</x1>
+    <y1>0.402</y1>
+    <x2>0.672</x2>
+    <y2>0.484</y2>
+   </texture>
+   <condition>
+    <property>/controls/gear-down</property>
+    <greater-than>
+     <property>/orientation/alpha-deg</property>
+     <value>15.0</value>
+    </greater-than>
+   </condition>
+   <transformations>
+    <transformation>
+     <type>y-shift</type>
+     <offset>24.0</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>good</name>
+   <w>8</w>
+   <h>8</h>
+   <texture>
+    <path>Aircraft/f16/Panels/Textures/misc1.rgb</path>
+    <x1>0.703</x1>
+    <y1>0.391</y1>
+    <x2>0.797</x2>
+    <y2>0.496</y2>
+   </texture>
+   <condition>
+    <property>/controls/gear-down</property>
+    <less-than>
+     <property>/orientation/alpha-deg</property>
+     <value>15.0</value>
+    </less-than>
+    <greater-than>
+     <property>/orientation/alpha-deg</property>
+     <value>11.0</value>
+    </greater-than>
+   </condition>
+   <transformations>
+    <transformation>
+     <type>y-shift</type>
+     <offset>12.0</offset>
+    </transformation>
+   </transformations>
+  </layer>
+
+  <layer>
+   <name>too low</name>
+   <w>8</w>
+   <h>8</h>
+   <texture>
+    <path>Aircraft/f16/Panels/Textures/misc1.rgb</path>
+    <x1>0.824</x1>
+    <y1>0.402</y1>
+    <x2>0.914</x2>
+    <y2>0.484</y2>
+   </texture>
+   <condition>
+    <property>/controls/gear-down</property>
+    <less-than>
+     <property>/orientation/alpha-deg</property>
+     <value>11.0</value>
+    </less-than>
+   </condition>
+  </layer>
+
+ </layers>
+</PropertyList>
