@@ -19,6 +19,16 @@
   </offsets>
  </model>
 
+ <model>
+  <name>Throttle</name>
+  <path>Aircraft/f16/Models/throttle.xml</path>
+  <offsets>
+   <x-m>-4.25</x-m>
+   <y-m>-0.435</y-m>
+   <z-m>0.185</z-m>
+  </offsets>
+ </model>
+
 
 <!-- Panels -->
  <model>

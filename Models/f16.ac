@@ -22,8 +22,10 @@ MATERIAL "ac3dmat6" rgb 0.396 0.58 0  amb 0.2 0.2 0.2  emis 0.408 0.58 0  spec 0
 MATERIAL "ac3dmat3" rgb 1 0.039 0  amb 0.2 0.2 0.2  emis 1 0.137 0  spec 0.502 0.502 0.502  shi 10  trans 0
 MATERIAL "ac3dmat1" rgb 0.914 0.961 1  amb 0.929 0.957 1  emis 0.835 0.914 1  spec 0.502 0.502 0.502  shi 10  trans 0
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.502 0.502 0.502  shi 128  trans 0
+MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.502 0.502 0.502  shi 10  trans 0.365
+MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.502 0.502 0.502  shi 10  trans 0.533
 OBJECT world
-kids 92
+kids 100
 OBJECT poly
 name "external_front_gear_door"
 loc -2.46042 -1.09895 -0.278748
@@ -17330,4 +17332,160 @@ refs 3
 0 1 1
 2 0.446808 0
 1 0 0.846154
+kids 0
+OBJECT poly
+name "rect"
+loc 3.76862 1.64107 -0.0591789
+texture "f16.rgb"
+texrep -0.18 0.065
+numvert 4
+-0.554075 -0.0714865 0.00393902
+0.563374 -0.0714865 0.00393902
+0.563374 -0.441916 -0.00739221
+-0.554075 -0.441916 -0.00739221
+numsurf 1
+SURF 0x0
+mat 23
+refs 4
+0 0 1
+1 1 1
+2 1 0
+3 0 0
+kids 0
+OBJECT poly
+texture "f16.rgb"
+texrep -0.135 0.095
+texoff 0 0.062
+numvert 4
+3.83626 1.56958 -0.0552399
+4.51707 1.56958 -0.0552399
+4.51707 2.08299 -0.0420478
+3.83626 2.08299 -0.0420478
+numsurf 1
+SURF 0x0
+mat 23
+refs 4
+3 0 1
+2 1 1
+1 1 0
+0 0 0
+kids 0
+OBJECT poly
+name "rect"
+loc 2.41252 0.428283 -0.583059
+texture "f16.rgb"
+texrep 0.23 0.105
+texoff -0.37 0.13
+numvert 4
+-0.394065 0.129165 0.18519
+0.394065 0.129165 0.18519
+0.394065 -0.0878454 -0.14387
+-0.394065 -0.0878454 -0.14387
+numsurf 1
+SURF 0x0
+mat 24
+refs 4
+0 0 1
+1 1 1
+2 1 0
+3 0 0
+kids 0
+OBJECT poly
+name "rect"
+loc 1.15636 0.142746 3.28482
+texture "f16.rgb"
+texrep 0.23 0.105
+texoff -0.37 0.13
+numvert 4
+0.19042 -0.0318884 0.335625
+0.19042 0 -0.340939
+-0.141887 0 -0.340939
+-0.141887 -0.0318884 0.335625
+numsurf 1
+SURF 0x0
+mat 24
+refs 4
+0 0 1
+1 1 1
+2 1 0
+3 0 0
+kids 0
+OBJECT poly
+name "rect"
+loc 1.12023 -0.0300993 -3.62494
+texture "f16.rgb"
+texrep 0.23 0.105
+texoff -0.37 0.13
+numvert 4
+0.19042 0.0203162 0.3291
+0.19042 0.00326278 -0.340939
+-0.141887 0.00326278 -0.340939
+-0.141887 0.0203162 0.3291
+numsurf 1
+SURF 0x0
+mat 24
+refs 4
+3 0 0
+2 1 0
+1 1 1
+0 0 1
+kids 0
+OBJECT poly
+name "rect"
+loc 3.77014 1.6418 0.0433694
+texture "f16.rgb"
+texrep 0.18 0.065
+texoff -0.23 0
+numvert 4
+-0.554075 -0.0714865 0.00580001
+0.563374 -0.0714865 0.00580001
+0.563374 -0.441916 0.0171312
+-0.554075 -0.441916 0.0171312
+numsurf 1
+SURF 0x0
+mat 23
+refs 4
+3 0 0
+2 1 0
+1 1 1
+0 0 1
+kids 0
+OBJECT poly
+loc 0.00151944 0.000730276 0.102548
+texture "f16.rgb"
+texrep -0.135 0.095
+texoff 0 0.062
+numvert 4
+3.83626 1.56958 -0.0533789
+4.51707 1.56958 -0.0533789
+4.51707 2.08299 -0.0665711
+3.83626 2.08299 -0.0665711
+numsurf 1
+SURF 0x0
+mat 23
+refs 4
+0 0 0
+1 1 0
+2 1 1
+3 0 1
+kids 0
+OBJECT poly
+name "rect"
+loc 2.4144 0.44708 0.584289
+texture "f16.rgb"
+texrep 0.23 0.105
+texoff -0.37 0.13
+numvert 4
+-0.394065 0.108505 -0.16453
+0.394065 0.108505 -0.16453
+0.394065 -0.108505 0.16453
+-0.394065 -0.108505 0.16453
+numsurf 1
+SURF 0x0
+mat 24
+refs 4
+3 0 0
+2 1 0
+1 1 1
+0 0 1
 kids 0
