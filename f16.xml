@@ -93,6 +93,7 @@
    <COMPONENT NAME="elevator cmd limiter" TYPE="SUMMER">
      INPUT          fcs/elevator-cmd-norm
      INPUT          fcs/pitch-trim-cmd-norm
+     BIAS           -0.1
      CLIPTO         -1.0 0.44
    </COMPONENT>
    <COMPONENT NAME="g load norm" TYPE="PURE_GAIN">

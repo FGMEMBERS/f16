@@ -16310,6 +16310,7 @@ refs 3
 9 0 0
 kids 0
 OBJECT poly
+name "canopy_back"
 loc -2.87453 0.888182 0.000412643
 texrep -0.505 0.13
 texoff -0.38 0.7
@@ -16505,7 +16506,7 @@ refs 3
 13 0.266059 0.597527
 kids 0
 OBJECT poly
-name "hud_glass"
+name "hud"
 loc -4.82209 0.73158 -0.00119212
 numvert 16
 0.0978355 0.118675 0.0934986
@@ -17052,6 +17053,7 @@ refs 3
 0 1 0.229408
 kids 0
 OBJECT poly
+name "canopy"
 loc -4.37004 0.816617 -0.000135452
 numvert 40
 -1.0057 -0.308176 -0.00342321

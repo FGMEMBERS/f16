@@ -8,6 +8,17 @@
   <pitch-deg>0.3</pitch-deg>
  </offsets>
 
+ <animation>
+  <object-name>canopy</object-name>
+  <object-name>hud</object-name>
+ </animation>
+
+ <animation>
+  <type>alpha-test</type>
+  <alpha-factor>0.01</alpha-factor>
+ </animation>
+
+
 <!-- Submodels -->
  <model>
   <name>RudderPedals</name>
