@@ -4,14 +4,14 @@
 
   <l1>
   <name>Pitch Ladder</name>
-  <x>309</x>
+  <x>306</x>
   <y>360</y>
-  <width>25</width>
-  <height>25</height>
+  <width>24</width>
+  <height>12</height>
   <compression_factor>2.00</compression_factor>
   <loadfn>roll</loadfn>
   <loadfn1>pitch</loadfn1>
-  <span_units>45.0</span_units>
+  <span_units>30.0</span_units>
   <division_units>10.0</division_units>
   <screen_hole>70</screen_hole>
   <lbl_pos>0</lbl_pos>
