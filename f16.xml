@@ -38,8 +38,8 @@
     AC_IZZ      63100.0
     AC_IXZ        982.0
     AC_EMPTYWT  17400.0 <!-- w. oil, oxygen, unusable fuel and tip missile launchers -->
-    AC_AERORP           -201.3  0.0   0.0 <!-- 35% CBAR -->
-    AC_CGLOC            -216.3  0.0   0.0
+    AC_AERORP           -201.3  0.0   0.0
+    AC_CGLOC            -210.3  0.0   0.0 <!-- 35% CBAR -->
     AC_EYEPTLOC         -384.7  0.0  33.2
     AC_POINTMASS  230.0 -384.7  0.0   0.0 <!-- pilot -->
   </METRICS>
@@ -156,10 +156,9 @@
        OUTPUT       fcs/rudder-pos-rad
      </COMPONENT>
      <COMPONENT NAME="Flaps Control" TYPE="KINEMAT">
-       INPUT        fcs/flap-cmd-norm
-       DETENTS      3
+       INPUT        fcs/gear-cmd-norm
+       DETENTS      1
                     0    0
-                    15   3
                     25   3
        OUTPUT      fcs/flap-pos-deg
      </COMPONENT>
