@@ -5,7 +5,7 @@
   <submodel>
     <name>flares</name>
     <model>Models/Geometry/flare.xml</model>
-    <trigger>systems/submodels/submodel[0]/flare-release</trigger>
+    <trigger>ai/submodels/submodel[0]/flare-release</trigger>
     <speed>150.0</speed>
     <repeat>true</repeat>
     <delay>0.75</delay>
@@ -21,7 +21,7 @@
   <submodel>
     <name>contrail</name>
     <model>Models/Geometry/puff.xml</model>
-    <trigger>systems/submodels/submodel[0]/smoke</trigger>
+    <trigger>ai/submodels/submodel[0]/smoke</trigger>
     <speed>100.0</speed>
     <repeat>true</repeat>
     <delay>0.25</delay>
