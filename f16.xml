@@ -105,15 +105,15 @@
    </COMPONENT>
    <COMPONENT NAME="g load p" TYPE="PURE_GAIN">
      INPUT          fcs/g-load-error
-     GAIN           1.02
+     GAIN           0.6
    </COMPONENT>
    <COMPONENT NAME="g load i" TYPE="INTEGRATOR">
      INPUT          fcs/g-load-error
-     C1             0.0001
+     C1             0.005
    </COMPONENT>
    <COMPONENT NAME="g load d" TYPE="LEAD_LAG_FILTER">
      INPUT          fcs/g-load-error
-     C1             0.005
+     C1             0.00125
      C2             0.0
      C3             0.0
      C4             1.0
@@ -121,6 +121,7 @@
    <COMPONENT NAME="g load command" TYPE="SUMMER">
      INPUT          fcs/g-load-p
      INPUT          fcs/g-load-i
+     INPUT          fcs/g-load-d
      CLIPTO         -1 1
     </COMPONENT>
     <COMPONENT NAME="Elevator Control" TYPE="AEROSURFACE_SCALE">
