@@ -4,6 +4,7 @@
 
  <sim>
   <description>General Dynamics F-16</description>
+  <status>early-production</status>
  
   <flight-model>jsb</flight-model>
   <aero>f16</aero>
