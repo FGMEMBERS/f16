@@ -82,23 +82,8 @@ _______________________________________________________________________
    <h>12</h>
   </instrument>
 
-  <instrument>
+  <instrument include="ded.xml">
    <name>DED</name>
-   <w-base>64</w-base>
-   <h-base>32</h-base>
-   <layers>
-    <layer>
-     <texture>
-      <path>Aircraft/f16/Panels/Textures/misc2.rgb</path>
-      <x1>0.0</x1>
-      <y1>0.848</y1>
-      <x2>0.484</x2>
-      <y2>1.0</y2>
-     </texture>
-     <w>73</w>
-     <h>11</h>
-    </layer>
-   </layers>
    <x>729</x>
    <y>286</y>
    <w>120</w>

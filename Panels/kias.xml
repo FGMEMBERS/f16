@@ -39,7 +39,7 @@ Indicated airspeed instrument.
      <transformations>
       <transformation>
        <type>rotation</type>
-       <property>/fdm/jsbsim/velocities/mach-norm</property>
+       <property>/velocities/mach</property>
        <max>1.6</max>
        <scale>-225.0</scale>
       </transformation>

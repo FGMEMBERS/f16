@@ -2,6 +2,7 @@
 
  <cards>
 
+<!--
   <c1>
    <name>heading</name>
    <x>267</x>
@@ -9,7 +10,6 @@
    <width>102</width>
    <height>14</height>
    <loadfn>heading</loadfn>
-   <options>4</options>		<!--  Read ReadMe.xmlhud for Values  -->
    <maxValue>360.0</maxValue>
    <minValue>0.0</minValue>
    <disp_scaling>1.0</disp_scaling>
@@ -18,6 +18,7 @@
    <modulator>360</modulator>
    <value_span>25.0</value_span>
    <type>tape</type>
+   <options>4</opttions>
    <tick_bottom>false</tick_bottom>
    <tick_top>false</tick_top>
    <tick_right>false</tick_right>
@@ -31,23 +32,24 @@
    <pointer_type>fixed</pointer_type>
    <working>true</working>
   </c1>
+-->
 
   <c2>
    <name>Altitude-MSL</name>
-   <x>371</x>
-   <y>335</y> 
+   <x>374</x>
+   <y>346</y> 
    <width>10</width>
-   <height>80</height>
+   <height>60</height>
    <loadfn>altitude</loadfn>
-   <options>6</options>
    <maxValue>100.0</maxValue>
    <minValue>-100.0</minValue>
-   <disp_scaling>1.0</disp_scaling>
-   <major_divs>100</major_divs>
-   <minor_divs>25</minor_divs>
+   <disp_scaling>0.001</disp_scaling>
+   <major_divs>1000</major_divs>
+   <minor_divs>100</minor_divs>
    <modulator>0</modulator>
-   <value_span>500.0</value_span>
+   <value_span>2400.0</value_span>
    <type>tape</type>
+   <options>10</options>
    <tick_bottom>false</tick_bottom>
    <tick_top>false</tick_top>
    <tick_right>false</tick_right>
@@ -56,7 +58,7 @@
    <cap_top>false</cap_top>
    <cap_right>false</cap_right>
    <cap_left>false</cap_left>
-   <marker_offset>0.0</marker_offset>
+   <marker_offset>5</marker_offset>
    <enable_pointer>true</enable_pointer>
    <pointer_type>fixed</pointer_type>
    <working>true</working>
@@ -64,20 +66,20 @@
 
   <c3>
    <name>KIAS</name>
-   <x>256</x>
-   <y>336</y>
+   <x>255</x>
+   <y>346</y>
    <width>10</width>
-   <height>80</height>
+   <height>60</height>
    <loadfn>speed</loadfn>
-   <options>10</options>
-   <maxValue>200.0</maxValue>
+   <maxValue>850.0</maxValue>
    <minValue>0.0</minValue>
-   <disp_scaling>1.0</disp_scaling>
+   <disp_scaling>0.1</disp_scaling>
    <major_divs>10</major_divs>
-   <minor_divs>5</minor_divs>
+   <minor_divs>1</minor_divs>
    <modulator>0</modulator>
-   <value_span>50.0</value_span>
+   <value_span>24.0</value_span>
    <type>tape</type>
+   <options>6</options>
    <tick_bottom>false</tick_bottom>
    <tick_top>false</tick_top>
    <tick_right>false</tick_right>
@@ -86,7 +88,7 @@
    <cap_top>false</cap_top>
    <cap_right>false</cap_right>
    <cap_left>false</cap_left>
-   <marker_offset>0.0</marker_offset>
+   <marker_offset>5</marker_offset>
    <enable_pointer>true</enable_pointer>
    <pointer_type>fixed</pointer_type>
    <working>true</working>
