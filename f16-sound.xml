@@ -12,7 +12,7 @@
    <volume>
     <property>/engines/engine/thrust_lb</property>
     <type>lin</type>
-    <factor>0.00003448</factor>
+    <factor>0.00003445</factor>
    </volume>
   </engine>
 
