@@ -335,8 +335,8 @@
   <type>rotate</type>
   <object-name>front_wheel</object-name>
   <object-name>front_lower_strut</object-name>
-  <property>surface-positions/rudder-pos-norm</property>
-  <factor>-35</factor>
+  <property>gear/gear[0]/steering-norm</property>
+  <factor>-80</factor>
   <center>
    <x-m>-2.97</x-m>
    <y-m>0.0</y-m>
