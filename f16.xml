@@ -43,7 +43,7 @@
     AC_POINTMASS  230.0 -336.2  0.0   0.0
   </METRICS>
   <UNDERCARRIAGE>
-    AC_GEAR NOSE_LG   -299.6    0.0 -72.0 15000  5000 0.5 0.8 0.02 STEERABLE NOSE    5 RETRACT
+    AC_GEAR NOSE_LG   -299.6    0.0 -72.0 15000  5000 0.5 0.8 0.02 STEERABLE NOSE    80 RETRACT
     AC_GEAR LEFT_MLG  -158.6  -48.0 -71.6 22704 10000 0.5 0.8 0.02 FIXED     LEFT    0 RETRACT
     AC_GEAR RIGHT_MLG -158.6   48.0 -71.6 22704 10000 0.5 0.8 0.02 FIXED     RIGHT   0 RETRACT
 
@@ -258,6 +258,15 @@
                     0    0
                     1    5
        OUTPUT       gear/gear-pos-norm
+      </COMPONENT>
+      <COMPONENT NAME="Scheduled Steer Pos Deg" TYPE="SCHEDULED_GAIN">
+       INPUT        fcs/steer-cmd-norm
+       SCHEDULED_BY velocities/vg-fps
+       ROWS         3
+        10.0        80.0
+        50.0        15.0
+        150.0       2.0
+       OUTPUT       fcs/steer-pos-deg[0]
       </COMPONENT>
   </FLIGHT_CONTROL>
   <AERODYNAMICS>
