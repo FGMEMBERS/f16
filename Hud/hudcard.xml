@@ -6,7 +6,7 @@
   <c1>
    <name>heading</name>
    <x>267</x>
-   <y>429</y>
+   <y>289</y>
    <width>102</width>
    <height>14</height>
    <loadfn>heading</loadfn>
@@ -37,7 +37,7 @@
   <c2>
    <name>Altitude-MSL</name>
    <x>374</x>
-   <y>346</y> 
+   <y>206</y> 
    <width>10</width>
    <height>60</height>
    <loadfn>altitude</loadfn>
@@ -67,7 +67,7 @@
   <c3>
    <name>KIAS</name>
    <x>255</x>
-   <y>346</y>
+   <y>206</y>
    <width>10</width>
    <height>60</height>
    <loadfn>speed</loadfn>
