@@ -54,6 +54,17 @@
      <default-field-of-view-deg>60</default-field-of-view-deg>
    </config>
   </view>
+
+  <help>
+   <key>
+    <name>Ctrl-B</name>
+    <desc>toggle speed brake</desc>
+   </key>
+   <key>
+    <name>Ctrl-F</name>
+    <desc>trigger flare release</desc>
+   </key>
+  </help>
  </sim>
 
  <input>

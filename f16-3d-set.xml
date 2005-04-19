@@ -19,6 +19,10 @@
      <z-offset-m archive="y">-4.15</z-offset-m>
    </config>
   </view>
+
+  <help>
+   <title>General Dynamics F-16</title>
+  </help>
  </sim>
 
 </PropertyList>
