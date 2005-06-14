@@ -15,9 +15,6 @@
   </startup>
   
   <systems>
-   <electrical>
-    <path>Aircraft/Generic/generic-electrical.xml</path>
-   </electrical>
    <submodels>
     <serviceable type="bool">1</serviceable>
     <path>Aircraft/f16/f16-submodels.xml</path>
