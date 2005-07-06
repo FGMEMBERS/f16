@@ -25,7 +25,7 @@ MATERIAL "ac3dmat1" rgb 0.757 0.482 0.227  amb 1 0.925 0  emis 1 1 0.694  spec 1
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.502 0.502 0.502  shi 10  trans 0.365
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.502 0.502 0.502  shi 10  trans 0.533
 OBJECT world
-kids 100
+kids 99
 OBJECT poly
 name "external_front_gear_door"
 loc -2.46042 -1.09895 -0.278748
@@ -12551,38 +12551,6 @@ refs 3
 11 0.556927 0.165328
 1 0.556927 0.219924
 12 0 0.0810141
-kids 0
-OBJECT poly
-name "shadow_plan"
-loc -1.35524 -1.70066 -0.00642967
-texture "f16-shadows.rgb"
-texrep -0.75 0.51
-texoff -0.25 0.28
-numvert 5
--7.33427 0 0.0221916
-7.33427 0 -4.81555
-7.33427 0 4.85992
-0.954239 0 -4.85993
-0.954239 0 4.81555
-numsurf 3
-SURF 0x0
-mat 22
-refs 3
-0 0 0.497717
-1 1 0.995434
-3 0.565053 1
-SURF 0x0
-mat 22
-refs 3
-1 1 0.995434
-0 0 0.497717
-2 1 0
-SURF 0x0
-mat 22
-refs 3
-2 1 0
-0 0 0.497717
-4 0.565053 0.00456613
 kids 0
 OBJECT poly
 name "green_pos_light"
