@@ -13,7 +13,7 @@
   </panel>
 
   <model>
-   <path>Aircraft/f16/Models/baseline.ac</path>
+   <path>Aircraft/f16/Models/baseline.xml</path>
   </model>
 
   <view>
