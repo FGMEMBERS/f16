@@ -14,12 +14,10 @@
    <splash-texture>Aircraft/f16/f16-splash.rgb</splash-texture>
   </startup>
   
-  <systems>
    <submodels>
     <serviceable type="bool">1</serviceable>
     <path>Aircraft/f16/f16-submodels.xml</path>
    </submodels>
-  </systems> 
   
   <sound>
    <path>Aircraft/f16/f16-sound.xml</path>
@@ -71,13 +69,13 @@
      <desc>Trigger flare release</desc>
      <binding>
       <command>property-assign</command>
-      <property>/systems/submodels/submodel[0]/flare-release</property>
+      <property>/ai/submodels/submodel[0]/flare-release</property>
       <value type="bool">true</value>
      </binding>
      <mod-up>
       <binding>
        <command>property-assign</command>
-       <property>/systems/submodels/submodel[0]/flare-release</property>
+       <property>/ai/submodels/submodel[0]/flare-release</property>
        <value type="bool">false</value>
       </binding>
      </mod-up>
