@@ -28,7 +28,6 @@
   <object-name>afterburner</object-name>
   <object-name>turbine</object-name>
   <object-name>fan</object-name>
-  <object-name>canopy_back</object-name>
   <object-name>internal_flame</object-name>
   <object-name>external_flame</object-name>
   <object-name>green_pos_light</object-name>
@@ -40,8 +39,11 @@
   <object-name>wing_green_pos_light</object-name>
   <object-name>anti_collision_strobe_off</object-name>
   <object-name>anti_collision_strobe</object-name>
-  <object-name>canopy</object-name>
   <object-name>hud</object-name>
+  <object-name>lhicondenscone</object-name>
+  <object-name>rhicondenscone</object-name>
+  <object-name>lhocondenscone</object-name>
+  <object-name>rhocondenscone</object-name>
  </animation>
 
 <!-- Submodels -->
@@ -884,6 +886,31 @@
   <object-name>StrobeFlasher</object-name>
   <condition>
    <property>controls/lighting/strobe</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>lhicondenscone</object-name>
+  <object-name>rhicondenscone</object-name>
+  <object-name>lhocondenscone</object-name>
+  <object-name>rhocondenscone</object-name>
+  <condition>
+   <greater-than>
+    <property>orientation/alpha-deg</property>
+    <value>9.0</value>
+   </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>rhcondensation cone</object-name>
+  <condition>
+   <greater-than>
+    <property>orientation/alpha-deg</property>
+    <value>9.0</value>
+   </greater-than>
   </condition>
  </animation>
 
