@@ -12,6 +12,8 @@
   <object-name>canopy</object-name>
   <object-name>hud</object-name>
   <object-name>canopy_back</object-name>
+  <object-name>us_markings</object-name>
+  <object-name>klu_markings</object-name>
  </animation>
 
  <animation>
@@ -22,7 +24,8 @@
 <!-- no shadows -->
  <animation>
   <type>noshadow</type>
-  <object-name>markings</object-name>
+  <object-name>us_markings</object-name>
+  <object-name>klu_markings</object-name>
   <object-name>green_pos_light</object-name>
   <object-name>red_pos_light</object-name>
   <object-name>afterburner</object-name>
@@ -34,11 +37,9 @@
   <object-name>red_pos_light</object-name>
   <object-name>low_formation_light</object-name>
   <object-name>fwd_formation_light</object-name>
-  <object-name>aft_pos_light</object-name>
   <object-name>wing_red_pos_light</object-name>
   <object-name>wing_green_pos_light</object-name>
   <object-name>anti_collision_strobe_off</object-name>
-  <object-name>anti_collision_strobe</object-name>
   <object-name>hud</object-name>
   <object-name>lhicondenscone</object-name>
   <object-name>rhicondenscone</object-name>
@@ -836,6 +837,7 @@
  </animation>
 -->
 
+<!--
  <animation>
   <type>select</type>
   <object-name>green_pos_light</object-name>
@@ -849,10 +851,12 @@
    </equals>
   </condition>
  </animation>
+-->
 
  <animation>
   <type>select</type>
-  <object-name>aft_pos_light</object-name>
+  <object-name>aft_pos_light1</object-name>
+  <object-name>aft_pos_light2</object-name>
   <condition>
    <equals>
     <property>controls/lighting/logo-lights</property>
@@ -876,8 +880,10 @@
  <animation>
   <name>StrobeFlasher</name>
   <type>timed</type>
-  <object-name>anti_collision_strobe</object-name>
-  <object-name>anti_collision_strobe_off</object-name>
+  <object-name>green_pos_light</object-name>
+  <object-name>red_pos_light</object-name>
+  <object-name>wing_red_pos_light</object-name>
+  <object-name>wing_green_pos_light</object-name>
   <duration-sec>1.0</duration-sec>
  </animation>
 
@@ -885,7 +891,7 @@
   <type>select</type>
   <object-name>StrobeFlasher</object-name>
   <condition>
-   <property>controls/lighting/strobe</property>
+   <property>controls/lighting/nav-lights</property>
   </condition>
  </animation>
 
@@ -905,12 +911,32 @@
 
  <animation>
   <type>select</type>
-  <object-name>rhcondensation cone</object-name>
+  <object-name>rhocondenscone</object-name>
   <condition>
    <greater-than>
     <property>orientation/alpha-deg</property>
     <value>9.0</value>
    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>us_markings</object-name>
+  <object-name>us_tailboom</object-name>
+  <object-name>LExtTank</object-name>
+  <object-name>RExtTank</object-name>
+  <condition>
+    <property>/model/f16/us</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>klu_markings</object-name>
+  <object-name>klu_tailboom</object-name>
+  <condition>
+    <property>/model/f16/klu</property>
   </condition>
  </animation>
 

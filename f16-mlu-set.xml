@@ -29,4 +29,11 @@
   </help>
  </sim>
 
+ <model>
+  <f16>
+   <klu type="bool">true</klu>
+   <us type="bool">false</us>
+  </f16>
+ </model>
+
 </PropertyList>
