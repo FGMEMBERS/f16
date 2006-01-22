@@ -45,6 +45,7 @@
   <object-name>rhicondenscone</object-name>
   <object-name>lhocondenscone</object-name>
   <object-name>rhocondenscone</object-name>
+  <object-name>strobe</object-name>
  </animation>
 
 <!-- Submodels -->
@@ -920,6 +921,53 @@
   </condition>
  </animation>
 
+ 
+ <!-- strobe top/tail -->
+ <animation>
+  <type>select</type>
+  <object-name>strobe</object-name>
+  <condition>
+   <property>sim/model/f16/lighting/strobe/state</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>strobe</object-name>
+  <offset-m>5.31</offset-m>
+  <axis>
+   <x>5.31</x>
+   <y>0.0</y>
+   <z>3.22</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>material</type>
+  <object-name>strobe</object-name>
+  <threshold>0.001</threshold>
+ </animation>
+
+ <animation>
+  <type>billboard</type>
+  <object-name>strobe</object-name>
+ </animation>
+
+ <animation>
+  <type>scale</type>
+  <object-name>strobe</object-name>
+  <property>/sim/time/sun-angle-rad</property>
+  <offset>-1.4</offset>
+  <x-min>1</x-min>
+  <y-min>1</y-min>
+  <z-min>1</z-min>
+  <x-factor>12</x-factor>
+  <y-factor>12</y-factor>
+  <z-factor>12</z-factor>
+ </animation>
+
+
+ <!-- livery selection -->
  <animation>
   <type>select</type>
   <object-name>us_markings</object-name>
@@ -927,7 +975,7 @@
   <object-name>LExtTank</object-name>
   <object-name>RExtTank</object-name>
   <condition>
-    <property>/model/f16/us</property>
+    <property>sim/model/f16/us</property>
   </condition>
  </animation>
 
@@ -936,7 +984,7 @@
   <object-name>klu_markings</object-name>
   <object-name>klu_tailboom</object-name>
   <condition>
-    <property>/model/f16/klu</property>
+    <property>sim/model/f16/klu</property>
   </condition>
  </animation>
 

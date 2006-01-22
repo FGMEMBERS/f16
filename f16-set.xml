@@ -39,6 +39,10 @@
 
   <model>
    <path>Aircraft/f16/Models/f16.xml</path>
+   <f16>
+    <klu type="bool">false</klu>
+    <us type="bool">true</us>
+   </f16>
   </model>
 
   <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
@@ -83,6 +87,12 @@
    </keyboard>
   </input>
 
+ <controls>
+  <lighting>
+   <strobe type="bool">true</strobe>
+  </lighting>
+ </controls>
+
  <engines>
   <engine n="0">
    <running>true</running>
@@ -100,12 +110,11 @@
   </fuel>
  </consumables>
 
- <model>
+ <nasal>
   <f16>
-   <klu type="bool">false</klu>
-   <us type="bool">true</us>
+   <file>Aircraft/f16/f16.nas</file>
   </f16>
- </model>
+ </nasal>
 
 </PropertyList>
 
