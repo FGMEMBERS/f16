@@ -12,6 +12,10 @@
 
   <model>
    <path>Aircraft/f16/Models/f16klu.xml</path>
+   <f16>
+    <klu type="bool">true</klu>
+    <us type="bool">false</us>
+   </f16>
   </model>
 
   <view>
@@ -28,12 +32,5 @@
    <title>General Dynamics F-16AM</title>
   </help>
  </sim>
-
- <model>
-  <f16>
-   <klu type="bool">true</klu>
-   <us type="bool">false</us>
-  </f16>
- </model>
 
 </PropertyList>
