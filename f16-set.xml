@@ -90,6 +90,7 @@
  <controls>
   <lighting>
    <strobe type="bool">true</strobe>
+   <nav-lights type="bool">true</nav-lights>
   </lighting>
  </controls>
 

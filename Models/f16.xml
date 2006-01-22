@@ -26,19 +26,17 @@
   <type>noshadow</type>
   <object-name>us_markings</object-name>
   <object-name>klu_markings</object-name>
-  <object-name>green_pos_light</object-name>
-  <object-name>red_pos_light</object-name>
+  <object-name>green_pos_light1</object-name>
+  <object-name>red_pos_light1</object-name>
+  <object-name>wing_green_pos_light</object-name>
+  <object-name>wing_red_pos_light</object-name>
   <object-name>afterburner</object-name>
   <object-name>turbine</object-name>
   <object-name>fan</object-name>
   <object-name>internal_flame</object-name>
   <object-name>external_flame</object-name>
-  <object-name>green_pos_light</object-name>
-  <object-name>red_pos_light</object-name>
   <object-name>low_formation_light</object-name>
   <object-name>fwd_formation_light</object-name>
-  <object-name>wing_red_pos_light</object-name>
-  <object-name>wing_green_pos_light</object-name>
   <object-name>anti_collision_strobe_off</object-name>
   <object-name>hud</object-name>
   <object-name>lhicondenscone</object-name>
@@ -784,75 +782,6 @@
   </condition>
  </animation>
 -->
-<!--
- <animation>
-  <type>rotate</type>
-  <object-name>shadow_plan</object-name>
-  <property>orientation/pitch-deg</property>
-  <factor>-1.0</factor>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0</z-m>
-  </center>
-  <axis>
-   <x>0</x>
-   <y>1</y>
-   <z>0</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>shadow_plan</object-name>
-  <property>orientation/roll-deg</property>
-  <factor>1.0</factor>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0</z-m>
-  </center>
-  <axis>
-   <x>1</x>
-   <y>0</y>
-   <z>0</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>translate</type>
-  <object-name>shadow_plan</object-name>
-  <property>position/altitude-agl-ft</property>
-  <factor>-0.3</factor>
-  <offset-m>-6.0</offset-m>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0</z-m>
-  </center>
-  <axis>
-   <x>0</x>
-   <y>0</y>
-   <z>1</z>
-  </axis>
- </animation>
--->
-
-<!--
- <animation>
-  <type>select</type>
-  <object-name>green_pos_light</object-name>
-  <object-name>red_pos_light</object-name>
-  <object-name>wing_red_pos_light</object-name>
-  <object-name>wing_green_pos_light</object-name>
-  <condition>
-   <equals>
-    <property>controls/lighting/nav-lights</property>
-    <value>true</value>
-   </equals>
-  </condition>
- </animation>
--->
 
  <animation>
   <type>select</type>
@@ -879,18 +808,24 @@
  </animation>
 
  <animation>
-  <name>StrobeFlasher</name>
-  <type>timed</type>
-  <object-name>green_pos_light</object-name>
-  <object-name>red_pos_light</object-name>
-  <object-name>wing_red_pos_light</object-name>
+  <name>nav_lights</name>
+  <object-name>green_pos_light1</object-name>
+  <object-name>red_pos_light1</object-name>
   <object-name>wing_green_pos_light</object-name>
-  <duration-sec>1.0</duration-sec>
+  <object-name>wing_red_pos_light</object-name>
+ </animation>
+
+ <animation>
+  <name>timed_nav_lights</name>
+  <object-name>nav_lights</object-name>
+  <type>timed</type>
+  <object-name>pos_lights</object-name>
+  <duration-sec>0.8</duration-sec>
  </animation>
 
  <animation>
   <type>select</type>
-  <object-name>StrobeFlasher</object-name>
+  <object-name>timed_nav_lights</object-name>
   <condition>
    <property>controls/lighting/nav-lights</property>
   </condition>
@@ -934,11 +869,11 @@
  <animation>
   <type>translate</type>
   <object-name>strobe</object-name>
-  <offset-m>5.31</offset-m>
+  <offset-m>5.31421</offset-m>
   <axis>
-   <x>5.31</x>
+   <x>5.31421</x>
    <y>0.0</y>
-   <z>3.22</z>
+   <z>3.22005</z>
   </axis>
  </animation>
 
