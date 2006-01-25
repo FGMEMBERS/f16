@@ -41,7 +41,7 @@
 
   <engine>
    <name>whine</name>
-   <path>Sounds/whine.wav</path>
+   <path>Sounds/turbojet_fan.wav</path>
    <mode>looped</mode>
    <property>/engines/engine/running</property>
    <orientation>
@@ -49,18 +49,17 @@
     <y>-5.0</y>
     <z>0.0</z>
     <inner-cone>50.0</inner-cone>
-    <outer-cone>360.0</outer-cone>
+    <outer-cone>180.0</outer-cone>
     <outer-gain>0.0</outer-gain>
    </orientation>
    <pitch>
     <property>/engines/engine/n1</property>
     <type>lin</type>
-    <factor>.016</factor>
+    <ofset>0.7</ofset>
+    <factor>.00075</factor>
    </pitch>
    <volume>
-    <property>/engines/engine/n1</property>
-    <type>log</type>
-    <factor>0.1</factor> <!-- 10-100% rpm == 0.1 - 1 factor -->
+    <max>0.6</max>
    </volume>
   </engine>
 
