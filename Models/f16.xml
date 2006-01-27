@@ -18,6 +18,18 @@
  </animation>
 
  <animation>
+  <name>pos_lights</name>
+  <object-name>aft_pos_light2</object-name>
+  <object-name>green_pos_light1</object-name>
+  <object-name>red_pos_light1</object-name>
+  <object-name>green_pos_light2</object-name>
+  <object-name>red_pos_light2</object-name>
+  <object-name>wing_red_pos_light</object-name>
+  <object-name>wing_green_pos_light</object-name>
+  <object-name>aft_pos_light1</object-name>
+ </animation>
+
+ <animation>
   <type>alpha-test</type>
   <alpha-factor>0.01</alpha-factor>
  </animation>
@@ -861,9 +873,9 @@
  </animation>
 
  <animation>
+  <type>timed</type>
   <name>timed_nav_lights</name>
   <object-name>nav_lights</object-name>
-  <type>timed</type>
   <object-name>pos_lights</object-name>
   <duration-sec>0.8</duration-sec>
  </animation>

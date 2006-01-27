@@ -18907,7 +18907,7 @@ refs 3
 1 0 0.840909
 kids 0
 OBJECT poly
-name "rect"
+name "link16"
 loc 2.75144 0.21943 -0.382751
 texture "f16.rgb"
 texrep 0.95 0.2
