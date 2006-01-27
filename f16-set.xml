@@ -103,10 +103,16 @@
  <consumables>
   <fuel>
    <tank n="0">
-    <level-gal_us archive="y">1000</level-gal_us>
+    <level-gal_us archive="y">500</level-gal_us>
    </tank>
    <tank n="1">
-    <level-gal_us archive="y">1000</level-gal_us>
+    <level-gal_us archive="y">500</level-gal_us>
+   </tank>
+   <tank n="2">
+    <level-gal_us archive="y">370</level-gal_us>
+   </tank>
+   <tank n="3">
+    <level-gal_us archive="y">370</level-gal_us>
    </tank>
   </fuel>
  </consumables>

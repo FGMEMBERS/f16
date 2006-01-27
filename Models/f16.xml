@@ -14,6 +14,7 @@
   <object-name>canopy_back</object-name>
   <object-name>us_markings</object-name>
   <object-name>klu_markings</object-name>
+  <object-name>strobe</object-name>
  </animation>
 
  <animation>
@@ -47,6 +48,50 @@
  </animation>
 
 <!-- Submodels -->
+
+ <model>
+  <name>LExtTank</name>
+  <path>Aircraft/f16/Models/fueltank.ac</path>
+  <offsets>
+   <x-m>0.30</x-m>
+   <y-m>-1.65</y-m>
+   <z-m>-0.55</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>RExtTank</name>
+  <path>Aircraft/f16/Models/fueltank.ac</path>
+  <offsets>
+   <x-m>0.30</x-m>
+   <y-m>1.65</y-m>
+   <z-m>-0.55</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>LeftSidewinder</name>
+  <path>Aircraft/f16/Models/sidewinder.ac</path>
+  <offsets>
+   <x-m>1.5</x-m>
+   <y-m>4.87</y-m>
+   <z-m>0.0</z-m>
+   <pitch-deg>-5.0</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>RightSidewinder</name>
+  <path>Aircraft/f16/Models/sidewinder.ac</path>
+  <offsets>
+   <x-m>1.5</x-m>
+   <y-m>-4.87</y-m>
+   <z-m>0.0</z-m>
+   <pitch-deg>-5.0</pitch-deg>
+  </offsets>
+ </model>
+
+
  <model>
   <name>RudderPedals</name>
   <path>Aircraft/f16/Models/rudder_pedals.xml</path>
