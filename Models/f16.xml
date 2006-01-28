@@ -8,15 +8,23 @@
   <pitch-deg>0.3</pitch-deg>
  </offsets>
 
+ <!-- sort transparent objects -->
  <animation>
-  <object-name>canopy</object-name>
-  <object-name>hud</object-name>
+<!--
+  <object-name>strobe</object-name>
+  <object-name>canopy_glass</object-name>
+  <object-name>hud_glass</object-name>
   <object-name>canopy_back</object-name>
-  <object-name>us_markings</object-name>
+-->
   <object-name>klu_markings</object-name>
+  <object-name>us_markings</object-name>
+  <object-name>canopy_back</object-name>
+  <object-name>hud_glass</object-name>
+  <object-name>canopy_glass</object-name>
   <object-name>strobe</object-name>
  </animation>
 
+ <!-- group all position lights -->
  <animation>
   <name>pos_lights</name>
   <object-name>aft_pos_light2</object-name>
@@ -34,15 +42,12 @@
   <alpha-factor>0.01</alpha-factor>
  </animation>
 
-<!-- no shadows -->
+<!-- disable shadows for these objects -->
  <animation>
   <type>noshadow</type>
   <object-name>us_markings</object-name>
   <object-name>klu_markings</object-name>
-  <object-name>green_pos_light1</object-name>
-  <object-name>red_pos_light1</object-name>
-  <object-name>wing_green_pos_light</object-name>
-  <object-name>wing_red_pos_light</object-name>
+  <object-name>pos_lights</object-name>
   <object-name>afterburner</object-name>
   <object-name>turbine</object-name>
   <object-name>fan</object-name>
@@ -51,7 +56,7 @@
   <object-name>low_formation_light</object-name>
   <object-name>fwd_formation_light</object-name>
   <object-name>anti_collision_strobe_off</object-name>
-  <object-name>hud</object-name>
+  <object-name>hud_glass</object-name>
   <object-name>lhicondenscone</object-name>
   <object-name>rhicondenscone</object-name>
   <object-name>lhocondenscone</object-name>
@@ -68,6 +73,7 @@
    <x-m>0.30</x-m>
    <y-m>-1.65</y-m>
    <z-m>-0.55</z-m>
+   <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
 
@@ -78,6 +84,7 @@
    <x-m>0.30</x-m>
    <y-m>1.65</y-m>
    <z-m>-0.55</z-m>
+   <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
 
@@ -88,7 +95,7 @@
    <x-m>1.5</x-m>
    <y-m>4.87</y-m>
    <z-m>0.0</z-m>
-   <pitch-deg>-5.0</pitch-deg>
+   <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
 
@@ -99,7 +106,7 @@
    <x-m>1.5</x-m>
    <y-m>-4.87</y-m>
    <z-m>0.0</z-m>
-   <pitch-deg>-5.0</pitch-deg>
+   <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
 
@@ -266,6 +273,41 @@
 
 
 <!-- fuselage animations -->
+
+ <animation>
+  <type>rotate</type>
+  <object-name>canopy_frame</object-name>
+  <object-name>canopy_glass</object-name>
+  <property>sim/model/f16/canopy/position-norm</property>
+  <factor>30.0</factor>
+  <center>
+   <x-m>-3.30</x-m>
+   <y-m>0</y-m>
+   <z-m>0.6</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>arrester_hook</object-name>
+  <property>sim/model/f16/arrester-hook/position-norm</property>
+  <factor>43.0</factor>
+  <center>
+   <x-m>2.58</x-m>
+   <y-m>0</y-m>
+   <z-m>-0.73</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
 
  <animation>
   <type>select</type>

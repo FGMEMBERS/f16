@@ -42,6 +42,9 @@
    <f16>
     <klu type="bool">false</klu>
     <us type="bool">true</us>
+    <arrester-hook>
+     <engaged>false</engaged>
+    </arrester-hook>
    </f16>
   </model>
 
@@ -83,6 +86,22 @@
        <value type="bool">false</value>
       </binding>
      </mod-up>
+    </key>
+    <key n="8">
+     <name>Ctrl-H</name>
+     <desc>Toggle arrester hook</desc>
+     <binding>
+      <command>nasal</command>
+      <script>f16.testHook()</script>
+     </binding>
+    </key>
+    <key n="66">
+     <name>B</name>
+     <desc>Toggle parking brake on or off</desc>
+     <binding>
+      <command>nasal</command>
+      <script>f16.testCanopy()</script>
+     </binding>
     </key>
    </keyboard>
   </input>
