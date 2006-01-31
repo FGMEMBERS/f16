@@ -26,18 +26,6 @@
 
  <!-- group all position lights -->
  <animation>
-  <name>pos_lights</name>
-  <object-name>aft_pos_light2</object-name>
-  <object-name>green_pos_light1</object-name>
-  <object-name>red_pos_light1</object-name>
-  <object-name>green_pos_light2</object-name>
-  <object-name>red_pos_light2</object-name>
-  <object-name>wing_red_pos_light</object-name>
-  <object-name>wing_green_pos_light</object-name>
-  <object-name>aft_pos_light1</object-name>
- </animation>
-
- <animation>
   <type>alpha-test</type>
   <alpha-factor>0.01</alpha-factor>
  </animation>
@@ -881,6 +869,18 @@
   </condition>
  </animation>
 -->
+
+ <animation>
+  <name>pos_lights</name>
+  <object-name>aft_pos_light2</object-name>
+  <object-name>green_pos_light1</object-name>
+  <object-name>red_pos_light1</object-name>
+  <object-name>green_pos_light2</object-name>
+  <object-name>red_pos_light2</object-name>
+  <object-name>wing_red_pos_light</object-name>
+  <object-name>wing_green_pos_light</object-name>
+  <object-name>aft_pos_light1</object-name>
+ </animation>
 
  <animation>
   <type>select</type>
