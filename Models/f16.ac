@@ -4563,6 +4563,7 @@ kids 0
 OBJECT poly
 name "left_main_strut"
 loc 0.613638 -1.05711 0.70107
+crease 90.0
 numvert 16
 0.0517689 0.295561 -0.400893
 0.0326859 0.330441 -0.345568
@@ -4699,6 +4700,7 @@ kids 0
 OBJECT poly
 name "right_main_strut"
 loc 0.613902 -1.05733 -0.712661
+crease 90.0
 numvert 16
 0.0517689 0.295561 0.400893
 0.0326859 0.330441 0.345568
@@ -7839,6 +7841,7 @@ kids 0
 OBJECT poly
 name "front_aft_strut"
 loc -2.65207 -0.986259 -0.00102178
+crease 90.0
 numvert 8
 -0.296454 -0.205949 0.0248895
 -0.318825 -0.165446 0.0248895
@@ -7901,6 +7904,7 @@ kids 0
 OBJECT poly
 name "right_lower_main_strut"
 loc 0.339746 -1.19062 -0.765521
+crease 90.0
 numvert 8
 -0.291081 0.0987885 0.153305
 -0.255861 0.133947 0.214246
@@ -7963,6 +7967,7 @@ kids 0
 OBJECT poly
 name "right_upper_main_strut"
 loc -0.198306 -0.890067 -0.448103
+crease 90.0
 numvert 8
 0.292071 -0.098537 -0.154731
 0.256852 -0.133698 -0.215672
@@ -8025,6 +8030,7 @@ kids 0
 OBJECT poly
 name "left_lower_main_strut"
 loc 0.342306 -1.19081 0.763588
+crease 90.0
 numvert 8
 -0.29108 0.0987899 -0.153307
 -0.255863 0.13395 -0.214248
@@ -8087,6 +8093,7 @@ kids 0
 OBJECT poly
 name "left_upper_main_strut"
 loc -0.195735 -0.890257 0.44617
+crease 90.0
 numvert 8
 0.292071 -0.0985369 0.15473
 0.256852 -0.133695 0.215672
@@ -19604,6 +19611,7 @@ kids 0
 OBJECT poly
 name "front_upper_strut"
 loc -2.97279 -1.00177 -0.00513248
+crease 90.0
 numvert 12
 0.0245385 0.192655 0.0527167
 -0.0245385 0.192655 0.0527167
@@ -19694,6 +19702,7 @@ kids 0
 OBJECT poly
 name "front_lower_strut"
 loc -2.97457 -1.31574 -0.0219382
+crease 90.0
 numvert 28
 -0.0365639 0.034923 -0.0201582
 -0.0365639 0.0749291 -0.026462
