@@ -95,14 +95,6 @@
       <script>f16.testHook()</script>
      </binding>
     </key>
-    <key n="66">
-     <name>B</name>
-     <desc>Toggle parking brake on or off</desc>
-     <binding>
-      <command>nasal</command>
-      <script>f16.testCanopy()</script>
-     </binding>
-    </key>
    </keyboard>
   </input>
 
