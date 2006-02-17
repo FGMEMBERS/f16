@@ -935,14 +935,26 @@
 
  <animation>
   <type>select</type>
-  <object-name>lhicondenscone</object-name>
-  <object-name>rhicondenscone</object-name>
+  <!-- object-name>lhicondenscone</object-name>
+  <object-name>rhicondenscone</object-name -->
   <object-name>lhocondenscone</object-name>
   <object-name>rhocondenscone</object-name>
   <condition>
    <greater-than>
     <property>orientation/alpha-deg</property>
     <value>9.0</value>
+   </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>lhicondenscone</object-name>
+  <object-name>rhicondenscone</object-name>
+  <condition>
+   <greater-than>
+    <property>orientation/alpha-deg</property>
+    <value>90.0</value>
    </greater-than>
   </condition>
  </animation>

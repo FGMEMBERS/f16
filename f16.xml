@@ -284,9 +284,15 @@
                 <gain>0.125</gain>
             </pure_gain>
 
+            <pure_gain name="alpha limiter">
+                <input>aero/alpha-rad</input>
+                <gain>1.0472</gain>
+            </pure_gain>
+
             <summer name="g load error">
                 <input>fcs/elevator-cmd-limiter</input>
                 <input>fcs/g-load-norm</input>
+                <input>fcs/alpha-limiter</input>
             </summer>
 
             <pure_gain name="g load p">
@@ -302,6 +308,8 @@
             <lead_lag_filter name="g load d">
                 <input>fcs/g-load-error</input>
                 <c1>-0.000125</c1>
+                <c2>0.0</c2>
+                <c3>0.0</c3>
                 <c4>1</c4>
             </lead_lag_filter>
 
@@ -336,7 +344,7 @@
 
             <summer name="roll trim error">
                 <input>fcs/aileron-cmd-norm</input>
-                <input>fcs/roll-trim-cmd-norm</input>
+                <!-- input>fcs/roll-trim-cmd-norm</input -->
                 <input>-fcs/roll-rate-norm</input>
             </summer>
 
@@ -398,7 +406,7 @@
 
             <summer name="yaw trim error">
                 <input>fcs/rudder-cmd-norm</input>
-                <input>fcs/yaw-trim-cmd-norm</input>
+                <!-- input>fcs/yaw-trim-cmd-norm</input -->
                 <input>fcs/yaw-rate-norm</input>
             </summer>
 
@@ -415,6 +423,8 @@
             <lead_lag_filter name="yaw rate d">
                 <input>fcs/yaw-trim-error</input>
                 <c1>-0.00125</c1>
+                <c2>0.0</c2>
+                <c3>0.0</c3>
                 <c4>1</c4>
             </lead_lag_filter>
 

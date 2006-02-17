@@ -284,9 +284,15 @@
                 <gain>0.125</gain>
             </pure_gain>
 
+           <pure_gain name="alpha limiter">
+                <input>aero/alpha-rad</input>
+                <gain>1.0472</gain>
+            </pure_gain>
+
             <summer name="g load error">
                 <input>fcs/elevator-cmd-limiter</input>
                 <input>fcs/g-load-norm</input>
+                <input>fcs/alpha-limiter</input>
             </summer>
 
             <pure_gain name="g load p">
