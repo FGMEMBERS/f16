@@ -35,6 +35,14 @@
   <hud>
    <path>Aircraft/f16/Hud/default.xml</path>
    <visibility>true</visibility>
+   <brightness type="float">1.0</brightness>
+   <colors>
+    <color n="0">
+     <red type="float">0.5</red>
+     <green type="float">1.0</green>
+     <blue type="float">0.7</blue>
+    </color>
+   </colors>
   </hud>
 
   <model>
