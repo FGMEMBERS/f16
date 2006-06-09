@@ -35,15 +35,23 @@
   <hud>
    <path>Aircraft/f16/Hud/default.xml</path>
    <visibility>true</visibility>
-   <current-color>2</current-color>
+   <current-color>0</current-color>
    <color>
+    <transparent type="bool">true</transparent>
+    <antialiased type="bool">true</antialiased>
     <brightness type="float">1.0</brightness>
+    <alpha type="float">1.0</alpha>
    </color>
    <palette>
-    <color n="2">
-     <red type="float">0.36</red>
+    <color n="0">
+     <red type="float">0.0</red>
      <green type="float">1.0</green>
-     <blue type="float">0.58</blue>
+     <blue type="float">0.0</blue>
+    </color>
+    <color n="1">
+     <red type="float">1.0</red>
+     <green type="float">0.0</green>
+     <blue type="float">0.0</blue>
     </color>
    </palette>
   </hud>
