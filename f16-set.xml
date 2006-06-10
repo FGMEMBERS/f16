@@ -39,14 +39,14 @@
    <color>
     <transparent type="bool">true</transparent>
     <antialiased type="bool">true</antialiased>
-    <brightness type="float">1.0</brightness>
-    <alpha type="float">1.0</alpha>
+    <brightness type="float">0.85</brightness>
+    <alpha type="float">0.85</alpha>
    </color>
    <palette>
     <color n="0">
-     <red type="float">0.2</red>
-     <green type="float">0.8</green>
-     <blue type="float">0.2</blue>
+     <red type="float">0.38</red>
+     <green type="float">1.0</green>
+     <blue type="float">0.22</blue>
     </color>
     <color n="1">
      <red type="float">1.0</red>
