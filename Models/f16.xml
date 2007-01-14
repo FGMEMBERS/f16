@@ -12,7 +12,7 @@
  <animation>
   <object-name>canopy_glass</object-name>
   <object-name>hud_glass</object-name>
-  <object-name>canopy_back_insiude</object-name>
+  <object-name>canopy_back_inside</object-name>
   <object-name>canopy_back_outside</object-name>
   <object-name>klu_markings</object-name>
   <object-name>us_markings</object-name>
