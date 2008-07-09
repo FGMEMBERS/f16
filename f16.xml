@@ -389,7 +389,7 @@
 
             <pure_gain name="yaw rate norm">
                 <input>velocities/r-aero-rad_sec</input>
-                <gain>0.25465</gain>
+                <gain>0.28648</gain>
             </pure_gain>
 
             <summer name="yaw trim error">
@@ -405,12 +405,12 @@
 
             <integrator name="yaw rate i">
                 <input>fcs/yaw-trim-error</input>
-                <c1>0.05</c1>
+                <c1>0.045</c1>
             </integrator>
 
             <lead_lag_filter name="yaw rate d">
                 <input>fcs/yaw-trim-error</input>
-                <c1>-0.00125</c1>
+                <c1>-0.00113</c1>
                 <c2>0.0</c2>
                 <c3>0.0</c3>
                 <c4>1</c4>
