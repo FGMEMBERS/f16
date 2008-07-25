@@ -8,16 +8,6 @@
   <pitch-deg>0.3</pitch-deg>
  </offsets>
 
- <!-- sort transparent objects -->
- <animation>
-  <object-name>canopy_glass</object-name>
-  <object-name>hud_glass</object-name>
-  <object-name>canopy_back_inside</object-name>
-  <object-name>canopy_back_outside</object-name>
-  <object-name>klu_markings</object-name>
-  <object-name>us_markings</object-name>
- </animation>
-
  <!-- group all position lights -->
  <animation>
   <name>pos_lights</name>
@@ -51,8 +41,6 @@
   <object-name>fwd_formation_light</object-name>
   <object-name>anti_collision_strobe_off</object-name>
   <object-name>hud_glass</object-name>
-  <object-name>lhicondenscone</object-name>
-  <object-name>rhicondenscone</object-name>
   <object-name>lhocondenscone</object-name>
   <object-name>rhocondenscone</object-name>
  </animation>
@@ -68,7 +56,7 @@
   <name>LExtTank</name>
   <path>Aircraft/f16/Models/fueltank.ac</path>
   <offsets>
-   <x-m>0.30</x-m>
+   <x-m>0.10</x-m>
    <y-m>-1.65</y-m>
    <z-m>-0.55</z-m>
    <pitch-deg>-4.5</pitch-deg>
@@ -79,7 +67,7 @@
   <name>RExtTank</name>
   <path>Aircraft/f16/Models/fueltank.ac</path>
   <offsets>
-   <x-m>0.30</x-m>
+   <x-m>0.10</x-m>
    <y-m>1.65</y-m>
    <z-m>-0.55</z-m>
    <pitch-deg>-4.5</pitch-deg>
@@ -130,7 +118,7 @@
 
  <model>
   <name>strobe</name>
-  <path>Models/Aircraft/strobe.xml</path>
+  <path>Aircraft/f16/Models/strobe.xml</path>
  </model>
 
  <animation>
@@ -289,7 +277,8 @@
  <animation>
   <type>rotate</type>
   <object-name>canopy_frame</object-name>
-  <object-name>canopy_glass</object-name>
+  <object-name>canopy_glass_inside</object-name>
+  <object-name>canopy_glass_outside</object-name>
   <property>sim/model/f16/canopy/position-norm</property>
   <factor>30.0</factor>
   <center>
@@ -936,26 +925,12 @@
 
  <animation>
   <type>select</type>
-  <!-- object-name>lhicondenscone</object-name>
-  <object-name>rhicondenscone</object-name -->
   <object-name>lhocondenscone</object-name>
   <object-name>rhocondenscone</object-name>
   <condition>
    <greater-than>
     <property>orientation/alpha-deg</property>
     <value>9.0</value>
-   </greater-than>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>lhicondenscone</object-name>
-  <object-name>rhicondenscone</object-name>
-  <condition>
-   <greater-than>
-    <property>orientation/alpha-deg</property>
-    <value>90.0</value>
    </greater-than>
   </condition>
  </animation>
