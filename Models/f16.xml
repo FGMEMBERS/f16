@@ -56,7 +56,7 @@
   <name>LExtTank</name>
   <path>Aircraft/f16/Models/fueltank.ac</path>
   <offsets>
-   <x-m>0.10</x-m>
+   <x-m>-0.50</x-m>
    <y-m>-1.65</y-m>
    <z-m>-0.55</z-m>
    <pitch-deg>-4.5</pitch-deg>
@@ -67,7 +67,7 @@
   <name>RExtTank</name>
   <path>Aircraft/f16/Models/fueltank.ac</path>
   <offsets>
-   <x-m>0.10</x-m>
+   <x-m>-0.50</x-m>
    <y-m>1.65</y-m>
    <z-m>-0.55</z-m>
    <pitch-deg>-4.5</pitch-deg>
