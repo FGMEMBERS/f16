@@ -34,6 +34,8 @@
 
   <hud>
    <path>Aircraft/f16/Hud/default.xml</path>
+   <path>Aircraft/f16/Hud/f16.xml</path>
+   <visibility>false</visibility>
    <visibility>true</visibility>
    <current-color>0</current-color>
    <color>
