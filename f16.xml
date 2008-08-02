@@ -572,7 +572,7 @@
                 <output>fcs/speedbrake-pos-deg</output>
             </kinematic>
 
-           <aerosurface_scale name="Flap Position Normalizer">
+           <aerosurface_scale name="Speedbrake Position Normalizer">
               <input>fcs/speedbrake-control</input>
               <domain>
                 <min>0</min>

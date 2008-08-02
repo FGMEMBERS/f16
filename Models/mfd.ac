@@ -7,8 +7,8 @@ OBJECT poly
 name "mfd_right_border"
 loc 0.00120865 0.00118969 0.00227521
 texture "f16trans.rgb"
-texrep 0.164 0.164
-texoff 0.0035 -0.168
+texrep 0.331 0.33
+texoff 0 -0.33
 numvert 4
 0 0.0689 0.0665274
 0 0.0689 -0.0712719
@@ -32,8 +32,8 @@ OBJECT poly
 name "mfd_right"
 loc -0.00142111 0.00138067 0.00213788
 texture "f16trans.rgb"
-texrep 0.164 0.164
-texoff 0.0035 -0.168
+texrep 0.331 0.33
+texoff 0 -0.33
 numvert 4
 0 0.054252 0.0518799
 0 0.054252 -0.0566235
