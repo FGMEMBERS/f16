@@ -11,11 +11,14 @@
   </panel>
 
   <model>
-   <path>Aircraft/f16/Models/f16.xml</path>
    <f16>
-    <klu type="bool">true</klu>
-    <us type="bool">false</us>
+    <klu archive="y" type="bool">true</klu>
+    <us archive="y" type="bool">false</us>
    </f16>
+  </model>
+
+  <model>
+   <path>Aircraft/f16/Models/f16.xml</path>
   </model>
 
   <view>

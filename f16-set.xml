@@ -59,14 +59,14 @@
   </hud>
 
   <model>
-   <path>Aircraft/f16/Models/f16.xml</path>
    <f16>
     <klu type="bool">false</klu>
     <us type="bool">true</us>
     <arrester-hook>
-     <engaged>false</engaged>
+     <engaged type="bool">false</engaged>
     </arrester-hook>
    </f16>
+   <path>Aircraft/f16/Models/f16.xml</path>
   </model>
 
   <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
