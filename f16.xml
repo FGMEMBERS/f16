@@ -92,8 +92,8 @@
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
             <rolling_friction> 0.02 </rolling_friction>
-            <spring_coeff unit="LBS/FT"> 15000 </spring_coeff>
-            <damping_coeff type="SQUARE" unit="LBS/FT/SEC2"> 5000 </damping_coeff>
+            <spring_coeff unit="LBS/FT"> 12000 </spring_coeff>
+            <damping_coeff type="SQUARE" unit="LBS/FT/SEC2"> 6000 </damping_coeff>
             <max_steer unit="DEG"> 80 </max_steer>
             <brake_group> NOSE </brake_group>
             <retractable>1</retractable>
@@ -286,46 +286,87 @@
         <property>fcs/alpha-norm</property>
 
         <channel name="Pitch">
-            <pure_gain name="pitch rate norm">
-                <input>velocities/q-aero-rad_sec</input>
-                <gain>0.695</gain>
-            </pure_gain>
-
-            <pure_gain name="g load norm">
-              <input>accelerations/n-pilot-z-norm</input>
-              <gain>-0.08613</gain>
-            </pure_gain>
-
-            <pure_gain name="alpha limiter">
-              <input>aero/alpha-rad</input>
-              <gain>1.0472</gain>
-            </pure_gain>
-        
             <summer name="elevator cmd limiter">
               <input>fcs/elevator-cmd-norm</input>
-              <input>fcs/pitch-rate-norm</input>
-              <input>fcs/g-load-norm</input>
-              <input>fcs/alpha-limiter</input>
+              <input>fcs/pitch-trim-cmd-norm</input>
               <clipto>
                 <min>-1</min>
                 <max>0.44</max>
               </clipto>
             </summer>
 
-            <pid name="g-load-pid">
-              <input>fcs/elevator-cmd-limiter</input>
-              <kp> 0.675000 </kp>
-              <ki> 0.004750 </ki>
-              <kd> 0.00005 </kd>
+            <scheduled_gain name="elevator scheduler">
+                <input>fcs/elevator-cmd-limiter</input>
+                <table>
+                    <independentVar>aero/alpha-rad</independentVar>
+                    <tableData>
+                    -1.0472     0
+                    -0.8754     1
+                     0.0        1
+                     0.8754     1
+                     1.0472     0
+                    </tableData>
+                </table>
+            </scheduled_gain>
+
+            <pure_gain name="pitch rate norm">
+                <input>velocities/q-aero-rad_sec</input>
+                <gain>11.0</gain>
+            </pure_gain>
+
+            <pure_gain name="g load norm">
+              <input>accelerations/n-pilot-z-norm</input>
+              <gain>-0.25</gain>
+            </pure_gain>
+
+            <pure_gain name="alpha limiter norm">
+              <input>aero/alpha-rad</input>
+              <gain>2.1</gain>
+            </pure_gain>
+
+            <summer name="pitch trim error">
+              <input>fcs/elevator-scheduler</input>
+              <input>fcs/pitch-rate-norm</input>
+              <input>fcs/g-load-norm</input>
+            </summer>
+        
+            <switch name="elevator pid trigger">
+                <default value="1"/>
+                <test value="0">
+                    velocities/vc-kts lt 5.0
+                </test>
+            </switch>
+
+            <pid name="g load pid">
+              <trigger>fcs/elevator-pid-trigger</trigger>
+              <input>fcs/pitch-trim-error</input>
+              <kp> 0.10000 </kp>
+              <ki> 0.00010 </ki>
+              <kd> 0.0005 </kd>
+              <clipto>
+                <min>-1</min>
+                <max>1</max>
+              </clipto>
+            </pid>
+
+            <!--
+              - Calculate the difference between the current pitch rate
+              - and the one requested for.
+              - Compensate for too high alpha values.
+              -->
+            <summer name="pitch scheduler">
+              <input>fcs/elevator-scheduler</input>
+              <input>fcs/alpha-limiter-norm</input>
+              <input>fcs/g-load-pid</input>
               <clipto>
                 <min>-1</min>
                 <max>1</max>
               </clipto>
               <output>fcs/elevator-pos-norm</output>
-            </pid>
+            </summer>
 
             <aerosurface_scale name="Elevator Control">
-              <input>fcs/g-load-pid</input>
+              <input>fcs/pitch-scheduler</input>
               <range>
                 <min>-0.436</min>
                 <max>0.436</max>
@@ -409,17 +450,19 @@
             </pure_gain>
 
             <summer name="yaw trim error">
-                <input>fcs/rudder-cmd-norm</input>
-                <input>fcs/yaw-trim-cmd-norm</input>
-                <input>fcs/yaw-rate-norm</input> 
+                <input>fcs/yaw-rate-norm</input>
                 <input>fcs/yaw-load-norm</input>
-                <clipto>
-                <min>-1</min>
-                <max>1</max>
-              </clipto>
             </summer>
 
-            <pid name="yaw-load-pid">
+            <switch name="rudder pid trigger">
+                <default value="1"/>
+                <test value="0">
+                    velocities/vc-kts lt 10.0
+                </test>
+            </switch>
+
+            <pid name="yaw load pid">
+              <trigger>fcs/rudder-pid-trigger</trigger>
               <input>fcs/yaw-trim-error</input>
               <kp> 0.105500 </kp>
               <ki> 0.000010 </ki>
@@ -431,8 +474,23 @@
               <output>fcs/rudder-pos-norm</output>
             </pid>
 
-            <aerosurface_scale name="Rudder Control">
+            <!--
+              - calculate the difference between the current yaw rate
+              - and the one requiested for
+              -->
+            <summer name="yaw scheduler">
+                <input>fcs/rudder-cmd-norm</input>
+                <input>fcs/yaw-trim-cmd-norm</input>
                 <input>fcs/yaw-load-pid</input>
+                <clipto>
+                <min>-1</min>
+                <max>1</max>
+              </clipto>
+              <output>fcs/rudder-pos-norm</output>
+            </summer>
+
+            <aerosurface_scale name="Rudder Control">
+                <input>fcs/yaw-scheduler</input>
                 <range>
                     <min>-0.524</min>
                     <max>0.524</max>
@@ -543,9 +601,24 @@
         </channel>
 
         <channel name="Speedbrake">
+            <switch name="speedbrake alpha limiter">
+                <default value="0"/>
+                <test logic="AND" value="1">
+                    aero/alpha-deg ge 53 
+                    velocities/v-fps le 18
+                </test>
+            </switch>
+
+            <switch name="speedbrake scheduler">
+                <default value="0"/>
+                <test logic="OR" value="1">
+                    fcs/speedbrake-alpha-limiter eq 1
+                    fcs/speedbrake-cmd-norm eq 1
+                </test>
+            </switch>
 
             <kinematic name="Speedbrake Control">
-                <input>fcs/speedbrake-cmd-norm</input>
+                <input>fcs/speedbrake-scheduler</input>
                 <traverse>
                     <setting>
                         <position>0</position>
