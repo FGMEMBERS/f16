@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>cockpit.ac</path>
+
+ <model>
+  <name>RudderPedals</name>
+  <path>Aircraft/f16/Models/rudder_pedals.xml</path>
+  <offsets>
+   <x-m>-5.05</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.14</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Throttle</name>
+  <path>Aircraft/f16/Models/throttle.xml</path>
+  <offsets>
+   <x-m>-4.25</x-m>
+   <y-m>-0.435</y-m>
+   <z-m>0.185</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>EJECT</name>
+  <path>Aircraft/f16/Models/ejection_handle.ac</path>
+  <offsets>
+   <x-m>-4.570</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.26</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ICP</name>
+  <path>Aircraft/f16/Models/icp.ac</path>
+  <offsets>
+   <x-m>-4.64</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.617</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>DED</name>
+  <path>Aircraft/f16/Models/ded.ac</path>
+  <offsets>
+   <x-m>-4.76</x-m>
+   <y-m>0.13</y-m>
+   <z-m>0.63</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MISC</name>
+  <path>Aircraft/f16/Models/misc.ac</path>
+  <offsets>
+   <x-m>-4.770</x-m>
+   <y-m>-0.263</y-m>
+   <z-m>0.4830</z-m>
+   <pitch-deg>-12.75</pitch-deg>
+  </offsets>
+ </model>
+
+<!--
+ <model>
+  <name>ENGINE</name>
+  <path>Aircraft/f16/Models/engine.ac</path>
+  <offsets>
+   <x-m>-4.760</x-m>
+   <y-m>0.25</y-m>
+   <z-m>0.48</z-m>
+   <pitch-deg>-5.45</pitch-deg>
+  </offsets>
+ </model>
+-->
+
+ <model>
+  <name>LEFT</name>
+  <path>Aircraft/f16/Models/left_front.xml</path>
+  <offsets>
+   <x-m>-4.67</x-m>
+   <y-m>-0.32</y-m>
+   <z-m>0.342</z-m>
+   <pitch-deg>-45</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MFD1</name>
+  <path>Aircraft/f16/Models/mfd.ac</path>
+  <offsets>
+   <x-m>-4.79</x-m>
+   <y-m>-0.153</y-m>
+   <z-m>0.51</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MFD2</name>
+  <path>Aircraft/f16/Models/mfd.ac</path>
+  <offsets>
+   <x-m>-4.79</x-m>
+   <y-m>0.153</y-m>
+   <z-m>0.51</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ASI</name>
+  <path>Aircraft/f16/Models/airspeed.xml</path>
+  <offsets>
+   <x-m>-4.76</x-m>
+   <y-m>-0.0355</y-m>
+   <z-m>0.465</z-m>
+   <pitch-deg>-30</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>altitude</name>
+  <path>Aircraft/f16/Models/altitude.xml</path>
+  <offsets>
+   <x-m>-4.76</x-m>
+   <y-m>0.0355</y-m>
+   <z-m>0.465</z-m>
+   <pitch-deg>-30</pitch-deg>
+  </offsets>
+ </model>
+
+<!--
+ <model>
+  <name>AI</name>
+  <path>Aircraft/Instruments-3d/ai/ai.xml</path>
+  <offsets>
+   <x-m>-4.64</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.28</z-m>
+  </offsets>
+ </model>
+-->
+
+</PropertyList>
