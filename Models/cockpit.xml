@@ -46,17 +46,28 @@
 
  <model>
   <name>DED</name>
-  <path>Aircraft/f16/Models/ded.ac</path>
+  <path>Aircraft/f16/Models/ded.xml</path>
   <offsets>
-   <x-m>-4.76</x-m>
-   <y-m>0.13</y-m>
-   <z-m>0.63</z-m>
+   <x-m>-4.78</x-m>
+   <y-m>0.1275</y-m>
+   <z-m>0.628</z-m>
+   <pitch-deg>-14</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>THREAT</name>
+  <path>Aircraft/f16/Models/threat.xml</path>
+  <offsets>
+   <x-m>-4.79</x-m>
+   <y-m>-0.194</y-m>
+   <z-m>0.615</z-m>
   </offsets>
  </model>
 
  <model>
   <name>MISC</name>
-  <path>Aircraft/f16/Models/misc.ac</path>
+  <path>Aircraft/f16/Models/misc.xml</path>
   <offsets>
    <x-m>-4.770</x-m>
    <y-m>-0.263</y-m>
@@ -68,7 +79,7 @@
 <!--
  <model>
   <name>ENGINE</name>
-  <path>Aircraft/f16/Models/engine.ac</path>
+  <path>Aircraft/f16/Models/engine.xml</path>
   <offsets>
    <x-m>-4.760</x-m>
    <y-m>0.25</y-m>
@@ -82,16 +93,16 @@
   <name>LEFT</name>
   <path>Aircraft/f16/Models/left_front.xml</path>
   <offsets>
-   <x-m>-4.67</x-m>
+   <x-m>-4.655</x-m>
    <y-m>-0.32</y-m>
-   <z-m>0.342</z-m>
+   <z-m>0.3253</z-m>
    <pitch-deg>-45</pitch-deg>
   </offsets>
  </model>
 
  <model>
   <name>MFD1</name>
-  <path>Aircraft/f16/Models/mfd.ac</path>
+  <path>Aircraft/f16/Models/mfd.xml</path>
   <offsets>
    <x-m>-4.79</x-m>
    <y-m>-0.153</y-m>
@@ -101,7 +112,7 @@
 
  <model>
   <name>MFD2</name>
-  <path>Aircraft/f16/Models/mfd.ac</path>
+  <path>Aircraft/f16/Models/mfd.xml</path>
   <offsets>
    <x-m>-4.79</x-m>
    <y-m>0.153</y-m>

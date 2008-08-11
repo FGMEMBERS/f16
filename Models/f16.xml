@@ -125,16 +125,6 @@
   <min-m>0</min-m>
   <max-m>10000</max-m>
  </animation>
-
- <animation>
-  <name>InstrumentGroup</name>
-  <object-name>ASI</object-name>
-  <object-name>AI</object-name>
-  <object-name>ALT</object-name>
-  <object-name>ICP</object-name>
-  <object-name>MISC</object-name>
-  <object-name>LEFT</object-name>
- </animation>
 -->
 
 
