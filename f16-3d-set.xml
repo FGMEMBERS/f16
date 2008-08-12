@@ -6,12 +6,8 @@
   <description>General Dynamics F-16 w. 3d cockpit</description>
  
   <virtual-cockpit archive="y">true</virtual-cockpit>
-  <allow-toggle-cockpit archive="y">false</allow-toggle-cockpit>
-
-  <!-- Data Entry Display support in 3d mode -->
   <panel>
-   <path>Aircraft/f16/Models/2d-panel.xml</path>
-   <visibility archive="y">true</visibility>
+   <visibility archive="y">false</visibility>
   </panel>
 
   <view>

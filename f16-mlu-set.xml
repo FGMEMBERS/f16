@@ -15,9 +15,6 @@
     <klu archive="y" type="bool">true</klu>
     <us archive="y" type="bool">false</us>
    </f16>
-  </model>
-
-  <model>
    <path>Aircraft/f16/Models/f16.xml</path>
   </model>
 

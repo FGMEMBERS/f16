@@ -1,19 +1,24 @@
 <?xml version="1.0"?>
+<!DOCTYPE PropertyList SYSTEM "panel.dtd">
 
 <PropertyList>
 
- <name>F16 2d Panel</name>
+ <name>Data Entry Display Panel</name>
  <background>Aircraft/f16/Models/trans.rgb</background>
- <view-height>512</view-height>
+ <w>1024</w>
+ <h>768</h>
+ <y-offset>0</y-offset>
 
  <instruments>
-  <instrument include="../Panels/ded.xml">
-   <name>DED</name>
-   <x>700</x>
-   <y>365</y>
-   <w>100</w>
-   <h>100</h>
+
+  <instrument include="ded-display.xml">
+   <name>Data Entry Display</name>
+   <x>512</x>
+   <y>512</y>
+   <w>924</w>
+   <h>768</h>
   </instrument>
+
  </instruments>
 
 </PropertyList>
