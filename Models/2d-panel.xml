@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <name>F16 2d Panel</name>
+ <background>Aircraft/f16/Models/trans.rgb</background>
+ <view-height>512</view-height>
+
+ <instruments>
+  <instrument include="../Panels/ded.xml">
+   <name>DED</name>
+   <x>700</x>
+   <y>365</y>
+   <w>100</w>
+   <h>100</h>
+  </instrument>
+ </instruments>
+
+</PropertyList>
