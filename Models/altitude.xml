@@ -21,7 +21,7 @@
   <type>rotate</type>
   <object-name>drum1</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
-  <factor>0.036</factor>
+  <factor>0.36</factor>
   <axis>
    <x>0</x>
    <y>-1</y>
@@ -38,7 +38,7 @@
   <type>rotate</type>
   <object-name>drum2</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
-  <factor>0.0036</factor>
+  <factor>0.036</factor>
   <axis>
    <x>0</x>
    <y>-1</y>
@@ -55,7 +55,7 @@
   <type>rotate</type>
   <object-name>drum3</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
-  <factor>0.00036</factor>
+  <factor>0.0036</factor>
   <axis>
    <x></x>
    <y>-1</y>
