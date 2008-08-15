@@ -58,6 +58,10 @@
    </palette>
   </hud>
 
+  <instrumentation>
+   <path>Aircraft/Lightning/Systems/lightning-instrumentation.xml</path>
+  </instrumentation>
+
   <model>
    <f16>
     <klu type="bool">false</klu>
@@ -149,7 +153,37 @@
   </fuel>
  </consumables>
 
+ <systems>
+  <refuel>
+   <type>boom</type>
+   <serviceable type="bool">true</serviceable>
+  </refuel>
+ </systems>
+
+ <instrumentation>
+  <radar>
+   <serviceable type="bool">true</serviceable>
+   <switch type="string" archive="y">on</switch>
+   <range type="double" archive="y">40</range>
+   <mode-control type="int" archive="y">2</mode-control>
+   <limit-deg type="double">180</limit-deg>
+
+   <mode type="string" archive="y">WX</mode>
+   <lightning type="bool" archive="y">true</lightning>
+   <display-mode type="string" archive="y">plan</display-mode>
+
+   <display-controls>
+    <WX type="bool" archive="y">false</WX>
+    <data type="bool" archive="y">true</data>
+    <pos type="bool" archive="y">true</pos>
+   </display-controls>
+  </radar>
+ </instrumentation>
+
  <nasal>
+  <aar>
+   <file>Aircraft/Generic/aar.nas</file>
+  </aar>
   <f16>
    <file>Aircraft/f16/f16.nas</file>
   </f16>
