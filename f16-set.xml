@@ -59,7 +59,7 @@
   </hud>
 
   <instrumentation>
-   <path>Aircraft/Lightning/Systems/lightning-instrumentation.xml</path>
+   <path>Aircraft/f16/Systems/instrumentation.xml</path>
   </instrumentation>
 
   <model>
@@ -164,13 +164,13 @@
   <radar>
    <serviceable type="bool">true</serviceable>
    <switch type="string" archive="y">on</switch>
-   <range type="double" archive="y">40</range>
+   <range type="double" archive="y">60</range>
    <mode-control type="int" archive="y">2</mode-control>
-   <limit-deg type="double">180</limit-deg>
+   <limit-deg type="double">60</limit-deg>
 
    <mode type="string" archive="y">WX</mode>
    <lightning type="bool" archive="y">true</lightning>
-   <display-mode type="string" archive="y">plan</display-mode>
+   <display-mode type="string" archive="y">arc</display-mode>
 
    <display-controls>
     <WX type="bool" archive="y">false</WX>
@@ -179,6 +179,10 @@
    </display-controls>
   </radar>
  </instrumentation>
+
+ <limits>
+  <max-gear-extension-speed>280</max-gear-extension-speed>
+ </limits>
 
  <nasal>
   <aar>

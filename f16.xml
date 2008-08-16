@@ -389,7 +389,7 @@
               <input>fcs/pitch-trim-error</input>
               <kp> 0.94737 </kp>
               <ki> 0.00050 </ki>
-              <kd> 0.00065 </kd>
+              <kd> 0.000 </kd>
               <clipto>
                 <min>-1</min>
                 <max>1</max>

@@ -35,6 +35,17 @@
  </model>
 
  <model>
+  <name>DED</name>
+  <path>Aircraft/f16/Models/ded.xml</path>
+  <offsets>
+   <x-m>-4.78</x-m>
+   <y-m>0.1306</y-m>
+   <z-m>0.628</z-m>
+   <pitch-deg>-14</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
   <name>ICP</name>
   <path>Aircraft/f16/Models/icp.ac</path>
   <offsets>
@@ -45,13 +56,25 @@
  </model>
 
  <model>
-  <name>DED</name>
-  <path>Aircraft/f16/Models/ded.xml</path>
+  <name>EYEBROW_RIGHT</name>
+  <path>Aircraft/f16/Models/eyebrow_right.xml</path>
   <offsets>
-   <x-m>-4.78</x-m>
-   <y-m>0.1275</y-m>
-   <z-m>0.628</z-m>
-   <pitch-deg>-14</pitch-deg>
+   <x-m>-4.756</x-m>
+   <y-m>0.2255</y-m>
+   <z-m>0.5895</z-m>
+   <roll-deg>-51.75</roll-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>EYEBROW_LEFT</name>
+  <path>Aircraft/f16/Models/eyebrow_left.xml</path>
+  <offsets>
+   <x-m>-4.756</x-m>
+   <y-m>-0.214</y-m>
+   <z-m>0.605</z-m>
+   <pitch-deg>-16.5</pitch-deg>
+   <roll-deg>53.25</roll-deg>
   </offsets>
  </model>
 
@@ -76,18 +99,16 @@
   </offsets>
  </model>
 
-<!--
  <model>
   <name>ENGINE</name>
   <path>Aircraft/f16/Models/engine.xml</path>
   <offsets>
-   <x-m>-4.760</x-m>
-   <y-m>0.25</y-m>
-   <z-m>0.48</z-m>
-   <pitch-deg>-5.45</pitch-deg>
+   <x-m>-4.766</x-m>
+   <y-m>0.245</y-m>
+   <z-m>0.4750</z-m>
+   <pitch-deg>-12.75</pitch-deg>
   </offsets>
  </model>
--->
 
  <model>
   <name>LEFT</name>
@@ -102,7 +123,7 @@
 
  <model>
   <name>MFD1</name>
-  <path>Aircraft/f16/Models/mfd.xml</path>
+  <path>Aircraft/f16/Models/mfd_left.xml</path>
   <offsets>
    <x-m>-4.79</x-m>
    <y-m>-0.153</y-m>
@@ -112,7 +133,7 @@
 
  <model>
   <name>MFD2</name>
-  <path>Aircraft/f16/Models/mfd.xml</path>
+  <path>Aircraft/f16/Models/mfd_right.xml</path>
   <offsets>
    <x-m>-4.79</x-m>
    <y-m>0.153</y-m>
@@ -153,5 +174,46 @@
   </offsets>
  </model>
 -->
+
+ <!-- Angle of Attack indicator -->
+ <animation>
+  <type>select</type>
+  <object-name>down</object-name>
+  <condition>
+    <property>controls/gear/gear-down</property>
+    <greater-than>
+     <property>velocities/glideslope</property>
+     <value>-0.192</value>
+    </greater-than>
+   </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>steady</object-name>
+  <condition>
+    <property>controls/gear/gear-down</property>
+    <greater-than>
+     <property>velocities/glideslope</property>
+     <value>-0.2618</value>
+    </greater-than>
+    <less-than>
+     <property>velocities/glideslope</property>
+     <value>-0.192</value>
+    </less-than>
+   </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>up</object-name>
+  <condition>
+    <property>controls/gear/gear-down</property>
+    <less-than>
+     <property>velocities/glideslope</property>
+     <value>-0.2618</value>
+    </less-than>
+   </condition>
+ </animation>
 
 </PropertyList>

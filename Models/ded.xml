@@ -6,10 +6,10 @@
 
  <panel>
   <name>Panel3D</name>
-  <path>Aircraft/f16/Models/2d-panel.xml</path>
+  <path>Aircraft/f16/Models/ded-display.xml</path>
   <bottom-left>
    <x-m> 0.00</x-m>
-   <y-m>-0.05</y-m>
+   <y-m>-0.04</y-m>
    <z-m>-0.05</z-m>
   </bottom-left>
   <bottom-right>
@@ -19,7 +19,7 @@
   </bottom-right>
   <top-left>
    <x-m> 0.00</x-m>
-   <y-m>-0.05</y-m>
+   <y-m>-0.04</y-m>
    <z-m> 0.025</z-m>
   </top-left>
  </panel>
