@@ -89,6 +89,16 @@
  </model>
 
  <model>
+  <name>IFF</name>
+  <path>Aircraft/f16/Models/iff.xml</path>
+  <offsets>
+   <x-m>-4.79</x-m>
+   <y-m>-0.134</y-m>
+   <z-m>0.615</z-m>
+  </offsets>
+ </model>
+
+ <model>
   <name>MISC</name>
   <path>Aircraft/f16/Models/misc.xml</path>
   <offsets>
@@ -107,6 +117,17 @@
    <y-m>0.245</y-m>
    <z-m>0.4750</z-m>
    <pitch-deg>-12.75</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>FTIT</name>
+  <path>Aircraft/f16/Models/ftit.xml</path>
+  <offsets>
+   <x-m>-4.722</x-m>
+   <y-m>0.318</y-m>
+   <z-m>0.396</z-m>
+   <pitch-deg>-45</pitch-deg>
   </offsets>
  </model>
 

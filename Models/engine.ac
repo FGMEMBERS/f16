@@ -5,7 +5,7 @@ MATERIAL "ac3dmat0" rgb 0.157 0.157 0.157  amb 0.055 0.059 0.059  emis 0 0 0  sp
 OBJECT world
 kids 9
 OBJECT poly
-name "disk"
+name "oil_disk"
 loc 0 0.0548559 0.000293796
 texture "instruments.rgb"
 texrep -0.147 0.145
@@ -120,7 +120,7 @@ refs 3
 14 0.956295 0.295511
 kids 0
 OBJECT poly
-name "disk"
+name "noz_disk"
 loc 0.000133943 0.0240091 -0.00334064
 texture "instruments.rgb"
 texrep -0.198 0.198
@@ -235,7 +235,7 @@ refs 3
 14 0.956295 0.295511
 kids 0
 OBJECT poly
-name "disk"
+name "rpm_disk"
 loc -0.000206299 -0.0150745 -0.00675551
 texture "instruments.rgb"
 texrep -0.255 0.255
@@ -4495,7 +4495,7 @@ refs 3
 9 0.853553 0.853553
 kids 0
 OBJECT poly
-name "nozzle_needle"
+name "rpm_needle"
 loc 0.00095047 -0.0112371 -0.00664956
 numvert 26
 0.000121033 -0.000786209 0.00121981

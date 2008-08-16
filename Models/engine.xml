@@ -4,4 +4,55 @@
 
  <path>engine.ac</path>
 
+ <animation>
+  <type>rotate</type>
+  <object-name>oil_needle</object-name>
+  <property>engines/engine[0]/oil-pressure-psi</property>
+  <factor>3.3</factor>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m>-0.0003</y-m>
+   <z-m> 0.055</z-m>
+  </center>
+  <axis>
+   <x>-1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>rpm_needle</object-name>
+  <property>engines/engine[0]/n1</property>
+  <factor>3.3</factor>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0068</y-m>
+   <z-m>-0.015</z-m>
+  </center>
+  <axis>
+   <x>-1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>nozzle_needle</object-name>
+  <property>engines/engine[0]/nozzle-pos-norm</property>
+  <factor>250.0</factor>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0033</y-m>
+   <z-m> 0.024</z-m>
+  </center>
+  <axis>
+   <x>-1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
 </PropertyList>
