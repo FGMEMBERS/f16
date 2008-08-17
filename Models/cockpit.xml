@@ -93,7 +93,7 @@
    <x-m>-4.756</x-m>
    <y-m>-0.21065</y-m>
    <z-m>0.610</z-m>
-   <pitch-deg>-16.5</pitch-deg>
+   <pitch-deg>-17.0</pitch-deg>
    <roll-deg>53.25</roll-deg>
   </offsets>
  </model>
@@ -133,16 +133,17 @@
   <name>ENGINE</name>
   <path>Aircraft/f16/Models/engine.xml</path>
   <offsets>
-   <x-m>-4.766</x-m>
-   <y-m>0.245</y-m>
-   <z-m>0.4750</z-m>
+   <x-m>-4.770</x-m>
+   <y-m>0.2480</y-m>
+   <z-m>0.4855</z-m>
    <pitch-deg>-12.75</pitch-deg>
   </offsets>
  </model>
 
+<!--
  <model>
-  <name>FTIT</name>
-  <path>Aircraft/f16/Models/ftit.xml</path>
+  <name>FQI</name>
+  <path>Aircraft/f16/Models/fuel.xml</path>
   <offsets>
    <x-m>-4.722</x-m>
    <y-m>0.318</y-m>
@@ -150,6 +151,7 @@
    <pitch-deg>-45</pitch-deg>
   </offsets>
  </model>
+-->
 
  <model>
   <name>LEFT</name>
@@ -221,8 +223,8 @@
   <condition>
     <property>controls/gear/gear-down</property>
     <greater-than>
-     <property>velocities/glideslope</property>
-     <value>-0.192</value>
+     <property>orientation/alpha-deg</property>
+     <value>0.293</value>
     </greater-than>
    </condition>
  </animation>
@@ -233,12 +235,12 @@
   <condition>
     <property>controls/gear/gear-down</property>
     <greater-than>
-     <property>velocities/glideslope</property>
-     <value>-0.2618</value>
+     <property>orientation/alpha-deg</property>
+     <value>0.192</value>
     </greater-than>
     <less-than>
-     <property>velocities/glideslope</property>
-     <value>-0.192</value>
+     <property>orientation/alpha-deg</property>
+     <value>0.293</value>
     </less-than>
    </condition>
  </animation>
@@ -249,8 +251,8 @@
   <condition>
     <property>controls/gear/gear-down</property>
     <less-than>
-     <property>velocities/glideslope</property>
-     <value>-0.2618</value>
+     <property>orientation/alpha-deg</property>
+     <value>0.192</value>
     </less-than>
    </condition>
  </animation>

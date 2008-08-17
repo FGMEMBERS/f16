@@ -11,8 +11,8 @@
   <factor>3.3</factor>
   <center>
    <x-m> 0.0</x-m>
-   <y-m>-0.0003</y-m>
-   <z-m> 0.055</z-m>
+   <y-m>-0.0039</y-m>
+   <z-m> 0.054</z-m>
   </center>
   <axis>
    <x>-1.0</x>
@@ -28,8 +28,8 @@
   <factor>3.3</factor>
   <center>
    <x-m> 0.0</x-m>
-   <y-m> 0.0068</y-m>
-   <z-m>-0.015</z-m>
+   <y-m> 0.0043</y-m>
+   <z-m>-0.006</z-m>
   </center>
   <axis>
    <x>-1.0</x>
@@ -45,8 +45,25 @@
   <factor>250.0</factor>
   <center>
    <x-m> 0.0</x-m>
-   <y-m> 0.0033</y-m>
-   <z-m> 0.024</z-m>
+   <y-m> 0.00</y-m>
+   <z-m> 0.028</z-m>
+  </center>
+  <axis>
+   <x>-1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>ftit_needle</object-name>
+  <property>/environment/temperature-degc</property>
+  <factor>0.276923</factor>
+  <center>
+   <x-m> 0.0</x-m>
+   <y-m> 0.0093</y-m>
+   <z-m> -0.04</z-m>
   </center>
   <axis>
    <x>-1.0</x>
