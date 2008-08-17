@@ -46,7 +46,7 @@
 
  <model>
   <name>AI</name>
-  <path>Aircraft/f16/Models/adi/stdby-adi.xml</path>
+  <path>Aircraft/f16/Models/stdby-adi.xml</path>
   <offsets>
    <x-m>-4.794</x-m>
    <y-m>0.122</y-m>
@@ -206,7 +206,7 @@
 
  <model>
   <name>adi</name>
-  <path>Aircraft/f16/Models/adi/adi.xml</path>
+  <path>Aircraft/f16/Models/adi.xml</path>
   <offsets>
    <x-m>-4.71</x-m>
    <y-m>0.0</y-m>
