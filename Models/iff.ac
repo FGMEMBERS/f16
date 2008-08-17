@@ -5,9 +5,9 @@ kids 2
 OBJECT poly
 name "disk"
 loc -0.00125571 0.00110475 0.000105485
-texture "f16trans.rgb"
-texrep -0.21 0.21
-texoff 0.54 0.717
+texture "instruments.rgb"
+texrep -0.215 0.219
+texoff 0.48 0.76
 numvert 33
 0.00209221 -0.00102469 0.0283155
 0.00209221 0.00458844 0.0280888

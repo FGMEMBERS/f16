@@ -35,12 +35,32 @@
  </model>
 
  <model>
+  <name>FUELFLOW</name>
+  <path>Aircraft/f16/Models/fuelflow.xml</path>
+  <offsets>
+   <x-m>-4.794</x-m>
+   <y-m>0.180</y-m>
+   <z-m>0.605</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>AI</name>
+  <path>Aircraft/f16/Models/adi/stdby-adi.xml</path>
+  <offsets>
+   <x-m>-4.794</x-m>
+   <y-m>0.122</y-m>
+   <z-m>0.615</z-m>
+  </offsets>
+ </model>
+
+ <model>
   <name>DED</name>
   <path>Aircraft/f16/Models/ded.xml</path>
   <offsets>
    <x-m>-4.78</x-m>
-   <y-m>0.1306</y-m>
-   <z-m>0.628</z-m>
+   <y-m>0.1385</y-m>
+   <z-m>0.6315</z-m>
    <pitch-deg>-14</pitch-deg>
   </offsets>
  </model>
@@ -71,8 +91,8 @@
   <path>Aircraft/f16/Models/eyebrow_left.xml</path>
   <offsets>
    <x-m>-4.756</x-m>
-   <y-m>-0.214</y-m>
-   <z-m>0.605</z-m>
+   <y-m>-0.21065</y-m>
+   <z-m>0.610</z-m>
    <pitch-deg>-16.5</pitch-deg>
    <roll-deg>53.25</roll-deg>
   </offsets>
@@ -82,8 +102,8 @@
   <name>THREAT</name>
   <path>Aircraft/f16/Models/threat.xml</path>
   <offsets>
-   <x-m>-4.79</x-m>
-   <y-m>-0.194</y-m>
+   <x-m>-4.794</x-m>
+   <y-m>-0.195</y-m>
    <z-m>0.615</z-m>
   </offsets>
  </model>
@@ -92,9 +112,9 @@
   <name>IFF</name>
   <path>Aircraft/f16/Models/iff.xml</path>
   <offsets>
-   <x-m>-4.79</x-m>
-   <y-m>-0.134</y-m>
-   <z-m>0.615</z-m>
+   <x-m>-4.794</x-m>
+   <y-m>-0.136</y-m>
+   <z-m>0.6140</z-m>
   </offsets>
  </model>
 
@@ -166,10 +186,10 @@
   <name>ASI</name>
   <path>Aircraft/f16/Models/airspeed.xml</path>
   <offsets>
-   <x-m>-4.76</x-m>
+   <x-m>-4.77</x-m>
    <y-m>-0.0355</y-m>
    <z-m>0.465</z-m>
-   <pitch-deg>-30</pitch-deg>
+   <pitch-deg>-35</pitch-deg>
   </offsets>
  </model>
 
@@ -177,26 +197,24 @@
   <name>altitude</name>
   <path>Aircraft/f16/Models/altitude.xml</path>
   <offsets>
-   <x-m>-4.76</x-m>
+   <x-m>-4.77</x-m>
    <y-m>0.0355</y-m>
    <z-m>0.465</z-m>
-   <pitch-deg>-30</pitch-deg>
+   <pitch-deg>-35</pitch-deg>
   </offsets>
  </model>
 
-<!--
  <model>
-  <name>AI</name>
-  <path>Aircraft/Instruments-3d/ai/ai.xml</path>
+  <name>adi</name>
+  <path>Aircraft/f16/Models/adi/adi.xml</path>
   <offsets>
-   <x-m>-4.64</x-m>
+   <x-m>-4.71</x-m>
    <y-m>0.0</y-m>
-   <z-m>0.28</z-m>
+   <z-m>0.4175</z-m>
+   <pitch-deg>-35</pitch-deg>
   </offsets>
  </model>
--->
 
- <!-- Angle of Attack indicator -->
  <animation>
   <type>select</type>
   <object-name>down</object-name>

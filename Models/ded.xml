@@ -9,18 +9,18 @@
   <path>Aircraft/f16/Models/ded-display.xml</path>
   <bottom-left>
    <x-m> 0.00</x-m>
-   <y-m>-0.04</y-m>
-   <z-m>-0.05</z-m>
+   <y-m>-0.045</y-m>
+   <z-m>-0.0475</z-m>
   </bottom-left>
   <bottom-right>
    <x-m> 0.00</x-m>
-   <y-m> 0.05</y-m>
-   <z-m>-0.05</z-m>
+   <y-m> 0.045</y-m>
+   <z-m>-0.0475</z-m>
   </bottom-right>
   <top-left>
    <x-m> 0.00</x-m>
-   <y-m>-0.04</y-m>
-   <z-m> 0.025</z-m>
+   <y-m>-0.045</y-m>
+   <z-m> 0.0275</z-m>
   </top-left>
  </panel>
 
