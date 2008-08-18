@@ -287,12 +287,12 @@
 
         <channel name="Pitch">
             <!--
-              - accelerations/n-pilot-z-norm has the disadvantage that is
+              - accelerations/n-pilot-z-norm has the disadvantage that it
               - has an offset of 1G when positioned horizontal (and -1G
-              - when upside down). When you want the calculate the difference
-              - between commanded pitch-rate and actual pitch-rate this offset
-              - gets in the way. the following function calculates an offset
-              - to compensate for the earths gravity.
+              - when upside down). To calculate the difference between the
+              - commanded pitch-rate and actual pitch-rate this offset has
+              - to be eliminated. The following function calculates an offset
+              - to compensate for the earth's gravity.
               -->
             <fcs_function name="n pilot z correction">
              <function>
@@ -325,9 +325,11 @@
             <!--
                - If alpha (the difference between the pitch vector and the
                - thrust vector) approaches 60 degrees the Flight Computer will
-               - command full down elevator deflection to prevent a stall.
+               - command full down elevator deflection to prevent stalling.
                - This section reduces pilot command to zero when alpha
-               - exceeds 50 degrees.
+               - exceeds 50 degrees and approaches 60 degrees.
+               - (note: JSBSim doesn't extrapolate, so no need to specify
+               - beyond 60 degrees)
                -->
             <scheduled_gain name="elevator scheduler">
                 <input>fcs/elevator-cmd-limiter</input>
@@ -424,16 +426,16 @@
 
         <channel name="Roll">
 
-            <!-- Calculate the normailzed roll-rate -->
+            <!-- Calculate the normalized roll-rate -->
             <pure_gain name="roll rate norm">
                 <input>velocities/p-aero-rad_sec</input>
                 <gain>0.31831</gain>
             </pure_gain>
 
             <!--
-               - Calculate the difference between actual roll-rate and
-               - commanded roll-rate.
-               -->
+              - Calculate the difference between actual roll-rate and
+              - commanded roll-rate.
+              -->
             <summer name="roll trim error">
                 <input>fcs/aileron-cmd-norm</input>
                 <input>-fcs/roll-rate-norm</input>

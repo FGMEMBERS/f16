@@ -11,8 +11,8 @@
   <factor>3.3</factor>
   <center>
    <x-m> 0.0</x-m>
-   <y-m>-0.0039</y-m>
-   <z-m> 0.054</z-m>
+   <y-m>-0.0038</y-m>
+   <z-m> 0.0627</z-m>
   </center>
   <axis>
    <x>-1.0</x>
@@ -28,8 +28,8 @@
   <factor>3.3</factor>
   <center>
    <x-m> 0.0</x-m>
-   <y-m> 0.0043</y-m>
-   <z-m>-0.006</z-m>
+   <y-m> 0.0056</y-m>
+   <z-m>-0.00033</z-m>
   </center>
   <axis>
    <x>-1.0</x>
@@ -46,7 +46,7 @@
   <center>
    <x-m> 0.0</x-m>
    <y-m> 0.00</y-m>
-   <z-m> 0.028</z-m>
+   <z-m> 0.034</z-m>
   </center>
   <axis>
    <x>-1.0</x>
@@ -62,8 +62,8 @@
   <factor>0.276923</factor>
   <center>
    <x-m> 0.0</x-m>
-   <y-m> 0.0093</y-m>
-   <z-m> -0.04</z-m>
+   <y-m> 0.011</y-m>
+   <z-m>-0.037</z-m>
   </center>
   <axis>
    <x>-1.0</x>

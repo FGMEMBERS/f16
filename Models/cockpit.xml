@@ -123,9 +123,9 @@
   <path>Aircraft/f16/Models/misc.xml</path>
   <offsets>
    <x-m>-4.770</x-m>
-   <y-m>-0.263</y-m>
-   <z-m>0.4830</z-m>
-   <pitch-deg>-12.75</pitch-deg>
+   <y-m>-0.2645</y-m>
+   <z-m>0.4829</z-m>
+   <pitch-deg>-14.05</pitch-deg>
   </offsets>
  </model>
 
@@ -157,10 +157,12 @@
   <name>LEFT</name>
   <path>Aircraft/f16/Models/left_front.xml</path>
   <offsets>
-   <x-m>-4.655</x-m>
-   <y-m>-0.32</y-m>
-   <z-m>0.3253</z-m>
-   <pitch-deg>-45</pitch-deg>
+   <x-m>-4.642</x-m>
+   <y-m>-0.3222</y-m>
+   <z-m>0.331</z-m>
+   <pitch-deg>-39.35</pitch-deg>
+   <roll-deg>-6.00</roll-deg>
+   <heading-deg>7.3</heading-deg>
   </offsets>
  </model>
 
@@ -210,9 +212,9 @@
   <name>adi</name>
   <path>Aircraft/f16/Models/adi.xml</path>
   <offsets>
-   <x-m>-4.71</x-m>
+   <x-m>-4.710</x-m>
    <y-m>0.0</y-m>
-   <z-m>0.4175</z-m>
+   <z-m>0.4185</z-m>
    <pitch-deg>-35</pitch-deg>
   </offsets>
  </model>
@@ -224,7 +226,7 @@
     <property>controls/gear/gear-down</property>
     <greater-than>
      <property>orientation/alpha-deg</property>
-     <value>0.293</value>
+     <value>15.0</value>
     </greater-than>
    </condition>
  </animation>
@@ -236,11 +238,11 @@
     <property>controls/gear/gear-down</property>
     <greater-than>
      <property>orientation/alpha-deg</property>
-     <value>0.192</value>
+     <value>11.0</value>
     </greater-than>
     <less-than>
      <property>orientation/alpha-deg</property>
-     <value>0.293</value>
+     <value>15.0</value>
     </less-than>
    </condition>
  </animation>
@@ -252,9 +254,22 @@
     <property>controls/gear/gear-down</property>
     <less-than>
      <property>orientation/alpha-deg</property>
-     <value>0.192</value>
+     <value>11.0</value>
     </less-than>
    </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>rdy</object-name>
+  <object-name>ar_nws</object-name>
+  <object-name>disc</object-name>
+  <condition>
+   <equals>
+    <property type="bool">tmp/radar_select</property>
+    <value>true</value>
+   </equals>
+  </condition>
  </animation>
 
 </PropertyList>
