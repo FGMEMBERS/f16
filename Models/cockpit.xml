@@ -38,9 +38,9 @@
   <name>FUELFLOW</name>
   <path>Aircraft/f16/Models/fuelflow.xml</path>
   <offsets>
-   <x-m>-4.794</x-m>
-   <y-m>0.180</y-m>
-   <z-m>0.605</z-m>
+   <x-m>-4.798</x-m>
+   <y-m>0.185</y-m>
+   <z-m>0.601</z-m>
   </offsets>
  </model>
 
@@ -48,9 +48,9 @@
   <name>AI</name>
   <path>Aircraft/f16/Models/stdby-adi.xml</path>
   <offsets>
-   <x-m>-4.794</x-m>
-   <y-m>0.122</y-m>
-   <z-m>0.615</z-m>
+   <x-m>-4.799</x-m>
+   <y-m>0.132</y-m>
+   <z-m>0.614</z-m>
   </offsets>
  </model>
 
