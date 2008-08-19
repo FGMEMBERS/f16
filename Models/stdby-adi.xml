@@ -71,6 +71,7 @@
 
  <!-- lighting -->
 
+<!--
  <animation>
   <object-name>mount</object-name>
   <type>material</type>
@@ -81,6 +82,7 @@
    <blue>0.18</blue>
   </emission>
  </animation>
+-->
 
  <animation>
   <object-name>scale</object-name>

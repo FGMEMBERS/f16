@@ -324,31 +324,31 @@
 
             <!--
                - If alpha (the difference between the pitch vector and the
-               - thrust vector) approaches 60 degrees the Flight Computer will
+               - thrust vector) approaches 30 degrees the Flight Computer will
                - command full down elevator deflection to prevent stalling.
                - This section reduces pilot command to zero when alpha
-               - exceeds 50 degrees and approaches 60 degrees.
+               - exceeds 28 degrees and approaches 30 degrees.
                - (note: JSBSim doesn't extrapolate, so no need to specify
-               - beyond 60 degrees)
+               - beyond 30 degrees)
                -->
             <scheduled_gain name="elevator scheduler">
                 <input>fcs/elevator-cmd-limiter</input>
                 <table>
                     <independentVar>aero/alpha-rad</independentVar>
                     <tableData>
-                    -1.0472     0
-                    -0.8754     1
-                     0.0        1
-                     0.8754     1
-                     1.0472     0
+                    -0.5236     0.0
+                    -0.5	0.11
+                     0.0        1.0
+                     0.5	0.11
+                     0.5236     0.0
                     </tableData>
                 </table>
             </scheduled_gain>
 
-            <!-- Command full pitch down when approaching 60 degrees alpha -->
+            <!-- Command full pitch down when approaching 30 degrees alpha -->
             <pure_gain name="alpha limiter norm">
               <input>aero/alpha-rad</input>
-              <gain>0.956</gain>
+              <gain>1.0472</gain>
             </pure_gain>
 
             <!-- Calculate the normalized current pitch-rate -->

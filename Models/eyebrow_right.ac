@@ -1,9 +1,9 @@
 AC3Db
 MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.5 0.5 0.5  shi 10  trans 0
+MATERIAL "ac3dmat1" rgb 0 0 0  amb 0 0 0  emis 1 1 1  spec 0 0 0  shi 0  trans 0
 OBJECT world
-kids 5
+kids 10
 OBJECT poly
-name "box"
 loc 0.00245363 0.000180149 0.0159112
 texture "instruments.rgb"
 texrep -0.08 0.086
@@ -17,45 +17,69 @@ numvert 8
 -0.0025878 0.00740555 0.00756628
 0.00253344 0.00740555 0.00756628
 0.00253344 -0.00759445 0.00756628
-numsurf 5
+numsurf 10
 SURF 0x0
 mat 0
-refs 4
+refs 3
+2 0 1
 0 0 0
 1 0 1
+SURF 0x0
+mat 0
+refs 3
+0 0 0
 2 0 1
 3 0 0
 SURF 0x0
 mat 0
-refs 4
-6 1 1
+refs 3
+2 0 1
 7 1 0
 3 0 0
-2 0 1
 SURF 0x0
 mat 0
-refs 4
+refs 3
 7 1 0
+2 0 1
 6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 5 1 1
 4 1 0
 SURF 0x0
 mat 0
-refs 4
-1 0 1
+refs 3
 5 1 1
+7 1 0
 6 1 1
-2 0 1
 SURF 0x0
 mat 0
-refs 4
-4 1 0
+refs 3
+5 1 1
+2 0 1
+1 0 1
+SURF 0x0
+mat 0
+refs 3
+2 0 1
+5 1 1
+6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 0 0 0
 3 0 0
+SURF 0x0
+mat 0
+refs 3
+0 0 0
 7 1 0
+4 1 0
 kids 0
 OBJECT poly
-name "box"
 loc 0.00299055 0.000180089 -0.000385956
 texture "instruments.rgb"
 texrep -0.08 0.086
@@ -69,45 +93,69 @@ numvert 8
 -0.00312471 0.00740561 0.00756626
 0.00199653 0.00740561 0.00756626
 0.00199653 -0.00759439 0.00756626
-numsurf 5
+numsurf 10
 SURF 0x0
 mat 0
-refs 4
+refs 3
+2 0 1
 0 0 0
 1 0 1
+SURF 0x0
+mat 0
+refs 3
+0 0 0
 2 0 1
 3 0 0
 SURF 0x0
 mat 0
-refs 4
-6 1 1
+refs 3
+2 0 1
 7 1 0
 3 0 0
-2 0 1
 SURF 0x0
 mat 0
-refs 4
+refs 3
 7 1 0
+2 0 1
 6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 5 1 1
 4 1 0
 SURF 0x0
 mat 0
-refs 4
-1 0 1
+refs 3
 5 1 1
+7 1 0
 6 1 1
-2 0 1
 SURF 0x0
 mat 0
-refs 4
-4 1 0
+refs 3
+5 1 1
+2 0 1
+1 0 1
+SURF 0x0
+mat 0
+refs 3
+2 0 1
+5 1 1
+6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 0 0 0
 3 0 0
+SURF 0x0
+mat 0
+refs 3
+0 0 0
 7 1 0
+4 1 0
 kids 0
 OBJECT poly
-name "box"
 loc 0.00296337 1.27191e-05 -0.0326366
 texture "instruments.rgb"
 texrep -0.08 0.086
@@ -121,45 +169,69 @@ numvert 8
 -0.00309753 0.00757298 0.00756629
 0.00202371 0.00757298 0.00756629
 0.00202371 -0.00742702 0.00756629
-numsurf 5
+numsurf 10
 SURF 0x0
 mat 0
-refs 4
+refs 3
+2 0 1
 0 0 3.10441e-08
 1 0 1
+SURF 0x0
+mat 0
+refs 3
+0 0 3.10441e-08
 2 0 1
 3 0 0
 SURF 0x0
 mat 0
-refs 4
-6 1 1
+refs 3
+2 0 1
 7 1 0
 3 0 0
-2 0 1
 SURF 0x0
 mat 0
-refs 4
+refs 3
 7 1 0
+2 0 1
 6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 5 1 1
 4 1 3.10441e-08
 SURF 0x0
 mat 0
-refs 4
-1 0 1
+refs 3
 5 1 1
+7 1 0
 6 1 1
-2 0 1
 SURF 0x0
 mat 0
-refs 4
-4 1 3.10441e-08
+refs 3
+5 1 1
+2 0 1
+1 0 1
+SURF 0x0
+mat 0
+refs 3
+2 0 1
+5 1 1
+6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 0 0 3.10441e-08
 3 0 0
+SURF 0x0
+mat 0
+refs 3
+0 0 3.10441e-08
 7 1 0
+4 1 3.10441e-08
 kids 0
 OBJECT poly
-name "box"
 loc 0.00242645 1.27791e-05 -0.0165165
 texture "instruments.rgb"
 texrep -0.08 0.086
@@ -173,45 +245,69 @@ numvert 8
 -0.00256061 0.00757293 0.00756621
 0.00256062 0.00757293 0.00756621
 0.00256062 -0.00742708 0.00756621
-numsurf 5
+numsurf 10
 SURF 0x0
 mat 0
-refs 4
+refs 3
+2 0 1
 0 1.20691e-07 0
 1 1.20691e-07 1
+SURF 0x0
+mat 0
+refs 3
+0 1.20691e-07 0
 2 0 1
 3 0 0
 SURF 0x0
 mat 0
-refs 4
-6 1 1
+refs 3
+2 0 1
 7 1 0
 3 0 0
-2 0 1
 SURF 0x0
 mat 0
-refs 4
+refs 3
 7 1 0
+2 0 1
 6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 5 1 1
 4 1 0
 SURF 0x0
 mat 0
-refs 4
-1 1.20691e-07 1
+refs 3
 5 1 1
+7 1 0
+6 1 1
+SURF 0x0
+mat 0
+refs 3
+1 1.20691e-07 1
 6 1 1
 2 0 1
 SURF 0x0
 mat 0
-refs 4
-4 1 0
+refs 3
+6 1 1
+1 1.20691e-07 1
+5 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 0 1.20691e-07 0
 3 0 0
+SURF 0x0
+mat 0
+refs 3
+0 1.20691e-07 0
 7 1 0
+4 1 0
 kids 0
 OBJECT poly
-name "box"
 loc 0.00243236 0.000180149 0.0328022
 texture "instruments.rgb"
 texrep -0.08 0.086
@@ -225,40 +321,190 @@ numvert 8
 -0.00256653 0.00740555 0.00756627
 0.00253344 0.00740555 0.00756627
 0.00253344 -0.00759445 0.00756627
-numsurf 5
+numsurf 10
 SURF 0x0
 mat 0
-refs 4
+refs 3
+2 0 1
 0 0 0
 1 0 1
+SURF 0x0
+mat 0
+refs 3
+0 0 0
 2 0 1
 3 0 0
 SURF 0x0
 mat 0
-refs 4
-6 1 1
+refs 3
+2 0 1
 7 1 0
 3 0 0
-2 0 1
 SURF 0x0
 mat 0
-refs 4
+refs 3
 7 1 0
+2 0 1
 6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 5 1 1
 4 1 0
 SURF 0x0
 mat 0
-refs 4
-1 0 1
+refs 3
 5 1 1
+7 1 0
 6 1 1
-2 0 1
 SURF 0x0
 mat 0
-refs 4
-4 1 0
+refs 3
+5 1 1
+2 0 1
+1 0 1
+SURF 0x0
+mat 0
+refs 3
+2 0 1
+5 1 1
+6 1 1
+SURF 0x0
+mat 0
+refs 3
+7 1 0
 0 0 0
 3 0 0
+SURF 0x0
+mat 0
+refs 3
+0 0 0
 7 1 0
+4 1 0
+kids 0
+OBJECT poly
+name "canopy"
+loc 0.00389308 0.000137899 0.000686016
+texture "instruments.rgb"
+texrep 0.068 0.07
+texoff 0.58 -0.69
+numvert 4
+0.0013279 0.00653149 -0.0266106
+0.0013279 -0.00675111 -0.0266106
+0.0013279 0.00653149 -0.0405004
+0.0013279 -0.00675111 -0.0405004
+numsurf 2
+SURF 0x10
+mat 1
+refs 3
+1 0 0
+3 1 0
+0 0 1
+SURF 0x10
+mat 1
+refs 3
+2 1 1
+0 0 1
+3 1 0
+kids 0
+OBJECT poly
+name "eng_fire"
+loc -7.77598e-05 3.17281e-05 0.0033631
+texture "instruments.rgb"
+texrep 0.07 0.07
+texoff 0.247 -0.78
+numvert 4
+0.00532002 0.00663766 0.0362573
+0.00532002 -0.00664494 0.0362573
+0.00532002 0.00663766 0.0223675
+0.00532002 -0.00664494 0.0223675
+numsurf 2
+SURF 0x10
+mat 1
+refs 3
+1 0 0
+3 1 0
+0 0 1
+SURF 0x10
+mat 1
+refs 3
+2 1 1
+0 0 1
+3 1 0
+kids 0
+OBJECT poly
+name "hyd_oil_press"
+loc -7.77608e-05 3.17278e-05 0.00093207
+texture "instruments.rgb"
+texrep 0.07 0.07
+texoff 0.647 -0.69
+numvert 4
+0.00532001 0.00663766 0.0217493
+0.00532001 -0.00664494 0.0217493
+0.00532001 0.00663766 0.00785947
+0.00532001 -0.00664494 0.00785947
+numsurf 2
+SURF 0x10
+mat 1
+refs 3
+1 0 0
+3 1 0
+0 0 1
+SURF 0x10
+mat 1
+refs 3
+2 1 1
+0 0 1
+3 1 0
+kids 0
+OBJECT poly
+name "flcs_dbu_on"
+loc -7.77598e-05 -7.94996e-05 -0.000771991
+texture "instruments.rgb"
+texrep 0.07 0.07
+texoff 0.728 -0.6
+numvert 4
+0.00532002 0.00674889 0.00723173
+0.00532002 -0.00653371 0.00723173
+0.00532002 0.00674889 -0.00665807
+0.00532002 -0.00653371 -0.00665807
+numsurf 2
+SURF 0x10
+mat 1
+refs 3
+1 0 0
+3 1 0
+0 0 1
+SURF 0x10
+mat 1
+refs 3
+2 1 1
+0 0 1
+3 1 0
+kids 0
+OBJECT poly
+name "to_ldg_config"
+loc -7.77608e-05 3.17278e-05 -0.00220959
+texture "instruments.rgb"
+texrep 0.07 0.07
+texoff 0.799 -0.6
+numvert 4
+0.00532001 0.00663766 -0.00743572
+0.00532001 -0.00664494 -0.00743572
+0.00532001 0.00663766 -0.0213255
+0.00532001 -0.00664494 -0.0213255
+numsurf 2
+SURF 0x10
+mat 1
+refs 3
+1 0 0
+3 1 0
+0 0 1
+SURF 0x10
+mat 1
+refs 3
+2 1 1
+0 0 1
+3 1 0
 kids 0

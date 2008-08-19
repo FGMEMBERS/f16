@@ -4,4 +4,26 @@
 
  <path>eyebrow_right.ac</path>
 
+ <animation>
+  <type>select</type>
+  <object-name>canopy</object-name>
+  <condition>
+   <greater-than>
+    <property>/sim/model/f16/position-norm</property>
+    <value>0.0</value>
+   </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>eng_fire</object-name>
+  <object-name>hyd_oil_press</object-name>
+  <object-name>flcs_dbu_on</object-name>
+  <object-name>to_ldg_config</object-name>
+  <condition>
+    <property type="bool">/tmp/nill</property>
+  </condition>
+ </animation>
+
 </PropertyList>

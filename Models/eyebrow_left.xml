@@ -4,4 +4,14 @@
 
  <path>eyebrow_left.ac</path>
 
+ <animation>
+  <type>select</type>
+  <object-name>master_caution</object-name>
+  <object-name>none</object-name>
+  <object-name>tf_fail</object-name>
+  <condition>
+    <property type="bool">/tmp/nill</property>
+  </condition>
+ </animation>
+
 </PropertyList>

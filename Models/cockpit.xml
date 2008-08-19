@@ -49,7 +49,7 @@
   <path>Aircraft/f16/Models/stdby-adi.xml</path>
   <offsets>
    <x-m>-4.799</x-m>
-   <y-m>0.132</y-m>
+   <y-m>0.131</y-m>
    <z-m>0.614</z-m>
   </offsets>
  </model>
@@ -219,6 +219,7 @@
   </offsets>
  </model>
 
+ <!-- AOA indexer animations -->
  <animation>
   <type>select</type>
   <object-name>down</object-name>
@@ -259,15 +260,36 @@
    </condition>
  </animation>
 
+ <!-- AAR info animations -->
  <animation>
   <type>select</type>
   <object-name>rdy</object-name>
+  <condition>
+   <equals>
+    <property type="bool">/systems/refuel/serviceable</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>ar_nws</object-name>
+  <condition>
+   <equals>
+    <property type="bool">/systems/refuel/contact</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>disc</object-name>
   <condition>
    <equals>
-    <property type="bool">tmp/radar_select</property>
-    <value>true</value>
+    <property type="bool">/systems/refuel/contact</property>
+    <value>false</value>
    </equals>
   </condition>
  </animation>
