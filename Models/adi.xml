@@ -7,17 +7,17 @@
   <type>select</type>
   <object-name>off-flag</object-name>
   <condition>
-   <less-than>
-    <property>systems/electrical/outputs/adi</property>
-    <value>24</value>
-   </less-than>
+   <equals>
+    <property type="bool">systems/attitude-indicator</property>
+    <value>false</value>
+   </equals>
   </condition>
  </animation>
 
  <animation>
   <type>rotate</type>
   <object-name>sphere</object-name>
-  <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
+  <property>orientation/roll-deg</property>
   <center>
    <x-m>0</x-m>
    <y-m>0.0</y-m>
@@ -33,7 +33,7 @@
  <animation>
   <type>rotate</type>
   <object-name>sphere</object-name>
-  <property>instrumentation/attitude-indicator/indicated-pitch-deg</property>
+  <property>orientation/pitch-deg</property>
   <center>
    <x-m>-0.0522</x-m>
    <y-m>0.0</y-m>
@@ -47,17 +47,18 @@
  </animation>
 
  <!-- ILS mode -->
+<!--
  <animation>
   <type>select</type>
   <object-name>ils-flag</object-name>
   <condition>
    <or>
     <equals>
-     <property>sim/model/A-10/A-10-nav/selector-ils</property>
+     <property>sim/model/f16/selector-ils</property>
      <value>false</value>
     </equals>
     <less-than>
-     <property>systems/electrical/outputs/adi</property>
+     <property>systems/attitude-indicator</property>
      <value>24</value>
     </less-than>
     <equals>
@@ -73,7 +74,7 @@
   <object-name>glide-slope-index</object-name>
   <condition>
    <equals>
-    <property>sim/model/A-10/A-10-nav/selector-ils</property>
+    <property>sim/model/f16/selector-ils</property>
     <value>true</value>
    </equals>
    <greater-than>
@@ -86,16 +87,6 @@
  <animation>
   <type>translate</type>
   <object-name>glide-slope-index</object-name>
-  <!--<condition>
-   <equals>
-    <property>sim/model/A-10/A-10-nav/selector-ils</property>
-    <value>true</value>
-   </equals>
-   <greater-than>
-    <property>systems/electrical/outputs/adi</property>
-    <value>24</value>
-   </greater-than>
-  </condition>-->
   <property>instrumentation/nav[0]/gs-needle-deflection</property>
   <interpolation>
    <entry>
@@ -117,11 +108,12 @@
    <z>1</z>
   </axis>
  </animation>
+-->
 
  <animation>
   <type>rotate</type>
   <object-name>bank-index</object-name>
-  <property>instrumentation/attitude-indicator/indicated-roll-deg</property>
+  <property>orientation/roll-deg</property>
   <min-deg>-120</min-deg>
   <max-deg>120</max-deg>
   <center>
@@ -137,12 +129,13 @@
  </animation>
 
  <!-- ADI's bars in steering mode -->
+<!--
  <animation>
   <type>select</type>
   <object-name>yaw-steering-bar</object-name>
   <condition>
    <equals>
-    <property>sim/model/A-10/A-10-nav/selector-ptr</property>
+    <property>sim/model/f16/selector-ptr</property>
     <value>false</value>
    </equals>
   </condition>
@@ -153,7 +146,7 @@
   <object-name>yaw-steering-bar</object-name>
   <condition>
    <equals>
-    <property>sim/model/A-10/A-10-nav/selector-ptr</property>
+    <property>sim/model/f16/selector-ptr</property>
     <value>false</value>
    </equals>
   </condition>
@@ -171,7 +164,7 @@
   <object-name>pitch-steering-bar</object-name>
   <condition>
    <equals>
-    <property>sim/model/A-10/A-10-nav/selector-ptr</property>
+    <property>sim/model/f16/selector-ptr</property>
     <value>false</value>
    </equals>
   </condition>
@@ -182,7 +175,7 @@
   <object-name>pitch-steering-bar</object-name>
   <condition>
    <equals>
-    <property>sim/model/A-10/A-10-nav/selector-ptr</property>
+    <property>sim/model/f16/selector-ptr</property>
     <value>false</value>
    </equals>
   </condition>
@@ -194,21 +187,23 @@
    <z>1</z>
   </axis>
  </animation>
+-->
 
 <!-- ADI's bars in homing mode -->
 
+<!--
  <animation>
   <type>select</type>
   <object-name>nav-yaw-steering-bar</object-name>
   <condition>
-   <property>sim/model/A-10/A-10-nav/selector-ptr</property>
+   <property>sim/model/f16/selector-ptr</property>
    <property>instrumentation/nav[2]/in-range</property>
    <equals>
-    <property>sim/model/A-10/instrumentation/vhf/mode</property>
+    <property>sim/model/f16/instrumentation/vhf/mode</property>
     <value>2</value>
    </equals>
    <greater-than>
-    <property>sim/model/A-10/instrumentation/vhf/selector</property>
+    <property>sim/model/f16/instrumentation/vhf/selector</property>
     <value>2</value>
    </greater-than>
   </condition>
@@ -217,7 +212,7 @@
  <animation>
   <type>translate</type>
   <object-name>nav-yaw-steering-bar</object-name>
-  <property>sim/model/A-10/instrumentation/vhf/homing-deviation</property>
+  <property>sim/model/f16/instrumentation/vhf/homing-deviation</property>
   <factor>0.0012</factor>
   <min-m>-0.0331</min-m>
   <max-m>0.0330</max-m>
@@ -232,14 +227,14 @@
   <type>select</type>
   <object-name>nav-pitch-steering-bar</object-name>
   <condition>
-   <property>sim/model/A-10/A-10-nav/selector-ptr</property>
+   <property>sim/model/f16/selector-ptr</property>
    <property>instrumentation/nav[2]/in-range</property>
    <equals>
-    <property>sim/model/A-10/instrumentation/vhf/mode</property>
+    <property>sim/model/f16/instrumentation/vhf/mode</property>
     <value>2</value>
    </equals>
    <greater-than>
-    <property>sim/model/A-10/instrumentation/vhf/selector</property>
+    <property>sim/model/f16/instrumentation/vhf/selector</property>
     <value>2</value>
    </greater-than>
   </condition>
@@ -269,24 +264,26 @@
    <z>1</z>
   </axis>
  </animation>
+-->
 
  <!-- course-flag -->
+<!--
  <animation>
   <type>select</type>
   <object-name>course-flag</object-name>
   <condition>
    <or>
     <and>
-     <property>sim/model/A-10/A-10-nav/selector-ptr</property>
+     <property>sim/model/f16/selector-ptr</property>
      <not>
       <property>instrumentation/nav[2]/in-range</property>
      </not>
      <equals>
-      <property>sim/model/A-10/instrumentation/vhf/mode</property>
+      <property>sim/model/f16/instrumentation/vhf/mode</property>
       <value>2</value>
      </equals>
      <greater-than>
-      <property>sim/model/A-10/instrumentation/vhf/selector</property>
+      <property>sim/model/f16/instrumentation/vhf/selector</property>
       <value>2</value>
      </greater-than>
     </and>
@@ -297,6 +294,7 @@
    </or>
   </condition>
  </animation>
+-->
 
  <!-- slip-ball-->
  <animation>
@@ -319,7 +317,6 @@
  </animation>
 
  <!-- lighting -->
-
 <!--
  <animation>
   <object-name>mount</object-name>
