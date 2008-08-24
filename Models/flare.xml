@@ -30,4 +30,19 @@
   </emission>
  </animation>
 
+ <submodel>
+    <name>contrail</name>
+    <model>Aircraft/f16/Models/particle.xml</model>
+    <trigger>ai/submodels/submodel[0]/flare-release</trigger>
+    <speed>250.0</speed>
+    <repeat>true</repeat>
+    <delay>0.25</delay>
+    <yaw-offset>90.0</yaw-offset>
+    <count>-1</count>
+    <life>15</life>
+    <wind>true</wind>
+    <buoyancy>10</buoyancy>
+    <eda>1000</eda>
+  </submodel>
+
 </PropertyList>

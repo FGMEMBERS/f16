@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <sim>
+  <description>General Dynamics F-16</description>
+  <author>Erik Hofman, Pensacola (skin textures), Martin "Pegasus" Schmitt (panel textures)</author>
+  <status>early-production</status>
+ 
+  <flight-model>jsb</flight-model>
+  <aero>f16</aero>
+
+  <startup>
+   <splash-texture>Aircraft/f16/f16-splash.rgb</splash-texture>
+  </startup>
+  
+   <submodels>
+    <serviceable type="bool">1</serviceable>
+    <path>Aircraft/f16/f16-submodels.xml</path>
+   </submodels>
+  
+  <sound>
+   <path>Aircraft/f16/f16-sound.xml</path>
+  </sound>
+
+  <virtual-cockpit archive="y">false</virtual-cockpit>
+  <panel>
+   <path>Aircraft/f16/Panels/f16-2d-panel.xml</path>
+   <visibility archive="y">true</visibility>
+  </panel>
+  <panel_2>
+   <visibility>false</visibility>
+  </panel_2>
+
+  <hud>
+   <path>Aircraft/f16/Hud/default.xml</path>
+   <path>Aircraft/f16/hud.xml</path>
+   <visibility>false</visibility>
+   <visibility>true</visibility>
+   <current-color>0</current-color>
+   <color>
+    <transparent type="bool">true</transparent>
+    <antialiased type="bool">true</antialiased>
+    <brightness type="float">0.85</brightness>
+    <alpha type="float">0.85</alpha>
+   </color>
+   <palette>
+    <color n="0">
+     <red type="float">0.38</red>
+     <green type="float">1.0</green>
+     <blue type="float">0.22</blue>
+    </color>
+    <color n="1">
+     <red type="float">1.0</red>
+     <green type="float">0.0</green>
+     <blue type="float">0.0</blue>
+    </color>
+   </palette>
+  </hud>
+
+  <instrumentation>
+   <path>Aircraft/f16/Systems/instrumentation.xml</path>
+  </instrumentation>
+
+  <model>
+   <f16>
+    <klu type="bool">false</klu>
+    <us type="bool">true</us>
+    <arrester-hook>
+     <engaged type="bool">false</engaged>
+    </arrester-hook>
+   </f16>
+   <path>Aircraft/f16/Models/f16.xml</path>
+  </model>
+
+  <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
+
+  <view>
+   <config>
+     <pitch-offset-deg>-11.8</pitch-offset-deg>
+     <default-field-of-view-deg>60</default-field-of-view-deg>
+   </config>
+  </view>
+
+  <help>
+   <key>
+    <name>Ctrl-B</name>
+    <desc>toggle speed brake</desc>
+   </key>
+   <key>
+    <name>Ctrl-F</name>
+    <desc>trigger flare release</desc>
+   </key>
+  </help>
+ </sim>
+
+ <input>
+   <keyboard>
+    <key n="6">
+     <name>Ctrl-F</name>
+     <desc>Trigger flare release</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/ai/submodels/submodel[0]/flare-release</property>
+      <value type="bool">true</value>
+     </binding>
+     <mod-up>
+      <binding>
+       <command>property-assign</command>
+       <property>/ai/submodels/submodel[0]/flare-release</property>
+       <value type="bool">false</value>
+      </binding>
+     </mod-up>
+    </key>
+    <key n="8">
+     <name>Ctrl-H</name>
+     <desc>Toggle arrester hook</desc>
+     <binding>
+      <command>nasal</command>
+      <script>f16.testHook()</script>
+     </binding>
+    </key>
+   </keyboard>
+  </input>
+
+ <controls>
+  <lighting>
+   <strobe type="bool">true</strobe>
+   <nav-lights type="bool">true</nav-lights>
+  </lighting>
+ </controls>
+
+ <engines>
+  <engine n="0">
+   <running>true</running>
+  </engine>
+ </engines>
+
+ <consumables>
+  <fuel>
+   <tank n="0">
+    <level-gal_us archive="y">500</level-gal_us>
+   </tank>
+   <tank n="1">
+    <level-gal_us archive="y">500</level-gal_us>
+   </tank>
+   <tank n="2">
+    <level-gal_us archive="y">370</level-gal_us>
+   </tank>
+   <tank n="3">
+    <level-gal_us archive="y">370</level-gal_us>
+   </tank>
+  </fuel>
+ </consumables>
+
+ <systems>
+  <refuel>
+   <type>boom</type>
+   <serviceable type="bool">true</serviceable>
+  </refuel>
+ </systems>
+
+ <instrumentation>
+  <radar>
+   <serviceable type="bool">true</serviceable>
+   <switch type="string" archive="y">on</switch>
+   <range type="double" archive="y">60</range>
+   <mode-control type="int" archive="y">2</mode-control>
+   <limit-deg type="double">60</limit-deg>
+
+   <mode type="string" archive="y">WX</mode>
+   <lightning type="bool" archive="y">true</lightning>
+   <display-mode type="string" archive="y">arc</display-mode>
+
+   <display-controls>
+    <WX type="bool" archive="y">false</WX>
+    <data type="bool" archive="y">true</data>
+    <pos type="bool" archive="y">true</pos>
+   </display-controls>
+  </radar>
+ </instrumentation>
+
+ <limits>
+  <max-gear-extension-speed>280</max-gear-extension-speed>
+ </limits>
+
+ <nasal>
+  <aar>
+   <file>Aircraft/Generic/aar.nas</file>
+  </aar>
+  <f16>
+   <file>Aircraft/f16/f16.nas</file>
+  </f16>
+ </nasal>
+
+</PropertyList>
+
