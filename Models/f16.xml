@@ -2,11 +2,20 @@
 
 <PropertyList>
 
- <path>f16.ac</path>
+ <model>
+  <name>Cockpit</name>
+  <path>Aircraft/f16/Models/cockpit.xml</path>
+ </model>
+
+ <model>
+  <name>Aircraft Body</name>
+  <path>Aircraft/f16/Models/f16.ac</path>
+ </model>
+
  <offsets>
-  <z-m>0.15</z-m>
-  <pitch-deg>0.3</pitch-deg>
- </offsets>
+   <z-m>0.15</z-m>
+   <pitch-deg>0.3</pitch-deg>
+  </offsets>
 
  <!-- group all position lights -->
  <animation>
@@ -26,6 +35,7 @@
  </animation>
 
 <!-- disable shadows for these objects -->
+<!--
  <animation>
   <type>noshadow</type>
   <object-name>us_markings</object-name>
@@ -49,13 +59,9 @@
   <type>alpha-test</type>
   <alpha-factor>0.01</alpha-factor>
  </animation>
+-->
 
 <!-- Submodels -->
-
- <model>
-  <name>Cockpit</name>
-  <path>Aircraft/f16/Models/cockpit.xml</path>
- </model>
 
  <model>
   <name>LExtTank</name>
@@ -118,23 +124,19 @@
  </animation>
 
 
- <!-- Visible up to 10km (6mi) -->
-<!--
+ <!-- Visible up to 10km (6 miles) -->
  <animation>
   <type>range</type>
   <min-m>0</min-m>
   <max-m>10000</max-m>
  </animation>
--->
 
 
 <!-- fuselage animations -->
-
  <animation>
   <type>rotate</type>
   <object-name>canopy_frame</object-name>
-  <object-name>canopy_glass_inside</object-name>
-  <object-name>canopy_glass_outside</object-name>
+  <object-name>canopy_glass_fwd</object-name>
   <property>sim/model/f16/canopy/position-norm</property>
   <factor>30.0</factor>
   <center>
@@ -451,7 +453,6 @@
   </axis>
  </animation>
 
-<!--
  <animation>
   <type>translate</type>
   <object-name>front_wheel</object-name>
@@ -464,7 +465,6 @@
    <z>1</z>
   </axis>
  </animation>
--->
 
  <animation>
   <type>rotate</type>

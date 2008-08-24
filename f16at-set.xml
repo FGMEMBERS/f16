@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<PropertyList include="f16-set.xml">
+<PropertyList include="f16-2dpanel-set.xml">
 
  <sim>
   <description>General Dynamics F-16AT (Falcon-21)</description>
