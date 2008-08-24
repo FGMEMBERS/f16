@@ -10,13 +10,13 @@
    <mode>looped</mode>
    <property>/engines/engine/running</property>
    <position>
-    <x>0.0</x>
-    <y>-4.60</y>
+    <x>-4.6</x>
+    <y>0.0</y>
     <z>0.0</z>
    </position>
    <orientation>
-    <x>0.0</x>
-    <y>-1.0</y>
+    <x>1.0</x>
+    <y>0.0</y>
     <z>0.0</z>
     <inner-angle>200.0</inner-angle>
     <outer-angle>180.0</outer-angle>
@@ -36,13 +36,13 @@
    <mode>looped</mode>
    <property>engines/engine/augmentation</property>
    <position>
-    <x>0.0</x>
-    <y>-4.60</y>
+    <x>-4.6</x>
+    <y>00</y>
     <z>0.0</z>
    </position>
    <orientation>
-    <x>0.0</x>
-    <y>-1.0</y>
+    <x>1.0</x>
+    <y>0.0</y>
     <z>0.0</z>
     <inner-angle>100.0</inner-angle>
     <outer-angle>180.0</outer-angle>
@@ -61,14 +61,14 @@
     <property>/engines/engine/running</property>
    </condition>
    <position>
-    <x>0.37</x>
-    <y>-0.60</y>
-    <z>0.0</z>
+    <x>0.6</x>
+    <y>0.0</y>
+    <z>-0.37</z>
    </position>
    <orientation>
-    <x>0.03</x>
-    <y>1.0</y>
-    <z>0.0</z>
+    <x>-0.98</x>
+    <y>0.0</y>
+    <z>-0.17</z>
     <inner-angle>80.0</inner-angle>
     <outer-angle>100.0</outer-angle>
     <outer-gain>0.0</outer-gain>
@@ -94,14 +94,14 @@
     <property>/engines/engine/running</property>
    </condition>
    <position>
-    <x>0.37</x>
-    <y>-0.60</y>
-    <z>0.0</z>
+    <x>0.6</x>
+    <y>0.0</y>
+    <z>-0.37</z>
    </position>
    <orientation>
-    <x>0.03</x>
-    <y>1.0</y>
-    <z>0.0</z>
+    <x>-0.98</x>
+    <y>0.0</y>
+    <z>-0.17</z>
     <inner-angle>80.0</inner-angle>
     <outer-angle>100.0</outer-angle>
     <outer-gain>0.0</outer-gain>
@@ -129,9 +129,9 @@
     </or>
    </condition>
    <position>
-    <x>0.6</x>
-    <y>-1.2</y>
-    <z>0.0</z>
+    <x>1.2</x>
+    <y>0.0</y>
+    <z>-0.6</z>
    </position>
    <volume>
     <property>/velocities/airspeed-kt</property>
@@ -153,9 +153,9 @@
     </or>
    </condition>
    <position>
-    <x>0.6</x>
-    <y>-1.2</y>
-    <z>-0.60</z>
+    <x>1.2</x>
+    <y>0.0</y>
+    <z>-0.6</z>
    </position>
    <volume>
     <property>/velocities/speed-down-fps</property>
