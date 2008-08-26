@@ -28,7 +28,7 @@
   <name>EJECT</name>
   <path>Aircraft/f16/Models/ejection_handle.ac</path>
   <offsets>
-   <x-m>-4.570</x-m>
+   <x-m>-4.500</x-m>
    <y-m>0.0</y-m>
    <z-m>0.26</z-m>
   </offsets>
@@ -157,9 +157,9 @@
   <name>LEFT</name>
   <path>Aircraft/f16/Models/left_front.xml</path>
   <offsets>
-   <x-m>-4.642</x-m>
+   <x-m>-4.649</x-m>
    <y-m>-0.3222</y-m>
-   <z-m>0.331</z-m>
+   <z-m>0.334</z-m>
    <pitch-deg>-39.35</pitch-deg>
    <roll-deg>-6.00</roll-deg>
    <heading-deg>7.3</heading-deg>
