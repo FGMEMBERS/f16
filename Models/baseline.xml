@@ -10,7 +10,7 @@
 
  <!-- sort transparent objects -->
  <animation>
-  <object-name>canopy_glass</object-name>
+  <object-name>canopy_glass_fwd</object-name>
   <object-name>hud_glass</object-name>
   <object-name>canopy_back</object-name>
  </animation>

@@ -94,7 +94,8 @@
    </orientation>
    <volume>
     <property>engines/engine/thrust_lb</property>
-    <factor>0.000056179</factor>
+    <factor>0.000044944</factor>
+    <offset>0.1</offset>
    </volume>
    <pitch>
     <property>engines/engine/n1</property>
@@ -107,7 +108,7 @@
    <name>afterburner</name>
    <path>Sounds/exhaust_loop.wav</path>
    <mode>looped</mode>
-   <property>engines/engine/running</property>
+   <property>engines/engine/augmentation</property>
    <position>
     <x>-4.6</x>
     <y>0.0</y>
@@ -122,7 +123,7 @@
     <outer-gain>0.1</outer-gain>
    </orientation>
    <volume>
-    <property>engines/engine/augmentation</property>
+    <property>engines/engine/nozzle-pos-norm</property>
     <offset>0.05</offset>
     <factor>0.95</factor>
    </volume>

@@ -806,7 +806,7 @@
  <animation>
   <type>select</type>
   <object-name>us_markings</object-name>
-  <object-name>us_tailboom</object-name>
+  <object-name>us_tailroot</object-name>
   <object-name>LExtTank</object-name>
   <object-name>RExtTank</object-name>
   <condition>
@@ -817,7 +817,7 @@
  <animation>
   <type>select</type>
   <object-name>klu_markings</object-name>
-  <object-name>klu_tailboom</object-name>
+  <object-name>klu_tailroot</object-name>
   <object-name>link16</object-name>
   <condition>
     <property>sim/model/f16/klu</property>

@@ -5,6 +5,27 @@
  <path>cockpit.ac</path>
 
  <model>
+  <name>Pilot</name>
+  <path>Aircraft/f16/Models/pilot.xml</path>
+  <offsets>
+   <x-m>-4.13</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.195</z-m>
+  </offsets>
+ </model>
+
+ <animation>
+  <type>select</type>
+  <object-name>Pilot</object-name>
+  <condition>
+   <equals>
+    <property>sim/current-view/internal</property>
+    <value>false</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <model>
   <name>RudderPedals</name>
   <path>Aircraft/f16/Models/rudder_pedals.xml</path>
   <offsets>
@@ -18,9 +39,9 @@
   <name>Throttle</name>
   <path>Aircraft/f16/Models/throttle.xml</path>
   <offsets>
-   <x-m>-4.25</x-m>
-   <y-m>-0.435</y-m>
-   <z-m>0.185</z-m>
+   <x-m>-4.43</x-m>
+   <y-m>-0.405</y-m>
+   <z-m>0.225</z-m>
   </offsets>
  </model>
 
@@ -266,7 +287,7 @@
   <object-name>rdy</object-name>
   <condition>
    <equals>
-    <property type="bool">/systems/refuel/serviceable</property>
+    <property>/systems/refuel/serviceable</property>
     <value>true</value>
    </equals>
   </condition>
@@ -277,7 +298,7 @@
   <object-name>ar_nws</object-name>
   <condition>
    <equals>
-    <property type="bool">/systems/refuel/contact</property>
+    <property>/systems/refuel/contact</property>
     <value>true</value>
    </equals>
   </condition>
@@ -288,7 +309,7 @@
   <object-name>disc</object-name>
   <condition>
    <equals>
-    <property type="bool">/systems/refuel/contact</property>
+    <property>/systems/refuel/contact</property>
     <value>false</value>
    </equals>
   </condition>
