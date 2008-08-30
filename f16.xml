@@ -429,7 +429,7 @@
             <!-- Calculate the normalized roll-rate -->
             <pure_gain name="roll rate norm">
                 <input>velocities/p-aero-rad_sec</input>
-                <gain>0.31831</gain>
+                <gain>0.31821</gain>
             </pure_gain>
 
             <!--

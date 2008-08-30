@@ -7,7 +7,7 @@ aircraft.light.new("sim/model/lighting/strobe", [0.03, 1.9+rand()/5], strobe_swi
 # open canopy when engaging the parking brakes ======================
 var parkingNode = props.globals.getNode("/controls/gear/brake-parking");
 var wowNode = props.globals.getNode("/gear/gear/wow");
-var canopy = aircraft.door.new("sim/model/f16/canopy", 5);
+var canopy = aircraft.door.new("sim/model/f16/canopy", 10);
 
 setlistener(parkingNode, func {
    var is_parked = func { parkingNode.getValue() and wowNode.getValue() };

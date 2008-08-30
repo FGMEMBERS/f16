@@ -4,7 +4,47 @@
 
  <fx>
 
-  <engine>
+  <canopy>
+   <name>canopy</name>
+   <path>Aircraft/f16/Sounds/canopy.wav</path>
+   <mode>in-transit</mode>
+   <property>sim/model/f16/canopy/position-norm</property>
+   <position>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.195</z>
+   </position>
+   <pitch>
+    <internal>dt_start</internal>
+    <offset>1.25</offset>
+    <factor>-0.25</factor>
+   </pitch>
+   <volume>
+    <max>0.5</max>
+   </volume>
+  </canopy>
+
+  <canopy>
+   <name>canopy_lock</name>
+   <path>Aircraft/f16/Sounds/canopy_lock.wav</path>
+   <mode>single</mode>
+   <condition>
+    <equals>
+     <property>sim/model/f16/canopy/position-norm</property>
+     <value>0.0</value>
+    </equals>
+   </condition>
+   <position>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.195</z>
+   </position>
+   <volume>
+    <max>0.5</max>
+   </volume>
+  </canopy>
+
+  <engine_fan>
    <name>internal fan</name>
    <path>Sounds/whine.wav</path>
    <mode>looped</mode>
@@ -21,7 +61,7 @@
     <x>-0.98</x>
     <y>0.0</y>
     <z>-0.17</z>
-    <inner-angle>80.0</inner-angle>
+    <inner-angle>30.0</inner-angle>
     <outer-angle>100.0</outer-angle>
     <outer-gain>0.0</outer-gain>
    </orientation>
@@ -31,11 +71,11 @@
     <factor>.00075</factor>
    </pitch>
    <volume>
-    <factor>0.6</factor>
+    <factor>0.3</factor>
    </volume>
-  </engine>
+  </engine_fan>
 
-  <engine>
+  <engine_fan>
    <name>external fan</name>
    <path>Sounds/turbojet_fan.wav</path>
    <mode>looped</mode>
@@ -58,13 +98,13 @@
     <x>-0.98</x>
     <y>0.0</y>
     <z>-0.17</z>
-    <inner-angle>80.0</inner-angle>
+    <inner-angle>30.0</inner-angle>
     <outer-angle>100.0</outer-angle>
     <outer-gain>0.0</outer-gain>
    </orientation>
    <pitch>
     <property>engines/engine/n1</property>
-    <ofset>0.7</ofset>
+    <ofset>0.8</ofset>
     <factor>.003</factor>
    </pitch>
    <volume>
@@ -72,16 +112,16 @@
     <offset>0.02</offset>
     <factor>-0.0002</factor>
    </volume>
-  </engine>
+  </engine_fan>
 
-  <engine>
+  <exhaust>
    <name>turbine</name>
    <path>Sounds/jet.wav</path>
    <mode>looped</mode>
    <property>engines/engine/running</property>
    <position>
-    <x>-4.6</x>
-    <y>00</y>
+    <x>4.6</x>
+    <y>0.0</y>
     <z>0.0</z>
    </position>
    <orientation>
@@ -102,15 +142,15 @@
     <offset>0.3</offset>
     <factor>0.01</factor>
    </pitch>
-  </engine>
+  </exhaust>
 
-  <engine>
+  <afterburner>
    <name>afterburner</name>
    <path>Sounds/exhaust_loop.wav</path>
    <mode>looped</mode>
    <property>engines/engine/augmentation</property>
    <position>
-    <x>-4.6</x>
+    <x>4.6</x>
     <y>0.0</y>
     <z>0.0</z>
    </position>
@@ -127,7 +167,7 @@
     <offset>0.05</offset>
     <factor>0.95</factor>
    </volume>
-  </engine>
+  </afterburner>
 
   <rumble>
    <name>gear rumble</name>
@@ -190,25 +230,24 @@
  
   <stall>
    <name>stall</name>
-   <path>Sounds/stall.wav</path>
+   <path>Aircraft/f16/Sounds/warning.wav</path>
    <property>sim/alarms/stall-warning</property>
+   <mode>looped</mode>
    <condition>
     <less-than>
      <property>velocities/airspeed-kt</property>
-     <value>120.0</value>
+     <value>130.0</value>
     </less-than>
     <not>
      <property>gear/gear[1]/wow</property>
      <property>gear/gear[2]/wow</property>
     </not>
    </condition>
-   <volume>
-    <property>velocities/airspeed-kt</property>
-    <max>0.3</max>
-   </volume>
-   <pitch>
-    <factor>0.5</factor>
-   </pitch>
+   <position>
+    <x>-1.3</x>
+    <y>0.0</y>
+    <z>0.195</z>
+   </position>
   </stall>
  
 </fx>

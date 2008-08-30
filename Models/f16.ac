@@ -11321,7 +11321,7 @@ refs 3
 1 0.48253 1
 kids 0
 OBJECT poly
-name "link16"
+name "link16_antennas"
 loc -2.95725 0.233723 5.004
 texture "f16.rgb"
 texrep -1 1

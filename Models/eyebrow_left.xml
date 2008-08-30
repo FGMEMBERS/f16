@@ -7,6 +7,8 @@
  <animation>
   <type>select</type>
   <object-name>master_caution</object-name>
+  <object-name>unused1</object-name>
+  <object-name>unused2</object-name>
   <object-name>none</object-name>
   <object-name>tf_fail</object-name>
   <condition>

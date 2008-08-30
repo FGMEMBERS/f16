@@ -17,10 +17,13 @@
 
  <animation>
   <type>select</type>
+  <object-name>engine</object-name>
   <object-name>eng_fire</object-name>
   <object-name>hyd_oil_press</object-name>
-  <object-name>flcs_dbu_on</object-name>
+  <object-name>flcs</object-name>
+  <object-name>dbu_on</object-name>
   <object-name>to_ldg_config</object-name>
+  <object-name>unused</object-name>
   <condition>
     <property>/tmp/nill</property>
   </condition>
