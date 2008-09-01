@@ -26,13 +26,6 @@
    <z-m>0.0</z-m>
   </offsets>
  </model>
- <animation>
-  <type>select</type>
-  <object-name>nozzle</object-name>
-  <condition>
-    <property type="bool">/tmp/nill</property>
-  </condition>
- </animation>
 
  <!-- group all position lights -->
  <animation>
@@ -205,6 +198,19 @@
     <value>true</value>
    </equals>
   </condition>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>external_flame</object-name>
+  <property>engines/engine[0]/nozzle-pos-norm</property>
+  <offset-m>-4.0</offset-m>
+  <factor>4.0</factor>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>-0</z>
+  </axis>
  </animation>
 
  <animation>

@@ -58,7 +58,7 @@
  <animation>
   <type>rotate</type>
   <object-name>ftit_needle</object-name>
-  <property>/environment/temperature-degc</property>
+  <property>engines/engine[0]/egt_degf</property>
   <factor>0.276923</factor>
   <center>
    <x-m> 0.0</x-m>
