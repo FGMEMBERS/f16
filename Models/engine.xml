@@ -25,7 +25,20 @@
   <type>rotate</type>
   <object-name>rpm_needle</object-name>
   <property>engines/engine[0]/n1</property>
-  <factor>3.3</factor>
+  <interpolation>
+   <entry>
+    <ind>0.0</ind>
+    <dep>0.0</dep>
+   </entry>
+   <entry>
+    <ind>60.0</ind>
+    <dep>122.0</dep>
+   </entry>
+   <entry>
+    <ind>100.0</ind>
+    <dep>328.0</dep>
+   </entry>
+  </interpolation>
   <center>
    <x-m> 0.0</x-m>
    <y-m> 0.0056</y-m>
@@ -56,14 +69,31 @@
  </animation>
 
  <animation>
-  <type>rotate</type>
+  <type>rotate</type> <!-- 2192 --> <!-- 17.5 graden -->
   <object-name>ftit_needle</object-name>
   <property>engines/engine[0]/egt_degf</property>
-  <factor>0.276923</factor>
+  <interpolation>
+   <entry>
+    <ind>0.0</ind>
+    <dep>0.0</dep>
+   </entry>
+   <entry>
+    <ind>1292</ind>
+    <dep>103.5</dep>
+   </entry>
+   <entry>
+    <ind>1832</ind>
+    <dep>257.5</dep>
+   </entry>
+   <entry>
+    <ind>2192</ind>
+    <dep>322.5</dep>
+   </entry>
+  </interpolation>
   <center>
    <x-m> 0.0</x-m>
-   <y-m> 0.011</y-m>
-   <z-m>-0.037</z-m>
+   <y-m> 0.0114</y-m>
+   <z-m>-0.0398</z-m>
   </center>
   <axis>
    <x>-1.0</x>
