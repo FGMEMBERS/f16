@@ -21,7 +21,7 @@
   <name>new_nozzle</name>
   <path>Aircraft/f16/Models/nozzle.xml</path>
   <offsets>
-   <x-m>4.62</x-m>
+   <x-m>4.617</x-m>
    <y-m>0.0</y-m>
    <z-m>0.0</z-m>
   </offsets>
