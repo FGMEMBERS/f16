@@ -55,6 +55,7 @@
   <object-name>afterburner</object-name>
   <object-name>turbine</object-name>
   <object-name>fan</object-name>
+  <object-name>fan_spinning</object-name>
   <object-name>internal_flame</object-name>
   <object-name>external_flame</object-name>
   <object-name>low_formation_light</object-name>
@@ -120,19 +121,12 @@
  <model>
   <name>strobe</name>
   <path>Aircraft/f16/Models/strobe.xml</path>
+  <offsets>
+   <x-m>5.3</x-m>
+   <y-m>0.0</y-m>
+   <z-m>3.2</z-m>
+  </offsets>
  </model>
-
- <animation>
-  <type>translate</type>
-  <object-name>strobe</object-name>
-  <offset-m>6.21</offset-m>
-  <axis>
-   <x>5.3</x>
-   <y>0.0</y>
-   <z>3.2</z>
-  </axis>
- </animation>
-
 
  <!-- Visible up to 10km (6 miles) -->
  <animation>
@@ -180,6 +174,48 @@
 
  <animation>
   <type>select</type>
+  <object-name>fan</object-name>
+  <condition>
+   <less-than>
+    <property>engines/engine[0]/n1</property>
+    <value>1</value>
+   </less-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>fan_spinning</object-name>
+  <condition>
+   <greater-than>
+    <property>engines/engine[0]/n1</property>
+    <value>1</value>
+   </greater-than>
+  </condition>
+ </animation>
+
+<!--
+ <animation>
+  <type>rotate</type>
+  <object-name>fan</object-name>
+  <object-name>fan_spinning</object-name>
+  <property>engines/engine[0]/n1</property>
+  <factor>27</factor>
+  <center>
+   <x-m>0.596828</x-m>
+   <y-m>0.00300605</y-m>
+   <z-m>0.0184392</z-m>
+  </center>
+  <axis>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+-->
+
+ <animation>
+  <type>select</type>
   <object-name>internal_flame</object-name>
   <condition>
    <equals>
@@ -209,7 +245,7 @@
   <axis>
    <x>1</x>
    <y>0</y>
-   <z>-0</z>
+   <z>0</z>
   </axis>
  </animation>
 
