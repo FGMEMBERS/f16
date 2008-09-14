@@ -185,7 +185,7 @@
  </instrumentation>
 
  <limits>
-  <max-gear-extension-speed>280</max-gear-extension-speed>
+  <max-gear-extension-speed>200</max-gear-extension-speed>
  </limits>
 
  <nasal>

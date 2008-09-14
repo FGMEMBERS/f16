@@ -161,6 +161,28 @@
   </offsets>
  </model>
 
+ <model>
+  <name>COMPASS</name>
+  <path>Aircraft/f16/Models/mag-compass.xml</path>
+  <offsets>
+   <x-m>-4.721</x-m>
+   <y-m>0.2660</y-m>
+   <z-m>0.404</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>FUEL</name>
+  <path>Aircraft/f16/Models/fuel.xml</path>
+  <offsets>
+   <x-m>-4.733</x-m>
+   <y-m>0.318</y-m>
+   <z-m>0.409</z-m>
+   <pitch-deg>-45</pitch-deg>
+  </offsets>
+ </model>
+
+
 <!--
  <model>
   <name>FQI</name>
