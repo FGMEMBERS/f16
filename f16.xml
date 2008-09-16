@@ -567,47 +567,46 @@
         </channel>
 
         <channel name="Leading Edge Flap">
-
-            <pure_gain name="Alpha Norm Gain">
-                <input>aero/alpha-rad</input>
-                <gain>1.90986</gain>
-                <output>fcs/alpha-norm</output>
-            </pure_gain>
+            <!-- lef-pos-norm	lef-pos-deg |     scheduled lef-pos-deg
+               - 0.0            -2          | AOA|vc-kts  0/gd  0/gu  250  600
+               - 0.074          0           |  0           -2      0   15   -2
+               - 0.63           15          |  15          15     25   25   25
+               - 1.0            25          |  
+              -->
+            <switch name="lef pos norm">
+                <default value="0"/>
+                <test logic="OR" value="1">
+                    velocities/vc-kts lt 250
+                </test>
+            </switch>
 
             <kinematic name="LEF Pos Deg">
-                <input>fcs/alpha-norm</input>
+                <input>fcs/lef-pos-norm</input>
                 <traverse>
                     <setting>
-                        <position>-2</position>
+                        <position>0</position>
                         <time>0.5</time>
                     </setting>
                     <setting>
-                        <position>15</position>
+                        <position>0.68</position>
                         <time>1</time>
                     </setting>
                     <setting>
-                        <position>25</position>
-                        <time>2</time>
+                        <position>1</position>
+                        <time>1.5</time>
                     </setting>
                 </traverse>
             </kinematic>
 
-            <!-- ===============================================================
-                 Component for Leading edge flap position, NORMALIZED
-                 Input: fcs/lef-pos-deg (above)
-                 Output: Component (output) value is normalized leading edge
-                         flap position, mapping the LEF domain of
-                         -2 to +25 degrees into a range of 0 to 1.
-            -->
-            <aerosurface_scale name="LEF Pos Norm">
-              <input>fcs/lef-pos-deg</input>
+            <aerosurface_scale name="lef pos deg">
+              <input>fcs/lef-pos-norm</input>
               <domain>
-                <min>-2</min>  <!-- LEF actual minimum position -->
-                <max>25</max>  <!-- LEF actual maximum position -->
+                <min>0</min>
+                <max>1</max>
               </domain>
               <range>
-                <min>0</min>  <!-- LEF normalized minimum position -->
-                <max>1</max>  <!-- LEF normalized maximum position -->
+                <min>-2</min>
+                <max>25</max>
               </range>
             </aerosurface_scale>
 

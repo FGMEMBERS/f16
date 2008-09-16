@@ -323,6 +323,41 @@
 
  <animation>
   <type>rotate</type>
+  <object-name>right_upper_lef</object-name>
+  <object-name>right_lower_lef</object-name>
+  <property>fdm/jsbsim/fcs/lef-pos-deg</property>
+  <factor>-1</factor>
+  <center>
+   <x-m>0.24</x-m>
+   <y-m>3.0</y-m>
+   <z-m>0.035</z-m>
+  </center>
+  <axis>
+   <x>0.550908</x>
+   <y>0.834232</y>
+   <z>-0.023610</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>left_upper_lef</object-name>
+  <object-name>left_lower_lef</object-name>
+  <property>fdm/jsbsim/fcs/lef-pos-deg</property>
+  <center>
+   <x-m>0.24</x-m>
+   <y-m>-3.0</y-m>
+   <z-m>0.035</z-m>
+  </center>
+  <axis>
+   <x>0.549345</x>
+   <y>-0.834983</y>
+   <z>-0.031988</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
   <object-name>rudder</object-name>
   <property>surface-positions/rudder-pos-norm</property>
   <factor>30</factor>
@@ -377,7 +412,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>front_wheel</object-name>
+  <object-name>front_tire</object-name>
   <object-name>front_lower_strut</object-name>
   <property>gear/gear[0]/steering-norm</property>
   <factor>-80</factor>
@@ -395,7 +430,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>front_wheel</object-name>
+  <object-name>front_tire</object-name>
   <object-name>front_lower_strut</object-name>
   <object-name>front_upper_strut</object-name>
   <object-name>front_aft_strut</object-name>
@@ -434,7 +469,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>front_wheel</object-name>
+  <object-name>front_tire</object-name>
   <object-name>front_lower_strut</object-name>
   <property>gear/gear[0]/position-norm</property>
   <factor>90</factor>
@@ -479,7 +514,7 @@
   <property>gear/gear[2]/position-norm</property>
   <factor>460</factor>
   <min-deg>0</min-deg>
-  <max-deg>85</max-deg>
+  <max-deg>95</max-deg>
   <center>
    <x-m>-0.755</x-m>
    <y-m>0.76</y-m>
@@ -499,7 +534,7 @@
   <property>gear/gear[1]/position-norm</property>
   <factor>460</factor>
   <min-deg>0</min-deg>
-  <max-deg>85</max-deg>
+  <max-deg>95</max-deg>
   <center>
    <x-m>-0.755</x-m>
    <y-m>-0.76</y-m>
@@ -514,10 +549,10 @@
 
  <animation>
   <type>translate</type>
-  <object-name>front_wheel</object-name>
+  <object-name>front_tire</object-name>
   <object-name>front_lower_strut</object-name>
   <property>gear/gear/compression-norm</property>
-  <factor>0.5</factor>
+  <factor>0.25</factor>
   <axis>
    <x>0</x>
    <y>0</y>
@@ -527,7 +562,119 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>left_main_wheel</object-name>
+  <object-name>left_main_tire</object-name>
+  <object-name>left_inner_main_strut</object-name>
+  <object-name>left_outer_lower_main_strut</object-name>
+  <object-name>left_outer_upper_main_strut</object-name>
+  <object-name>left_upper_main_strut</object-name>
+  <object-name>left_lower_main_strut</object-name>
+  <property>gear/gear[2]/compression-norm</property>
+  <factor>-20</factor>
+  <center>
+   <x-m>0.0</x-m>
+   <y-m>-0.41</y-m>
+   <z-m>-0.57</z-m>
+  </center>
+  <axis>
+   <x>0.943612</x>
+   <y>-0.262974</y>
+   <z>0.201098</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>right_main_tire</object-name>
+  <object-name>right_inner_main_strut</object-name>
+  <object-name>right_outer_lower_main_strut</object-name>
+  <object-name>right_outer_upper_main_strut</object-name>
+  <object-name>right_upper_main_strut</object-name>
+  <object-name>right_lower_main_strut</object-name>
+  <property>gear/gear[1]/compression-norm</property>
+  <factor>20</factor>
+  <center>
+   <x-m>0.0</x-m>
+   <y-m>0.41</y-m>
+   <z-m>-0.57</z-m>
+  </center>
+  <axis>
+   <x>0.943612</x>
+   <y>0.262974</y>
+   <z>0.201098</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>left_outer_lower_main_strut</object-name>
+  <object-name>left_outer_upper_main_strut</object-name>
+  <property>gear/gear[2]/compression-norm</property>
+  <factor>10</factor>
+  <center>
+   <x-m>0.56</x-m>
+   <y-m>-1.10</y-m>
+   <z-m>-1.42</z-m>
+  </center>
+  <axis>
+   <x>0.995037</x>
+   <y>-0.099504</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>translate</type>
+  <object-name>left_outer_upper_main_strut</object-name>
+  <property>gear/gear[2]/compression-norm</property>
+  <factor>0.2</factor>
+  <center>
+   <x-m>0.59</x-m>
+   <y-m>-0.28</y-m>
+   <z-m>-0.75</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>0.457</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>right_outer_lower_main_strut</object-name>
+  <object-name>right_outer_upper_main_strut</object-name>
+  <property>gear/gear[1]/compression-norm</property>
+  <factor>-10</factor>
+  <center>
+   <x-m>0.56</x-m>
+   <y-m>1.10</y-m>
+   <z-m>-1.42</z-m>
+  </center>
+  <axis>
+   <x>0.995037</x>
+   <y>0.099504</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+ <animation>
+  <type>translate</type>
+  <object-name>right_outer_upper_main_strut</object-name>
+  <property>gear/gear[1]/compression-norm</property>
+  <factor>0.2</factor>
+  <center>
+   <x-m>0.59</x-m>
+   <y-m>0.28</y-m>
+   <z-m>-0.75</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>-0.457</y>
+   <z>1.0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>left_main_tire</object-name>
   <object-name>left_main_strut</object-name>
   <object-name>left_upper_main_strut</object-name>
   <object-name>left_lower_main_strut</object-name>
@@ -542,6 +689,27 @@
   <axis>
    <x>0.0</x>
    <y>0.868243</y>
+   <z>-0.496139</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>right_main_tire</object-name>
+  <object-name>right_main_strut</object-name>
+  <object-name>right_upper_main_strut</object-name>
+  <object-name>right_lower_main_strut</object-name>
+  <property>gear/gear[1]/position-norm</property>
+  <factor>-95</factor>
+  <offset-deg>95</offset-deg>
+  <center>
+   <x-m>0.64</x-m>
+   <y-m>0.44</y-m>
+   <z-m>-0.66</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>-0.868243</y>
    <z>-0.496139</z>
   </axis>
  </animation>
@@ -567,25 +735,64 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>left_upper_main_strut</object-name>
-  <property>gear/gear[2]/position-norm</property>
-  <factor>55</factor>
-  <offset-deg>-55</offset-deg>
+  <object-name>right_upper_main_strut</object-name>
+  <object-name>right_lower_main_strut</object-name>
+  <property>gear/gear[1]/position-norm</property>
+  <factor>-55</factor>
+  <offset-deg>55</offset-deg>
   <center>
-   <x-m>0.07</x-m>
-   <y-m>-0.60</y-m>
-   <z-m>-1.04</z-m>
+   <x-m>0.62</x-m>
+   <y-m>0.92</y-m>
+   <z-m>-1.34</z-m>
   </center>
   <axis>
    <x>0.0</x>
-   <y>0.868243</y>
+   <y>-0.868243</y>
    <z>-0.496139</z>
   </axis>
  </animation>
 
  <animation>
   <type>rotate</type>
-  <object-name>left_main_wheel</object-name>
+  <object-name>left_upper_main_strut</object-name>
+  <property>gear/gear[2]/position-norm</property>
+  <factor>205</factor>
+  <offset-deg>-205</offset-deg>
+  <min-deg>-180</min-deg>
+  <center>
+   <x-m>0.005</x-m>
+   <y-m>-0.61</y-m>
+   <z-m>-1.055</z-m>
+  </center>
+  <axis>
+   <x>0.147442</x>
+   <y>0.884651</y>
+   <z>-0.442327</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>right_upper_main_strut</object-name>
+  <property>gear/gear[1]/position-norm</property>
+  <factor>205</factor>
+  <offset-deg>-205</offset-deg>
+  <min-deg>-180</min-deg>
+  <center>
+   <x-m>0.005</x-m>
+   <y-m>0.61</y-m>
+   <z-m>-1.055</z-m>
+  </center>
+  <axis>
+   <x>0.147442</x>
+   <y>-0.884651</y>
+   <z>-0.442327</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>left_main_tire</object-name>
   <property>gear/gear[2]/position-norm</property>
   <factor>-90</factor>
   <offset-deg>90</offset-deg>
@@ -603,68 +810,10 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>right_main_wheel</object-name>
-  <object-name>right_main_strut</object-name>
-  <object-name>right_upper_main_strut</object-name>
-  <object-name>right_lower_main_strut</object-name>
+  <object-name>right_main_tire</object-name>
   <property>gear/gear[1]/position-norm</property>
-  <factor>95</factor>
-  <offset-deg>-95</offset-deg>
-  <center>
-   <x-m>0.64</x-m>
-   <y-m>0.44</y-m>
-   <z-m>-0.66</z-m>
-  </center>
-  <axis>
-   <x>0.0</x>
-   <y>-0.868243</y>
-   <z>-0.496139</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>right_upper_main_strut</object-name>
-  <object-name>right_lower_main_strut</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <factor>55</factor>
-  <offset-deg>-55</offset-deg>
-  <center>
-   <x-m>0.62</x-m>
-   <y-m>0.92</y-m>
-   <z-m>-1.34</z-m>
-  </center>
-  <axis>
-   <x>0.0</x>
-   <y>-0.868243</y>
-   <z>-0.496139</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>right_upper_main_strut</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <factor>-55</factor>
-  <offset-deg>55</offset-deg>
-  <center>
-   <x-m>0.07</x-m>
-   <y-m>0.60</y-m>
-   <z-m>-1.04</z-m>
-  </center>
-  <axis>
-   <x>0.0</x>
-   <y>-0.868243</y>
-   <z>-0.496139</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>rotate</type>
-  <object-name>right_main_wheel</object-name>
-  <property>gear/gear[1]/position-norm</property>
-  <factor>90</factor>
-  <offset-deg>-90</offset-deg>
+  <factor>-90</factor>
+  <offset-deg>90</offset-deg>
   <center>
    <x-m>0.62</x-m>
    <y-m>1.12</y-m>
@@ -748,7 +897,7 @@
 <!--
  <animation>
   <type>select</type>
-  <object-name>front_wheel</object-name>
+  <object-name>front_tire</object-name>
   <object-name>front_lower_strut</object-name>
   <object-name>front_upper_strut</object-name>
   <object-name>front_aft_strut</object-name>
@@ -765,7 +914,7 @@
 
  <animation>
   <type>select</type>
-  <object-name>left_main_wheel</object-name>
+  <object-name>left_main_tire</object-name>
   <object-name>left_main_strut</object-name>
   <object-name>left_upper_main_strut</object-name>
   <object-name>left_lower_main_strut</object-name>
@@ -782,7 +931,7 @@
 
  <animation>
   <type>select</type>
-  <object-name>right_main_wheel</object-name>
+  <object-name>right_main_tire</object-name>
   <object-name>right_main_strut</object-name>
   <object-name>right_upper_main_strut</object-name>
   <object-name>right_lower_main_strut</object-name>

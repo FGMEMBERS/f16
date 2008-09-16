@@ -2,6 +2,14 @@
 
 <PropertyList>
 
+ <path>nozzle.ac</path>
+
+ <animation>
+  <type>select</type>
+  <object-name>nozzle</object-name>
+  <property>/tmp/nill</property>
+ </animation>
+
  <model>
   <name>sect1</name>
   <path>Aircraft/f16/Models/nozzle-section.xml</path>
