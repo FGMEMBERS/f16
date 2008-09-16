@@ -700,8 +700,8 @@
   <object-name>right_upper_main_strut</object-name>
   <object-name>right_lower_main_strut</object-name>
   <property>gear/gear[1]/position-norm</property>
-  <factor>-95</factor>
-  <offset-deg>95</offset-deg>
+  <factor>95</factor>
+  <offset-deg>-95</offset-deg>
   <center>
    <x-m>0.64</x-m>
    <y-m>0.44</y-m>
@@ -738,8 +738,8 @@
   <object-name>right_upper_main_strut</object-name>
   <object-name>right_lower_main_strut</object-name>
   <property>gear/gear[1]/position-norm</property>
-  <factor>-55</factor>
-  <offset-deg>55</offset-deg>
+  <factor>55</factor>
+  <offset-deg>-55</offset-deg>
   <center>
    <x-m>0.62</x-m>
    <y-m>0.92</y-m>
@@ -775,9 +775,9 @@
   <type>rotate</type>
   <object-name>right_upper_main_strut</object-name>
   <property>gear/gear[1]/position-norm</property>
-  <factor>205</factor>
-  <offset-deg>-205</offset-deg>
-  <min-deg>-180</min-deg>
+  <factor>-205</factor>
+  <offset-deg>205</offset-deg>
+  <max-deg>180</max-deg>
   <center>
    <x-m>0.005</x-m>
    <y-m>0.61</y-m>
@@ -812,8 +812,8 @@
   <type>rotate</type>
   <object-name>right_main_tire</object-name>
   <property>gear/gear[1]/position-norm</property>
-  <factor>-90</factor>
-  <offset-deg>90</offset-deg>
+  <factor>90</factor>
+  <offset-deg>-90</offset-deg>
   <center>
    <x-m>0.62</x-m>
    <y-m>1.12</y-m>
