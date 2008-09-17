@@ -568,27 +568,44 @@
 
         <channel name="Leading Edge Flap">
             <!-- lef-pos-norm	lef-pos-deg |     scheduled lef-pos-deg
-               - 0.0            -2          | AOA|vc-kts  0/gd  0/gu  250  600
+               - 0.0           -2          | AOA|vc-kts  0/gd  0/gu  250  600
                - 0.074          0           |  0           -2      0   15   -2
                - 0.63           15          |  15          15     25   25   25
                - 1.0            25          |  
               -->
             <switch name="lef pos norm">
-                <default value="0"/>
-                <test logic="OR" value="1">
-                    velocities/vc-kts lt 250
+                <default value="0.074"/>
+                <test logic="AND" value="0">
+                    fcs/gear-wow eq 1
+                    fcs/gear-extended eq 1
+                </test>
+                <test logic="AND" value="0.63">
+                    fcs/gear-wow eq 0
+                    fcs/gear-extended eq 1
+                </test>
+                <test logic="AND" value="1">
+                    fcs/gear-extended eq 0
+                    aero/alpha-rad gt 0.2618
+                </test>
+                <test logic="AND" value="0">
+                    fcs/gear-extended eq 0
+                    velocities/vc-kts gt 600
                 </test>
             </switch>
 
-            <kinematic name="LEF Pos Deg">
+            <kinematic name="LEF Controll">
                 <input>fcs/lef-pos-norm</input>
                 <traverse>
                     <setting>
                         <position>0</position>
+                        <time>0.1</time>
+                    </setting>
+                    <setting>
+                        <position>0.074</position>
                         <time>0.5</time>
                     </setting>
                     <setting>
-                        <position>0.68</position>
+                        <position>0.63</position>
                         <time>1</time>
                     </setting>
                     <setting>
@@ -599,7 +616,7 @@
             </kinematic>
 
             <aerosurface_scale name="lef pos deg">
-              <input>fcs/lef-pos-norm</input>
+              <input>fcs/lef-controll</input>
               <domain>
                 <min>0</min>
                 <max>1</max>
@@ -736,6 +753,21 @@
         </channel>
 
         <channel name="Landing Gear">
+
+            <switch name="gear-wow">
+                <default value="0"/>
+                <test logic="AND" value="1">
+                    gear/unit[1]/WOW eq 1
+                    gear/unit[2]/WOW eq 1
+                </test>
+            </switch>
+
+             <switch name="gear-extended">
+                <default value="0"/>
+                <test logic="AND" value="1">
+                    gear/gear-pos-norm gt 0
+                </test>
+            </switch>
 
             <kinematic name="Gear Control">
                 <input>gear/gear-cmd-norm</input>
