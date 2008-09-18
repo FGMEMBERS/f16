@@ -289,8 +289,7 @@
   <type>rotate</type>
   <object-name>right_upper_flap</object-name>
   <object-name>right_lower_flap</object-name>
-  <property>surface-positions/flap-pos-norm</property>
-  <factor>35</factor>
+  <property>fdm/jsbsim/fcs/tef-pos-deg</property>
   <center>
    <x-m>1.54</x-m>
    <y-m>2.35</y-m>
@@ -307,8 +306,8 @@
   <type>rotate</type>
   <object-name>left_upper_flap</object-name>
   <object-name>left_lower_flap</object-name>
-  <property>surface-positions/flap-pos-norm</property>
-  <factor>-25</factor>
+  <property>fdm/jsbsim/fcs/tef-pos-deg</property>
+  <factor>-1</factor>
   <center>
    <x-m>1.54</x-m>
    <y-m>-2.35</y-m>
