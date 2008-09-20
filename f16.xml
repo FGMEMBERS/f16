@@ -282,8 +282,93 @@
     <flight_control name="F-16 FC">
 
       <!-- Declare some interface properties -->
-
         <property>fcs/alpha-norm</property>
+
+        <channel name="Roll">
+
+            <!-- Calculate the normalized roll-rate -->
+            <pure_gain name="roll rate norm">
+                <input>velocities/p-aero-rad_sec</input>
+                <gain>0.31821</gain>
+            </pure_gain>
+
+            <!--
+              - Calculate the difference between actual roll-rate and
+              - commanded roll-rate.
+              -->
+            <summer name="roll trim error">
+                <input>fcs/aileron-cmd-norm</input>
+                <input>-fcs/roll-rate-norm</input>
+            </summer>
+
+            <!--
+              - Make sure the PID controller is only active when the aircraft
+              - has gained some speed. This will prevent bad behaviour when the
+              - aircraft has been parked for a while.
+              -->
+            <switch name="aileron pid trigger">
+                <default value="1"/>
+                <test value="0">
+                    velocities/vc-kts lt 20.0
+                </test>
+            </switch>
+
+            <pid name="roll rate pid">
+              <trigger>fcs/aileron-pid-trigger</trigger>
+              <input>fcs/roll-trim-error</input>
+              <kp> 3.00000 </kp>
+              <ki> 0.00050 </ki>
+              <kd> -0.00125 </kd>
+              <clipto>
+                <min>-1</min>
+                <max>1</max>
+              </clipto>
+            </pid>
+
+            <summer name="roll rate command">
+                <input>fcs/roll-rate-pid</input>
+                <input>fcs/aileron-cmd-norm</input>
+                <input>fcs/roll-trim-cmd-norm</input>
+                <clipto>
+                    <min>-1</min>
+                    <max>1</max>
+                </clipto>
+            </summer>
+
+            <kinematic name="aileron position">
+                <input>fcs/roll-rate-command</input>
+                <traverse>
+                    <setting>
+                        <position>-1</position>
+                        <time>0.3</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>0.3</time>
+                    </setting>
+                </traverse>
+                <output>fcs/left-aileron-pos-norm</output>
+            </kinematic>
+
+            <aerosurface_scale name="Left Aileron Control">
+                <input>fcs/left-aileron-pos-norm</input>
+                <range>
+                    <min>-0.375</min>
+                    <max>0.375</max>
+                </range>
+                <output>fcs/left-aileron-pos-rad</output>
+            </aerosurface_scale>
+
+            <aerosurface_scale name="Right Aileron Control">
+                <input>-fcs/left-aileron-pos-norm</input>
+                <range>
+                    <min>-0.375</min>
+                    <max>0.375</max>
+                </range>
+                <output>fcs/right-aileron-pos-rad</output>
+            </aerosurface_scale>
+
+        </channel>
 
         <channel name="Pitch">
             <!--
@@ -410,11 +495,25 @@
                 <min>-1</min>
                 <max>1</max>
               </clipto>
-              <output>fcs/elevator-pos-norm</output>
             </summer>
 
-            <aerosurface_scale name="Elevator Control">
-              <input>fcs/pitch-scheduler</input>
+            <kinematic name="elevator position">
+                <input>fcs/pitch-scheduler</input>
+                <traverse>
+                    <setting>
+                        <position>-1</position>
+                        <time>0.3</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>0.3</time>
+                    </setting>
+                </traverse>
+                <output>fcs/elevator-pos-norm</output>
+            </kinematic>
+
+            <aerosurface_scale name="elevator position">
+              <input>fcs/elevator-pos-norm</input>
               <range>
                 <min>-0.436</min>
                 <max>0.436</max>
@@ -422,77 +521,23 @@
               <output>fcs/elevator-pos-rad</output>
             </aerosurface_scale>
 
-        </channel>
-
-        <channel name="Roll">
-
-            <!-- Calculate the normalized roll-rate -->
-            <pure_gain name="roll rate norm">
-                <input>velocities/p-aero-rad_sec</input>
-                <gain>0.31821</gain>
-            </pure_gain>
-
-            <!--
-              - Calculate the difference between actual roll-rate and
-              - commanded roll-rate.
-              -->
-            <summer name="roll trim error">
-                <input>fcs/aileron-cmd-norm</input>
-                <input>-fcs/roll-rate-norm</input>
-            </summer>
-
-            <!--
-              - Make sure the PID controller is only active when the aircraft
-              - has gained some speed. This will prevent bad behaviour when the
-              - aircraft has been parked for a while.
-              -->
-            <switch name="aileron pid trigger">
-                <default value="1"/>
-                <test value="0">
-                    velocities/vc-kts lt 20.0
-                </test>
-            </switch>
-
-            <pid name="roll rate pid">
-              <trigger>fcs/aileron-pid-trigger</trigger>
-              <input>fcs/roll-trim-error</input>
-              <kp> 3.00000 </kp>
-              <ki> 0.00050 </ki>
-              <kd> -0.00125 </kd>
+            <summer name="dht left pos rad">
+              <input>-fcs/elevator-pos-rad</input>
+              <input>-fcs/left-aileron-pos-rad</input>
               <clipto>
-                <min>-1</min>
-                <max>1</max>
+                <min>-0.436</min>
+                <max>0.436</max>
               </clipto>
-            </pid>
+             </summer>
 
-            <summer name="roll rate command">
-                <input>fcs/roll-rate-pid</input>
-                <input>fcs/aileron-cmd-norm</input>
-                <input>fcs/roll-trim-cmd-norm</input>
-                <clipto>
-                    <min>-1</min>
-                    <max>1</max>
-                </clipto>
-                <output>fcs/left-aileron-pos-norm</output>
-            </summer>
-
-            <aerosurface_scale name="Left Aileron Control">
-                <input>fcs/roll-rate-command</input>
-                <range>
-                    <min>-0.375</min>
-                    <max>0.375</max>
-                </range>
-                <output>fcs/left-aileron-pos-rad</output>
-            </aerosurface_scale>
-
-            <aerosurface_scale name="Right Aileron Control">
-                <input>-fcs/roll-rate-command</input>
-                <range>
-                    <min>-0.375</min>
-                    <max>0.375</max>
-                </range>
-                <output>fcs/right-aileron-pos-rad</output>
-            </aerosurface_scale>
+             <summer name="dht right pos rad">
+              <input>fcs/elevator-pos-rad</input>
+              <input>fcs/right-aileron-pos-rad</input>
+              <clipto>
+                <min>-0.436</min>
+                <max>0.436</max>
+              </clipto>
+             </summer>
 
         </channel>
 
@@ -552,11 +597,25 @@
                 <min>-1</min>
                 <max>1</max>
               </clipto>
-              <output>fcs/rudder-pos-norm</output>
             </summer>
 
-            <aerosurface_scale name="Rudder Control">
+            <kinematic name="rudder position">
                 <input>fcs/yaw-scheduler</input>
+                <traverse>
+                    <setting>
+                        <position>-1</position>
+                        <time>0.4</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>0.4</time>
+                    </setting>
+                </traverse>
+                <output>fcs/rudder-pos-norm</output>
+            </kinematic>
+
+            <aerosurface_scale name="Rudder Control">
+                <input>fcs/rudder-pos-norm</input>
                 <range>
                     <min>-0.524</min>
                     <max>0.524</max>
@@ -598,10 +657,6 @@
                     <setting>
                         <position>-1.0</position>
                         <time>3.0</time>
-                    </setting>
-                    <setting>
-                        <position>0.0</position>
-                        <time>0</time>
                     </setting>
                     <setting>
                         <position>1.0</position>

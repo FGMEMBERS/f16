@@ -376,8 +376,8 @@
   <type>rotate</type>
   <object-name>right_upper_horizontal_tail</object-name>
   <object-name>right_lower_horizontal_tail</object-name>
-  <property>surface-positions/elevator-pos-norm</property>
-  <factor>25</factor>
+  <property>fdm/jsbsim/fcs/dht-right-pos-rad</property>
+  <factor>57.3</factor>
   <center>
    <x-m>4.36</x-m>
    <y-m>1.965</y-m>
@@ -394,9 +394,8 @@
   <type>rotate</type>
   <object-name>left_upper_horizontal_tail</object-name>
   <object-name>left_lower_horizontal_tail</object-name>
-  <property>surface-positions/elevator-pos-norm</property>
-  <factor>-25</factor>
-  <factor>25</factor>
+  <property>fdm/jsbsim/fcs/dht-left-pos-rad</property>
+  <factor>57.3</factor>
   <center>
    <x-m>4.36</x-m>
    <y-m>-1.965</y-m>
