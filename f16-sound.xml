@@ -8,7 +8,7 @@
    <name>canopy</name>
    <path>Aircraft/f16/Sounds/canopy.wav</path>
    <mode>in-transit</mode>
-   <property>sim/model/f16/canopy/position-norm</property>
+   <property>fdm/jsbsim/fcs/canopy-pos-norm</property>
    <position>
     <x>-1.0</x>
     <y>0.0</y>
@@ -30,7 +30,7 @@
    <mode>single</mode>
    <condition>
     <equals>
-     <property>sim/model/f16/canopy/position-norm</property>
+     <property>fdm/jsbsim/fcs/canopy-pos-norm</property>
      <value>0.0</value>
     </equals>
    </condition>

@@ -15,4 +15,17 @@
   </axis>
  </animation>
 
+ <animation>
+  <type>translate</type>
+  <object-name>scan_marker</object-name>
+  <property>fdm/jsbsim/fcs/scan-marker-pos-norm</property>
+  <offset-m>-0.045</offset-m>
+  <factor>0.09</factor>
+  <axis>
+   <x>0</x>
+   <y>1</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
 </PropertyList>
