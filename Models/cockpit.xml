@@ -15,6 +15,13 @@
  </model>
 
  <animation>
+  <type>range</type>
+  <object-name>pilot</object-name>
+  <min-m>0</min-m>
+  <max-m>5000</max-m>
+ </animation>
+
+ <animation>
   <type>select</type>
   <object-name>Pilot</object-name>
   <condition>
@@ -35,6 +42,7 @@
   </offsets>
  </model>
 
+
  <model>
   <name>Throttle</name>
   <path>Aircraft/f16/Models/throttle.xml</path>
@@ -54,6 +62,15 @@
    <z-m>0.26</z-m>
   </offsets>
  </model>
+
+ <animation>
+  <type>range</type>
+  <object-name>RudderPedals</object-name>
+  <object-name>Throttle</object-name>
+  <object-name>EJECT</object-name>
+  <min-m>0</min-m>
+  <max-m>100</max-m>
+ </animation>
 
  <model>
   <name>FUELFLOW</name>
@@ -181,20 +198,6 @@
    <pitch-deg>-45</pitch-deg>
   </offsets>
  </model>
-
-
-<!--
- <model>
-  <name>FQI</name>
-  <path>Aircraft/f16/Models/fuel.xml</path>
-  <offsets>
-   <x-m>-4.722</x-m>
-   <y-m>0.318</y-m>
-   <z-m>0.396</z-m>
-   <pitch-deg>-45</pitch-deg>
-  </offsets>
- </model>
--->
 
  <model>
   <name>LEFT</name>
@@ -335,6 +338,34 @@
     <value>false</value>
    </equals>
   </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <condition>
+   <equals>
+    <property>sim/current-view/internal</property>
+    <value>true</value>
+   </equals>
+  </condition>
+  <object-name>FUELFLOW</object-name>
+  <object-name>AI</object-name>
+  <object-name>DED</object-name>
+  <object-name>ICP</object-name>
+  <object-name>EYEBROW_RIGHT</object-name>
+  <object-name>EYEBROW_LEFT</object-name>
+  <object-name>THREAT</object-name>
+  <object-name>IFF</object-name>
+  <object-name>MISC</object-name>
+  <object-name>ENGINE</object-name>
+  <object-name>COMPASS</object-name>
+  <object-name>FUEL</object-name>
+  <object-name>LEFT</object-name>
+  <object-name>MFD1</object-name>
+  <object-name>MFD2</object-name>
+  <object-name>ASI</object-name>
+  <object-name>altitude</object-name>
+  <object-name>adi</object-name>
  </animation>
 
 </PropertyList>
