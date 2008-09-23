@@ -8,6 +8,7 @@
   <type>rotate</type>
   <object-name>us1</object-name>
   <property>engines/engine/nozzle-pos-norm</property>
+  <offset-deg>-5</offset-deg>
   <factor>10</factor>
   <center>
    <x-m>0.0</x-m>
@@ -25,6 +26,7 @@
   <type>rotate</type>
   <object-name>ls1</object-name>
   <property>engines/engine/nozzle-pos-norm</property>
+  <offset-deg>-5</offset-deg>
   <factor>10</factor>
   <center>
    <x-m>0.0</x-m>
@@ -42,6 +44,7 @@
   <type>rotate</type>
   <object-name>ls2</object-name>
   <property>engines/engine/nozzle-pos-norm</property>
+  <offset-deg>-5</offset-deg>
   <factor>10</factor>
   <center>
    <x-m>0.0</x-m>
