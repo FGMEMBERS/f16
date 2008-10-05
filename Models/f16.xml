@@ -1001,6 +1001,7 @@
   </condition>
  </animation>
 
+<!--
  <animation>
   <type>select</type>
   <condition>
@@ -1066,4 +1067,5 @@
   <object-name>fan_spinning</object-name>
   <object-name>air_intake</object-name>
  </animation>
+-->
 </PropertyList>
