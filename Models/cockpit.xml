@@ -92,7 +92,6 @@
   </offsets>
  </model>
 
-<!--
  <model>
   <name>DED</name>
   <path>Aircraft/f16/Models/ded.xml</path>
@@ -103,7 +102,6 @@
    <pitch-deg>-14</pitch-deg>
   </offsets>
  </model>
--->
 
  <model>
   <name>ICP</name>
