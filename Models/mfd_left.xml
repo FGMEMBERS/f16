@@ -4,6 +4,28 @@
 
  <path>mfd.ac</path>
 
+<!--
+ <panel>
+  <name>Radar3D</name>
+  <path>Aircraft/f16/Models/radar-display.xml</path>
+  <bottom-left>
+   <x-m> 0.00</x-m>
+   <y-m>-0.044</y-m>
+   <z-m>-0.047</z-m>
+  </bottom-left>
+  <bottom-right>
+   <x-m> 0.00</x-m>
+   <y-m> 0.044</y-m>
+   <z-m>-0.047</z-m>
+  </bottom-right>
+  <top-left>
+   <x-m> 0.00</x-m>
+   <y-m>-0.044</y-m>
+   <z-m> 0.047</z-m>
+  </top-left>
+ </panel>
+-->
+
  <animation>
   <type>rotate</type>
   <object-name>horizon</object-name>
