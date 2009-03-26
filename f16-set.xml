@@ -55,6 +55,12 @@
      <blue type="float">0.0</blue>
     </color>
    </palette>
+   <clipping>
+    <left type="double">-85</left>
+    <right type="double">85</right>
+    <top type="double">115</top>
+    <bottom type="double">-95</bottom>
+   </clipping>
   </hud>
 
   <instrumentation>
