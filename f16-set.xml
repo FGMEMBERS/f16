@@ -98,6 +98,14 @@
     <name>Ctrl-F</name>
     <desc>trigger flare release</desc>
    </key>
+   <key>
+   <name>e (lower case 'e')</name>
+   <desc>Fire the CANNON!</desc>
+   </key>
+   <key>
+   <name>Ctrl-h</name>
+   <desc>Toggle arrester hook</desc>
+   </key>
   </help>
  </sim>
 
@@ -135,6 +143,23 @@
       <property>/fdm/jsbsim/fcs/hook-engage</property>
      </binding>
     </key>
+	
+		<key n="101">
+		<name>e</name>
+			<desc>Gun Trigger</desc> 
+			<binding>
+				<command>property-assign</command>
+				<property>controls/armament/trigger</property>
+				<value>true</value>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-assign</command>
+					<property>controls/armament/trigger</property>
+					<value>false</value>
+				</binding> 
+			</mod-up>
+	</key>
    </keyboard>
   </input>
 
