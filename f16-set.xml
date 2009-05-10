@@ -68,11 +68,14 @@
   </instrumentation>
 
   <model>
+   <path archive="y">Aircraft/f16/Models/f16.xml</path>
    <f16>
     <klu type="bool">false</klu>
     <us type="bool">true</us>
    </f16>
-   <path>Aircraft/f16/Models/f16.xml</path>
+   <livery>
+    <file type="string"/>
+   </livery>
   </model>
 
   <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
@@ -88,6 +91,22 @@
    </config>
   </view>
 
+  <menubar>
+   <default>
+    <menu n="100">
+     <label>F-16</label>
+     <enabled type="bool">true</enabled>
+     <item>
+      <label>Select Livery</label>
+      <binding>
+       <command>nasal</command>
+       <script>aircraft.livery.dialog.toggle()</script>
+      </binding>
+     </item>
+    </menu>
+   </default>
+  </menubar>
+
   <help>
    <title>General Dynamics F-16 Block 40</title>
    <key>
@@ -100,11 +119,11 @@
    </key>
    <key>
    <name>e (lower case 'e')</name>
-   <desc>Fire the CANNON!</desc>
+   <desc>fire the cannon</desc>
    </key>
    <key>
    <name>Ctrl-h</name>
-   <desc>Toggle arrester hook</desc>
+   <desc>toggle arrester hook</desc>
    </key>
   </help>
  </sim>
@@ -143,23 +162,22 @@
       <property>/fdm/jsbsim/fcs/hook-engage</property>
      </binding>
     </key>
-	
-		<key n="101">
-		<name>e</name>
-			<desc>Gun Trigger</desc> 
-			<binding>
-				<command>property-assign</command>
-				<property>controls/armament/trigger</property>
-				<value>true</value>
-			</binding>
-			<mod-up>
-				<binding>
-					<command>property-assign</command>
-					<property>controls/armament/trigger</property>
-					<value>false</value>
-				</binding> 
-			</mod-up>
-	</key>
+    <key n="101">
+     <name>e</name>
+     <desc>Gun Trigger</desc> 
+     <binding>
+      <command>property-assign</command>
+      <property>controls/armament/trigger</property>
+      <value>true</value>
+     </binding>
+     <mod-up>
+      <binding>
+       <command>property-assign</command>
+       <property>controls/armament/trigger</property>
+       <value>false</value>
+      </binding> 
+     </mod-up>
+    </key>
    </keyboard>
   </input>
 
@@ -229,7 +247,8 @@
    <file>Aircraft/Generic/aar.nas</file>
   </aar>
   <f16>
-   <file>Aircraft/f16/f16.nas</file>
+   <file>Aircraft/f16/Nasal/f16.nas</file>
+   <file>Aircraft/f16/Nasal/liveries.nas</file>
   </f16>
  </nasal>
 

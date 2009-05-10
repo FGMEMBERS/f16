@@ -3,19 +3,28 @@
 <PropertyList>
 
  <model>
-  <name>Cockpit</name>
-  <path>Aircraft/f16/Models/cockpit.xml</path>
- </model>
-
- <model>
   <name>Aircraft Body</name>
   <path>Aircraft/f16/Models/f16.ac</path>
  </model>
+
+ <nasal>
+  <load>
+   var livery_update = aircraft.livery_update.new("Aircraft/f16/Models/Liveries");
+  </load>
+  <unload>
+   livery_update.stop();
+  </unload>
+ </nasal>
 
  <offsets>
   <z-m>0.15</z-m>
   <pitch-deg>0.3</pitch-deg>
  </offsets>
+
+ <model>
+  <name>Cockpit</name>
+  <path>Aircraft/f16/Models/cockpit.xml</path>
+ </model>
 
  <model>
   <name>new_nozzle</name>
@@ -999,6 +1008,49 @@
   <condition>
     <property>sim/model/f16/klu</property>
   </condition>
+ </animation>
+
+ <animation>
+  <type>material</type>
+  <object-name>left_upper_horizontal_tail</object-name>
+  <object-name>right_upper_horizontal_tail</object-name>
+  <object-name>left_lower_horizontal_tail</object-name>
+  <object-name>right_lower_horizontal_tail</object-name>
+  <object-name>left_upper_aileron</object-name>
+  <object-name>right_upper_aileron</object-name>
+  <object-name>left_lower_aileron</object-name>
+  <object-name>right_lower_aileron</object-name>
+  <object-name>left_upper_flap</object-name>
+  <object-name>right_upper_flap</object-name>
+  <object-name>left_lower_flap</object-name>
+  <object-name>right_lower_flap</object-name>
+  <object-name>left_upper_speedbrake</object-name>
+  <object-name>right_upper_speedbrake</object-name>
+  <object-name>left_lower_speedbrake</object-name>
+  <object-name>right_lower_speedbrake</object-name>
+  <object-name>tail</object-name>
+  <object-name>ventral_fins</object-name>
+  <object-name>external_front_gear_door</object-name>
+  <object-name>external_left_main_door</object-name>
+  <object-name>external_right_main_door</object-name>
+  <object-name>ventral_fins</object-name>
+  <object-name>LWStation1</object-name>
+  <object-name>LWStation2</object-name>
+  <object-name>RWStation1</object-name>
+  <object-name>RWStation1</object-name>
+  <object-name>rudder</object-name>
+  <object-name>fuselage_top</object-name>
+  <object-name>fuselage_bottom</object-name>
+
+  <object-name>us_markings</object-name>
+  <object-name>rect</object-name>
+  <object-name>klu_markings</object-name>
+  <object-name>klu_tailroot</object-name>
+  <object-name>us_tailroot</object-name>
+
+  <property-base>sim/model/livery</property-base>
+  <texture-prop>texture</texture-prop>
+  <texture>f16.rgb</texture>
  </animation>
 
 <!--

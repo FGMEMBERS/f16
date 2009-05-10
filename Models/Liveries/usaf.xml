@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <sim>
+  <model>
+   <f16>
+    <klu type="bool">false</klu>
+    <us type="bool">true</us>
+   </f16>
+   <livery>
+    <name type="string">US Airforce</name>
+    <texture>f16.rgb</texture>
+   </livery>
+   <livery-logo>
+    <texture>f16trans.rgb</texture>
+   </livery-logo>
+  </model>
+ </sim>
+</PropertyList>
