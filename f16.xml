@@ -286,6 +286,7 @@
         <property>fcs/hook-engage</property>
         <property>fcs/canopy-engage</property>
         <property>fcs/scan-marker-pos-norm</property>
+        <property>fcs/fbw-override</property>
 
         <channel name="Roll">
 
@@ -337,9 +338,20 @@
                     <max>1</max>
                 </clipto>
             </summer>
+            
+            <!--
+              - FBW override swich
+              -->
+            <switch name="roll rate command switch">
+                <default value="fcs/roll-rate-command"/>
+                <test value="fcs/aileron-cmd-norm">
+                    fcs/fbw-override == 1
+                </test>
+            </switch>
+
 
             <kinematic name="aileron position">
-                <input>fcs/roll-rate-command</input>
+                <input>fcs/roll-rate-command-switch</input>
                 <traverse>
                     <setting>
                         <position>-1</position>
@@ -425,9 +437,9 @@
                     <independentVar>aero/alpha-rad</independentVar>
                     <tableData>
                     -0.5236     0.0
-                    -0.5	0.11
+                    -0.5	  0.11
                      0.0        1.0
-                     0.5	0.11
+                     0.5	  0.11
                      0.5236     0.0
                     </tableData>
                 </table>
@@ -499,9 +511,19 @@
                 <max>1</max>
               </clipto>
             </summer>
+            
+            <!--
+              - FBW override swich
+              -->
+             <switch name="pitch scheduler switch">
+                <default value="fcs/pitch-scheduler"/>
+                <test value="fcs/elevator-cmd-limiter">
+                    fcs/fbw-override == 1
+                </test>
+            </switch>
 
             <kinematic name="elevator position">
-                <input>fcs/pitch-scheduler</input>
+                <input>fcs/pitch-scheduler-switch</input>
                 <traverse>
                     <setting>
                         <position>-1</position>
@@ -1878,3 +1900,4 @@
   </output>
 -->
 </fdm_config>
+

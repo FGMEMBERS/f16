@@ -125,6 +125,10 @@
    <name>Ctrl-h</name>
    <desc>toggle arrester hook</desc>
    </key>
+   <key>
+   <name>Delete</name>
+   <desc>Toggle FBW override</desc>
+   </key>
   </help>
  </sim>
 
@@ -177,6 +181,14 @@
        <value>false</value>
       </binding> 
      </mod-up>
+    </key>
+    <key n="127">
+     <name>Delete</name>
+     <desc>FBW override</desc>
+     <binding>
+      <command>property-toggle</command>
+      <property>/fdm/jsbsim/fcs/fbw-override</property>
+     </binding>
     </key>
    </keyboard>
   </input>
