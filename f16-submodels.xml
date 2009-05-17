@@ -18,7 +18,8 @@
     <buoyancy>8</buoyancy>
     <eda>1.0</eda>
   </submodel>
-<submodel>
+
+  <submodel>
     <name>gun-pod</name>
     <model>Aircraft/f16/Models/guns/tracer.xml</model>
     <trigger>controls/armament/trigger</trigger>

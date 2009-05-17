@@ -4,7 +4,7 @@
 
 	<submodel>
 		<name>bullet splash</name>
-		<model>Aircraft/DavePack/Stores/guns/splash.xml</model>
+		<model>Aircraft/f16/Models/guns/splash.xml</model>
 		<speed>0</speed>
 		<repeat>false</repeat>
 		<delay>0</delay>

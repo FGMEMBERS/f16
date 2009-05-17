@@ -249,7 +249,18 @@
     <z>0.195</z>
    </position>
   </stall>
- 
+
+  <cannon>
+   <name>cannon</name>
+   <path>Sounds/gatling.wav</path>
+   <property>controls/armament/trigger</property>
+   <mode>looped</mode>
+   <position>
+    <x>-1.0</x>
+    <y>-0.8</y>
+    <z>0.195</z>
+   </position>
+  </cannon>
 </fx>
  
 </PropertyList>

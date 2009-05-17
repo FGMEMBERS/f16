@@ -14,10 +14,10 @@
    <splash-texture>Aircraft/f16/f16-splash.rgb</splash-texture>
   </startup>
   
-   <submodels>
-    <serviceable type="bool">1</serviceable>
-    <path>Aircraft/f16/f16-submodels.xml</path>
-   </submodels>
+  <submodels>
+   <serviceable type="bool">1</serviceable>
+   <path>Aircraft/f16/f16-submodels.xml</path>
+  </submodels>
   
   <sound>
    <path>Aircraft/f16/f16-sound.xml</path>
@@ -76,6 +76,12 @@
    <livery>
     <file type="string"/>
    </livery>
+   <pushback>
+    <kp type="double">100</kp>
+    <ki type="double">25</ki>
+    <kd type="double">0</kd>
+    <position-norm type="double">0</position-norm>
+   </pushback>
   </model>
 
   <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
@@ -101,6 +107,17 @@
       <binding>
        <command>nasal</command>
        <script>aircraft.livery.dialog.toggle()</script>
+      </binding>
+     </item>
+    </menu>
+    <menu n="5">
+     <item n="10">
+      <label>Pushback</label>
+      <enabled type="bool">true</enabled>
+      <name>pushback</name>
+      <binding>
+       <command>dialog-show</command>
+       <dialog-name>pushback</dialog-name>
       </binding>
      </item>
     </menu>
@@ -259,8 +276,8 @@
    <file>Aircraft/Generic/aar.nas</file>
   </aar>
   <f16>
-   <file>Aircraft/f16/Nasal/f16.nas</file>
    <file>Aircraft/f16/Nasal/liveries.nas</file>
+   <file>Aircraft/f16/Nasal/f16.nas</file>
   </f16>
  </nasal>
 
