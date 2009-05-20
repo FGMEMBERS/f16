@@ -4808,9 +4808,9 @@ kids 0
 OBJECT poly
 name "cylinder"
 loc -4.63647 0.660318 -0.00181422
-texture "f16trans.rgb"
-texrep 0.11 0.15
-texoff 0.88 0.33
+texture "f16trans_misc.rgb"
+texrep 0.4 0.66
+texoff 0.41 0.14
 numvert 10
 -0.0783935 0.203031 0.0917329
 -0.0901213 0.207953 0.0526837
@@ -4875,8 +4875,8 @@ kids 0
 OBJECT poly
 name "cylinder"
 loc -4.62069 0.660756 -0.00085292
-texrep 0.11 0.15
-texoff 0.88 0.33
+texrep 0.4 0.66
+texoff 0.41 0.14
 numvert 10
 -0.0860701 0.196696 0.0907716
 -0.0978222 0.201832 0.0516949

@@ -4,15 +4,17 @@
  <sim>
   <model>
    <f16>
-    <klu type="bool">false</klu>
-    <us type="bool">true</us>
+    <dragchute type="bool">false</dragchute>
+    <link16 type="bool">false</link16>
+    <wingtanks type="bool">false</wingtanks>
+    <sidewinders type="bool">false</sidewinders>
    </f16>
    <livery>
     <name type="string">RSAF Black Knights</name>
     <texture>Liveries/f16rsaf_bk.rgb</texture>
    </livery>
    <livery-logo>
-    <texture>Liveries/f16trans.rgb</texture>
+    <texture>Liveries/f16rsaf_bk_trans.rgb</texture>
    </livery-logo>
   </model>
  </sim>

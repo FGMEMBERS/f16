@@ -1,15 +1,13 @@
 AC3Db
-MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.502 0.502 0.502  shi 10  trans 0
-MATERIAL "ac3dmat0" rgb 0 0 0  amb 0 0 0  emis 0 0 0  spec 0.094 0.094 0.094  shi 50  trans 0
+MATERIAL "ac3dmat1" rgb 1 1 1  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.5 0.5 0.5  shi 10  trans 0
+MATERIAL "ac3dmat0" rgb 0 0 0  amb 0.2 0.2 0.2  emis 0 0 0  spec 0.094 0.094 0.094  shi 10  trans 0
 MATERIAL "ac3dmat1" rgb 0 0 0  amb 0 0 0  emis 0.522 1 0.227  spec 0 0 0  shi 0  trans 0.008
 OBJECT world
 kids 5
 OBJECT poly
 name "mfd_right_border"
 loc 0.00180805 8.55718e-05 -9.70289e-05
-texture "f16trans.rgb"
-texrep 0.331 0.33
-texoff 0 -0.33
+texture "f16trans_misc.rgb"
 numvert 24
 -0.000592298 0.0725 -0.0725
 -0.000592298 0.0725 0.0725
@@ -231,15 +229,15 @@ refs 3
 kids 0
 OBJECT poly
 name "horizon"
-loc 0.000428842 -0.00095478 -7.46418e-05
-texture "f16trans.rgb"
-texrep 0.11 0.0115
-texoff -0.12 -0.499
+loc 0.000428842 -8.59611e-07 -7.46418e-05
+texture "f16trans_misc.rgb"
+texrep 0.39 0.036
+texoff 0.41 -0.155
 numvert 4
-0 0.0035 -0.03
-0 0.0035 0.03
-0 -0.0035 0.03
-0 -0.0035 -0.03
+0 0.00254608 -0.03
+0 0.00254608 0.03
+0 -0.00254608 0.03
+0 -0.00254608 -0.03
 numsurf 2
 SURF 0x0
 mat 2
@@ -256,15 +254,15 @@ refs 3
 kids 0
 OBJECT poly
 name "scan_marker"
-loc 0.000627323 -0.0415771 0.0027676
-texture "f16trans.rgb"
-texrep 0.01 0.0069
-texoff -0.02 -0.506
+loc 0.000627323 -0.0415771 0.00286782
+texture "f16trans_misc.rgb"
+texrep 0.044 0.032
+texoff 0.77 -0.185
 numvert 4
-0 0.00170557 -0.00101738
-0 0.00170557 0.00101738
-0 -0.00170557 0.00101738
-0 -0.00170557 -0.00101738
+0 0.00165336 -0.000856567
+0 0.00165336 0.00110071
+0 -0.00175777 0.00110071
+0 -0.00175777 -0.000856567
 numsurf 2
 SURF 0x0
 mat 2

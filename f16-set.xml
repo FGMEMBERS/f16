@@ -70,8 +70,10 @@
   <model>
    <path archive="y">Aircraft/f16/Models/f16.xml</path>
    <f16>
-    <klu type="bool">false</klu>
-    <us type="bool">true</us>
+    <dragchute type="bool">false</dragchute>
+    <link16 type="bool">false</link16>
+    <wingtanks type="bool">true</wingtanks>
+    <sidewinders type="bool">true</sidewinders>
    </f16>
    <livery>
     <file type="string"/>

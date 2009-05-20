@@ -336,6 +336,8 @@
  <animation>
   <type>rotate</type>
   <object-name>rudder</object-name>
+  <object-name>vstab_band_left_aft</object-name>
+  <object-name>vstab_band_right_aft</object-name>
   <property>surface-positions/rudder-pos-norm</property>
   <factor>30</factor>
   <center>
@@ -984,28 +986,52 @@
   </condition>
  </animation>
 
- <!-- livery selection -->
+ <!-- layout selection -->
  <animation>
   <type>select</type>
-  <object-name>us_markings</object-name>
   <object-name>us_tailroot</object-name>
+  <condition>
+   <not>
+    <property>sim/model/f16/dragchute</property>
+   </not>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>klu_tailroot</object-name>
+  <condition>
+   <property>sim/model/f16/dragchute</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>LExtTank</object-name>
   <object-name>RExtTank</object-name>
   <condition>
-    <property>sim/model/f16/us</property>
+   <property>sim/model/f16/wingtanks</property>
   </condition>
  </animation>
 
  <animation>
   <type>select</type>
-  <object-name>klu_markings</object-name>
-  <object-name>klu_tailroot</object-name>
-  <object-name>link16</object-name>
+  <object-name>LeftSidewinder</object-name>
+  <object-name>RightSidewinder</object-name>
   <condition>
-    <property>sim/model/f16/klu</property>
+   <property>sim/model/f16/sidewinders</property>
   </condition>
  </animation>
 
+ <animation>
+  <type>select</type>
+  <object-name>link16</object-name>
+  <condition>
+   <property>sim/model/f16/link16</property>
+  </condition>
+ </animation>
+
+ <!-- livery selection -->
  <animation>
   <type>material</type>
   <object-name>left_upper_horizontal_tail</object-name>
@@ -1055,9 +1081,19 @@
 
  <animation>
   <type>material</type>
-  <object-name>us_markings</object-name>
-  <object-name>rect</object-name>
-  <object-name>klu_markings</object-name>
+  <object-name>winglogo_right_top</object-name>
+  <object-name>fuselage_logo_left</object-name>
+  <object-name>fuselage_logo_right</object-name>
+  <object-name>vstab_logo_right_top</object-name>
+  <object-name>vstab_logo_left_top</object-name>
+  <object-name>vstab_logo_right_bottom</object-name>
+  <object-name>vstab_logo_left_bottom</object-name>
+  <object-name>winglogo_left_top</object-name>
+  <object-name>winglogo_right_bottom</object-name>
+  <object-name>vstab_band_left_front</object-name>
+  <object-name>vstab_band_left_aft</object-name>
+  <object-name>vstab_band_righ_front</object-name>
+  <object-name>vstab_band_right_aft</object-name>
   <property-base>sim/model/livery-logo</property-base>
   <texture-prop>texture</texture-prop>
   <texture>f16trans.rgb</texture>
@@ -1123,9 +1159,7 @@
   <object-name>external_flame</object-name>
   <object-name>rudder</object-name>
   <object-name>right_lower_flap</object-name>
-  <object-name>us_markings</object-name>
   <object-name>rect</object-name>
-  <object-name>klu_markings</object-name>
   <object-name>klu_tailroot</object-name>
   <object-name>aft_pos_light2</object-name>
   <object-name>chute</object-name>
