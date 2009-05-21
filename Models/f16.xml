@@ -53,6 +53,17 @@
 <!-- Submodels -->
 
  <model>
+  <name>VentralTank</name>
+  <path>Aircraft/f16/Models/centre_fueltank.ac</path>
+  <offsets>
+   <x-m>0</x-m>
+   <y-m>0</y-m>
+   <z-m>-1.12</z-m>
+   <pitch-deg>-2</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
   <name>LExtTank</name>
   <path>Aircraft/f16/Models/fueltank.ac</path>
   <offsets>
@@ -1007,10 +1018,29 @@
 
  <animation>
   <type>select</type>
+  <object-name>LWStation1</object-name>
+  <object-name>LWStation2</object-name>
+  <object-name>RWStation1</object-name>
+  <object-name>RWStation2</object-name>
+  <condition>
+   <property>sim/model/f16/wingmounts</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>LExtTank</object-name>
   <object-name>RExtTank</object-name>
   <condition>
    <property>sim/model/f16/wingtanks</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>VentralTank</object-name>
+  <condition>
+   <property>sim/model/f16/ventraltank</property>
   </condition>
  </animation>
 
@@ -1074,6 +1104,7 @@
   <object-name>klu_tailroot</object-name>
   <object-name>us_tailroot</object-name>
   <object-name>fuel_tank</object-name>
+  <object-name>arrester_hook</object-name>
   <property-base>sim/model/livery</property-base>
   <texture-prop>texture</texture-prop>
   <texture>f16.rgb</texture>

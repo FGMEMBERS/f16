@@ -6,8 +6,10 @@
    <f16>
     <dragchute type="bool">false</dragchute>
     <link16 type="bool">false</link16>
+    <ventraltank type="bool">false</ventraltank>
     <wingtanks type="bool">true</wingtanks>
     <sidewinders type="bool">true</sidewinders>
+    <wingmounts type="bool">true</wingmounts>
    </f16>
    <livery>
     <name type="string">US Airforce</name>

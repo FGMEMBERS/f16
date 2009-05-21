@@ -7,7 +7,9 @@
     <dragchute type="bool">false</dragchute>
     <link16 type="bool">false</link16>
     <wingtanks type="bool">false</wingtanks>
+    <ventraltank type="bool">true</ventraltank>
     <sidewinders type="bool">false</sidewinders>
+    <wingmounts type="bool">false</wingmounts>
    </f16>
    <livery>
     <name type="string">RSAF Black Knights</name>

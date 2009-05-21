@@ -7,7 +7,9 @@
     <dragchute type="bool">true</dragchute>
     <link16 type="bool">true</link16>
     <wingtanks type="bool">false</wingtanks>
+    <ventraltank type="bool">false</ventraltank>
     <sidewinders type="bool">true</sidewinders>
+    <wingmounts type="bool">true</wingmounts>
    </f16>
    <livery>
     <name type="string">Royal Netherlands Airforce</name>

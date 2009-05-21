@@ -73,7 +73,9 @@
     <dragchute type="bool">false</dragchute>
     <link16 type="bool">false</link16>
     <wingtanks type="bool">true</wingtanks>
+    <ventraltank type="bool">false</ventraltank>
     <sidewinders type="bool">true</sidewinders>
+    <wingmounts type="bool">true</wingmounts>
    </f16>
    <livery>
     <file type="string"/>
