@@ -1055,7 +1055,7 @@
 
  <animation>
   <type>select</type>
-  <object-name>link16</object-name>
+  <object-name>link16_antennas</object-name>
   <condition>
    <property>sim/model/f16/link16</property>
   </condition>
