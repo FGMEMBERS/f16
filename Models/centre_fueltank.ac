@@ -3,6 +3,7 @@ MATERIAL "ac3dmat1" rgb 1 1 1  amb 1 1 1  emis 0 0 0  spec 0.835 0.835 0.835  sh
 OBJECT world
 kids 1
 OBJECT poly
+name "fuel_tank"
 loc 0.130988 -0.0394056 -0.000795722
 texture "f16.rgb"
 texrep 0.385 0.064
