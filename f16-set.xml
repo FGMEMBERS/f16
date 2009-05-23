@@ -130,38 +130,34 @@
   <help>
    <title>General Dynamics F-16 Block 40</title>
    <key>
-    <name>Ctrl-B</name>
+    <name>Ctrl-b</name>
     <desc>toggle speed brake</desc>
    </key>
    <key>
-    <name>Ctrl-F</name>
+    <name>Ctrl-f</name>
     <desc>trigger flare release</desc>
    </key>
    <key>
-   <name>e (lower case 'e')</name>
-   <desc>fire the cannon</desc>
+    <name>Ctrl-h</name>
+    <desc>toggle arrester hook</desc>
    </key>
    <key>
-   <name>Ctrl-h</name>
-   <desc>toggle arrester hook</desc>
+    <name>C</name>
+    <desc>Toggle canopy</desc>
    </key>
    <key>
-   <name>Delete</name>
-   <desc>Toggle FBW override</desc>
+    <name>e (lower case 'e')</name>
+    <desc>fire the cannon</desc>
+   </key>
+   <key>
+    <name>Delete</name>
+    <desc>Toggle FBW override</desc>
    </key>
   </help>
  </sim>
 
  <input>
    <keyboard>
-    <key n="3">
-     <name>Ctrl-C</name>
-     <desc>Toggle canopy</desc>
-     <binding>
-      <command>property-toggle</command>
-      <property>/fdm/jsbsim/fcs/canopy-engage</property>
-     </binding>
-    </key>
     <key n="6">
      <name>Ctrl-F</name>
      <desc>Trigger flare release</desc>
@@ -184,6 +180,14 @@
      <binding>
       <command>property-toggle</command>
       <property>/fdm/jsbsim/fcs/hook-engage</property>
+     </binding>
+    </key>
+    <key n="67">
+     <name>C</name>
+     <desc>Toggle canopy</desc>
+     <binding>
+      <command>property-toggle</command>
+      <property>/fdm/jsbsim/fcs/canopy-engage</property>
      </binding>
     </key>
     <key n="101">
