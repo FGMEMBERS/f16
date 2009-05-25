@@ -285,7 +285,6 @@
         <property>fcs/alpha-norm</property>
         <property>fcs/hook-engage</property>
         <property>fcs/canopy-engage</property>
-        <property>fcs/scan-marker-pos-norm</property>
         <property>fcs/fbw-override</property>
 
         <channel name="Roll">
@@ -867,35 +866,6 @@
                     </setting>
                 </traverse>
                 <output>fcs/canopy-pos-norm</output>
-            </kinematic>
-
-        </channel>
-
-        <channel name="Radar Scan Marker">
-
-            <switch name="scan-marker initiate">
-                <default value="fcs/scan-marker-initiate"/>
-                <test logic="AND" value="1">
-                    fcs/scan-marker-pos-norm eq 0 
-                </test>
-                <test logic="AND" value="0">
-                    fcs/scan-marker-pos-norm eq 1
-                </test>
-            </switch>
-
-            <kinematic name="MSM Control">
-                <input>fcs/scan-marker-initiate</input>
-                <traverse>
-                    <setting>
-                        <position>0</position>
-                        <time>2.5</time>
-                    </setting>
-                    <setting>
-                        <position>1</position>
-                        <time>2.5</time>
-                    </setting>
-                </traverse>
-                <output>fcs/scan-marker-pos-norm</output>
             </kinematic>
 
         </channel>

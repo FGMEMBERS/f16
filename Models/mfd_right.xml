@@ -8,6 +8,7 @@
   <type>select</type>
   <object-name>radar_screen</object-name>
   <object-name>scan_marker</object-name>
+  <object-name>radar-markers</object-name>
   <object-name>horizon</object-name>
   <condition>
    <equals>

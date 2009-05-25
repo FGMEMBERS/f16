@@ -84,11 +84,11 @@
 
  <model>
   <name>AI</name>
-  <path>Aircraft/f16/Models/stdby-adi.xml</path>
+  <path>Aircraft/Instruments-3d/standby-adi/stdby-adi.xml</path>
   <offsets>
-   <x-m>-4.799</x-m>
+   <x-m>-4.7968</x-m>
    <y-m>0.131</y-m>
-   <z-m>0.614</z-m>
+   <z-m>0.588</z-m>
   </offsets>
  </model>
 
@@ -141,18 +141,18 @@
   <path>Aircraft/f16/Models/threat.xml</path>
   <offsets>
    <x-m>-4.794</x-m>
-   <y-m>-0.195</y-m>
-   <z-m>0.615</z-m>
+   <y-m>-0.198</y-m>
+   <z-m>0.59</z-m>
   </offsets>
  </model>
 
  <model>
   <name>IFF</name>
-  <path>Aircraft/f16/Models/iff.xml</path>
+  <path>Aircraft/Instruments-3d/rwr/rwr.xml</path>
   <offsets>
-   <x-m>-4.794</x-m>
-   <y-m>-0.136</y-m>
-   <z-m>0.6140</z-m>
+   <x-m>-4.77</x-m>
+   <y-m>-0.1195</y-m>
+   <z-m>0.6040</z-m>
   </offsets>
  </model>
 
@@ -218,7 +218,29 @@
   <offsets>
    <x-m>-4.79</x-m>
    <y-m>-0.153</y-m>
-   <z-m>0.51</z-m>
+   <z-m>0.485</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>RADAR_SCREEN</name>
+  <path>Aircraft/Instruments-3d/radar2/radar-screen.xml</path>
+  <offsets>
+   <x-m>-4.795</x-m>
+   <y-m>-0.153</y-m>
+   <z-m>0.485</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <!-- Just a diamond displayed in the HUD above the nearest target -->
+  <name>HUD_ADDS</name>
+  <path>Aircraft/Instruments-3d/radar2/hud.xml</path>
+  <offsets>
+   <x-m>-4.7061</x-m>
+   <y-m>0</y-m>
+   <z-m>0.7535</z-m>
+   <pitch-deg>-15.4</pitch-deg>
   </offsets>
  </model>
 
@@ -228,7 +250,7 @@
   <offsets>
    <x-m>-4.79</x-m>
    <y-m>0.153</y-m>
-   <z-m>0.51</z-m>
+   <z-m>0.485</z-m>
   </offsets>
  </model>
 

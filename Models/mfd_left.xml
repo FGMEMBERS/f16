@@ -4,28 +4,6 @@
 
  <path>mfd.ac</path>
 
-<!--
- <panel>
-  <name>Radar3D</name>
-  <path>Aircraft/f16/Models/radar-display.xml</path>
-  <bottom-left>
-   <x-m> 0.00</x-m>
-   <y-m>-0.044</y-m>
-   <z-m>-0.047</z-m>
-  </bottom-left>
-  <bottom-right>
-   <x-m> 0.00</x-m>
-   <y-m> 0.044</y-m>
-   <z-m>-0.047</z-m>
-  </bottom-right>
-  <top-left>
-   <x-m> 0.00</x-m>
-   <y-m>-0.044</y-m>
-   <z-m> 0.047</z-m>
-  </top-left>
- </panel>
--->
-
  <animation>
   <type>rotate</type>
   <object-name>horizon</object-name>
@@ -40,9 +18,8 @@
  <animation>
   <type>translate</type>
   <object-name>scan_marker</object-name>
-  <property>fdm/jsbsim/fcs/scan-marker-pos-norm</property>
-  <offset-m>-0.045</offset-m>
-  <factor>0.09</factor>
+  <property>instrumentation/radar2/sweep-marker-norm</property>
+  <factor>0.0422</factor>
   <axis>
    <x>0</x>
    <y>1</y>
