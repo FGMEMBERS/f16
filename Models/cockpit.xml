@@ -287,6 +287,18 @@
   </offsets>
  </model>
 
+ <model>
+  <name>HSI</name>
+  <path>Aircraft/f16/Models/hsi.xml</path>
+  <offsets>
+   <x-m>-4.6642</x-m>
+   <y-m>0</y-m>
+   <z-m>0.3180</z-m>
+   <pitch-deg>-48</pitch-deg>
+  </offsets>
+ </model>
+
+
  <!-- AOA indexer animations -->
  <animation>
   <type>select</type>

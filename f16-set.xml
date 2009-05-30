@@ -100,6 +100,15 @@
    </config>
   </view>
 
+  <rendering>
+   <redout>
+    <parameters>
+     <blackout-complete-g>7.9</blackout-complete-g>
+     <blackout-onset-g>5.5</blackout-onset-g>
+    </parameters>
+   </redout>
+  </rendering>
+
   <menubar>
    <default>
     <menu n="100">
