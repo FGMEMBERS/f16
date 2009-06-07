@@ -281,9 +281,14 @@
   </input>
 
  <controls>
+  <fuel>
+   <qty-selector type="int">1</qty-selector>
+   <external-transfer type="bool">true</external-transfer>
+  </fuel>
   <lighting>
    <strobe type="bool">true</strobe>
    <nav-lights type="bool">true</nav-lights>
+   <instruments-norm type="double">0</instruments-norm>
   </lighting>
  </controls>
 

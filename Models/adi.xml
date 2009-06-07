@@ -19,9 +19,9 @@
   <object-name>sphere</object-name>
   <property>orientation/roll-deg</property>
   <center>
-   <x-m>0</x-m>
-   <y-m>0.0</y-m>
-   <z-m>0.0</z-m>
+   <x-m>-0.0291</x-m>
+   <y-m>0</y-m>
+   <z-m>0</z-m>
   </center>
   <axis>
    <x>1</x>
@@ -35,10 +35,25 @@
   <object-name>sphere</object-name>
   <property>orientation/pitch-deg</property>
   <center>
-   <x-m>-0.0522</x-m>
-   <y-m>0.0</y-m>
-   <z-m>0.0023</z-m>
+   <x-m>-0.0291</x-m>
+   <y-m>0</y-m>
+   <z-m>0</z-m>
   </center>
+  <axis>
+   <x>0</x>
+   <y>1</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>turn-indicator</object-name>
+  <property>/instrumentation/turn-indicator/indicated-turn-rate</property>
+  <!-- midle: ~ 1,3 G turn, full 2 G turn at mach 0.8 ??? -->
+  <factor>0.0073</factor>
+  <min>-0.0111</min>
+  <max>0.0111</max>
   <axis>
    <x>0</x>
    <y>1</y>
@@ -114,15 +129,13 @@
   <type>rotate</type>
   <object-name>bank-index</object-name>
   <property>orientation/roll-deg</property>
-  <min-deg>-120</min-deg>
-  <max-deg>120</max-deg>
   <center>
-   <x-m>-0.0015</x-m>
+   <x-m>0</x-m>
    <y-m>0</y-m>
-   <z-m>0.0064</z-m>
+   <z-m>0</z-m>
   </center>
   <axis>
-   <x>-1</x>
+   <x>1</x>
    <y>0</y>
    <z>0</z>
   </axis>
@@ -301,13 +314,13 @@
   <type>rotate</type>
   <object-name>slip-ball</object-name>
   <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
-  <factor>8</factor>
-  <min-deg>-11</min-deg>
-  <max-deg>11</max-deg>
+  <factor>2</factor>
+  <min-deg>-2</min-deg>
+  <max-deg>2l</max-deg>
   <center>
    <x-m>0</x-m>
    <y-m>0</y-m>
-   <z-m>0.0279031</z-m> 
+   <z-m>0.18</z-m> 
   </center>
   <axis>
    <x>-1</x>
@@ -317,81 +330,12 @@
  </animation>
 
  <!-- lighting -->
-<!--
  <animation>
   <object-name>mount</object-name>
+  <object-name>knob</object-name>
   <type>material</type>
   <emission>
    <factor-prop>controls/lighting/panel-norm</factor-prop>
-   <red>0.45</red>
-   <green>0.34</green>
-   <blue>0.18</blue>
-  </emission>
- </animation>
--->
-
- <animation>
-  <object-name>ils-flag</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
-   <red>0.45</red>
-   <green>0.34</green>
-   <blue>0.18</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>off-flag</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
-   <red>0.45</red>
-   <green>0.34</green>
-   <blue>0.18</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>course-flag</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
-   <red>0.45</red>
-   <green>0.34</green>
-   <blue>0.18</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>ring-slip</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.45</red>
-   <green>0.34</green>
-   <blue>0.18</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>bank-index</object-name>
-  <type>material</type>
-  <emission> 
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.45</red>
-   <green>0.34</green>
-   <blue>0.18</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>ai-ring</object-name>
-  <object-name>gs-scale</object-name>
-  <object-name>knob-index</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
@@ -408,100 +352,116 @@
    <blue>0.12</blue>
   </emission>
  </animation>
-
  <animation>
-  <object-name>reticl</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.50</red>
-   <green>0.35</green>
-   <blue>0.20</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>slip-ball</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.50</red>
-   <green>0.35</green>
-   <blue>0.20</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>glide-slope-index</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.50</red>
-   <green>0.35</green>
-   <blue>0.20</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>bank-index</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.50</red>
-   <green>0.35</green>
-   <blue>0.20</blue>
-  </emission>
- </animation>
-
- <animation>
-  <object-name>yaw-steering-bar</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.75</red>
-   <green>0.55</green>
-   <blue>0.35</blue>
-  </emission>
- </animation>
-
- <animation> 
-  <object-name>nav-yaw-steering-bar</object-name>
-  <type>material</type>
-  <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.75</red>
-   <green>0.55</green>
-   <blue>0.35</blue>
-  </emission>
- </animation>
-
- <animation> 
   <object-name>pitch-steering-bar</object-name>
   <type>material</type>
   <emission> 
    <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.75</red>
-   <green>0.55</green>
-   <blue>0.35</blue>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
   </emission>
  </animation>
-
- <animation> 
-  <object-name>nav-pitch-steering-bar</object-name>
+ <animation>
+  <object-name>yaw-steering-bar</object-name>
   <type>material</type>
   <emission> 
    <factor-prop>controls/lighting/instruments-norm</factor-prop>
-   <red>0.75</red>
-   <green>0.55</green>
-   <blue>0.35</blue>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
   </emission>
  </animation>
-
  <animation>
-  <object-name>ai</object-name>
-  <type>noshadow</type>
+  <object-name>turn-indicator</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
  </animation>
-
+ <animation>
+  <object-name>bank-index</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
+ <animation>
+  <object-name>reticl</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
+ <animation>
+  <object-name>glide-slop-index</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
+ <animation>
+  <object-name>face</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
+ <animation>
+  <object-name>off-flag</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
+ <animation>
+  <object-name>aux-flag</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
+ <animation>
+  <object-name>gs-flag</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
+ <animation>
+  <object-name>loc-flag</object-name>
+  <type>material</type>
+  <emission> 
+   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <red>0.55</red>
+   <green>0.30</green>
+   <blue>0.12</blue>
+  </emission>
+ </animation>
 
  <animation>
   <type>range</type>
