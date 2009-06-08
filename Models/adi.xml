@@ -403,7 +403,7 @@
   </emission>
  </animation>
  <animation>
-  <object-name>glide-slop-index</object-name>
+  <object-name>glide-slope-index</object-name>
   <type>material</type>
   <emission> 
    <factor-prop>controls/lighting/instruments-norm</factor-prop>
