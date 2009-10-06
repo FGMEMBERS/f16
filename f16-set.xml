@@ -210,7 +210,7 @@
      <desc>Toggle arrester hook</desc>
      <binding>
       <command>property-toggle</command>
-      <property>/fdm/jsbsim/fcs/hook-engage</property>
+      <property>fdm/jsbsim/systems/hook/tailhook-cmd-norm</property>
      </binding>
     </key>
     <key n="14">

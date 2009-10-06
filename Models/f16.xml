@@ -147,7 +147,7 @@
  <animation>
   <type>rotate</type>
   <object-name>arrester_hook</object-name>
-  <property>fdm/jsbsim/fcs/hook-pos-norm</property>
+  <property>fdm/jsbsim/systems/hook/tailhook-cmd-norm</property>
   <factor>45.0</factor>
   <center>
    <x-m>2.58</x-m>
