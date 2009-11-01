@@ -69,13 +69,71 @@
   <model>
    <path archive="y">Aircraft/f16/Models/f16.xml</path>
    <f16>
+    
     <dragchute type="bool">false</dragchute>
     <link16 type="bool">false</link16>
     <wingtanks type="bool">true</wingtanks>
     <ventraltank type="bool">false</ventraltank>
     <sidewinders type="bool">true</sidewinders>
     <wingmounts type="bool">true</wingmounts>
-   </f16>
+    
+    <controls>
+     <navigation>
+     
+      <!-- INSTRUMENT MODE PANEL -->
+      <instrument-mode-panel>
+       <mode>
+        <rotary-switch-knob type="int">0</rotary-switch-knob>
+       </mode>
+       <hdg>
+        <!-- if true than knob is pushed and compass can be calibrated -->
+        <rotary-push-knob type="bool">false</rotary-push-knob>
+       </hdg>    
+      </instrument-mode-panel>
+
+     </navigation>
+    </controls>
+   
+    <instrumentation>
+    <vhf>
+     <selector type="int">0</selector>               
+     <mode type="int">0</mode>                       
+     <selected-preset type="int">1</selected-preset>
+     <load-state type="int">0</load-state>
+     <presets>
+      <preset n="1" type="float">0</preset>
+      <preset n="2" type="float">0</preset>
+      <preset n="3" type="float">0</preset>
+      <preset n="4" type="float">0</preset>
+      <preset n="5" type="float">0</preset>
+      <preset n="6" type="float">0</preset>
+      <preset n="7" type="float">0</preset>
+      <preset n="8" type="float">0</preset>
+      <preset n="9" type="float">0</preset>
+      <preset n="10" type="float">0</preset>
+      <preset n="11" type="float">0</preset>
+      <preset n="12" type="float">0</preset>
+      <preset n="13" type="float">0</preset>
+      <preset n="14" type="float">0</preset>
+      <preset n="15" type="float">0</preset>
+      <preset n="16" type="float">0</preset>
+      <preset n="17" type="float">0</preset>
+      <preset n="18" type="float">0</preset>
+      <preset n="19" type="float">0</preset>
+      <preset n="20" type="float">0</preset>
+     </presets>
+<!--
+     <frequencies>
+      <alt-selected-mhz-x10 type="int">0</alt-selected-mhz-x10>
+      <alt-selected-mhz-x1 type="int">0</alt-selected-mhz-x1>
+      <alt-selected-mhz-x01 type="int">0</alt-selected-mhz-x01>
+      <alt-selected-mhz-x0001 type="int">0</alt-selected-mhz-x0001>
+     </frequencies>
+-->
+    </vhf>
+   </instrumentation>
+  </f16>
+
    <livery>
     <file type="string"/>
    </livery>
@@ -96,7 +154,7 @@
      <x-offset-m archive="y">0.0</x-offset-m>
      <y-offset-m archive="y">0.93</y-offset-m>
      <z-offset-m archive="y">-4.15</z-offset-m>
-     <default-field-of-view-deg>60</default-field-of-view-deg>
+     <default-field-of-view-deg>55</default-field-of-view-deg>
    </config>
   </view>
 
@@ -318,6 +376,7 @@
  <systems>
   <electrical>
    <outputs>
+    <adi type="int">24</adi> 				<!-- satisfying /Models/adi.xml -->
     <rwr type="double">24</rwr>
    </outputs>
   </electrical>
@@ -331,8 +390,8 @@
   <radar>
    <enabled type="bool">true</enabled>
    <az-field type="double">120</az-field>
-   <range type="double">150</range>
-   <range-selected type="double">50</range-selected>
+   <range type="double">160</range>
+   <range-selected type="double">40</range-selected>
    <display-rdr type="bool">true</display-rdr>
    <radar-standby type="int">0</radar-standby>
    <mode>
@@ -357,7 +416,7 @@
  </instrumentation>
 
  <limits>
-  <max-gear-extension-speed>200</max-gear-extension-speed>
+  <max-gear-extension-speed>300</max-gear-extension-speed>
  </limits>
 
  <nasal>
@@ -377,4 +436,5 @@
  </nasal>
 
 </PropertyList>
+
 

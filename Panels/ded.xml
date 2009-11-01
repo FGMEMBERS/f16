@@ -127,6 +127,11 @@
      <type>literal</type>
      <text>VHF</text>
     </chunk>
+    <chunck> 
+     <type>number-value</type>
+     <property>/instrumentation/comm/frequencies/selected-mhz</property>
+     <format>%3.2f</format>
+    </chunck>
    </chunks>
    <transformations>
     <transformation>

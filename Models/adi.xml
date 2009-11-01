@@ -3,17 +3,72 @@
 
  <path>adi.ac</path>
 
+ <!-- Flags -->
+ <animation>
+  <type>select</type>
+  <object-name>gs-flag</object-name>
+  <condition>
+   <less-than>
+    <property>systems/electrical/outputs/adi</property>
+    <value>24</value>
+   </less-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>loc-flag</object-name>
+  <condition>
+   <less-than>
+    <property>systems/electrical/outputs/adi</property>
+     <value>24</value>
+    </less-than>
+  </condition>
+ </animation>
+
  <animation>
   <type>select</type>
   <object-name>off-flag</object-name>
   <condition>
-   <equals>
-    <property type="bool">systems/attitude-indicator</property>
-    <value>false</value>
-   </equals>
+   <less-than>
+    <property>systems/electrical/outputs/adi</property>
+    <value>24</value>
+   </less-than>
   </condition>
  </animation>
 
+ <animation>
+  <type>select</type>
+  <object-name>aux-flag</object-name>
+  <condition>
+   <less-than>
+    <property>systems/electrical/outputs/adi</property>
+     <value>24</value>
+    </less-than>
+  </condition>
+ </animation>
+
+ <!-- slip-ball-->
+ <animation>
+  <type>rotate</type>
+  <object-name>slip-ball</object-name>
+  <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
+  <factor>2</factor>
+  <min-deg>-2</min-deg>
+  <max-deg>2</max-deg>
+  <center>
+   <x-m>0</x-m>
+   <y-m>0</y-m>
+   <z-m>0.18</z-m>
+  </center>
+  <axis>
+   <x>-1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <!-- Artificial Horizon -->
  <animation>
   <type>rotate</type>
   <object-name>sphere</object-name>
@@ -46,6 +101,7 @@
   </axis>
  </animation>
 
+ <!-- Turn indicator -->
  <animation>
   <type>translate</type>
   <object-name>turn-indicator</object-name>
@@ -61,41 +117,84 @@
   </axis>
  </animation>
 
- <!-- ILS mode -->
-<!--
- <animation>
-  <type>select</type>
-  <object-name>ils-flag</object-name>
-  <condition>
-   <or>
-    <equals>
-     <property>sim/model/f16/selector-ils</property>
-     <value>false</value>
-    </equals>
-    <less-than>
-     <property>systems/attitude-indicator</property>
-     <value>24</value>
-    </less-than>
-    <equals>
-     <property>instrumentation/nav[0]/in-range</property>
-     <value>false</value>
-    </equals>
-   </or>
-  </condition>
- </animation>
+ <!-- arrow knob -->
+ 
+  <animation>
+   <type>rotate</type>
+   <object-name>arrow-knob-cw</object-name>
+  <!--<property> ? </property>-->
+   <center>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>0</z-m>
+   </center>
+   <axis><x>-1</x></axis>
+  </animation>
 
+  <!-- arrow  knob - pick animation-->
+
+  <animation>
+   <name>heading-cw</name>
+   <type>pick</type>
+   <visible>true</visible>
+   <object-name>arrow-knob-cw</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.2</interval-sec>
+    <binding>
+     <command>property-adjust</command>
+ <!--<property> ? </property>-->
+     <step>1</step>
+     <min>-180</min>
+     <max>180</max>
+     <wrap>true</wrap>
+    </binding>
+   </action>
+  </animation>
+
+
+  <animation>
+   <name>heading-ccw</name>
+   <type>pick</type>
+   <visible>true</visible>
+   <object-name>arrow-knob-ccw</object-name>
+   <action>
+    <button>0</button>
+    <repeatable>true</repeatable>
+    <interval-sec>0.2</interval-sec>
+    <binding>
+     <command>property-adjust</command>
+ <!--<property> ? </property>-->
+     <step>-1</step>
+     <min>-180</min>
+     <max>180</max>
+     <wrap>true</wrap>
+    </binding>
+   </action>
+  </animation>
+
+ <!-- ILS mode -->
+
+ <!-- Glide slope index -->
  <animation>
   <type>select</type>
   <object-name>glide-slope-index</object-name>
   <condition>
-   <equals>
-    <property>sim/model/f16/selector-ils</property>
-    <value>true</value>
-   </equals>
    <greater-than>
     <property>systems/electrical/outputs/adi</property>
-    <value>24</value>
+    <value>23</value>
    </greater-than>
+   <or>
+    <equals>
+     <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property>
+     <value>0</value>
+    </equals>
+    <equals>
+     <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property>
+     <value>3</value>
+    </equals>
+   </or>
   </condition>
  </animation>
 
@@ -123,8 +222,8 @@
    <z>1</z>
   </axis>
  </animation>
--->
-
+ 
+ <!-- Bank index -->
  <animation>
   <type>rotate</type>
   <object-name>bank-index</object-name>
@@ -141,195 +240,84 @@
   </axis>
  </animation>
 
- <!-- ADI's bars in steering mode -->
-<!--
+ <!-- ADI bars in homing mode (ILS/TCN && ILS/NAV -->
+
+ <!-- Yaw Steering Bar -->
+
  <animation>
   <type>select</type>
   <object-name>yaw-steering-bar</object-name>
-  <condition>
-   <equals>
-    <property>sim/model/f16/selector-ptr</property>
-    <value>false</value>
-   </equals>
-  </condition>
- </animation>
-
- <animation>
-  <type>translate</type>
-  <object-name>yaw-steering-bar</object-name>
-  <condition>
-   <equals>
-    <property>sim/model/f16/selector-ptr</property>
-    <value>false</value>
-   </equals>
-  </condition>
-  <property>controls/flight/aileron</property>
-  <factor>0.025</factor>
-  <axis>
-   <x>0</x>
-   <y>1</y>
-   <z>0</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>pitch-steering-bar</object-name>
-  <condition>
-   <equals>
-    <property>sim/model/f16/selector-ptr</property>
-    <value>false</value>
-   </equals>
-  </condition>
- </animation>
-
- <animation>
-  <type>translate</type>
-  <object-name>pitch-steering-bar</object-name>
-  <condition>
-   <equals>
-    <property>sim/model/f16/selector-ptr</property>
-    <value>false</value>
-   </equals>
-  </condition>
-  <property>controls/flight/elevator</property>
-  <factor>0.03</factor>
-  <axis>
-   <x>0</x>
-   <y>0</y>
-   <z>1</z>
-  </axis>
- </animation>
--->
-
-<!-- ADI's bars in homing mode -->
-
-<!--
- <animation>
-  <type>select</type>
-  <object-name>nav-yaw-steering-bar</object-name>
-  <condition>
-   <property>sim/model/f16/selector-ptr</property>
-   <property>instrumentation/nav[2]/in-range</property>
-   <equals>
-    <property>sim/model/f16/instrumentation/vhf/mode</property>
-    <value>2</value>
-   </equals>
-   <greater-than>
-    <property>sim/model/f16/instrumentation/vhf/selector</property>
-    <value>2</value>
-   </greater-than>
-  </condition>
- </animation>
-
- <animation>
-  <type>translate</type>
-  <object-name>nav-yaw-steering-bar</object-name>
-  <property>sim/model/f16/instrumentation/vhf/homing-deviation</property>
-  <factor>0.0012</factor>
-  <min-m>-0.0331</min-m>
-  <max-m>0.0330</max-m>
-  <axis>
-   <x>0</x>
-   <y>1</y>
-   <z>0</z>
-  </axis>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>nav-pitch-steering-bar</object-name>
-  <condition>
-   <property>sim/model/f16/selector-ptr</property>
-   <property>instrumentation/nav[2]/in-range</property>
-   <equals>
-    <property>sim/model/f16/instrumentation/vhf/mode</property>
-    <value>2</value>
-   </equals>
-   <greater-than>
-    <property>sim/model/f16/instrumentation/vhf/selector</property>
-    <value>2</value>
-   </greater-than>
-  </condition>
- </animation>
-
- <animation>
-  <type>translate</type>
-  <object-name>nav-pitch-steering-bar</object-name>
-  <property>instrumentation/nav[2]/nav-distance</property>
-  <interpolation>
-   <entry>
-    <ind>0</ind>
-    <dep>0</dep>
-   </entry>
-   <entry>
-    <ind>50000</ind>
-    <dep>-0.030</dep>
-   </entry>
-   <entry>
-    <ind>600000</ind>
-    <dep>-0.030</dep>
-   </entry>
-  </interpolation>
-  <axis>
-   <x>0</x>
-   <y>0</y>
-   <z>1</z>
-  </axis>
- </animation>
--->
-
- <!-- course-flag -->
-<!--
- <animation>
-  <type>select</type>
-  <object-name>course-flag</object-name>
   <condition>
    <or>
-    <and>
-     <property>sim/model/f16/selector-ptr</property>
-     <not>
-      <property>instrumentation/nav[2]/in-range</property>
-     </not>
-     <equals>
-      <property>sim/model/f16/instrumentation/vhf/mode</property>
-      <value>2</value>
-     </equals>
-     <greater-than>
-      <property>sim/model/f16/instrumentation/vhf/selector</property>
-      <value>2</value>
-     </greater-than>
-    </and>
-    <less-than>
-     <property>systems/electrical/outputs/adi</property>
-     <value>24</value>
-    </less-than>
+    <equals>
+     <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property> 
+     <value>0</value>
+    </equals>
+    <equals>
+     <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property> 
+     <value>3</value>
+    </equals>
    </or>
+   <equals>
+    <property>instrumentation/nav[0]/in-range</property>
+    <value>true</value>
+   </equals>
   </condition>
  </animation>
--->
 
- <!-- slip-ball-->
  <animation>
-  <type>rotate</type>
-  <object-name>slip-ball</object-name>
-  <property>instrumentation/slip-skid-ball/indicated-slip-skid</property>
-  <factor>2</factor>
-  <min-deg>-2</min-deg>
-  <max-deg>2l</max-deg>
-  <center>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>0.18</z-m> 
-  </center>
+  <type>translate</type>
+  <object-name>yaw-steering-bar</object-name>
+  <property>/instrumentation/nav/heading-needle-deflection</property>
+  <factor>0.006</factor>
+  <min-m>-0.018</min-m>
+  <max-m>0.018</max-m>
   <axis>
-   <x>-1</x>
-   <y>0</y>
+   <x>0</x>
+   <y>1</y>
    <z>0</z>
   </axis>
  </animation>
 
+ <!-- Pitch Steering Bar -->
+
+ <animation>
+  <type>select</type>
+  <object-name>pitch-steering-bar</object-name>
+  <condition>
+   <or>
+    <equals>
+     <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property> 
+     <value>0</value>
+    </equals>
+    <equals>
+     <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property> 
+     <value>3</value>
+    </equals>
+   </or>
+   <equals>
+    <property>instrumentation/nav[0]/in-range</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>pitch-steering-bar</object-name>
+  <property>/instrumentation/nav[0]/gs-needle-deflection</property>
+  <factor>0.0025</factor>
+  <min-m>-0.015</min-m>
+  <max-m>0.015</max-m>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
+  </axis>
+ </animation>
+ 
  <!-- lighting -->
+
  <animation>
   <object-name>mount</object-name>
   <object-name>knob</object-name>

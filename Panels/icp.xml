@@ -24,7 +24,6 @@ Oil Pressure indicator instrument.
      <h>201</h>
     </layer>
    </layers>
-
 <!--
    <model>
     <path>Aircraft/f16/Models/wheel.xml</path>
@@ -62,5 +61,4 @@ Oil Pressure indicator instrument.
     </offsets>
    </model>
 -->
-
 </PropertyList>

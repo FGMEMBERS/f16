@@ -16,7 +16,7 @@
     <texture>f16.rgb</texture>
    </livery>
    <livery-logo>
-    <texture>f16trans.rgb</texture>
+    <texture>f16trans.png</texture>
    </livery-logo>
   </model>
  </sim>

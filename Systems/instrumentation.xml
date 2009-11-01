@@ -38,6 +38,11 @@ This file selects the instrumentation modules that should be available.
 		<suction>/systems/vacuum/suction-inhg</suction>
 	</attitude-indicator>
 
+        <clock>
+        	<name>clock</name>
+        	<number>0</number>
+        </clock>
+
 	<dme>
 		<name>dme</name>
 		<number>0</number>
@@ -58,6 +63,11 @@ This file selects the instrumentation modules that should be available.
 		<name>magnetic-compass</name>
 		<number>0</number>
 	</magnetic-compass>
+
+	<marker-beacon>
+		<name>marker-beacon</name>
+		<number>0</number>
+	</marker-beacon>
 
 	<nav-radio>
 		<name>nav</name>

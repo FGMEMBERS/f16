@@ -8,7 +8,7 @@
  <animation>
   <type>rotate</type>
   <object-name>mode-knob</object-name>
-  <property>sim/model/f16/controls/navigation/instruments-mode</property>
+  <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property>
   <factor>40</factor>
   <center>
    <x-m>0</x-m>
@@ -22,7 +22,6 @@
   </axis>
  </animation>
 
-
  <!-- Mode knob - pick animation-->
  <animation>
   <name>mode-left</name>
@@ -34,7 +33,7 @@
    <repeatable>false</repeatable>
    <binding>
     <command>property-adjust</command>
-    <property>sim/model/f16/controls/navigation/instruments-mode</property>
+    <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property>
     <step>-1</step>
     <min>0</min>
     <max>3</max>
@@ -53,7 +52,7 @@
    <repeatable>false</repeatable>
    <binding>
     <command>property-adjust</command>
-    <property>sim/model/f16/controls/navigation/instruments-mode</property>
+    <property>sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob</property>
     <step>1</step>
     <min>0</min>
     <max>3</max>
@@ -61,10 +60,6 @@
    </binding>
   </action>
  </animation>
-
-
-
-
 
  <!-- HDG knob - pick animation-->
 

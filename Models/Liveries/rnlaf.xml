@@ -12,11 +12,11 @@
     <wingmounts type="bool">true</wingmounts>
    </f16>
    <livery>
-    <name type="string">Royal Netherlands Airforce</name>
+    <name type="string">Royal Netherlands Air Force</name>
     <texture>f16.rgb</texture>
    </livery>
    <livery-logo>
-    <texture>Liveries/f16rnaf_trans.rgb</texture>
+    <texture>Liveries/f16rnlaf_trans.rgb</texture>
    </livery-logo>
   </model>
  </sim>

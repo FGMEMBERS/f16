@@ -3,7 +3,6 @@
 <PropertyList>
 
  <fx>
-
   <canopy>
    <name>canopy</name>
    <path>Aircraft/f16/Sounds/canopy.wav</path>

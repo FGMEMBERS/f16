@@ -15,7 +15,20 @@
   </condition>
  </animation>
 
- <!-- Compass Card -->
+ <!-- off-flag -->
+ <!-- TODO: using simple electrical scheme for now -->
+ <animation>
+  <type>select</type>
+  <object-name>off-flag</object-name>
+  <condition>
+   <less-than>
+    <property>systems/electrical/outputs/adi</property>
+    <value>24</value>
+   </less-than> 
+  </condition>
+ </animation>
+
+<!-- Compass Card -->
  <animation>
   <type>rotate</type>
   <object-name>compass-card</object-name>
@@ -154,7 +167,7 @@
   <visible>true</visible>
   <object-name>hdg-knob-left</object-name>
   <action>
-   <button>1</button>
+   <button>2</button>
    <repeatable>true</repeatable>
    <interval-sec>0.2</interval-sec>
    <binding>
@@ -194,7 +207,7 @@
   <visible>true</visible>
   <object-name>hdg-knob-right</object-name>
   <action>
-   <button>1</button>
+   <button>2</button>
    <repeatable>true</repeatable>
    <interval-sec>0.2</interval-sec>
    <binding>
@@ -384,7 +397,7 @@
   <object-name>vor-cdi-off</object-name>
   <object-name>bearing-vor-needle-on</object-name>
   <object-name>bearing-validity-flag</object-name>
-  <object-name>off-flag</object-name>
+
   <type>select</type>
   <condition>
    <equals>
