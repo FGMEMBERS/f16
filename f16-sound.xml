@@ -3,7 +3,6 @@
 <PropertyList>
 
  <fx>
-<!--
   <canopy>
    <name>canopy</name>
    <path>Aircraft/f16/Sounds/canopy.wav</path>
@@ -113,7 +112,6 @@
     <factor>-0.0002</factor>
    </volume>
   </engine_fan>
--->
 
   <exhaust>
    <name>turbine</name>
@@ -145,7 +143,6 @@
    </pitch>
   </exhaust>
 
-<!--
   <afterburner>
    <name>afterburner</name>
    <path>Sounds/exhaust_loop.wav</path>
@@ -263,7 +260,6 @@
     <z>0.0</z>
    </position>
   </cannon>
--->
 </fx>
  
 </PropertyList>
