@@ -13,7 +13,7 @@
    </f16>
    <livery>
     <name type="string">Royal Netherlands Air Force</name>
-    <texture>f16.rgb</texture>
+    <texture>Liveries/f16klu.rgb</texture>
    </livery>
    <livery-logo>
     <texture>Liveries/f16rnlaf_trans.rgb</texture>
