@@ -288,6 +288,43 @@
         <property>fcs/canopy-engage</property>
         <property>fcs/fbw-override</property>
 
+        <channel name="Flaps">
+
+            <switch name="tef pos rad">
+                <default value="0.0"/>
+                <test logic="AND" value="0.349">
+                    velocities/vc-kts lt 250
+                </test>
+                <test logic="AND" value="-0.0349">
+                    velocities/mach gt 0.9
+                </test>
+            </switch>
+
+            <pure_gain name="tef pos norm">
+              <input>fcs/tef-pos-rad</input>
+              <gain>2.864789</gain>
+            </pure_gain>
+
+            <kinematic name="tef control">
+                <input>fcs/tef-pos-norm</input>
+                <traverse>
+                    <setting>
+                        <position>-1.0</position>
+                        <time>3.0</time>
+                    </setting>
+                    <setting>
+                        <position>0</position>
+                        <time>0</time>
+                    </setting>
+                    <setting>
+                        <position>1.0</position>
+                        <time>3.0</time>
+                    </setting>
+                </traverse>
+            </kinematic>
+
+        </channel>
+
         <channel name="Roll">
 
             <!-- Calculate the normalized roll-rate -->
@@ -378,6 +415,24 @@
                     </tableData>
                 </table>
             </scheduled_gain>
+
+            <summer name="left flaperon norm">
+                <input>-fcs/tef-control</input>
+                <input>-fcs/aileron-speed-compensated</input>
+                <clipto>
+                    <min>-1.0</min>
+                    <max>1.0</max>
+                </clipto>
+            </summer>
+
+            <summer name="right flaperon norm">
+                <input>fcs/tef-control</input>
+                <input>-fcs/aileron-speed-compensated</input>
+                <clipto>
+                    <min>-1.0</min>
+                    <max>1.0</max>
+                </clipto>
+            </summer>
 
             <aerosurface_scale name="Left Aileron Control">
                 <input>fcs/aileron-speed-compensated</input>
@@ -725,55 +780,6 @@
                 <gain>2</gain>
                 <output>fcs/throttle-pos-norm</output>
             </pure_gain>
-
-        </channel>
-
-        <channel name="Flaps">
-
-            <switch name="tef pos rad">
-                <default value="0.0"/>
-                <test logic="AND" value="0.349">
-                    velocities/vc-kts lt 250
-                </test>
-                <test logic="AND" value="-0.0349">
-                    velocities/mach gt 0.9
-                </test>
-            </switch>
-
-            <pure_gain name="tef pos norm">
-              <input>fcs/tef-pos-rad</input>
-              <gain>2.864789</gain>
-            </pure_gain>
-
-            <kinematic name="tef control">
-                <input>fcs/tef-pos-norm</input>
-                <traverse>
-                    <setting>
-                        <position>-1.0</position>
-                        <time>3.0</time>
-                    </setting>
-                    <setting>
-                        <position>0</position>
-                        <time>0</time>
-                    </setting>
-                    <setting>
-                        <position>1.0</position>
-                        <time>3.0</time>
-                    </setting>
-                </traverse>
-            </kinematic>
-
-            <aerosurface_scale name="tef pos deg">
-              <input>fcs/tef-control</input>
-              <domain>
-                <min>-1.0</min>
-                <max>1.0</max>
-              </domain>
-              <range>
-                <min>-20</min>
-                <max>20</max>
-              </range>
-            </aerosurface_scale>
 
         </channel>
 

@@ -238,6 +238,7 @@
   </axis>
  </animation>
 
+<!--
  <animation>
   <type>rotate</type>
   <object-name>right_upper_aileron</object-name>
@@ -273,12 +274,14 @@
    <z>-0.039404</z>
   </axis>
  </animation>
+-->
 
  <animation>
   <type>rotate</type>
   <object-name>right_upper_flap</object-name>
   <object-name>right_lower_flap</object-name>
-  <property>fdm/jsbsim/fcs/tef-pos-deg</property>
+  <property>fdm/jsbsim/fcs/right-flaperon-norm</property>
+  <factor>20.0</factor>
   <center>
    <x-m>1.54</x-m>
    <y-m>2.35</y-m>
@@ -295,8 +298,8 @@
   <type>rotate</type>
   <object-name>left_upper_flap</object-name>
   <object-name>left_lower_flap</object-name>
-  <property>fdm/jsbsim/fcs/tef-pos-deg</property>
-  <factor>-1</factor>
+  <property>fdm/jsbsim/fcs/left-flaperon-norm</property>
+  <factor>20.0</factor>
   <center>
    <x-m>1.54</x-m>
    <y-m>-2.35</y-m>
