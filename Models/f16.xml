@@ -32,6 +32,48 @@
   </offsets>
  </model>
 
+ <!-- effects -->
+ <model>
+  <name>exhaust_smoke</name>
+  <path>Aircraft/f16/Models/Effects/exhaust.xml</path>
+  <offsets>
+   <x-m>4.6</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.0</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <path>Aircraft/Generic/Effects/tyre-smoke-nose.xml</path>
+  <name>tyre-smoke-n</name>
+  <offsets>
+   <x-m>-2.97</x-m>
+   <y-m>0.0</y-m>
+   <z-m>-2.0</z-m>
+  </offsets>
+ </model>
+
+  <model>
+   <path>Aircraft/Generic/Effects/tyre-smoke-port.xml</path>
+   <name>tyre-smoke-p</name>
+   <offsets>
+    <x-m>0.0</x-m>
+    <y-m>-1.21</y-m>
+    <z-m>-2.0</z-m>
+   </offsets>
+  </model>
+
+  <model>
+   <path>Aircraft/Generic/Effects/tyre-smoke-stbd.xml</path>
+   <name>tyre-smoke-s</name>
+   <offsets>
+   <x-m>0.0</x-m>
+    <y-m>1.21</y-m>
+    <z-m>-2.0</z-m>
+   </offsets>
+  </model>
+
+
  <!-- group all position lights -->
  <animation>
   <name>pos_lights</name>
