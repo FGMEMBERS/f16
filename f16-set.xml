@@ -426,6 +426,7 @@
   <f16>
    <file>Aircraft/f16/Nasal/liveries.nas</file>
    <file>Aircraft/f16/Nasal/f16.nas</file>
+   <file>Aircraft/f16/Nasal/tyresmoke.nas</file>
   </f16>
   <radar>
    <file>Aircraft/Instruments-3d/radar2/radar2.nas</file>
