@@ -5,7 +5,7 @@
   <name>exhaust-heath</name>
   <texture>exhaustheath.png</texture>
   <emissive>false</emissive>
-  <lighting>false</lighting>
+  <lighting>true</lighting>
   
   <offsets>
    <x-m>0</x-m>
@@ -35,9 +35,7 @@
    <phi-max-deg>15</phi-max-deg>
    <speed-mps>
     <property>engines/engine/thrust_lb</property>
-    <offset>100</offset>
-    <factor>0.8</factor>
-    <spread>5</spread>
+    <spread>20</spread>
    </speed-mps>
    <rotation-speed>
     <x-min-deg-sec>5</x-min-deg-sec>
@@ -52,7 +50,7 @@
   <counter>
    <particles-per-sec>
     <value>8</value>
-    <spread>15</spread>
+    <spread>5</spread>
    </particles-per-sec>
   </counter>
   
@@ -71,7 +69,7 @@
       <value>1</value>
      </blue>
      <alpha>
-      <value>0.05</value>
+      <value>0.12</value>
      </alpha>
     </color>
     <size>
@@ -90,18 +88,18 @@
       <value>1</value>
      </blue>
      <alpha>
-      <value>0.001</value>
+      <value>0.008</value>
      </alpha>
     </color>
     <size>
-     <value>12</value>
+     <value>8</value>
     </size>
    </end>
    <life-sec>
     <value>5.0</value>
    </life-sec>
    <mass-kg>0.00001</mass-kg>
-   <radius-m>0.025</radius-m>
+   <radius-m>0.015</radius-m>
   </particle>
   
   <program>
