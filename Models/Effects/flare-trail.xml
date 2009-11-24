@@ -3,9 +3,9 @@
 
 <particlesystem>
   <name>flare-smoke</name>
-  <texture>puff.png</texture>
-  <emissive>false</emissive>
-  <lighting>true</lighting>
+  <texture>flare.png</texture>
+  <emissive>true</emissive>
+  <lighting>false</lighting>
   
   <offsets>
    <x-m>0</x-m>
@@ -22,28 +22,27 @@
   </placer>
   
   <shooter>
-   <theta-min-deg>-5</theta-min-deg>
-   <theta-max-deg>5</theta-max-deg>
-   <phi-min-deg>-5</phi-min-deg>
-   <phi-max-deg>5</phi-max-deg>
+   <theta-min-deg>-1</theta-min-deg>
+   <theta-max-deg>1</theta-max-deg>
+   <phi-min-deg>-1</phi-min-deg>
+   <phi-max-deg>1</phi-max-deg>
    <speed-mps>
     <value>0</value>
-    <spread>2</spread>
+    <spread>0</spread>
    </speed-mps>
    <rotation-speed>
-    <x-min-deg-sec>5</x-min-deg-sec>
-    <y-min-deg-sec>5</y-min-deg-sec>
-    <z-min-deg-sec>5</z-min-deg-sec>
-    <x-max-deg-sec>20</x-max-deg-sec>
-    <y-max-deg-sec>20</y-max-deg-sec>
-    <z-max-deg-sec>20</z-max-deg-sec>
+    <x-min-deg-sec>0</x-min-deg-sec>
+    <y-min-deg-sec>0</y-min-deg-sec>
+    <z-min-deg-sec>0</z-min-deg-sec>
+    <x-max-deg-sec>0</x-max-deg-sec>
+    <y-max-deg-sec>0</y-max-deg-sec>
+    <z-max-deg-sec>0</z-max-deg-sec>
    </rotation-speed>
   </shooter>
   
   <counter>
    <particles-per-sec>
-    <value>20</value>
-    <spread>5</spread>
+    <value>30</value>
    </particles-per-sec>
   </counter>
   
@@ -66,7 +65,7 @@
      </alpha>
     </color>
     <size>
-     <value>1</value>
+     <value>0.25</value>
     </size>
    </start>
    <end>
@@ -85,11 +84,11 @@
      </alpha>
     </color>
     <size>
-     <value>5</value>
+     <value>0.1</value>
     </size>
    </end>
    <life-sec>
-    <value>3.0</value>
+    <value>0.7</value>
    </life-sec>
    <mass-kg>0.00001</mass-kg>
    <radius-m>0.015</radius-m>
