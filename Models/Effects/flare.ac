@@ -5,7 +5,7 @@ kids 1
 OBJECT poly
 name "flare"
 loc -2.84189e-05 -1.39698e-09 -6.12284e-05
-texture "flare.rgb"
+texture "flare.png"
 numvert 4
 0.25 0.25 0
 -0.25 0.25 0

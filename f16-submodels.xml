@@ -4,7 +4,7 @@
 
   <submodel>
     <name>flares</name>
-    <model>Aircraft/f16/Models/flare.xml</model>
+    <model>Aircraft/f16/Models/Effects/flare.xml</model>
     <trigger>ai/submodels/submodel[0]/flare-release</trigger>
     <speed>100.0</speed>   <!-- ft/sec -->
     <repeat>true</repeat>
