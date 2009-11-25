@@ -60,10 +60,10 @@
    <start>
     <color>
      <red>
-      <value>1</value>
+      <value>0.6</value>
      </red>
      <green>
-      <value>1</value>
+      <value>0.8</value>
      </green>
      <blue>
       <value>1</value>
@@ -79,10 +79,10 @@
    <end>
     <color>
      <red>
-      <value>1</value>
+      <value>0.6</value>
      </red>
      <green>
-      <value>1</value>
+      <value>0.8</value>
      </green>
      <blue>
       <value>1</value>

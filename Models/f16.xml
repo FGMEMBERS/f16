@@ -44,6 +44,26 @@
  </model>
 
  <model>
+  <name>left-strake-vortex</name>
+  <path>Aircraft/f16/Models/Effects/strake-vortex.xml</path>
+  <offsets>
+   <x-m>-2.5</x-m>
+   <y-m>-1.0</y-m>
+   <z-m>0.15</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>right-strake-vortex</name>
+  <path>Aircraft/f16/Models/Effects/strake-vortex.xml</path>
+  <offsets>
+   <x-m>-2.5</x-m>
+   <y-m>1.0</y-m>
+   <z-m>0.15</z-m>
+  </offsets>
+ </model>
+
+ <model>
   <path>Aircraft/Generic/Effects/tyre-smoke-nose.xml</path>
   <name>tyre-smoke-n</name>
   <offsets>
@@ -165,6 +185,14 @@
   <min-m>0</min-m>
   <max-m>10000</max-m>
  </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>lhocondenscone</object-name>
+  <object-name>rhocondenscone</object-name>
+  <property>null</property>
+ </animation>
+   
 
 
 <!-- fuselage animations -->
@@ -1016,29 +1044,6 @@
   <object-name>timed_nav_lights</object-name>
   <condition>
    <property>controls/lighting/nav-lights</property>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>lhocondenscone</object-name>
-  <object-name>rhocondenscone</object-name>
-  <condition>
-   <greater-than>
-    <property>orientation/alpha-deg</property>
-    <value>9.0</value>
-   </greater-than>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>rhocondenscone</object-name>
-  <condition>
-   <greater-than>
-    <property>orientation/alpha-deg</property>
-    <value>9.0</value>
-   </greater-than>
   </condition>
  </animation>
 
