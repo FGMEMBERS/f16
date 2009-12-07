@@ -8,15 +8,15 @@
     <link16 type="bool">true</link16>
     <wingtanks type="bool">false</wingtanks>
     <ventraltank type="bool">false</ventraltank>
-    <sidewinders type="bool">true</sidewinders>
+    <sidewinders type="bool">false</sidewinders>
     <wingmounts type="bool">true</wingmounts>
    </f16>
    <livery>
-    <name type="string">Royal Netherlands Air Force</name>
-    <texture>Liveries/f16klu.rgb</texture>
+    <name type="string">RNLAF J-008 312 Sqaudron</name>
+    <texture>Liveries/rnlaf/f16klu.rgb</texture>
    </livery>
    <livery-logo>
-    <texture>Liveries/f16rnlaf_trans.rgb</texture>
+    <texture>Liveries/rnlaf/J-008_311sqn.rgb</texture>
    </livery-logo>
   </model>
  </sim>

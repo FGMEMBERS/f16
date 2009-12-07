@@ -1,21 +1,34 @@
 <?xml version="1.0"?>
 
 <PropertyList>
+
+<!-- clipping is defined in f16-set.xml -->
+<!-- dimensions are x -70 x 70 y 40 y -140 -->
+
     <enable3d>true</enable3d>
+    
+    <label>
+        <name>G Load</name>
+        <x>-43</x>
+        <y>-20</y>
+        <width>1</width>
+        <height>1</height>
+        <input>
+            <property>/accelerations/pilot/z-accel-fps_sec</property>
+            <factor>-0.03108095</factor>
+            <damp>1.0</damp>
+        </input>
+        <format>%2.1f</format>
+        <halign>left</halign>
+    </label>
 
     <ladder>
         <name>Pitch Ladder</name>
         <type>pitch</type>
-        <x>-25</x>
-        <y>-35</y>
-        <width>50</width>
-        <height>70</height>
-        <clipping>
-            <top>75</top>
-            <bottom>-75</bottom>
-            <left>-75</left>
-            <right>75</right>
-        </clipping>
+        <x>-20</x>
+        <y>-120</y>
+        <width>40</width>
+        <height>239</height>
         <roll-input>
             <property>/orientation/roll-deg</property>
         </roll-input>
@@ -23,10 +36,10 @@
             <property>/orientation/pitch-deg</property>
         </pitch-input>
         <compression-factor>11.63</compression-factor>
-        <display-span>15.0</display-span>
+        <display-span>30.0</display-span>
         <divisions>5.0</divisions>
         <screen-hole>10</screen-hole>
-        <zero-bar-overlength>55</zero-bar-overlength>
+        <zero-bar-overlength>100</zero-bar-overlength>
         <enable-dive-bar-angle>false</enable-dive-bar-angle>
         <enable-dynamic-origin>false</enable-dynamic-origin>
         <enable-fuselage-ref-line>false</enable-fuselage-ref-line>
@@ -44,8 +57,8 @@
 
     <tape>
         <name>Altitude-MSL</name>
-        <x>54</x>
-        <y>-29</y>
+        <x>37</x>
+        <y>-76</y>
         <width>7</width>
         <height>50</height>
         <input>
@@ -74,8 +87,8 @@
 
     <tape>
         <name>KIAS</name>
-        <x>-59</x>
-        <y>-29</y>
+        <x>-50</x>
+        <y>-76</y>
         <width>7</width>
         <height>50</height>
         <input>
@@ -102,12 +115,12 @@
         <pointer-type>fixed</pointer-type>
     </tape>
 
-<!--
+
     <tape>
         <name>Gyrocompass</name>
-        <x>-45</x>
-        <y>-34</y>
-        <width>90</width>
+        <x>-14.8</x>
+        <y>-93</y>
+        <width>30</width>
         <height>10</height>
         <input>
             <property>/orientation/heading-deg</property>
@@ -118,25 +131,25 @@
         <major-divisions>10</major-divisions>
         <minor-divisions>5</minor-divisions>
         <tick-bottom>false</tick-bottom>
-        <tick-top>false</tick-top>
-        <tick-right>true</tick-right>
-        <tick-left>true</tick-left>
+        <tick-top>true</tick-top>
+        <tick-right>false</tick-right>
+        <tick-left>false</tick-left>
         <cap-bottom>false</cap-bottom>
         <cap-top>false</cap-top>
         <cap-right>false</cap-right>
         <cap-left>false</cap-left>
-        <marker-offset>0.0</marker-offset>
+        <marker-offset>0</marker-offset>
         <enable-pointer>false</enable-pointer>
         <pointer-type>fixed</pointer-type>
         <tick-type>line</tick-type>
         <tick-length>fixed</tick-length>
     </tape>
--->
+
 
     <label>
         <name>KIAS</name>
-        <x>-80</x>
-        <y>-10</y>
+        <x>-65</x>
+        <y>-55</y>
         <width>18</width>
         <height>8</height>
         <input>
@@ -150,8 +163,8 @@
 
     <label>
         <name>KIAS Marker</name>
-        <x>-50</x>
-        <y>1</y>
+        <x>-43</x>
+        <y>-47</y>
         <width>1</width>
         <height>1</height>
         <format>C</format>
@@ -160,8 +173,8 @@
 
     <label>
         <name>Altitude</name>
-        <x>60</x>
-        <y>-8</y>
+        <x>45</x>
+        <y>-55</y>
         <width>24</width>
         <height>8</height>
         <input>
@@ -175,33 +188,19 @@
 
     <label>
         <name>SIM</name>
-        <x>-54.8</x>
-        <y>-39.5</y>
+        <x>-43</x>
+        <y>-81</y>
         <width>1</width>
         <height>1</height>
         <format>SIM</format>
         <halign>left</halign>
     </label>
 
-    <label>
-        <name>G Load</name>
-        <x>-44</x>
-        <y>25.5</y>
-        <width>1</width>
-        <height>1</height>
-        <input>
-            <property>/accelerations/pilot/z-accel-fps_sec</property>
-            <factor>-0.03108095</factor>
-            <damp>1.0</damp>
-        </input>
-        <format>%2.1f</format>
-        <halign>right</halign>
-    </label>
 
     <label>
         <name>MACH Number</name>
-        <x>-54.8</x>
-        <y>-48</y>
+        <x>-43</x>
+        <y>-87</y>
         <width>1</width>
         <height>1</height>
         <input>
@@ -211,10 +210,11 @@
         <halign>left</halign>
     </label>
 
+<!-- not sure if we need this
     <label>
         <name>Heading</name>
         <x>37</x>
-        <y>-48</y>
+        <y>-20</y>
         <width>18</width>
         <height>6</height>
         <input>
@@ -225,5 +225,55 @@
         <halign>right</halign>
         <box>false</box>
     </label>
+-->
+<!--
+    <label>
+        <name>MACH Number</name>
+        <x>-70</x>
+        <y>-140</y>
+        <width>1</width>
+        <height>1</height>
+        <input>
+            <property>/velocities/mach</property>
+        </input>
+        <format>%4.2f</format>
+        <halign>left</halign>
+    </label>
+    <label>
+        <name>MACH Number</name>
+        <x>-70</x>
+        <y>40</y>
+        <width>1</width>
+        <height>1</height>
+        <input>
+            <property>/velocities/mach</property>
+        </input>
+        <format>%4.2f</format>
+        <halign>left</halign>
+    </label>
+    <label>
+        <name>MACH Number</name>
+        <x>70</x>
+        <y>-140</y>
+        <width>1</width>
+        <height>1</height>
+        <input>
+            <property>/velocities/mach</property>
+        </input>
+        <format>%4.2f</format>
+        <halign>left</halign>
+    </label>
+    <label>
+        <name>MACH Number</name>
+        <x>70</x>
+        <y>40</y>
+        <width>1</width>
+        <height>1</height>
+        <input>
+            <property>/velocities/mach</property>
+        </input>
+        <format>%4.2f</format>
+        <halign>left</halign>
+    </label>
+-->
 </PropertyList>
-

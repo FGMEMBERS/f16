@@ -55,12 +55,17 @@
     </color>
    </palette>
    <clipping>
-    <left type="double">-85</left>
-    <right type="double">85</right>
-    <top type="double">115</top>
-    <bottom type="double">-95</bottom>
+    <left type="double">-70</left>
+    <right type="double">70</right>
+    <top type="double">-15</top>
+    <bottom type="double">-180</bottom>
    </clipping>
   </hud>
+
+ <gear>
+  <!-- Start with the Parking Brake on -->
+  <brake-parking type="double">1.0</brake-parking>
+ </gear>
 
   <instrumentation>
    <path>Aircraft/f16/Systems/instrumentation.xml</path>
@@ -147,6 +152,7 @@
 
   <chase-distance-m type="double" archive="y">-35.0</chase-distance-m>
 
+<!-- original settings
   <view>
    <internal archive="y">true</internal>
    <config>
@@ -157,12 +163,24 @@
      <default-field-of-view-deg>55</default-field-of-view-deg>
    </config>
   </view>
+-->
+
+  <view>
+   <internal archive="y">true</internal>
+   <config>
+     <pitch-offset-deg>0.0</pitch-offset-deg>
+     <x-offset-m archive="y">0</x-offset-m>
+     <y-offset-m archive="y">1</y-offset-m>
+     <z-offset-m archive="y">-4.15</z-offset-m>
+     <default-field-of-view-deg>55</default-field-of-view-deg>
+   </config>
+  </view>
 
   <rendering>
    <redout>
     <parameters>
-     <blackout-complete-g>7.9</blackout-complete-g>
-     <blackout-onset-g>5.5</blackout-onset-g>
+     <blackout-complete-g>9.0</blackout-complete-g>
+     <blackout-onset-g>7.5</blackout-onset-g>
     </parameters>
    </redout>
   </rendering>
@@ -424,7 +442,7 @@
    <file>Aircraft/Generic/aar.nas</file>
   </aar>
   <f16>
-   <file>Aircraft/f16/Nasal/liveries.nas</file>
+  <file>Aircraft/f16/Nasal/liveries.nas</file>
    <file>Aircraft/f16/Nasal/f16.nas</file>
    <file>Aircraft/f16/Nasal/tyresmoke.nas</file>
   </f16>
