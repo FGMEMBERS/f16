@@ -33,7 +33,7 @@ OBJECT poly
 name "LeftInnerStrut"
 data 8
 Mesh.083
-crease 30.000000
+crease 80.000000
 numvert 76
 0.536882 -1.371302 0.985552
 0.497639 -1.367277 0.978931
@@ -777,7 +777,7 @@ OBJECT poly
 name "LeftOuterLowerStrut"
 data 8
 Mesh.081
-crease 30.000000
+crease 80.000000
 numvert 32
 0.607605 -0.969038 0.929338
 0.573149 -0.964397 0.934393
@@ -1009,7 +1009,7 @@ OBJECT poly
 name "LeftOuterUpperStrut"
 data 8
 Mesh.082
-crease 30.000000
+crease 80.000000
 numvert 32
 0.607152 -0.885391 0.870351
 0.578138 -0.881463 0.874642
@@ -1246,7 +1246,7 @@ data 8
 Mesh.068
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 0.969126 0.127194 -2.961348
 0.969126 0.103562 -3.96134
@@ -1272,7 +1272,7 @@ data 8
 Mesh.069
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 0.968989 -0.020212 2.951675
 0.968989 -0.03119 3.951669
@@ -1299,7 +1299,7 @@ OBJECT poly
 name "AftPosLight2"
 data 8
 Mesh.070
-crease 30.000000
+crease 80.000000
 numvert 6
 5.475019 1.147868 0.032681
 5.475019 1.106105 0.019312
@@ -1343,7 +1343,7 @@ OBJECT poly
 name "Chute"
 data 8
 Mesh.071
-crease 30.000000
+crease 80.000000
 numvert 6
 5.489459 0.697753 -0.077171
 5.489459 1.087889 -0.077329
@@ -1395,7 +1395,7 @@ data 8
 Mesh.072
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 30
 5.42794 0.626805 -0.143875
 5.42794 0.626805 0.137823
@@ -1736,7 +1736,7 @@ OBJECT poly
 name "RightInnerStrut"
 data 8
 Mesh.087
-crease 30.000000
+crease 80.000000
 numvert 76
 0.536858 -1.371324 -0.997203
 0.497615 -1.367299 -0.990582
@@ -2480,7 +2480,7 @@ OBJECT poly
 name "RightOuterLowerStrut"
 data 8
 Mesh.088
-crease 30.000000
+crease 80.000000
 numvert 32
 0.607581 -0.968576 -0.942754
 0.573125 -0.963935 -0.947808
@@ -2712,7 +2712,7 @@ OBJECT poly
 name "RightOuterUpperStrut"
 data 8
 Mesh.089
-crease 30.000000
+crease 80.000000
 numvert 32
 0.606634 -0.885447 -0.89395
 0.577621 -0.881519 -0.898241
@@ -2947,7 +2947,7 @@ OBJECT poly
 name "AftPosLight1"
 data 8
 Mesh.074
-crease 30.000000
+crease 80.000000
 numvert 6
 5.024122 0.864535 0.031965
 5.03158 0.822772 0.018596
@@ -2993,7 +2993,7 @@ data 8
 Mesh.073
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 18
 0.7145 0.665534 -0.000112
 1.19142 0.640577 -0.095447
@@ -3186,7 +3186,7 @@ data 8
 Mesh.062
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 2.020321 0.551143 0.41976
 3.122418 0.551143 0.41976
@@ -3212,7 +3212,7 @@ data 8
 Mesh.063
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 2.018441 0.553007 -0.397868
 3.122417 0.553007 -0.397868
@@ -3238,7 +3238,7 @@ data 8
 Mesh.061
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 1.299121 -0.015421 -2.961343
 1.299121 -0.032807 -3.961335
@@ -3264,7 +3264,7 @@ data 8
 Mesh.067
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 3.190291 1.563555 0.049169
 4.259942 1.563555 0.049169
@@ -3290,7 +3290,7 @@ data 8
 Mesh.065
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 3.709943 1.563545 0.04917
 4.259943 1.563545 0.04917
@@ -3316,7 +3316,7 @@ data 8
 Mesh.066
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 3.18902 1.562825 -0.05524
 4.259942 1.562825 -0.05524
@@ -3342,7 +3342,7 @@ data 8
 Mesh.064
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 3.708673 1.562815 -0.05524
 4.259943 1.562815 -0.05524
@@ -3368,7 +3368,7 @@ data 8
 Mesh.060
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 1.29898 0.096121 3.951677
 1.29898 0.12881 2.951685
@@ -3397,7 +3397,7 @@ data 8
 Mesh.107
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 12
 1.284691 0.065625 1.628636
 0.927393 -0.18806 1.686928
@@ -3527,7 +3527,7 @@ data 8
 Mesh.108
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 12
 1.558601 0.061507 2.880092
 1.497011 -0.189975 2.938384
@@ -3657,7 +3657,7 @@ data 8
 Mesh.106
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 12
 1.282574 0.065625 -1.633054
 0.925283 -0.188226 -1.574762
@@ -3787,7 +3787,7 @@ data 8
 Mesh.105
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 12
 1.5588 0.061507 -2.879894
 1.497211 -0.189958 -2.821603
@@ -3915,7 +3915,7 @@ OBJECT poly
 name "AirIntake"
 data 8
 Mesh.080
-crease 30.000000
+crease 80.000000
 numvert 93
 -3.25977 -0.830605 -0.018227
 -2.9298 -0.301978 -0.018227
@@ -4826,7 +4826,7 @@ OBJECT poly
 name "AntiCollisionStrobe"
 data 8
 Mesh.036
-crease 30.000000
+crease 80.000000
 numvert 22
 5.31421 3.190329 -0.048085
 5.342687 3.190329 -0.041643
@@ -5038,7 +5038,7 @@ data 8
 Mesh.037
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 20
 2.5746 -0.743138 -0.055239
 2.57196 -0.716754 -0.055239
@@ -5282,7 +5282,7 @@ OBJECT poly
 name "Box"
 data 8
 Mesh.012
-crease 30.000000
+crease 80.000000
 numvert 13
 -3.129259 -0.75215 -0.274214
 -3.129259 -0.75215 0.292568
@@ -5405,7 +5405,7 @@ OBJECT poly
 name "BoxLeft"
 data 8
 Mesh.014
-crease 30.000000
+crease 80.000000
 numvert 12
 -0.660103 -0.414191 0.76249
 -0.660103 -0.31513 0.657742
@@ -5515,7 +5515,7 @@ OBJECT poly
 name "BoxRight"
 data 8
 Mesh.013
-crease 30.000000
+crease 80.000000
 numvert 12
 -0.660009 -0.414191 -0.763429
 -0.660009 -0.315563 -0.671251
@@ -5625,7 +5625,7 @@ OBJECT poly
 name "CanopyBackOutside"
 data 8
 Mesh.047
-crease 30.000000
+crease 80.000000
 numvert 26
 -3.463535 0.639714 -0.344849
 -2.715903 0.907471 -0.180967
@@ -5877,7 +5877,7 @@ data 8
 Mesh.058
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 75
 -5.44412 0.439216 0.16583
 -5.37575 0.472908 -0.00356
@@ -6692,7 +6692,7 @@ OBJECT poly
 name "CanopyGlassFwd"
 data 8
 Mesh.059
-crease 30.000000
+crease 80.000000
 numvert 47
 -5.174412 0.626164 -0.145819
 -5.333189 0.459838 -0.131521
@@ -7151,7 +7151,7 @@ data 4
 Mesh
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 44
 3.07859 0.223977 0.315987
 3.07859 0.373835 0.149256
@@ -7480,7 +7480,7 @@ data 8
 Mesh.044
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 7
 -3.13065 -1.39276 -0.277236
 -1.871841 -1.37565 -0.297629
@@ -7527,7 +7527,7 @@ data 8
 Mesh.045
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 -0.830129 -0.742367 0.521733
 0.682 -0.697392 0.5727
@@ -7567,7 +7567,7 @@ data 8
 Mesh.046
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 -0.830933 -0.742354 -0.523699
 0.681696 -0.697362 -0.587058
@@ -7607,7 +7607,7 @@ data 8
 Mesh.078
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 17
 0.595316 0.018564 0.447795
 0.595316 0.190748 0.413602
@@ -7730,7 +7730,7 @@ data 8
 Mesh.079
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 17
 0.596828 0.018439 0.446193
 0.596828 0.190623 0.412
@@ -7853,7 +7853,7 @@ data 8
 Mesh.032
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 5.074357 3.191345 -0.002287
 5.394983 3.191345 -0.040867
@@ -7927,7 +7927,7 @@ OBJECT poly
 name "FrontAftStrut"
 data 8
 Mesh.150
-crease 30.000000
+crease 80.000000
 numvert 8
 -2.989242 -1.141261 0.055981
 -3.011612 -1.100757 0.055981
@@ -7991,7 +7991,7 @@ OBJECT poly
 name "FrontLowerStrut"
 data 8
 Mesh.151
-crease 30.000000
+crease 80.000000
 numvert 28
 -3.051851 -1.363209 -0.014504
 -3.051851 -1.323202 -0.020807
@@ -8269,7 +8269,7 @@ data 8
 Mesh.152
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 146
 -3.001343 -1.667941 -0.025078
 -3.019021 -1.66062 -0.025078
@@ -10055,7 +10055,7 @@ OBJECT poly
 name "FrontUpperStrut"
 data 8
 Mesh.153
-crease 30.000000
+crease 80.000000
 numvert 12
 -2.988968 -0.758167 0.079697
 -3.038046 -0.758167 0.079697
@@ -10149,7 +10149,7 @@ data 8
 Mesh.091
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 227
 1.34141 -0.79068 -0.225227
 4.03244 -0.619906 -0.068152
@@ -12480,7 +12480,7 @@ data 8
 Mesh.090
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 189
 0.637835 0.218995 -1.098922
 1.348945 0.201441 -1.073423
@@ -14477,7 +14477,7 @@ OBJECT poly
 name "FwdFormationLight"
 data 8
 Mesh.034
-crease 30.000000
+crease 80.000000
 numvert 6
 -2.077067 0.793044 0.048961
 -2.023229 0.807068 0.029863
@@ -14521,7 +14521,7 @@ OBJECT poly
 name "GreenPosLight1"
 data 8
 Mesh.010
-crease 30.000000
+crease 80.000000
 numvert 6
 -3.311515 -0.507128 -0.766632
 -3.311515 -0.587747 -0.697518
@@ -14559,7 +14559,7 @@ OBJECT poly
 name "GreenPosLight2"
 data 8
 Mesh.040
-crease 30.000000
+crease 80.000000
 numvert 6
 -3.311545 -0.507056 -0.766522
 -3.311545 -0.587674 -0.697408
@@ -14599,7 +14599,7 @@ data 8
 Mesh.029
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 16
 4.2077 0.009706 -0.37399
 4.2077 0.160234 -0.341824
@@ -14713,7 +14713,7 @@ OBJECT poly
 name "InternalFrontGearDoor"
 data 8
 Mesh.007
-crease 30.000000
+crease 80.000000
 numvert 7
 -3.130636 -1.392616 -0.277217
 -1.871778 -1.376191 -0.29761
@@ -14758,7 +14758,7 @@ OBJECT poly
 name "InternalLeftMainDoor"
 data 8
 Mesh.009
-crease 30.000000
+crease 80.000000
 numvert 6
 -0.830126 -0.742362 0.521733
 0.681575 -0.697378 0.572661
@@ -14796,7 +14796,7 @@ OBJECT poly
 name "InternalRightMainDoor"
 data 8
 Mesh.008
-crease 30.000000
+crease 80.000000
 numvert 6
 -0.830929 -0.742357 -0.523699
 0.681575 -0.697378 -0.587187
@@ -14836,7 +14836,7 @@ data 8
 Mesh.093
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 8
 1.73389 0.053383 3.578267
 1.89916 0.013104 4.613617
@@ -14902,7 +14902,7 @@ data 8
 Mesh.096
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 8
 1.35176 0.152707 1.065196
 1.7339 0.053383 3.578266
@@ -14968,7 +14968,7 @@ data 8
 Mesh.017
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 5.33846 -0.260634 2.790397
 4.593236 -0.2646 2.836616
@@ -15014,7 +15014,7 @@ data 8
 Mesh.092
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 14
 -0.80967 0.063653 1.416833
 1.28156 -0.02482 4.606663
@@ -15108,7 +15108,7 @@ OBJECT poly
 name "LeftLowerMainStrut"
 data 8
 Mesh.002
-crease 30.000000
+crease 80.000000
 numvert 136
 0.099034 -1.154663 0.677141
 0.098224 -1.144876 0.687908
@@ -16898,7 +16898,7 @@ data 8
 Mesh.028
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 10
 4.555547 0.026664 1.0804
 4.555547 0.05485 0.64785
@@ -16942,7 +16942,7 @@ data 8
 Mesh.004
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 98
 0.688885 -1.460945 1.282643
 0.659078 -1.416924 1.290406
@@ -18202,7 +18202,7 @@ data 8
 Mesh.020
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 2.12146 0.014148 4.606955
 2.139519 0.049449 3.570143
@@ -18242,7 +18242,7 @@ data 8
 Mesh.056
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 1.719892 0.073899 3.5817
 1.734542 0.089968 3.58272
@@ -18282,7 +18282,7 @@ data 8
 Mesh.015
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 7
 5.33846 -0.260633 2.790399
 4.593237 -0.264599 2.836614
@@ -18341,7 +18341,7 @@ data 8
 Mesh.022
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 1.294246 -0.006548 4.58845
 1.280846 0.011041 4.6059
@@ -18379,7 +18379,7 @@ OBJECT poly
 name "LeftUpperMainStrut"
 data 8
 Mesh.003
-crease 30.000000
+crease 80.000000
 numvert 100
 -0.509703 -0.804192 0.298968
 -0.510757 -0.795537 0.308512
@@ -19809,7 +19809,7 @@ data 8
 Mesh.027
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 4.555548 0.091491 1.0804
 4.555548 0.136775 1.0804
@@ -19847,7 +19847,7 @@ OBJECT poly
 name "LhoCondensCone"
 data 8
 Mesh.005
-crease 30.000000
+crease 80.000000
 numvert 7
 0.26488 0.00295 4.808999
 5.00572 0.009136 4.801603
@@ -19924,7 +19924,7 @@ data 8
 Mesh.057
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 24
 -5.85416 0.367736 -0.05907
 -5.83446 0.417656 -0.04564
@@ -20100,7 +20100,7 @@ OBJECT poly
 name "LowFormationLight"
 data 8
 Mesh.033
-crease 30.000000
+crease 80.000000
 numvert 6
 -1.223697 -0.851753 0.033867
 -1.26546 -0.859211 0.014769
@@ -20144,7 +20144,7 @@ OBJECT poly
 name "Poly"
 data 8
 Mesh.055
-crease 30.000000
+crease 80.000000
 numvert 3
 5.03477 1.15181 -0.001775
 4.31473 1.15181 0.043123
@@ -20163,7 +20163,7 @@ data 8
 Mesh.075
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 32
 4.612857 0.452113 0.089106
 4.612857 0.450425 -0.084941
@@ -20395,7 +20395,7 @@ OBJECT poly
 name "Poly.002"
 data 8
 Mesh.077
-crease 30.000000
+crease 80.000000
 numvert 48
 4.338967 0.253982 0.504028
 4.338966 0.430301 0.363266
@@ -20837,7 +20837,7 @@ data 8
 Mesh.099
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 23
 -6.63713 -0.052852 0.406264
 -6.12835 -0.178358 0.414746
@@ -21044,7 +21044,7 @@ data 8
 Mesh.098
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 29
 -6.63713 -0.052852 0.40627
 -6.12838 -0.008151 0.47753
@@ -21309,7 +21309,7 @@ OBJECT poly
 name "RedPosLight1"
 data 8
 Mesh.011
-crease 30.000000
+crease 80.000000
 numvert 6
 -3.311625 -0.506391 0.750868
 -3.311625 -0.587009 0.681754
@@ -21347,7 +21347,7 @@ OBJECT poly
 name "RedPosLight2"
 data 8
 Mesh.030
-crease 30.000000
+crease 80.000000
 numvert 6
 -3.311625 -0.506391 0.750868
 -3.311625 -0.587009 0.681754
@@ -21385,7 +21385,7 @@ OBJECT poly
 name "RhoCondensCone"
 data 8
 Mesh.006
-crease 30.000000
+crease 80.000000
 numvert 7
 0.26448 0.002959 -4.686264
 5.00532 0.009145 -4.693659
@@ -21462,7 +21462,7 @@ data 8
 Mesh.094
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 8
 1.73474 0.052416 -3.604003
 1.90001 0.011569 -4.598613
@@ -21528,7 +21528,7 @@ data 8
 Mesh.095
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 8
 1.35295 0.150957 -1.07402
 1.73508 0.051633 -3.604031
@@ -21594,7 +21594,7 @@ data 8
 Mesh.024
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 5.34627 -0.260633 -2.802469
 4.601046 -0.264599 -2.848689
@@ -21640,7 +21640,7 @@ data 8
 Mesh.097
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 7
 -0.81065 0.065216 -1.42361
 1.27943 -0.023489 -4.59923
@@ -21691,7 +21691,7 @@ OBJECT poly
 name "RightLowerMainStrut"
 data 8
 Mesh.084
-crease 30.000000
+crease 80.000000
 numvert 136
 0.099019 -1.154787 -0.683803
 0.098209 -1.144999 -0.69457
@@ -23481,7 +23481,7 @@ data 8
 Mesh.026
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 10
 4.555546 0.026665 -1.08342
 4.555546 0.05485 -0.657704
@@ -23525,7 +23525,7 @@ data 8
 Mesh.085
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 98
 0.688861 -1.460965 -1.294294
 0.659054 -1.416944 -1.302057
@@ -24785,7 +24785,7 @@ data 8
 Mesh.019
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 2.12231 0.01318 -4.598608
 2.140369 0.048482 -3.595873
@@ -24825,7 +24825,7 @@ data 8
 Mesh.018
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 1.721012 0.072768 -3.60735
 1.735662 0.088837 -3.60837
@@ -24865,7 +24865,7 @@ data 8
 Mesh.023
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 7
 5.34627 -0.260633 -2.802482
 4.601047 -0.264599 -2.848697
@@ -24924,7 +24924,7 @@ data 8
 Mesh.021
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 1.291058 -0.003321 -4.59923
 1.278358 0.013004 -4.59923
@@ -24962,7 +24962,7 @@ OBJECT poly
 name "RightUpperMainStrut"
 data 8
 Mesh.086
-crease 30.000000
+crease 80.000000
 numvert 100
 -0.509727 -0.804215 -0.310624
 -0.510781 -0.79556 -0.320168
@@ -26392,7 +26392,7 @@ data 8
 Mesh.025
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 6
 4.555548 0.091492 -1.08342
 4.555548 0.137954 -1.08342
@@ -26432,7 +26432,7 @@ data 8
 Mesh.048
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 3
 4.314726 1.151809 0.043123
 4.314158 1.151809 -0.046994
@@ -26451,7 +26451,7 @@ data 8
 Mesh.049
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 3
 5.520533 3.029971 -0.016738
 5.520533 3.029971 0.008651
@@ -26470,7 +26470,7 @@ data 8
 Mesh.050
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 3
 4.314158 1.151809 -0.046994
 5.85243 3.02997 -0.003321
@@ -26489,7 +26489,7 @@ data 8
 Mesh.051
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 3
 5.85243 3.02997 -0.003321
 4.314726 1.151809 0.043123
@@ -26508,7 +26508,7 @@ data 8
 Mesh.052
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 3
 5.520533 3.029971 0.008651
 5.85243 3.02997 -0.003321
@@ -26527,7 +26527,7 @@ data 8
 Mesh.053
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 3
 5.85243 3.02997 -0.003321
 4.314158 1.151809 -0.046994
@@ -26546,7 +26546,7 @@ data 8
 Mesh.054
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 3
 4.314726 1.151809 0.043123
 5.85243 3.02997 -0.003321
@@ -26565,7 +26565,7 @@ data 8
 Mesh.031
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 20
 2.81058 1.15182 -0.001775
 3.687348 1.15182 -0.052686
@@ -26769,7 +26769,7 @@ data 8
 Mesh.076
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 17
 2.986734 -0.089174 0.438464
 2.986734 0.08745 0.438521
@@ -26892,7 +26892,7 @@ data 8
 Mesh.043
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 10
 1.78656 -0.54083 -0.48426
 1.78944 -0.54139 0.460943
@@ -26972,7 +26972,7 @@ data 8
 Mesh.102
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 5.85471 3.034232 0.001601
 5.278403 3.034232 0.01947
@@ -26993,7 +26993,7 @@ data 8
 Mesh.101
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 5.278402 3.034232 0.01947
 4.681371 3.034232 0.001601
@@ -27014,7 +27014,7 @@ data 8
 Mesh.104
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 5.85434 3.033172 -0.009489
 5.278033 3.033172 -0.027358
@@ -27035,7 +27035,7 @@ data 8
 Mesh.103
 texture "f16trans.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 4
 5.278032 3.033172 -0.027358
 4.681001 3.033172 -0.009489
@@ -27054,7 +27054,7 @@ OBJECT poly
 name "WingGreenPosLight"
 data 8
 Mesh.038
-crease 30.000000
+crease 80.000000
 numvert 12
 1.607468 0.003548 -4.601487
 1.554939 -0.007674 -4.582388
@@ -27134,7 +27134,7 @@ OBJECT poly
 name "WingRedPosLight"
 data 8
 Mesh.035
-crease 30.000000
+crease 80.000000
 numvert 12
 1.607224 0.004305 4.49425
 1.554695 -0.006916 4.513349
@@ -27216,7 +27216,7 @@ data 8
 Mesh.100
 texture "f16.rgb"
 texrep 1 1
-crease 30.000000
+crease 80.000000
 numvert 61
 1.31141 -0.037656 -4.60823
 1.31014 -0.001936 -4.60819
