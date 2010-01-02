@@ -117,7 +117,7 @@
   <offsets>
    <x-m>-2.5</x-m>
    <y-m>-1.0</y-m>
-   <z-m>0.15</z-m>
+   <z-m>0.5</z-m>
   </offsets>
  </model>
 
@@ -127,7 +127,7 @@
   <offsets>
    <x-m>-2.5</x-m>
    <y-m>1.0</y-m>
-   <z-m>0.15</z-m>
+   <z-m>0.5</z-m>
   </offsets>
  </model>
 
