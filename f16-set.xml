@@ -32,7 +32,7 @@
   </panel_2>
 
   <hud>
-   <path n="1">Aircraft/f16/hud.xml</path>
+   <path n="1">Aircraft/f16/Models/Cockpit/hud.xml</path>
    <visibility n="1">true</visibility>
    <palette>
     <color n="0">

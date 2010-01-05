@@ -20,12 +20,83 @@
 <!-- disable shadows for these objects -->
 
 <!-- start submodels -->
+ <!-- decide which cockpit we select based upon selected livery -->
  <model>
   <name>Cockpit</name>
-  <path>Aircraft/f16/Models/cockpit.xml</path>
+  <path>Aircraft/f16/Models/Cockpit/F-16A-MLU/cockpit.xml</path>
+  <condition>
+   <equals>
+    <property>sim/model/livery/actype</property>
+    <value>F-16A-MLU</value>
+   </equals>
+  </condition>
  </model>
 
  <model>
+  <name>Cockpit</name>
+  <path>Aircraft/f16/Models/Cockpit/F-16C-40/cockpit.xml</path>
+  <condition>
+   <or>
+    <equals>
+     <property>sim/model/livery/actype</property>
+     <value>F-16C-40</value>
+    </equals>
+    <equals> 
+     <property>sim/model/livery/actype</property>
+     <value>F-16C-42</value>
+    </equals>
+   </or>
+  </condition>
+ </model>
+
+ <model>
+  <name>Cockpit</name>
+  <path>Aircraft/f16/Models/Cockpit/F-16C-50/cockpit.xml</path>
+  <condition>
+   <or>
+    <equals>
+     <property>sim/model/livery/actype</property>
+     <value>F-16C-50</value>
+    </equals>
+    <equals> 
+     <property>sim/model/livery/actype</property>
+     <value>F-16C-52</value>
+    </equals>
+   </or>
+  </condition>
+ </model>
+
+ <model>
+  <name>Pilot</name>
+  <path>Aircraft/f16/Models/pilot.xml</path>
+  <offsets>
+   <x-m>-4.13</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.195</z-m>
+  </offsets>
+ </model>
+
+ <animation>
+  <type>range</type>
+  <object-name>pilot</object-name>
+  <min-m>0</min-m>
+  <max-m>5000</max-m>
+ </animation>
+
+<!--
+ <animation>
+  <type>select</type>
+  <object-name>Pilot</object-name>
+  <condition>
+   <equals>
+    <property>sim/current-view/internal</property>
+    <value>false</value>
+   </equals>
+  </condition>
+ </animation>
+-->
+
+<model>
   <name>new_nozzle</name>
   <path>Aircraft/f16/Models/nozzle.xml</path>
   <offsets>
@@ -35,9 +106,14 @@
   </offsets>
  </model>
 
-<model>
+
+<!-- ===================== START ARMAMENT =========================== -->
+<!-- The armament section should probably be placed in a seperate file -->
+
+<!-- Station 5 -->
+ <model>
   <name>VentralTank</name>
-  <path>Aircraft/f16/Models/centre_fueltank.ac</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/300G.ac</path>
   <offsets>
    <x-m>0</x-m>
    <y-m>0</y-m>
@@ -46,9 +122,10 @@
   </offsets>
  </model>
 
+<!-- Station 4 -->
  <model>
   <name>LExtTank</name>
-  <path>Aircraft/f16/Models/fueltank.ac</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/370G.ac</path>
   <offsets>
    <x-m>-0.50</x-m>
    <y-m>-1.65</y-m>
@@ -57,9 +134,10 @@
   </offsets>
  </model>
 
+<!-- Station 6 -->
  <model>
   <name>RExtTank</name>
-  <path>Aircraft/f16/Models/fueltank.ac</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/370G.ac</path>
   <offsets>
    <x-m>-0.50</x-m>
    <y-m>1.65</y-m>
@@ -68,9 +146,44 @@
   </offsets>
  </model>
 
+<!-- Station 1 -->
  <model>
-  <name>LeftSidewinder</name>
-  <path>Aircraft/f16/Models/sidewinder.ac</path>
+  <name>Station1_AIM-9L</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L.ac</path>
+  <offsets>
+   <x-m>1.5</x-m>
+   <y-m>-4.87</y-m>
+   <z-m>0.0</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station1_AIM-9L_dummy</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L_dummy.ac</path>
+  <offsets>
+   <x-m>1.5</x-m>
+   <y-m>-4.87</y-m>
+   <z-m>0.0</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station1_AIM-9_smokewinder</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9_smokewinder.ac</path>
+  <offsets>
+   <x-m>1.5</x-m>
+   <y-m>-4.87</y-m>
+   <z-m>0.0</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+<!-- Station 9 -->
+ <model>
+  <name>Station9_AIM-9L</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L.ac</path>
   <offsets>
    <x-m>1.5</x-m>
    <y-m>4.87</y-m>
@@ -80,15 +193,29 @@
  </model>
 
  <model>
-  <name>RightSidewinder</name>
-  <path>Aircraft/f16/Models/sidewinder.ac</path>
+  <name>Station9_AIM-9L_dummy</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L_dummy.ac</path>
   <offsets>
    <x-m>1.5</x-m>
-   <y-m>-4.87</y-m>
+   <y-m>4.87</y-m>
    <z-m>0.0</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
+
+ <model>
+  <name>Station9_AIM-9_smokewinder</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9_smokewinder.ac</path>
+  <offsets>
+   <x-m>1.5</x-m>
+   <y-m>4.87</y-m>
+   <z-m>0.0</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+<!-- ======================= END ARMAMENT =========================== -->
+
 
  <model>
   <name>strobe</name>
@@ -233,7 +360,6 @@
   <object-name>RhoCondensCone</object-name>
   <property>null</property>
  </animation>
-
 
 <!-- fuselage animations -->
  <animation>
@@ -1072,12 +1198,28 @@
 
  <animation>
   <type>select</type>
+  <object-name>Link16Antennas</object-name>
+  <condition>
+   <property>sim/model/f16/link16</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>LWStation1</object-name>
   <object-name>LWStation2</object-name>
   <object-name>RWStation1</object-name>
   <object-name>RWStation2</object-name>
   <condition>
    <property>sim/model/f16/wingmounts</property>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>VentralTank</object-name>
+  <condition>
+   <property>sim/model/f16/ventraltank</property>
   </condition>
  </animation>
 
@@ -1092,26 +1234,30 @@
 
  <animation>
   <type>select</type>
-  <object-name>VentralTank</object-name>
+  <object-name>Station1_AIM-9L</object-name>
+  <object-name>Station9_AIM-9L</object-name>
   <condition>
-   <property>sim/model/f16/ventraltank</property>
+   <property>sim/model/f16/AIM-9L</property>
+  </condition>
+ </animation>
+
+<!-- in peacetime we don't carry live ammunition -->
+<!-- however for aerodynamic reasons we carry dummy missiles -->
+ <animation>
+  <type>select</type>
+  <object-name>Station1_AIM-9L_dummy</object-name>
+  <object-name>Station9_AIM-9L_dummy</object-name>
+  <condition>
+   <property>sim/model/f16/AIM-9L_dummy</property>
   </condition>
  </animation>
 
  <animation>
   <type>select</type>
-  <object-name>LeftSidewinder</object-name>
-  <object-name>RightSidewinder</object-name>
+  <object-name>Station1_AIM-9_smokewinder</object-name>
+  <object-name>Station9_AIM-9_smokewinder</object-name>
   <condition>
-   <property>sim/model/f16/sidewinders</property>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>Link16Antennas</object-name>
-  <condition>
-   <property>sim/model/f16/link16</property>
+   <property>sim/model/f16/AIM-9_smokewinders</property>
   </condition>
  </animation>
 

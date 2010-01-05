@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>cockpit.ac</path>
+ <offsets>
+  <z-m>0.0</z-m>
+ </offsets>
+
+ <model>
+  <name>RudderPedals</name>
+  <path>Aircraft/f16/Models/Cockpit/rudder_pedals.xml</path>
+  <offsets>
+   <x-m>-5.05</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.14</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Throttle</name>
+  <path>Aircraft/f16/Models/Cockpit/throttle.xml</path>
+  <offsets>
+   <x-m>-4.43</x-m>
+   <y-m>-0.405</y-m>
+   <z-m>0.225</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>EJECT</name>
+  <path>Aircraft/f16/Models/Cockpit/ejection_handle.ac</path>
+  <offsets>
+   <x-m>-4.500</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.26</z-m>
+  </offsets>
+ </model>
+
+ <animation>
+  <type>range</type>
+  <object-name>RudderPedals</object-name>
+  <object-name>Throttle</object-name>
+  <object-name>EJECT</object-name>
+  <min-m>0</min-m>
+  <max-m>100</max-m>
+ </animation>
+
+ <model>
+  <name>FUELFLOW</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/fuelflow.xml</path>
+  <offsets>
+   <x-m>-4.798</x-m>
+   <y-m>0.185</y-m>
+   <z-m>0.601</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>AI</name>
+  <path>Aircraft/Instruments-3d/standby-adi/stdby-adi.xml</path>
+  <offsets>
+   <x-m>-4.7968</x-m>
+   <y-m>0.131</y-m>
+   <z-m>0.588</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>HSI</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/hsi.xml</path>
+  <offsets>
+   <x-m>-4.6642</x-m>
+   <y-m>0</y-m>
+   <z-m>0.3180</z-m>
+   <pitch-deg>-48</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>DED</name>
+  <path>Aircraft/f16/Models/Cockpit/Avionics/DED/ded.xml</path>
+  <offsets>
+   <x-m>-4.78</x-m>
+   <y-m>0.134</y-m>
+   <z-m>0.6315</z-m>
+   <pitch-deg>-14</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ICP</name>
+  <path>Aircraft/f16/Models/Cockpit/Panels/icp.xml</path>
+  <offsets>
+   <x-m>-4.64</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.617</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>EYEBROW_RIGHT</name>
+  <path>Aircraft/f16/Models/Cockpit/F-16C-50/eyebrow_right.xml</path>
+  <offsets>
+   <x-m>-4.756</x-m>
+   <y-m>0.2255</y-m>
+   <z-m>0.5895</z-m>
+   <roll-deg>-51.75</roll-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>EYEBROW_LEFT</name>
+  <path>Aircraft/f16/Models/Cockpit/F-16C-50/eyebrow_left.xml</path>
+  <offsets>
+   <x-m>-4.756</x-m>
+   <y-m>-0.21065</y-m>
+   <z-m>0.610</z-m>
+   <pitch-deg>-17.0</pitch-deg>
+   <roll-deg>53.25</roll-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>THREAT</name>
+  <path>Aircraft/f16/Models/Cockpit/Avionics/EWS/US_threat_warning_prime.xml</path>
+  <offsets>
+   <x-m>-4.794</x-m>
+   <y-m>-0.198</y-m>
+   <z-m>0.59</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>IFF</name>
+  <path>Aircraft/Instruments-3d/rwr/rwr.xml</path>
+  <offsets>
+   <x-m>-4.77</x-m>
+   <y-m>-0.1195</y-m>
+   <z-m>0.6040</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MISC</name>
+  <path>Aircraft/f16/Models/Cockpit/F-16C-50/misc.xml</path>
+  <offsets>
+   <x-m>-4.770</x-m>
+   <y-m>-0.2645</y-m>
+   <z-m>0.4829</z-m>
+   <pitch-deg>-14.05</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ENGINE</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/engine.xml</path>
+  <offsets>
+   <x-m>-4.770</x-m>
+   <y-m>0.2480</y-m>
+   <z-m>0.4863</z-m>
+   <pitch-deg>-12.75</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>COMPASS</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/mag-compass.xml</path>
+  <offsets>
+   <x-m>-4.763</x-m>
+   <y-m>0.2660</y-m>
+   <z-m>0.403</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>FUEL</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/fuel.xml</path>
+  <offsets>
+   <x-m>-4.768</x-m>
+   <y-m>0.317</y-m>
+   <z-m>0.403</z-m>
+   <pitch-deg>-45</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>LEFT</name>
+  <path>Aircraft/f16/Models/Cockpit/F-16C-50/left_aux_console.xml</path>
+  <offsets>
+   <x-m>-4.649</x-m>
+   <y-m>-0.3222</y-m>
+   <z-m>0.334</z-m>
+   <pitch-deg>-39.35</pitch-deg>
+   <roll-deg>-6.00</roll-deg>
+   <heading-deg>7.3</heading-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MFD1</name>
+  <path>Aircraft/f16/Models/Cockpit/Avionics/MFD/mfd_left.xml</path>
+  <offsets>
+   <x-m>-4.79</x-m>
+   <y-m>-0.156</y-m>
+   <z-m>0.485</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>RADAR_SCREEN</name>
+  <path>Aircraft/Instruments-3d/radar2/radar-screen.xml</path>
+  <offsets>
+   <x-m>-4.795</x-m>
+   <y-m>-0.158</y-m>
+   <z-m>0.485</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <!-- Just a diamond displayed in the HUD above the nearest target -->
+  <name>HUD_ADDS</name>
+  <path>Aircraft/Instruments-3d/radar2/hud.xml</path>
+  <offsets>
+   <x-m>-4.7061</x-m>
+   <y-m>0</y-m>
+   <z-m>0.7535</z-m>
+   <pitch-deg>-15.4</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>MFD2</name>
+  <path>Aircraft/f16/Models/Cockpit/Avionics/MFD/mfd_right.xml</path>
+  <offsets>
+   <x-m>-4.79</x-m>
+   <y-m>0.158</y-m>
+   <z-m>0.485</z-m>
+  </offsets>
+ </model>
+
+ <model>
+  <name>ASI</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/asi.xml</path>
+  <offsets>
+   <x-m>-4.7739</x-m>
+   <y-m>-0.0419</y-m>
+   <z-m>0.4477</z-m>
+   <pitch-deg>-29.8</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>altitude</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/altimeter.xml</path>
+  <offsets>
+   <x-m>-4.7739</x-m>
+   <y-m>0.0419</y-m>
+   <z-m>0.4477</z-m>
+   <pitch-deg>-29.8</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>aoa-gauge</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/aoa-gauge.xml</path>
+  <offsets>
+   <x-m>-4.7317</x-m>
+   <y-m>-0.0608</y-m>
+   <z-m>0.3742</z-m>
+   <pitch-deg>-29.8</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>adi</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/adi.xml</path>
+  <offsets>
+   <x-m>-4.7317</x-m>
+   <y-m>0</y-m>
+   <z-m>0.3742</z-m>
+   <pitch-deg>-29.8</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>vsi</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/vsi.xml</path>
+  <offsets>
+   <x-m>-4.7317</x-m>
+   <y-m>0.0608</y-m>
+   <z-m>0.3742</z-m>
+   <pitch-deg>-29.8</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Instrument Mode</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/instr.xml</path>
+  <offsets>
+   <x-m>-4.6642</x-m>
+   <y-m>-0.0614</y-m>
+   <z-m>0.3180</z-m>
+   <pitch-deg>-48</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>HSI</name>
+  <path>Aircraft/f16/Models/Cockpit/Instruments/hsi.xml</path>
+  <offsets>
+   <x-m>-4.6642</x-m>
+   <y-m>0</y-m>
+   <z-m>0.3180</z-m>
+   <pitch-deg>-48</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Fuel Quantity Sel</name>
+  <path>Aircraft/f16/Models/Cockpit/Panels/fuel-qty-sel.xml</path>
+  <offsets>
+   <x-m>-4.6642</x-m>
+   <y-m>0.0537</y-m>
+   <z-m>0.2936</z-m>
+   <pitch-deg>-48</pitch-deg>
+  </offsets>
+ </model>
+
+ <!-- AOA indexer animations -->
+ <animation>
+  <type>select</type>
+  <object-name>down</object-name>
+  <condition>
+    <property>controls/gear/gear-down</property>
+    <greater-than>
+     <property>orientation/alpha-deg</property>
+     <value>15.0</value>
+    </greater-than>
+   </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>steady</object-name>
+  <condition>
+    <property>controls/gear/gear-down</property>
+    <greater-than>
+     <property>orientation/alpha-deg</property>
+     <value>11.0</value>
+    </greater-than>
+    <less-than>
+     <property>orientation/alpha-deg</property>
+     <value>15.0</value>
+    </less-than>
+   </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>up</object-name>
+  <condition>
+    <property>controls/gear/gear-down</property>
+    <less-than>
+     <property>orientation/alpha-deg</property>
+     <value>11.0</value>
+    </less-than>
+   </condition>
+ </animation>
+
+ <!-- AAR info animations -->
+ <animation>
+  <type>select</type>
+  <object-name>rdy</object-name>
+  <condition>
+   <equals>
+    <property>/systems/refuel/serviceable</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>ar_nws</object-name>
+  <condition>
+   <equals>
+    <property>/systems/refuel/contact</property>
+    <value>true</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>disc</object-name>
+  <condition>
+   <equals>
+    <property>/systems/refuel/contact</property>
+    <value>false</value>
+   </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <condition>
+   <equals>
+    <property>sim/current-view/internal</property>
+    <value>true</value>
+   </equals>
+  </condition>
+  <object-name>FUELFLOW</object-name>
+  <object-name>AI</object-name>
+  <object-name>DED</object-name>
+  <object-name>ICP</object-name>
+  <object-name>EYEBROW_RIGHT</object-name>
+  <object-name>EYEBROW_LEFT</object-name>
+  <object-name>THREAT</object-name>
+  <object-name>IFF</object-name>
+  <object-name>MISC</object-name>
+  <object-name>ENGINE</object-name>
+  <object-name>COMPASS</object-name>
+  <object-name>FUEL</object-name>
+  <object-name>LEFT</object-name>
+  <object-name>MFD1</object-name>
+  <object-name>MFD2</object-name>
+  <object-name>ASI</object-name>
+  <object-name>altitude</object-name>
+  <object-name>adi</object-name>
+ </animation>
+
+</PropertyList>

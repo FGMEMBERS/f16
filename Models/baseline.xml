@@ -96,7 +96,7 @@
 <!-- Panels -->
  <model>
   <name>ICP</name>
-  <path>Aircraft/f16/Models/icp.ac</path>
+  <path>Aircraft/f16/Models/Cockpit/Panels/icp.ac</path>
   <offsets>
    <x-m>-4.635</x-m>
    <y-m>0.0</y-m>
