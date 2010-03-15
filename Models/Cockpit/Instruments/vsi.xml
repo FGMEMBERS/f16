@@ -5,7 +5,7 @@
 
  <animation>
   <type>select</type>
-  <object-name>off-flag-inverted</object-name>
+  <object-name>VSI_off-flag-inverted</object-name>
   <condition>
     <property>systems/static/serviceable</property><!-- FIXME -->
   </condition>
@@ -14,7 +14,7 @@
  <animation>
   <name>needle</name>
   <type>rotate</type>
-  <object-name>needle</object-name>
+  <object-name>VSI_needle</object-name>
   <property>velocities/vertical-speed-fps</property>
   <interpolation>
    <entry><ind>-100.0</ind><dep>-90</dep></entry>
@@ -43,10 +43,10 @@
 
  <!-- lighting -->
  <animation>
-  <object-name>mount</object-name>
+  <object-name>VSI_mount</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
@@ -54,30 +54,30 @@
  </animation>
 
  <animation>
-  <object-name>off-flag-inverted</object-name>
+  <object-name>VSI_off-flag-inverted</object-name>
   <type>material</type>
   <emission> 
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.55</red>
    <green>0.24</green>
    <blue>0.10</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>face</object-name>
+  <object-name>VSI_face</object-name>
   <type>material</type>
   <emission> 
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.55</red>
    <green>0.24</green>
    <blue>0.10</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>needle</object-name>
+  <object-name>VSI_needle</object-name>
   <type>material</type>
   <emission> 
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.55</red>
    <green>0.24</green>
    <blue>0.10</blue>

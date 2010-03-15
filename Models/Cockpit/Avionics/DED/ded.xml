@@ -7,7 +7,7 @@
  <panel>
   <name>Panel3D</name>
   <path>Aircraft/f16/Models/Cockpit/Avionics/DED/ded-display.xml</path>
-  <bottom-left>
+<!--  <bottom-left>
    <x-m> 0.00</x-m>
    <y-m>-0.045</y-m>
    <z-m>-0.044</z-m>
@@ -21,6 +21,23 @@
    <x-m> 0.00</x-m>
    <y-m>-0.045</y-m>
    <z-m> 0.028</z-m>
+  </top-left> -->
+
+
+  <bottom-left>
+   <x-m>-4.58</x-m>
+   <y-m>0.08</y-m>
+   <z-m>0.66</z-m>
+  </bottom-left>
+  <bottom-right>
+   <x-m>-4.58</x-m>
+   <y-m>0.15</y-m>
+   <z-m>0.66</z-m>
+  </bottom-right>
+  <top-left>
+   <x-m>-4.58</x-m>
+   <y-m>0.08</y-m>
+   <z-m>0.71</z-m>
   </top-left>
  </panel>
 

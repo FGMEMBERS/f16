@@ -5,7 +5,7 @@ kids 1
 OBJECT poly
 name "rect"
 loc 0.000311276 -0.000717465 -0.000422714
-texture "../../Textures/blck40-panels1.rgb"
+texture "../../Textures/panels-blck40-1.rgb"
 texrep -0.175 0.204
 texoff -0.2 0.493
 numvert 53

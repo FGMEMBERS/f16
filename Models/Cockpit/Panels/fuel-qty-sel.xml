@@ -6,12 +6,13 @@
 
  <animation>
   <type>select</type>
-  <object-name>marker-beacon-on</object-name>
+  <object-name>FQS_marker-beacon-on</object-name>
   <condition><!-- FIXME -->
    <or>
     <property>instrumentation/marker-beacon/outer</property>
     <property>instrumentation/marker-beacon/outer</property>
     <property>instrumentation/marker-beacon/outer</property>
+    <property>controls/test/test-panel/mal-ind-lts</property>
    </or>
   </condition>
  </animation>
@@ -20,7 +21,7 @@
  <!-- Mode knob -->
  <animation>
   <type>rotate</type>
-  <object-name>sel-knob</object-name>
+  <object-name>FQS_sel-knob</object-name>
   <property>controls/fuel/qty-selector</property>
   <factor>45</factor>
   <center>
@@ -40,7 +41,7 @@
   <name>sel-knob-left</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>sel-knob-left</object-name>
+  <object-name>FQS_sel-knob-left</object-name>
   <action>
    <button>0</button>
    <repeatable>false</repeatable>
@@ -59,7 +60,7 @@
   <name>sel-knob-right</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>sel-knob-right</object-name>
+  <object-name>FQS_sel-knob-right</object-name>
   <action>
    <button>0</button>
    <repeatable>false</repeatable>
@@ -77,7 +78,7 @@
 
  <!-- Ext Fuel Trans Switch -->
  <animation>
-  <object-name>fuel-trans-switch</object-name>
+  <object-name>FQS_fuel-trans-switch</object-name>
   <type>rotate</type>
   <property>controls/fuel/external-transfer</property>
   <factor>50</factor>
@@ -97,7 +98,7 @@
   <name>ext-trans-toggle</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>ext-trans-toggle</object-name>
+  <object-name>FQS_ext-trans-toggle</object-name>
   <action>
    <button>0</button>
    <binding>
@@ -109,10 +110,10 @@
 
  <!--lighting -->
  <animation>
-  <object-name>mount</object-name>
+  <object-name>FQS_mount</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
@@ -120,10 +121,10 @@
  </animation>
 
  <animation>
-  <object-name>marker-beacon</object-name>
+  <object-name>FQS_marker-beacon</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
@@ -131,7 +132,7 @@
  </animation>
 
  <animation>
-  <object-name>marker-beacon-on</object-name>
+  <object-name>FQS_marker-beacon-on</object-name>
   <type>material</type>
   <emission>
    <red>1</red>
@@ -141,10 +142,10 @@
  </animation>
 
  <animation>
-  <object-name>sel-knob</object-name> 
+  <object-name>FQS_sel-knob</object-name> 
   <type>material</type>
   <emission> 
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
@@ -152,10 +153,10 @@
  </animation>
 
  <animation>
-  <object-name>fuel-trans-switch</object-name> 
+  <object-name>FQS_fuel-trans-switch</object-name> 
   <type>material</type>
   <emission> 
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>

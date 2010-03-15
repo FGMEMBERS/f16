@@ -1,21 +1,23 @@
 <?xml version="1.0"?>
 
 <PropertyList>
-
+<!--
  <path>baseline.ac</path>
  <offsets>
   <z-m>0.15</z-m>
   <pitch-deg>0.3</pitch-deg>
  </offsets>
-
+-->
  <!-- sort transparent objects -->
+<!--
  <animation>
   <object-name>canopy_glass_fwd</object-name>
   <object-name>hud_glass</object-name>
   <object-name>canopy_back</object-name>
  </animation>
-
+-->
  <!-- group all position lights -->
+ <!--
  <animation>
   <name>pos_lights</name>
   <object-name>aft_pos_light1</object-name>
@@ -28,8 +30,9 @@
   <object-name>wing_red_pos_light</object-name>
   <object-name>wing_green_pos_light</object-name>
  </animation>
-
+-->
  <!-- disable shadows for these objects -->
+<!--
  <animation>
   <type>noshadow</type>
   <object-name>pos_lights_lit</object-name>
@@ -48,14 +51,16 @@
   <object-name>lhocondenscone</object-name>
   <object-name>rhocondenscone</object-name>
  </animation>
-
+-->
+<!--
  <animation>
   <type>alpha-test</type>
   <alpha-factor>0.01</alpha-factor>
  </animation>
-
+-->
 
 <!-- Submodels -->
+<!--
  <model>
   <name>RudderPedals</name>
   <path>Aircraft/f16/Models/rudder_pedals.xml</path>
@@ -91,9 +96,10 @@
    <z>3.2</z>
   </axis>
  </animation>
-
+-->
 
 <!-- Panels -->
+<!--
  <model>
   <name>ICP</name>
   <path>Aircraft/f16/Models/Cockpit/Panels/icp.ac</path>
@@ -135,20 +141,21 @@
    <pitch-deg>-5.45</pitch-deg>
   </offsets>
  </model>
-
+-->
+<!--
  <model>
   <name>LEFT</name>
   <path>Aircraft/f16/Models/left_front.xml</path>
   <offsets>
    <x-m>-4.66</x-m>
    <y-m>-0.31</y-m>
-   <z-m>0.33</z-m>
+   <z-m>0.33</z-m>-->
    <!-- roll-deg>-5.0</roll-deg -->
-   <pitch-deg>-46.0</pitch-deg>
+<!--   <pitch-deg>-46.0</pitch-deg>
    <heading-deg>-4.2</heading-deg>
   </offsets>
- </model>
-
+ </model>-->
+<!--
  <model>
   <name>MFD1</name>
   <path>Aircraft/f16/Models/mfd.ac</path>
@@ -178,7 +185,7 @@
    <z-m>0.26</z-m>
   </offsets>
  </model>
-
+-->
 <!-- Instruments -->
 
 <!--
@@ -234,7 +241,7 @@
 
 
 <!-- fuselage animations -->
-
+<!--
  <animation>
   <type>select</type>
   <object-name>internal_flame</object-name>
@@ -410,7 +417,7 @@
    <z>0.0</z>
   </axis>
  </animation>
-
+-->
 <!--
  <animation>
   <type>translate</type>
@@ -425,7 +432,7 @@
   </axis>
  </animation>
 -->
-
+<!--
  <animation>
   <type>rotate</type>
   <object-name>left_main_wheel</object-name>
@@ -645,7 +652,7 @@
    <z>0.0454</z>
   </axis>
  </animation>
-
+-->
 <!--
  <animation>
   <type>select</type>
@@ -751,7 +758,7 @@
   </axis>
  </animation>
 -->
-
+<!--
  <animation>
   <type>select</type>
   <object-name>aft_pos_light1</object-name>
@@ -774,15 +781,16 @@
    </equals>
   </condition>
  </animation>
-
+-->
+<!--
  <animation>
   <name>timed_nav_lights</name>
   <type>timed</type>
   <object-name>pos_lights_lit</object-name>
   <object-name>pos_lights</object-name>
   <duration-sec>1.0</duration-sec>
- </animation>
-
+ </animation> -->
+<!-- absolete 
  <animation>
   <type>select</type>
   <object-name>timed_nav_lights</object-name>
@@ -790,7 +798,8 @@
    <property>controls/lighting/nav-lights</property>
   </condition>
  </animation>
-
+-->
+<!--
  <animation>
   <type>select</type>
   <object-name>lhicondenscone</object-name>
@@ -815,5 +824,5 @@
    </greater-than>
   </condition>
  </animation>
-
+-->
 </PropertyList>

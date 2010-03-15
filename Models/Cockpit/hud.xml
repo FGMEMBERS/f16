@@ -2,6 +2,13 @@
 
 <PropertyList>
 
+<!-- We don't want the HUD to move when we adjust are sitting height -->
+<!--
+ <offsets>
+  <z-m alias="" />
+ </offsets>
+-->
+
 <!-- clipping is defined in f16-set.xml -->
 <!-- dimensions are x -70 x 70 y -15 y -180  -->
 
@@ -10,7 +17,7 @@
     <label>
         <name>G Load</name>
         <x>-43</x>
-        <y>-20</y>
+        <y>20</y>
         <width>1</width>
         <height>1</height>
         <input>
@@ -26,7 +33,7 @@
         <name>Pitch Ladder</name>
         <type>pitch</type>
         <x>-20</x>
-        <y>-120</y>
+        <y>-100</y>
         <width>40</width>
         <height>239</height>
         <roll-input>
@@ -58,7 +65,7 @@
     <tape>
         <name>Altitude-MSL</name>
         <x>37</x>
-        <y>-76</y>
+        <y>-36</y>
         <width>7</width>
         <height>50</height>
         <input>
@@ -88,7 +95,7 @@
     <tape>
         <name>KIAS</name>
         <x>-50</x>
-        <y>-76</y>
+        <y>-36</y>
         <width>7</width>
         <height>50</height>
         <input>
@@ -119,7 +126,7 @@
     <tape>
         <name>Gyrocompass</name>
         <x>-14.8</x>
-        <y>-93</y>
+        <y>-53</y>
         <width>30</width>
         <height>10</height>
         <input>
@@ -131,7 +138,7 @@
         <major-divisions>10</major-divisions>
         <minor-divisions>5</minor-divisions>
         <tick-bottom>false</tick-bottom>
-        <tick-top>true</tick-top>
+        <tick-top>false</tick-top>
         <tick-right>false</tick-right>
         <tick-left>false</tick-left>
         <cap-bottom>false</cap-bottom>
@@ -145,11 +152,19 @@
         <tick-length>fixed</tick-length>
     </tape>
 
+    <label>
+        <name>Gyro Heading Marker</name>
+        <x>0</x>
+        <y>-41</y>
+        <width>1</width>
+        <height>1</height>
+        <format>v</format>
+    </label>
 
     <label>
         <name>KIAS</name>
         <x>-65</x>
-        <y>-55</y>
+        <y>-15</y>
         <width>18</width>
         <height>8</height>
         <input>
@@ -164,7 +179,7 @@
     <label>
         <name>KIAS Marker</name>
         <x>-43</x>
-        <y>-47</y>
+        <y>-07</y>
         <width>1</width>
         <height>1</height>
         <format>C</format>
@@ -174,7 +189,7 @@
     <label>
         <name>Altitude</name>
         <x>45</x>
-        <y>-55</y>
+        <y>-35</y>
         <width>24</width>
         <height>8</height>
         <input>
@@ -189,7 +204,7 @@
     <label>
         <name>SIM</name>
         <x>-43</x>
-        <y>-81</y>
+        <y>-41</y>
         <width>1</width>
         <height>1</height>
         <format>SIM</format>
@@ -200,7 +215,7 @@
     <label>
         <name>MACH Number</name>
         <x>-43</x>
-        <y>-87</y>
+        <y>-47</y>
         <width>1</width>
         <height>1</height>
         <input>

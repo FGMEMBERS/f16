@@ -7,12 +7,8 @@
  <type>select</type>
  <object-name>chocks</object-name>
  <condition>
-  <and>
    <property>controls/gear/brake-parking</property>
-   <not>
-   <property>controls/lighting/strobe</property>
-   </not>
-  </and>
+   <not><property>controls/lighting/ext-lighting-panel/anti-collision</property></not>
  </condition>
 </animation>
  

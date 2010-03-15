@@ -7,12 +7,16 @@
  <background>Aircraft/f16/Models/Cockpit/Textures/trans.rgb</background>
  <w>1024</w>
  <h>768</h>
+
+ <x-offset>0</x-offset>
  <y-offset>0</y-offset>
+ <z-offset>0</z-offset>
+
 
  <instruments>
   <instrument>
    <name>Data Entry Display</name>
-   <w-base>80</w-base>
+   <w-base>85</w-base>
    <h-base>28</h-base>
    <x>512</x>
    <y>512</y>
@@ -24,7 +28,8 @@
  <!-- ================== 1st row ================= -->
 
  <!-- disabled as you can't see this row from pilots p.o.v. -->
- <!--
+ <!-- FIXME needs condition statement -->
+
     <layer>
      <name>UHF</name>
      <type>text</type>
@@ -144,7 +149,12 @@
      <chunks>
       <chunk>
        <type>literal</type>
-       <text>VHF</text>
+       <text>VHF </text>
+      </chunk>
+      <chunk>
+       <type>number-value</type>
+       <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
+       <format>%3.2f</format>
       </chunk>
      </chunks>
      <transformations>
@@ -193,7 +203,7 @@
 
  <!-- ================== 5th row ================= -->
 
-  <!--
+<!--
     <layer>
      <name>hack time</name>
      <type>text</type>
@@ -221,7 +231,7 @@
       </transformation>
      </transformations>
     </layer>
-  -->
+-->
 
     <layer>
      <name>IFF mode</name>
@@ -292,7 +302,16 @@
      <chunks>
       <chunk>
        <type>literal</type>
-       <text>T   X</text>
+       <text>T</text>
+      </chunk>
+      <chunk>
+       <type>number-value</type>
+       <property>/instrumentation/tacan/frequencies/selected-channel</property>
+       <format>%3.0f</format>
+      </chunk>
+      <chunk>
+       <type>text-value</type>
+       <property>/instrumentation/tacan/frequencies/selected-channel[4]</property>
       </chunk>
      </chunks>
      <transformations>

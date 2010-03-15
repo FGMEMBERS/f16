@@ -19,7 +19,7 @@
  <!-- TODO: using simple electrical scheme for now -->
  <animation>
   <type>select</type>
-  <object-name>off-flag</object-name>
+  <object-name>HSI_off-flag</object-name>
   <condition>
    <less-than>
     <property>systems/electrical/outputs/adi</property>
@@ -31,7 +31,7 @@
 <!-- Compass Card -->
  <animation>
   <type>rotate</type>
-  <object-name>compass-card</object-name>
+  <object-name>HSI_compass-card</object-name>
   <property>orientation/heading-magnetic-deg</property>
   <center>
    <x-m>0</x-m>
@@ -46,14 +46,14 @@
  <!-- TACAN mode -->
  <animation>
   <type>select</type>
-  <object-name>bearing-tcn-needle-on</object-name>
+  <object-name>HSI_brg-tcn-needle-on</object-name>
   <condition>
    <property>instrumentation/tacan/in-range</property>
   </condition>
  </animation>
  <animation>
   <type>rotate</type>
-  <object-name>bearing-tcn-needle-on</object-name>
+  <object-name>HSI_brg-tcn-needle-on</object-name>
   <property>orientation/heading-magnetic-deg</property>
   <center>
    <x-m>0</x-m>
@@ -66,7 +66,7 @@
  </animation>
  <animation>
   <type>rotate</type>
-  <object-name>bearing-tcn-needle-on</object-name>
+  <object-name>HSI_brg-tcn-needle-on</object-name>
   <property>instrumentation/tacan/indicated-bearing-true-deg</property>
   <!-- Note: TCN should provide magnetic-degs, as do the HSI -->
   <center>
@@ -81,7 +81,7 @@
 
  <animation>
   <type>select</type>
-  <object-name>bearing-needle-off</object-name>
+  <object-name>HSI_brg-needle-off</object-name>
   <condition>
    <not>
     <property>instrumentation/tacan/in-range</property>
@@ -90,7 +90,7 @@
  </animation>
  <animation>
   <type>rotate</type>
-  <object-name>bearing-needle-off</object-name>
+  <object-name>HSI_brg-needle-off</object-name>
   <property>orientation/heading-magnetic-deg</property>
   <center>
    <x-m>0</x-m>
@@ -104,7 +104,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>cdi</object-name>
+  <object-name>HSI_cdi</object-name>
   <property>orientation/heading-magnetic-deg</property>
   <center>
    <x-m>0</x-m>
@@ -115,7 +115,7 @@
  </animation>
  <animation>
   <type>rotate</type>
-  <object-name>cdi</object-name>
+  <object-name>HSI_cdi</object-name>
   <property>instrumentation/nav[1]/radials/selected-deg</property>
   <center>
    <x-m>0</x-m>
@@ -129,7 +129,7 @@
  <!-- HDG knob -->
  <animation>
   <type>rotate</type>
-  <object-name>hdg-knob</object-name>
+  <object-name>HSI_hdg-knob</object-name>
   <property>instrumentation/heading-indicator-fg/offset-deg</property>
   <center>
    <x-m>0</x-m>
@@ -145,7 +145,7 @@
   <name>heading-ccw</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>hdg-knob-left</object-name>
+  <object-name>HSI_hdg-knob-left</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -165,7 +165,7 @@
   <name>heading-ccw-fast</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>hdg-knob-left</object-name>
+  <object-name>HSI_hdg-knob-left</object-name>
   <action>
    <button>2</button>
    <repeatable>true</repeatable>
@@ -185,7 +185,7 @@
   <name>heading-cw</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>hdg-knob-right</object-name>
+  <object-name>HSI_hdg-knob-right</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -205,7 +205,7 @@
   <name>heading-cw-fast</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>hdg-knob-right</object-name>
+  <object-name>HSI_hdg-knob-right</object-name>
   <action>
    <button>2</button>
    <repeatable>true</repeatable>
@@ -225,7 +225,7 @@
  <!-- COURSE Knob -->
  <animation>
   <type>rotate</type>
-  <object-name>course-knob</object-name>
+  <object-name>HSI_course-knob</object-name>
   <property>instrumentation/nav[1]/radials/selected-deg</property>
   <center>
    <x-m>0</x-m>
@@ -240,7 +240,7 @@
   <name>course-ccw</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>course-knob-left</object-name>
+  <object-name>HSI_course-knob-left</object-name>
   <action>
    <button>1</button>
    <repeatable>true</repeatable>
@@ -260,7 +260,7 @@
   <name>course-ccw-fast</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>course-knob-left</object-name>
+  <object-name>HSI_course-knob-left</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -280,7 +280,7 @@
   <name>course-cw</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>course-knob-right</object-name>
+  <object-name>HSI_course-knob-right</object-name>
   <action>
    <button>1</button>
    <repeatable>true</repeatable>
@@ -300,7 +300,7 @@
   <name>course-cw-fast</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>course-knob-right</object-name>
+  <object-name>HSI_course-knob-right</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -320,7 +320,7 @@
  <!-- TACAN Distance Digital Display -->
  <animation>
   <type>select</type>
-  <object-name>out-of-range-flag</object-name>
+  <object-name>HSI_out-of-range-flag</object-name>
   <condition>
    <not>
     <property>instrumentation/tacan/in-range</property>
@@ -330,7 +330,7 @@
 
  <animation>
   <type>textranslate</type>
-  <object-name>miles-drum-1</object-name>
+  <object-name>HSI_miles-drum-1</object-name>
   <property>instrumentation/tacan/indicated-distance-nm</property>
   <factor>0.1</factor>
   <offset>-1</offset>
@@ -338,7 +338,7 @@
  </animation>
  <animation>
   <type>textranslate</type>
-  <object-name>miles-drum-2</object-name>
+  <object-name>HSI_miles-drum-2</object-name>
   <property>instrumentation/tacan/indicated-distance-nm</property>
   <factor>0.01</factor>
   <offset>-10</offset>
@@ -348,7 +348,7 @@
  </animation>
  <animation>
   <type>textranslate</type>
-  <object-name>miles-drum-3</object-name>
+  <object-name>HSI_miles-drum-3</object-name>
   <property>instrumentation/tacan/indicated-distance-nm</property>
   <factor>0.001</factor>
   <offset>-100</offset>
@@ -360,7 +360,7 @@
 <!-- Course Digital Display -->
  <animation>
   <type>textranslate</type>
-  <object-name>course-drum-1</object-name>
+  <object-name>HSI_course-drum-1</object-name>
   <property>instrumentation/nav[1]/radials/selected-deg</property>
   <factor>0.1</factor>
   <offset>-1</offset>
@@ -368,7 +368,7 @@
  </animation>
  <animation>
   <type>textranslate</type>
-  <object-name>course-drum-2</object-name>
+  <object-name>HSI_course-drum-2</object-name>
   <property>instrumentation/nav[1]/radials/selected-deg</property>
   <factor>0.01</factor>
   <offset>-10</offset>
@@ -378,7 +378,7 @@
  </animation>
  <animation>
   <type>textranslate</type>
-  <object-name>course-drum-3</object-name>
+  <object-name>HSI_course-drum-3</object-name>
   <property>instrumentation/nav[1]/radials/selected-deg</property>
   <factor>0.001</factor>
   <offset>-100</offset>
@@ -389,14 +389,14 @@
 
  <!-- For now, hide everything else -->
  <animation>
-  <object-name>tcn-tofrom-to</object-name>
-  <object-name>tcn-tofrom-from</object-name>
-  <object-name>vor-tofrom-to</object-name>
-  <object-name>vor-tofrom-from</object-name>
-  <object-name>tcn-cdi-on</object-name>
-  <object-name>vor-cdi-off</object-name>
-  <object-name>bearing-vor-needle-on</object-name>
-  <object-name>bearing-validity-flag</object-name>
+  <object-name>HSI_tcn-tofrom-to</object-name>
+  <object-name>HSI_tcn-tofrom-from</object-name>
+  <object-name>HSI_vor-tofrom-to</object-name>
+  <object-name>HSI_vor-tofrom-from</object-name>
+  <object-name>HSI_tcn-cdi-on</object-name>
+  <object-name>HSI_vor-cdi-off</object-name>
+  <object-name>HSI_brg-vor-needle-on</object-name>
+  <object-name>HSI_brg-validity-flag</object-name>
 
   <type>select</type>
   <condition>
@@ -411,20 +411,20 @@
 
  <!-- lighting -->
  <animation>
-  <object-name>mount</object-name>
+  <object-name>HSI_mount</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>knobs</object-name>
+  <object-name>HSI_knobs</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
@@ -432,60 +432,60 @@
  </animation>
 
  <animation>
-  <object-name>needles</object-name>
+  <object-name>HSI_needles</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.0</red>
    <green>1.0</green>
    <blue>0.40</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>cdi</object-name>
+  <object-name>HSI_cdi</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.0</red>
    <green>1.0</green>
    <blue>0.40</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>drums</object-name>
+  <object-name>HSI_drums</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.0</red>
    <green>1.0</green>
    <blue>0.40</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>compass-card</object-name>
+  <object-name>HSI_compass-card</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.0</red>
    <green>1.0</green>
    <blue>0.40</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>aircraft-symbol</object-name>
+  <object-name>HSI_aircraft-symbol</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.0</red>
    <green>1.0</green>
    <blue>0.40</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>off-flag</object-name>
+  <object-name>HSI_off-flag</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.0</red>
    <green>1.0</green>
    <blue>0.40</blue>

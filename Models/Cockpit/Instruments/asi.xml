@@ -18,7 +18,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>face</object-name>
+  <object-name>ASI_face</object-name>
   <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
   <interpolation>
    <entry><ind>0</ind><dep>0</dep></entry>
@@ -50,7 +50,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>safe-speed-bug</object-name>
+  <object-name>ASI_safe-speed-bug</object-name>
   <property>sim/model/f-14b/instrumentation/airspeed-indicator/safe-speed-limit-bug</property>
   <interpolation>
    <entry><ind>0</ind><dep>0</dep></entry>
@@ -82,7 +82,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>mach-scale</object-name>
+  <object-name>ASI_mach-scale</object-name>
   <property>instrumentation/airspeed-indicator/indicated-speed-kt</property>
   <interpolation>
    <entry><ind>0</ind><dep>0</dep></entry>
@@ -114,7 +114,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>mach-scale</object-name>
+  <object-name>ASI_mach-scale</object-name>
   <property>velocities/mach</property>
   <interpolation>
    <entry><ind>0</ind><dep>0</dep></entry>
@@ -135,7 +135,7 @@
   <name>asi-bug-left-fine</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>asi-bug-left</object-name>
+  <object-name>ASI_bug-left</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -152,7 +152,7 @@
   <name>asi-bug-left-coarse</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>asi-bug-left</object-name>
+  <object-name>ASI_bug-left</object-name>
   <action>
    <button>1</button>
    <repeatable>true</repeatable>
@@ -170,7 +170,7 @@
   <name>asi-bug-right-fine</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>asi-bug-right</object-name>
+  <object-name>ASI_bug-right</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -187,7 +187,7 @@
   <name>asi-bug-right-coarse</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>asi-bug-right</object-name>
+  <object-name>ASI_bug-right</object-name>
   <action>
    <button>1</button>
    <repeatable>true</repeatable>
@@ -204,20 +204,20 @@
 
  <!-- Lightning -->
  <animation>
-  <object-name>mount</object-name>
+  <object-name>ASI_mount</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
   </emission>
  </animation>
  <animation>
-  <object-name>knob</object-name>
+  <object-name>ASI_knob</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/panel-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
    <red>0.45</red>
    <green>0.34</green>
    <blue>0.18</blue>
@@ -225,10 +225,10 @@
  </animation>
 
  <animation>
-  <object-name>face</object-name>
+  <object-name>ASI_face</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.55</red>
    <green>0.24</green>
    <blue>0.10</blue>
@@ -236,10 +236,10 @@
  </animation>
 
  <animation>
-  <object-name>mach-scale</object-name>
+  <object-name>ASI_mach-scale</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.55</red>
    <green>0.24</green>
    <blue>0.10</blue>
@@ -247,10 +247,21 @@
  </animation>
 
  <animation>
-  <object-name>bkg</object-name>
+  <object-name>ASI_bkg</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
+   <red>0.55</red>
+   <green>0.24</green>
+   <blue>0.10</blue>
+  </emission>
+ </animation>
+ 
+<animation>
+  <object-name>ASI_bkg2</object-name>
+  <type>material</type>
+  <emission>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.55</red>
    <green>0.24</green>
    <blue>0.10</blue>
@@ -258,10 +269,10 @@
  </animation>
 
  <animation>
-  <object-name>safe-speed-bug</object-name>
+  <object-name>ASI_safe-speed-bug</object-name>
   <type>material</type>
   <emission>
-   <factor-prop>controls/lighting/instruments-norm</factor-prop>
+   <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
    <red>0.55</red>
    <green>0.24</green>
    <blue>0.10</blue>

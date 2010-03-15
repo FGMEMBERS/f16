@@ -229,6 +229,7 @@
             <feed>1</feed>
             <feed>2</feed>
             <feed>3</feed>
+            <feed>4</feed>
             <thruster file="direct">
                 <location unit="IN">
                     <x> 0 </x>
@@ -276,6 +277,16 @@
                 <z> -15.0 </z>
             </location>
             <capacity unit="LBS"> 2991 </capacity>
+            <contents unit="LBS"> 0 </contents>
+        </tank>
+        <!-- FIXME station 5 is totally guess work -->
+        <tank type="FUEL">    <!-- External Tank number 2 (station 5) -->
+            <location unit="IN">
+                <x> -174.4 </x>
+                <y>  0     </y>
+                <z> -30.0 </z>
+            </location>
+            <capacity unit="LBS"> 1980 </capacity>
             <contents unit="LBS"> 0 </contents>
         </tank>
     </propulsion>

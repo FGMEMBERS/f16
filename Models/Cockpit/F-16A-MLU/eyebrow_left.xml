@@ -12,7 +12,10 @@
   <object-name>none</object-name>
   <object-name>tf_fail</object-name>
   <condition>
+    <or>
     <property type="bool">/tmp/nill</property>
+    <property>controls/test/test-panel/mal-ind-lts</property>
+    </or>
   </condition>
  </animation>
 

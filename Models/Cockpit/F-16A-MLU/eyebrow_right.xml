@@ -25,7 +25,10 @@
   <object-name>to_ldg_config</object-name>
   <object-name>unused</object-name>
   <condition>
+    <or>
     <property>/tmp/nill</property>
+    <property>controls/test/test-panel/mal-ind-lts</property>
+    </or>
   </condition>
  </animation>
 
