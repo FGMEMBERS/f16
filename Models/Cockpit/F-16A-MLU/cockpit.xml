@@ -452,7 +452,7 @@
   <name>RADAR_SCREEN</name>
   <path>Aircraft/Instruments-3d/radar2/radar-screen.xml</path>
   <offsets>
-   <x-m>-4.795</x-m>
+   <x-m>-4.750</x-m><!-- -4.795 -->
    <y-m>-0.158</y-m>
    <z-m>0.4793</z-m>
   </offsets>
@@ -478,8 +478,8 @@
   <offsets>
    <x-m>-4.7061</x-m>
    <y-m>0</y-m>
-   <z-m>0.7535</z-m>
-   <pitch-deg>-15.4</pitch-deg>
+   <z-m>0.803</z-m>
+   <pitch-deg>-5</pitch-deg>
   </offsets>
  </model>
 

@@ -33,9 +33,9 @@
         <name>Pitch Ladder</name>
         <type>pitch</type>
         <x>-20</x>
-        <y>-100</y>
+        <y>-124</y>
         <width>40</width>
-        <height>239</height>
+        <height>255</height>
         <roll-input>
             <property>/orientation/roll-deg</property>
         </roll-input>
@@ -46,7 +46,7 @@
         <display-span>30.0</display-span>
         <divisions>5.0</divisions>
         <screen-hole>10</screen-hole>
-        <zero-bar-overlength>100</zero-bar-overlength>
+        <zero-bar-overlength>75</zero-bar-overlength>
         <enable-dive-bar-angle>false</enable-dive-bar-angle>
         <enable-dynamic-origin>false</enable-dynamic-origin>
         <enable-fuselage-ref-line>false</enable-fuselage-ref-line>
@@ -125,18 +125,20 @@
 
     <tape>
         <name>Gyrocompass</name>
-        <x>-14.8</x>
-        <y>-53</y>
-        <width>30</width>
+        <x>-32</x>
+        <y>-90</y>
+        <width>60</width>
         <height>10</height>
         <input>
-            <property>/orientation/heading-deg</property>
+            <property>orientation/heading-deg</property>
+            <factor>0.1</factor>
+            <max>85</max>
+            <min>0</min>
         </input>
-        <display-span>25.0</display-span>
-        <modulo>360</modulo>
+        <display-span>3</display-span>
         <option>bottom</option>
-        <major-divisions>10</major-divisions>
-        <minor-divisions>5</minor-divisions>
+        <major-divisions>1</major-divisions>
+        <minor-divisions>0.5</minor-divisions>
         <tick-bottom>false</tick-bottom>
         <tick-top>false</tick-top>
         <tick-right>false</tick-right>
@@ -155,10 +157,24 @@
     <label>
         <name>Gyro Heading Marker</name>
         <x>0</x>
-        <y>-41</y>
+        <y>-78</y>
         <width>1</width>
         <height>1</height>
         <format>v</format>
+    </label>
+
+    <label>
+        <name>Gyro Heading Label</name>
+        <x>-9</x>
+        <y>-76</y>
+        <width>18</width>
+        <height>8</height>
+        <input>
+            <property>/orientation/heading-deg</property>
+        </input>
+        <format>%4.0f</format>
+        <halign>center</halign>
+        <box>true</box>
     </label>
 
     <label>
@@ -177,19 +193,9 @@
     </label>
 
     <label>
-        <name>KIAS Marker</name>
-        <x>-43</x>
-        <y>-07</y>
-        <width>1</width>
-        <height>1</height>
-        <format>C</format>
-        <halign>left</halign>
-    </label>
-
-    <label>
         <name>Altitude</name>
-        <x>45</x>
-        <y>-35</y>
+        <x>41</x>
+        <y>-15</y>
         <width>24</width>
         <height>8</height>
         <input>
@@ -201,94 +207,19 @@
         <option>left</option>
     </label>
 
+
     <label>
-        <name>SIM</name>
-        <x>-43</x>
-        <y>-41</y>
-        <width>1</width>
+        <name>MACH Number</name>
+        <x>-60</x>
+        <y>-72</y>
+       <width>1</width>
         <height>1</height>
-        <format>SIM</format>
+        <input>
+            <property>/velocities/mach</property>
+        </input>
+        <format>M%4.1f</format>
         <halign>left</halign>
     </label>
 
 
-    <label>
-        <name>MACH Number</name>
-        <x>-43</x>
-        <y>-47</y>
-        <width>1</width>
-        <height>1</height>
-        <input>
-            <property>/velocities/mach</property>
-        </input>
-        <format>%4.2f</format>
-        <halign>left</halign>
-    </label>
-
-<!-- not sure if we need this
-    <label>
-        <name>Heading</name>
-        <x>37</x>
-        <y>-20</y>
-        <width>18</width>
-        <height>6</height>
-        <input>
-            <property>/orientation/heading-deg</property>
-            <max>359.999</max>
-        </input>
-        <format>%04.0f</format>
-        <halign>right</halign>
-        <box>false</box>
-    </label>
--->
-<!-- 
-    <label>
-        <name>MACH Number</name>
-        <x>-70</x>
-        <y>-140</y>
-        <width>1</width>
-        <height>1</height>
-        <input>
-            <property>/velocities/mach</property>
-        </input>
-        <format>%4.2f</format>
-        <halign>left</halign>
-    </label>
-    <label>
-        <name>MACH Number</name>
-        <x>-70</x>
-        <y>40</y>
-        <width>1</width>
-        <height>1</height>
-        <input>
-            <property>/velocities/mach</property>
-        </input>
-        <format>%4.2f</format>
-        <halign>left</halign>
-    </label>
-    <label>
-        <name>MACH Number</name>
-        <x>70</x>
-        <y>-140</y>
-        <width>1</width>
-        <height>1</height>
-        <input>
-            <property>/velocities/mach</property>
-        </input>
-        <format>%4.2f</format>
-        <halign>left</halign>
-    </label>
-    <label>
-        <name>MACH Number</name>
-        <x>70</x>
-        <y>40</y>
-        <width>1</width>
-        <height>1</height>
-        <input>
-            <property>/velocities/mach</property>
-        </input>
-        <format>%4.2f</format>
-        <halign>left</halign>
-    </label>
--->
 </PropertyList>
