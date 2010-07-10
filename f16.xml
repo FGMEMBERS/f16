@@ -740,6 +740,46 @@
 
         </channel>
 
+        <channel name="Landing Gear">
+
+            <switch name="gear-wow">
+                <default value="0"/>
+                <test logic="AND" value="1">
+                    gear/unit[1]/WOW eq 1
+                    gear/unit[2]/WOW eq 1
+                </test>
+            </switch>
+
+            <kinematic name="Gear Control">
+                <input>gear/gear-cmd-norm</input>
+                <traverse>
+                    <setting>
+                        <position>0</position>
+                        <time>0</time>
+                    </setting>
+                    <setting>
+                        <position>1</position>
+                        <time>5</time>
+                    </setting>
+                </traverse>
+                <output>gear/gear-pos-norm</output>
+            </kinematic>
+
+            <scheduled_gain name="Scheduled Steer Pos Deg">
+                <input>fcs/steer-cmd-norm</input>
+                <table>
+                    <independentVar>velocities/vg-fps</independentVar>
+                    <tableData>
+                        10.0        80.0
+                        50.0        15.0
+                        150.0       2.0
+                    </tableData>
+                </table>
+                <output>fcs/steer-pos-deg</output>
+            </scheduled_gain>
+
+        </channel>
+
         <channel name="Leading Edge Flap">
 
             <switch name="lef pos rad">
@@ -909,46 +949,6 @@
                 </traverse>
                 <output>fcs/canopy-pos-norm</output>
             </kinematic>
-
-        </channel>
-
-        <channel name="Landing Gear">
-
-            <switch name="gear-wow">
-                <default value="0"/>
-                <test logic="AND" value="1">
-                    gear/unit[1]/WOW eq 1
-                    gear/unit[2]/WOW eq 1
-                </test>
-            </switch>
-
-            <kinematic name="Gear Control">
-                <input>gear/gear-cmd-norm</input>
-                <traverse>
-                    <setting>
-                        <position>0</position>
-                        <time>0</time>
-                    </setting>
-                    <setting>
-                        <position>1</position>
-                        <time>5</time>
-                    </setting>
-                </traverse>
-                <output>gear/gear-pos-norm</output>
-            </kinematic>
-
-            <scheduled_gain name="Scheduled Steer Pos Deg">
-                <input>fcs/steer-cmd-norm</input>
-                <table>
-                    <independentVar>velocities/vg-fps</independentVar>
-                    <tableData>
-                        10.0        80.0
-                        50.0        15.0
-                        150.0       2.0
-                    </tableData>
-                </table>
-                <output>fcs/steer-pos-deg</output>
-            </scheduled_gain>
 
         </channel>
 
