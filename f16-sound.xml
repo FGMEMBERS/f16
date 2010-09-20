@@ -59,10 +59,7 @@
    <orientation>
     <x>-0.98</x>
     <y>0.0</y>
-    <z>-0.17</z>
-    <inner-angle>30.0</inner-angle>
-    <outer-angle>100.0</outer-angle>
-    <outer-gain>0.0</outer-gain>
+    <z>0.0</z>
    </orientation>
    <pitch>
     <property>engines/engine/n1</property>
@@ -97,8 +94,8 @@
     <x>-0.98</x>
     <y>0.0</y>
     <z>-0.17</z>
-    <inner-angle>30.0</inner-angle>
-    <outer-angle>100.0</outer-angle>
+    <inner-angle>60.0</inner-angle>
+    <outer-angle>200.0</outer-angle>
     <outer-gain>0.0</outer-gain>
    </orientation>
    <pitch>
@@ -127,8 +124,8 @@
     <x>1.0</x>
     <y>0.0</y>
     <z>0.0</z>
-    <inner-angle>100.0</inner-angle>
-    <outer-angle>180.0</outer-angle>
+    <inner-angle>200.0</inner-angle>
+    <outer-angle>360.0</outer-angle>
     <outer-gain>0.2</outer-gain>
    </orientation>
    <volume>
@@ -156,9 +153,9 @@
     <x>1.0</x>
     <y>0.0</y>
     <z>0.0</z>
-    <inner-angle>100.0</inner-angle>
-    <outer-angle>160.0</outer-angle>
-    <outer-gain>0.1</outer-gain>
+    <inner-angle>200.0</inner-angle>
+    <outer-angle>360.0</outer-angle>
+    <outer-gain>0.2</outer-gain>
    </orientation>
    <volume>
     <property>engines/engine/nozzle-pos-norm</property>
