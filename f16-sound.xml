@@ -8,6 +8,8 @@
    <path>Aircraft/f16/Sounds/canopy.wav</path>
    <mode>in-transit</mode>
    <property>fdm/jsbsim/fcs/canopy-pos-norm</property>
+   <reference-dist>30</reference-dist>
+   <max-dist>100</max-dist>
    <position>
     <x>-1.0</x>
     <y>0.0</y>
@@ -33,6 +35,8 @@
      <value>0.0</value>
     </equals>
    </condition>
+   <reference-dist>10</reference-dist>
+   <max-dist>40</max-dist>
    <position>
     <x>-1.0</x>
     <y>0.0</y>
@@ -51,6 +55,8 @@
     <property>sim/current-view/internal</property>
     <property>engines/engine/running</property>
    </condition>
+   <reference-dist>30</reference-dist>
+   <max-dist>100</max-dist>
    <position>
     <x>-0.6</x>
     <y>0.0</y>
@@ -85,6 +91,8 @@
       <value>85.0</value>
     </less-than>
    </condition>
+   <reference-dist>800</reference-dist>
+   <max-dist>3000</max-dist>
    <position>
     <x>0.6</x>
     <y>0.0</y>
@@ -115,6 +123,8 @@
    <path>Sounds/jet.wav</path>
    <mode>looped</mode>
    <property>engines/engine/running</property>
+   <reference-dist>2000</reference-dist>
+   <max-dist>10000</max-dist>
    <position>
     <x>4.6</x>
     <y>0.0</y>
@@ -144,6 +154,8 @@
    <path>Sounds/exhaust_loop.wav</path>
    <mode>looped</mode>
    <property>engines/engine/augmentation</property>
+   <reference-dist>5000</reference-dist>
+   <max-dist>30000</max-dist>
    <position>
     <x>4.6</x>
     <y>0.0</y>
@@ -175,6 +187,8 @@
      <property>gear/gear[2]/wow</property>
     </or>
    </condition>
+   <reference-dist>30</reference-dist>
+   <max-dist>100</max-dist>
    <position>
     <x>1.2</x>
     <y>0.0</y>
@@ -198,6 +212,8 @@
      <property>gear/gear[2]/wow</property>
     </or>
    </condition>
+   <reference-dist>150</reference-dist>
+   <max-dist>500</max-dist>
    <position>
     <x>1.2</x>
     <y>0.0</y>
