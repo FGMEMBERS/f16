@@ -20,7 +20,7 @@
   <type>rotate</type>
   <object-name>needle</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
-  <factor>3.6</factor>  
+  <factor>0.36</factor>  
   <axis>
    <x>-1</x>
    <y>0</y>
