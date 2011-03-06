@@ -3,7 +3,7 @@
 
 
 <PropertyList>
- <path>altimeter.ac</path>
+ <path>../../../../Instruments-3d/altimeter/altimeter.ac</path>
 
  <animation>
   <type>select</type>
@@ -18,7 +18,7 @@
 
  <animation>
   <type>rotate</type>
-  <object-name>ALT_needle</object-name>
+  <object-name>needle</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
   <factor>3.6</factor>  
   <axis>
@@ -31,7 +31,7 @@
  <!-- altimeter drum counter -->
  <animation>
   <type>textranslate</type>
-  <object-name>ALT_drum-1</object-name>
+  <object-name>drum-1</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
   <factor>0.001</factor>
   <offset>-75</offset>
@@ -47,7 +47,7 @@
 
  <animation>
   <type>textranslate</type>
-  <object-name>ALT_drum-2</object-name>
+  <object-name>drum-2</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
   <factor>0.0001</factor>
   <offset>-750</offset>
@@ -63,7 +63,7 @@
 
  <animation>
   <type>textranslate</type>
-  <object-name>ALT_drum-3</object-name>
+  <object-name>drum-3</object-name>
   <property>instrumentation/altimeter/indicated-altitude-ft</property>
   <factor>0.00001</factor>
   <offset>-7500</offset>
@@ -79,7 +79,7 @@
  <!-- barometer drum counter -->
  <animation>
   <type>textranslate</type>
-  <object-name>ALT_drum-inhg-1</object-name>
+  <object-name>drum-inhg-1</object-name>
   <property>instrumentation/altimeter/setting-inhg</property>
   <factor>10</factor>
   <offset>-0.01</offset>
@@ -92,7 +92,7 @@
 
  <animation>
   <type>textranslate</type>
-  <object-name>ALT_drum-inhg-2</object-name>
+  <object-name>drum-inhg-2</object-name>
   <property>instrumentation/altimeter/setting-inhg</property>
   <factor>1</factor>
   <offset>-0.1</offset>
@@ -107,7 +107,7 @@
 
  <animation>
   <type>textranslate</type>
-  <object-name>ALT_drum-inhg-3</object-name>
+  <object-name>drum-inhg-3</object-name>
   <property>instrumentation/altimeter/setting-inhg</property>
   <factor>0.1</factor>
   <offset>-1</offset>
@@ -122,7 +122,7 @@
 
  <animation>
   <type>textranslate</type>
-  <object-name>ALT_drum-inhg-4</object-name>
+  <object-name>drum-inhg-4</object-name>
   <property>instrumentation/altimeter/setting-inhg</property>
   <factor>0.01</factor>
   <offset>-10</offset>
@@ -140,7 +140,7 @@
   <name>ingh-knob-left-fine</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>ALT_ingh-knob-left</object-name>
+  <object-name>ingh-knob-left</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -160,7 +160,7 @@
   <name>ingh-knob-left-coarse</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>ALT_ingh-knob-left</object-name>
+  <object-name>ingh-knob-left</object-name>
   <action>
    <button>1</button>
    <repeatable>true</repeatable>
@@ -180,7 +180,7 @@
   <name>ingh-knob-right-fine</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>ALT_ingh-knob-right</object-name>
+  <object-name>ingh-knob-right</object-name>
   <action>
    <button>0</button>
    <repeatable>true</repeatable>
@@ -200,7 +200,7 @@
   <name>ingh-knob-right-coarse</name>
   <type>pick</type>
   <visible>true</visible>
-  <object-name>ALT_ingh-knob-right</object-name>
+  <object-name>ingh-knob-right</object-name>
   <action>
    <button>1</button>
    <repeatable>true</repeatable>
@@ -218,7 +218,7 @@
 
  <!-- lighting -->
  <animation>
-  <object-name>ALT_mount</object-name>
+  <object-name>mount</object-name>
   <type>material</type>
   <emission>
    <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
@@ -229,7 +229,7 @@
  </animation>
 
  <animation> 
-  <object-name>ALT_knobs</object-name>
+  <object-name>knobs</object-name>
   <type>material</type>
   <emission>
    <factor-prop>controls/lighting/lighting-panel/flood-inst-pnl</factor-prop>
@@ -240,7 +240,7 @@
  </animation>
 
  <animation>
-  <object-name>ALT_face</object-name>
+  <object-name>face</object-name>
   <type>material</type>
   <emission>
    <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
@@ -251,7 +251,7 @@
  </animation>
 
  <animation>
-  <object-name>ALT_drums</object-name>
+  <object-name>drums</object-name>
   <type>material</type>
   <emission>
    <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
@@ -262,7 +262,7 @@
  </animation>
 
  <animation>
-  <object-name>ALT_needle-w</object-name>
+  <object-name>needle-w</object-name>
   <type>material</type>
   <emission>
    <factor-prop>controls/lighting/lighting-panel/pri-inst-pnl</factor-prop>
