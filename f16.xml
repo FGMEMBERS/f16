@@ -906,7 +906,7 @@
                         1    0.71667
                     </tableData>
                 </table>
-                <output>fcs/steer-pos-deg</output>
+                <output>fcs/speedbrake-pos-norm</output>
             </scheduled_gain>
 
             <kinematic name="fcs/speedbrake-control">
