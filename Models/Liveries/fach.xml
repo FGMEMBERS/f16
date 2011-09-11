@@ -27,7 +27,7 @@
    </f16>
    <livery>
     <name type="string">FACH 853 3rd Aviation Group</name>
-    <texture>Liveries/fach/f16-fach.dds</texture>
+    <texture>Liveries/fach/f16-fach.rgb</texture>
     <actype type="string">F-16A-MLU</actype>
     <owner type="string">FACH</owner>
    </livery>
