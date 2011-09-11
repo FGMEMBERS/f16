@@ -76,7 +76,6 @@
     <factor>0.3</factor>
    </volume>
   </engine_fan>
-
   <engine_fan>
    <name>external fan</name>
    <path>Sounds/turbojet_fan.wav</path>
@@ -117,7 +116,6 @@
     <factor>-0.0002</factor>
    </volume>
   </engine_fan>
-
   <exhaust>
    <name>turbine</name>
    <path>Sounds/jet.wav</path>

@@ -71,7 +71,7 @@
  <animation>
   <type>rotate</type> <!-- 2192 --> <!-- 17.5 graden -->
   <object-name>ftit_needle</object-name>
-  <property>engines/engine[0]/egt_degf</property>
+  <property>engines/engine[0]/egt-degf</property>
   <interpolation>
    <entry>
     <ind>0.0</ind>
