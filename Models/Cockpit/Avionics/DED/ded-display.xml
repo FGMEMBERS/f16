@@ -48,7 +48,7 @@
       <chunk>
        <type>number-value</type>
        <property>/instrumentation/comm/frequencies/selected-mhz</property>
-       <format>%3.2f</format>
+       <format>%3.3f</format>
       </chunk>
      </chunks>
      <transformations>
@@ -154,7 +154,7 @@
       <chunk>
        <type>number-value</type>
        <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
-       <format>%3.2f</format>
+       <format>%3.3f</format>
       </chunk>
      </chunks>
      <transformations>
