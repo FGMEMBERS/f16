@@ -13,7 +13,21 @@
   <startup>
    <splash-texture>Aircraft/f16/f16-splash.rgb</splash-texture>
   </startup>
-  
+
+  <!-- enable "parkpos=AVAILABLE" option for the F-16 -->
+  <dimensions>
+   <radius-m type="double">10.0</radius-m>
+   <parkpos-offset-m type="double">0.0</parkpos-offset-m>
+  </dimensions>
+  <aircraft-class type="string">mil-fighter</aircraft-class>
+  <aircraft-operator></aircraft-operator>
+  <aircraft-data>
+   <path>/sim/dimensions/radius-m</path>
+   <path>/sim/dimensions/parkpos-offset-m</path>
+   <path>/sim/aircraft-class</path>
+   <path>/sim/aircraft-operator</path>
+  </aircraft-data>
+
   <submodels>
    <serviceable type="bool">1</serviceable>
    <path>Aircraft/f16/f16-submodels.xml</path>
