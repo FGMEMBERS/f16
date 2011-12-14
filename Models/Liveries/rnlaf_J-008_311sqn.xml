@@ -27,12 +27,12 @@
    </f16>
    <livery>
     <name type="string">RNLAF J-008 311 Squadron</name>
-    <texture>Liveries/rnlaf/f16klu.rgb</texture>
+    <texture>Liveries/rnlaf/f16klu.dds</texture>
     <actype type="string">F-16A-MLU</actype>
     <owner type="string">RNLAF</owner>
    </livery>
    <livery-logo>
-    <texture>Liveries/rnlaf/J-008_311sqn.rgb</texture>
+    <texture>Liveries/rnlaf/J-008_311sqn.dds</texture>
    </livery-logo>
   </model>
  </sim>
