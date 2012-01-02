@@ -18,15 +18,17 @@
   <name>Pilot_ext</name>
   <path>Aircraft/f16/Models/Pilots/pilot_externalview.xml</path>
  </model>
-<!-- 
+
+<!--
  <model>
   <name>Pilot_int</name>
   <path>Aircraft/f16/Models/Pilots/pilot_internalview.xml</path>
  </model>
 -->
+
  <animation>
   <type>range</type>
-  <object-name>Pilot_int</object-name>
+  <!-- object-name>Pilot_int</object-name -->
   <object-name>Pilot_ext</object-name>
   <min-m>0</min-m>
   <max-m>5000</max-m>
@@ -40,6 +42,7 @@
   </condition>
  </animation>
 
+<!--
  <animation>
   <type>select</type>
   <object-name>Pilot_int</object-name>
@@ -47,11 +50,12 @@
    <property>sim/current-view/internal</property>
   </condition>
  </animation>
+-->
 
  <animation>
   <type>translate</type>
   <object-name>AcesII</object-name>
-  <object-name>Pilot_int</object-name>
+  <!-- object-name>Pilot_int</object-name -->
   <object-name>Pilot_ext</object-name>
   <property>controls/seat/vertical-adjust</property>
   <value>1</value>
