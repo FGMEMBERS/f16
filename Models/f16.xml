@@ -1414,7 +1414,7 @@
   <object-name>ArresterHook</object-name>
   <property-base>sim/model/livery</property-base>
   <texture-prop>texture</texture-prop>
-  <texture>f16.dds</texture>
+  <texture>f16.rgb</texture>
  </animation>
 
 

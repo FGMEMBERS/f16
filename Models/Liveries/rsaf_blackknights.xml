@@ -27,7 +27,7 @@
    </f16>
    <livery>
     <name type="string">RSAF '1' Black Knights</name>
-    <texture>Liveries/rsaf/f16rsaf_bk.dds</texture>
+    <texture>Liveries/rsaf/f16rsaf_bk.png</texture>
     <actype type="string">F-16C-52</actype>
     <owner type="string">RSAF</owner>
    </livery>
