@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-	<path>../../../../../Instruments-3d/rwr/rwr.ac</path>
+	<path>/Aircraft/Instruments-3d/rwr/rwr.ac</path>
 
 	<power-supply>systems/electrical/outputs/rwr</power-supply>
 	<mininal-volts>20</mininal-volts>
