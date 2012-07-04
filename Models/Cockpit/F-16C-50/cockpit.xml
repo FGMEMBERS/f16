@@ -440,15 +440,9 @@
 
 
 <!-- ======= START AVIONICS ======= -->
-<model>
- <name>DED</name>
+ <model>
+  <name>DED</name>
   <path>Aircraft/f16/Models/Cockpit/Avionics/DED/ded.xml</path>
-<!--  <offsets>
-   <x-m>-4.78</x-m>
-   <y-m>0.134</y-m>
-   <z-m>0.6315</z-m>
-   <pitch-deg>-14</pitch-deg>
-  </offsets> -->
  </model>
 
  <model>
@@ -458,10 +452,10 @@
    <x-m>-4.77</x-m>
    <y-m>-0.125</y-m>
    <z-m>0.595</z-m>
-   <pitch-deg>-15</pitch-deg><!-- needs verification! -->
+   <pitch-deg>-13.8</pitch-deg>
   </offsets>
  </model>
- 
+
 <model>
   <name>MFD1</name>
   <path>Aircraft/f16/Models/Cockpit/Avionics/MFD/mfd_left.xml</path>
@@ -469,7 +463,7 @@
    <x-m>-4.755</x-m>
    <y-m>-0.156</y-m>
    <z-m>0.48</z-m>
-   <pitch-deg>-15</pitch-deg>
+   <pitch-deg>-13.8</pitch-deg>
   </offsets>
  </model>
 
@@ -480,7 +474,7 @@
    <x-m>-4.755</x-m>
    <y-m>0.158</y-m>
    <z-m>0.48</z-m>
-   <pitch-deg>-15</pitch-deg>
+   <pitch-deg>-13.8</pitch-deg>
   </offsets>
  </model>
 
@@ -488,12 +482,13 @@
   <name>RADAR_SCREEN</name>
   <path>Aircraft/Instruments-3d/radar2/radar-screen.xml</path>
   <offsets>
-   <x-m>-4.795</x-m>
+   <x-m>-4.760</x-m>
    <y-m>-0.158</y-m>
    <z-m>0.4793</z-m>
+   <pitch-deg>-13.8</pitch-deg>
   </offsets>
  </model>
-<!-- ======= START AVIONICS ======= -->
+<!-- ======= END AVIONICS ======= -->
 
 
  <model>

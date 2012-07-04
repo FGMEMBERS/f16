@@ -539,7 +539,7 @@
    <enabled type="bool">true</enabled>
    <az-field type="double">120</az-field>
    <range type="double">160</range>
-   <range-selected type="double">40</range-selected>
+   <range-selected type="double">50</range-selected>
    <display-rdr type="bool">true</display-rdr>
    <radar-standby type="int">0</radar-standby>
    <mode>
