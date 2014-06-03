@@ -662,6 +662,12 @@
  <animation>
   <type>rotate</type>
   <object-name>Rudder</object-name>
+  <object-name>Rudder.001</object-name>
+  <object-name>Rudder.002</object-name>
+  <object-name>Rudder.003</object-name>
+  <object-name>Rudder.004</object-name>
+  <object-name>Rudder.005</object-name>
+  <object-name>Rudder.006</object-name>  
   <object-name>VstabBandLeftAft</object-name>
   <object-name>VstabBandRightAft</object-name>
   <property>surface-positions/rudder-pos-norm</property>
