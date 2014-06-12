@@ -33,6 +33,14 @@
    <path>/sim/aircraft-operator</path>
   </aircraft-data>
 
+  <tags>
+      <tag>fighter</tag>
+      <tag>jet</tag>
+      <tag>single-engine</tag>
+      <tag>retractable-gear</tag>
+      <tag>ifr</tag>
+  </tags>
+  
   <submodels>
    <serviceable type="bool">1</serviceable>
    <path>Aircraft/f16/f16-submodels.xml</path>
