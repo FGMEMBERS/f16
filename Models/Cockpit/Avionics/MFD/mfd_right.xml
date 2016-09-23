@@ -1,109 +1,41 @@
 <?xml version="1.0"?>
 
-<!-- Based on F-15 MPCD by Richard Harrison; rjh@zaretto.com  -->
+<!-- Using MFD_Generic.nas, based on F-15 MPCD and BAe Hawk T2 MFD Richard Harrison; rjh@zaretto.com  -->
 
 <PropertyList>
-    <path>mfd.ac</path>
+    <path>mfd-r.ac</path>
 
-    <animation>
-      <type>translate</type>
-      <object-name>scan_marker</object-name>
-      <property>instrumentation/radar2/sweep-marker-norm</property>
-      <factor>0.0422</factor>
-      <axis>
-       <x>0</x>
-       <y>1</y>
-       <z>0</z>
-      </axis>
-    </animation>
-
+    <!-- used to turn the display off when no power, or device powered down-->
     <animation>
         <type>select</type>
-        <object-name>MPCDImage</object-name>
+        <object-name>MFDimage2</object-name>
         <condition>
-            <property>sim/model/f16/controls/MPCD/mode</property>
-            <greater-than>
-                <property>/fdm/jsbsim/systems/electrics/ac-left-main-bus</property>
+            <property>controls/MFD[1]/mode</property>
+
+            <!-- electrics main bus needed-->
+            <!--<greater-than>
+                <property>fdm/jsbsim/systems/electrics/ac-left-main-bus</property>
                 <value>0</value>
-            </greater-than>
+            </greater-than>-->
+
         </condition>
     </animation>
-
-
-    <animation>
-        <type>knob</type>
-        <object-name>master-arm-switch</object-name>
-        <property>sim/model/f16/controls/armament/master-arm-switch</property>
-        <offset-deg>-30</offset-deg>
-        <factor>60</factor>
-        <center>
-            <x-m>-5.6962</x-m>
-            <y-m>-0.1864</y-m>
-            <z-m>0.8802</z-m>
-        </center>
-        <axis>
-            <x>0</x>
-            <y>-1</y>
-            <z>0</z>
-        </axis>
-
-        <action>
-            <binding>
-                <command>property-adjust</command>
-                <property>sim/model/f16/controls/armament/master-arm-switch</property>
-                <factor>1</factor>
-                <min>0</min>
-                <max>1</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-    </animation>
-    <animation>
-        <type>knob</type>
-        <object-name>mode-knob</object-name>
-        <property>sim/model/f16/controls/MPCD/mode</property>
-        <offset-deg>80</offset-deg>
-        <factor>-40</factor>
-        <center>
-            <x-m>-5.6962</x-m>
-            <y-m>-0.2597</y-m>
-            <z-m>0.8579</z-m>
-        </center>
-        <axis>
-            <x>1</x>
-            <y>0</y>
-            <z>0</z>
-        </axis>
-
-        <action>
-            <binding>
-                <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/mode</property>
-                <factor>1</factor>
-                <min>0</min>
-                <max>2</max>
-                <wrap>false</wrap>
-            </binding>
-        </action>
-    </animation>
-
-    <!-- left buttons -->
     <animation>
         <type>translate</type>
-        <object-name>button-left-1</object-name>
+        <object-name>MFDButtonL1</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>1</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -114,12 +46,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-left-1</object-name>
+        <object-name>MFDButtonL1</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>1</value>
             </binding>
         </action>
@@ -127,7 +59,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -137,20 +69,20 @@
 
     <animation>
         <type>translate</type>
-        <object-name>button-left-2</object-name>
+        <object-name>MFDButtonL2</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>2</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -162,11 +94,11 @@
 
     <animation>
         <type>knob</type>
-        <object-name>button-left-2</object-name>
+        <object-name>MFDButtonL2</object-name>
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>2</value>
             </binding>
         </action>
@@ -174,7 +106,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -184,20 +116,20 @@
 
     <animation>
         <type>translate</type>
-        <object-name>button-left-3</object-name>
+        <object-name>MFDButtonL3</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>3</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -208,12 +140,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-left-3</object-name>
+        <object-name>MFDButtonL3</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>3</value>
             </binding>
         </action>
@@ -221,7 +153,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -230,20 +162,20 @@
     </animation>
     <animation>
         <type>translate</type>
-        <object-name>button-left-4</object-name>
+        <object-name>MFDButtonL4</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>4</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -254,12 +186,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-left-4</object-name>
+        <object-name>MFDButtonL4</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>4</value>
             </binding>
         </action>
@@ -267,7 +199,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -276,20 +208,20 @@
     </animation>
     <animation>
         <type>translate</type>
-        <object-name>button-left-5</object-name>
+        <object-name>MFDButtonL5</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>5</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -300,12 +232,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-left-5</object-name>
+        <object-name>MFDButtonL5</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>5</value>
             </binding>
         </action>
@@ -313,7 +245,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -323,20 +255,20 @@
     <!-- right buttons -->
     <animation>
         <type>translate</type>
-        <object-name>button-right-1</object-name>
+        <object-name>MFDButtonR1</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>6</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -347,12 +279,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-right-1</object-name>
+        <object-name>MFDButtonR1</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>6</value>
             </binding>
         </action>
@@ -360,7 +292,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -370,20 +302,20 @@
 
     <animation>
         <type>translate</type>
-        <object-name>button-right-2</object-name>
+        <object-name>MFDButtonR2</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>7</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -395,11 +327,11 @@
 
     <animation>
         <type>knob</type>
-        <object-name>button-right-2</object-name>
+        <object-name>MFDButtonR2</object-name>
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>7</value>
             </binding>
         </action>
@@ -407,7 +339,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -417,20 +349,20 @@
 
     <animation>
         <type>translate</type>
-        <object-name>button-right-3</object-name>
+        <object-name>MFDButtonR3</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>8</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -441,12 +373,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-right-3</object-name>
+        <object-name>MFDButtonR3</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>8</value>
             </binding>
         </action>
@@ -454,7 +386,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -463,20 +395,20 @@
     </animation>
     <animation>
         <type>translate</type>
-        <object-name>button-right-4</object-name>
+        <object-name>MFDButtonR4</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>9</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -487,12 +419,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-right-4</object-name>
+        <object-name>MFDButtonR4</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>9</value>
             </binding>
         </action>
@@ -500,7 +432,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -509,20 +441,20 @@
     </animation>
     <animation>
         <type>translate</type>
-        <object-name>button-right-5</object-name>
+        <object-name>MFDButtonR5</object-name>
         <condition>
             <or>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>10</value>
                 </equals>
                 <equals>
-                    <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                    <property>controls/MFD[1]/button-pressed</property>
                     <value>0</value>
                 </equals>
             </or>
         </condition>
-        <property>sim/model/f16/controls/MPCD/button-pressed</property>
+        <property>controls/MFD[1]/button-pressed</property>
         <factor>-0.002</factor>
         <axis>
             <x>1</x>
@@ -533,12 +465,12 @@
     </animation>
     <animation>
         <type>knob</type>
-        <object-name>button-right-5</object-name>
+        <object-name>MFDButtonR5</object-name>
 
         <action>
             <binding>
                 <command>property-assign</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <value>10</value>
             </binding>
         </action>
@@ -546,7 +478,7 @@
         <release>
             <binding>
                 <command>property-adjust</command>
-                <property>sim/model/f16/controls/MPCD/button-pressed</property>
+                <property>controls/MFD[1]/button-pressed</property>
                 <step>0</step>
                 <min>0</min>
                 <max>0</max>
@@ -554,12 +486,12 @@
         </release>
     </animation>
     <!-- Lighting -->
-    <animation>
-        <object-name>mpcd-mount</object-name>
+    <!--<animation>
+        <object-name>mount</object-name>
         <type>material</type>
         <condition>
             <greater-than>
-                <property>/fdm/jsbsim/systems/electrics/ac-essential-bus1</property>
+                <property>fdm/jsbsim/systems/electrics/ac-essential-bus1</property>
                 <value>0</value>
             </greater-than>
             <not>
@@ -574,88 +506,25 @@
             <red-prop>controls/lighting/panel-red</red-prop>
             <green-prop>controls/lighting/panel-green</green-prop>
             <blue-prop>controls/lighting/panel-blue</blue-prop>
-
         </emission>
-    </animation>
-    <!-- implicit ALS lighting see http://wiki.flightgear.org/ALS_technical_notes -->
-<!--
-    <effect>
-        <name>f16panel-knob</name>
-        <inherits-from>Effects/f16panel-knob</inherits-from>
-        <object-name>mode-knob</object-name>
-        <object-name>jett-knob</object-name>
-        <object-name>jett-button</object-name>
-        <object-name>brightness-switch</object-name>
-        <object-name>contrast-switch</object-name>
-    </effect>
-    <effect>
-        <name>f16panel-left</name>
-        <inherits-from>Effects/f16panel-left</inherits-from>
-        <object-name>mpcd-mount</object-name>
-        <object-name>button-bottom-1</object-name>
-        <object-name>button-bottom-2</object-name>
-        <object-name>button-bottom-3</object-name>
-        <object-name>button-bottom-4</object-name>
-        <object-name>button-bottom-5</object-name>
-        <object-name>button-left-1</object-name>
-        <object-name>button-left-2</object-name>
-        <object-name>button-left-3</object-name>
-        <object-name>button-left-4</object-name>
-        <object-name>button-left-5</object-name>
-        <object-name>button-right-1</object-name>
-        <object-name>button-right-2</object-name>
-        <object-name>button-right-3</object-name>
-        <object-name>button-right-4</object-name>
-        <object-name>button-right-5</object-name>
-        <object-name>button-top-c</object-name>
-        <object-name>button-top-l</object-name>
-        <object-name>button-top-lc</object-name>
-        <object-name>button-top-r</object-name>
-        <object-name>button-top-rc</object-name>
-    </effect>
-    <effect>
-        <name>f16interior</name>
-        <inherits-from>Effects/f16interior</inherits-from>
-        <object-name>MPCDImage</object-name>
-    </effect>
--->
-
+    </animation>-->
     <animation>
-        <object-name>MPCDImage</object-name>
+        <object-name>MFDimage2</object-name>
         <type>material</type>
         <condition>
-            <greater-than>
-                <property>/fdm/jsbsim/systems/electrics/ac-essential-bus1</property>
+            <!--<greater-than>
+                <property>fdm/jsbsim/systems/electrics/ac-essential-bus1</property>
                 <value>0</value>
-            </greater-than>
+            </greater-than>-->
             <not>
                 <property>/sim/rendering/rembrandt/enabled</property>
             </not>
         </condition>
         <emission>
-            <factor-prop>sim/model/f16/controls/MPCD/mode</factor-prop>
+            <factor-prop>controls/MFD[1]/mode</factor-prop>
             <red>  0.5</red>
             <green>0.5</green>
             <blue> 0.5</blue>
-        </emission>
-    </animation>
-    <animation>
-        <type>material</type>
-        <object-name>bit-lamp</object-name>
-        <condition>
-            <greater-than>
-                <property>/fdm/jsbsim/systems/electrics/ac-essential-bus1</property>
-                <value>0</value>
-            </greater-than>
-            <or>
-                <property>sim/model/f16/lights/master-test-lights</property>
-                <property>sim/model/f16/lights/mpcd-bit-ligt</property>
-            </or>
-        </condition>
-        <emission>
-            <red>  1</red>
-            <green>1</green>
-            <blue> 1</blue>
         </emission>
     </animation>
 </PropertyList>
