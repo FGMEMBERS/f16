@@ -87,7 +87,8 @@
   </instrumentation>
 
   <model>
-   <f16>
+      <fallback-model-index type="int">516</fallback-model-index>
+      <f16>
 
     <controls>
      <navigation>
