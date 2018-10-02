@@ -1,0 +1,132 @@
+#
+# TODO list for F-16.
+#
+
+Bugs
+----
+masterarm off while aim9 in lock..bad stuuff [cant reproduce]
+
+Model
+-----
+Set proper default livery for all blocks.
+Make loads.xml not be a submodel.
+
+Hydraulics
+----------
+If there is cockpit controls for it, make them work.
+
+Electrical
+----------
+Make more stuff depend on electrical system
+
+Fuel
+----
+Make full fuel system
+Check priorities.
+
+JSBSim
+------
+FBW with regards to take-off still have quirks. Had to make small differences from reference documents to make it behave reasonable in this regard. This needs to be further looked at.
+
+Engine
+------
+
+GUI
+---
+designation view for targeting pod. (ala. Mirage2000)
+
+Stores
+------
+Model conformal fuel tanks.
+Find real positions of payloads, is only approx. positions now.
+Make id-0 be id-000, hmm not sure this is smart, not backwards compatible.
+Should auto missile view work for jettisoned stores as well?
+More gun tracers?
+A-A and A-G button cycle cannon also?
+Missile view start behind weapon?
+Stores should only emergency Jett. when main, stby or epu is running.
+Found a document that details all loadouts for US F16s, they can carry alot more than Greek F16s. For example triple agm65 etc etc.
+Show stores over MP.
+
+Damage
+------
+Enable damage in-air but not disable. Already fired missiles should not broadcast. Problem people can suddenly turn it on and as surprise begin firing.
+
+Radar
+-----
+Add doppler.
+
+Cockpit
+-------
+Make center mount less deep, so pilot get good view of MFDs and RWR.
+Make warning lights and master warning work.
+Convert all flat 2D panels into 3D.
+Make controls work for STORES CONFIG and STANDBY GAINS.
+Enable masterarm, jettison, trims, ALT FLAPS and MFD contrast/brightness.
+Enable the intensity knob on RWR.
+Enable knob for HUD focus. (above BRT knob)
+Fuel dial strange (not really, one needle shows frw tank, one shows aft tank), but should be configurable.
+Real flood light instead of emission.
+
+Sound
+-----
+G-EEDs changes are still pending. Haven't been in contact with him since he made them.
+
+HUD
+---
+Make tons of features.
+CCIP for MK82
+ILS (page 1-159 of block50 manual)
+When an eyebrow warning comes on the HUD should show WARN. Can be removed with WARN RESET on ICP panel below hud.
+
+DED (little display right-down from HUD)
+---
+Canvas (page 1-137 of b50 manual)
+
+Oxygen system
+-------------
+page 1-131 of b50 manual
+
+MFDs
+----
+Add tons of pages
+
+Aero
+----
+Add wave drag to stores
+Convert groundeffect to be an addition instead of a factor.
+
+Effects
+-------
+Better aircraft lighting system: cockpit, taxi/landing, anti-collision, formation, navigation, beacon, tail flood, etc.
+page 1-111 of b50 manual
+Make ejection seat use the proper F16 seat/pilot.
+
+Flight controls
+---------------
+wheel brakes too weak?
+
+GUI
+---
+Sort splashes so they match liveries.
+
+A/P
+---
+
+Walker
+------
+It can not walk forward or left.
+Other issues as well
+key for toggling
+
+Nasal
+-----
+Optimize
+
+F-16D
+-----
+UV map
+Texture
+Animate
+Put cockpit into model
+Add pjedved to authors

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <sim>
+  <model>
+   <livery>
+    <name type="string">RSAF, Black Knights No. 1</name>
+    <texture>Liveries/Block50/97-0119.png</texture>
+    <owner type="string">RSAF</owner>
+   </livery>
+   <livery-logo>
+    <texture>Liveries/Block50/BK-646.png</texture>
+   </livery-logo>
+
+   <livery-patch>
+      <texture>Liveries/Block50/patch.default.png</texture>
+  </livery-patch>
+
+  <livery-pod>
+        <texture>Armament/External-stores/MXU-648.png</texture>
+    </livery-pod>
+  </model>
+ </sim>
+</PropertyList>

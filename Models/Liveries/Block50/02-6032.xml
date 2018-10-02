@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <sim>
+  <model>
+   <livery> 
+    <name type="string">FACh I BA, Grupo No. 3, #853</name>
+    <texture>Liveries/Block50/02-6032.png</texture>
+    <owner type="string">FACh</owner>
+   </livery>
+   <livery-logo>
+    <texture>Liveries/yf/yf16-transp.png</texture>
+   </livery-logo>
+
+   <livery-patch>
+      <texture>Liveries/Block50/patch.default.png</texture>
+  </livery-patch>
+
+  <livery-pod>
+        <texture>Armament/External-stores/MXU-648.png</texture>
+    </livery-pod>
+  </model>
+ </sim>
+</PropertyList>

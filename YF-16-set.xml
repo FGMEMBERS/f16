@@ -4,8 +4,8 @@
 
  <sim>
   <description>General Dynamics YF-16</description>
-  <long-description>The YF-16 is a 1975 prototype of a 4th generation fighter aircraft with a fly by wire system.</long-description>
-  <author>Erik Hofman, Pensacola (skin textures), Martin "Pegasus" Schmitt (panel textures), Richard Harrison (MFD, HUD), Nikolai V. Chr. (YF-16 Aero and FCS)</author>
+  <long-description>The YF-16 is a 1975 prototype of a 4th generation fighter aircraft with a fly by wire system. Powered by F100-PW-200. The fly-by-wire in this variant offers no spin, nose-slide or deep stall protection.</long-description>
+  <author>Erik Hofman, Pensacola, Martin "Pegasus" Schmitt, Richard Harrison, Nikolai V. Chr., J Maverick 16, Joshua Davidson, Gary Brown, Jonathan Redpath, Martien Van Der P.</author>
   <status>production</status>
   <rating>
     <FDM type="int">5</FDM>
@@ -15,7 +15,8 @@
   </rating>
   <flight-model>jsb</flight-model>
   <aero>yf16</aero>
-  <variant-of>f16</variant-of>
+  <variant-id type="int">0</variant-id>
+  <variant-of>f16-block-52</variant-of>
   <tags>
       <tag>general-dynamics</tag>
       <tag>1970s</tag>
@@ -35,14 +36,30 @@
    <splash-texture>Aircraft/f16/yf16-splash.png</splash-texture>
   </startup>
 
+  <previews>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/splash/yf16-1.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/splash/yf16-2.png</path>
+            </preview>
+  </previews>
+
+  
   <model>
+    <f16>
+      <wingmounts type="bool">false</wingmounts>
+      <dragchute type="bool">false</dragchute>
+      <link16 type="bool">false</link16>
+    </f16>
    <path archive="y">Aircraft/f16/Models/YF-16.xml</path>
    <livery>
-    <file type="string">yf.xml</file>
+    <file type="string"/>
     <name type="string">YF-16 Prototype</name>
-    <texture>Liveries/yf/yf.png</texture>
-    <actype type="string">F-16A-MLU</actype>
-    <owner type="string">USAF</owner>
    </livery>
   </model>
 
@@ -65,6 +82,7 @@
    <fcs>
     <fly-by-wire>
       <prototype type="bool">true</prototype>
+      <enable-control-c type="bool">false</enable-control-c>
     </fly-by-wire>
    </fcs>
   </jsbsim>

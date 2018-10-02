@@ -1,0 +1,69 @@
+#
+# Authors of Flightgear F-16
+#
+
+
+Erik Hofman
+- Main author
+- Simplified FDM
+- F16 block 30+ aerodynamics modifications
+
+Pensacola
+- Liveries
+
+Martin "Pegasus" Schmitt
+- Cockpit textures
+
+Nikolai V. Chr.
+- F16 block 10, 20 and YF-16 aerodynamics
+- Fly-by-wire system for all variants except simplified.
+- Danish, Ghost Gray, Blue Bandit, 2xUAE, Croatian, Empire, Norwegian and prototype livery
+- Various changes to radar, MFD, HUD
+- RWR
+- Pylons, counter-measures and missile code
+- Crash and stress code.
+- Splashes
+
+Richard Harrison
+- Radar
+- MFDs
+- HUD
+- 3D misc. panel
+- Avionics communication system (emesary based)
+
+Jonathan Redpath
+- Hydraulics
+- Splash
+
+Justin Nicholson
+- Splashes
+- AIM-9 growl sound
+- AIM-9 and AIM-120 models
+- Radar RCS system
+
+J Maverick 16
+- Adapted and added liveries by Gary Brown
+- Sound recording/editing
+- Added weapons, stores
+- Fixes and improvements
+
+Fabien Barbier
+- Work on stores
+- Missile view
+
+Carsten Brueggmann
+- Sound creation and editing.
+
+FGUK
+- Used some of their GPL weapon models
+
+Alan Teeder
+- FDM consulting
+- Fixed wrong aero data for speedbrake
+
+Joshua Davidson (it0uchpods)
+- Autopilot
+- Electrical System
+
+Martien Van Der Plas
+- 3D modeling for weapons, stores

@@ -24,31 +24,30 @@
   </placer>
   
   <shooter>
-   <theta-min-deg>-5</theta-min-deg>
-   <theta-max-deg>5</theta-max-deg>
-   <phi-min-deg>-5</phi-min-deg>
-   <phi-max-deg>5</phi-max-deg>
-   <speed-mps>
-    <value>5</value>
-    <spread>0</spread>
-   </speed-mps>
-   <rotation-speed>
-    <x-min-deg-sec>33</x-min-deg-sec>
-    <y-min-deg-sec>33</y-min-deg-sec>
-    <z-min-deg-sec>33</z-min-deg-sec>
-    <x-max-deg-sec>70</x-max-deg-sec>
-    <y-max-deg-sec>70</y-max-deg-sec>
-    <z-max-deg-sec>70</z-max-deg-sec>
-   </rotation-speed>
-  </shooter>
+      <theta-min-deg>10</theta-min-deg>
+      <theta-max-deg>86</theta-max-deg>
+      <phi-min-deg>-1.5</phi-min-deg>
+      <phi-max-deg>8</phi-max-deg>
+      <speed-mps>
+        <value>10</value>
+        <spread>2.5</spread>
+      </speed-mps>
+      <rotation-speed>
+        <x-min-deg-sec>5</x-min-deg-sec>
+        <y-min-deg-sec>5</y-min-deg-sec>
+        <z-min-deg-sec>5</z-min-deg-sec>
+        <x-max-deg-sec>60</x-max-deg-sec>
+        <y-max-deg-sec>60</y-max-deg-sec>
+        <z-max-deg-sec>60</z-max-deg-sec>
+      </rotation-speed>
+    </shooter>
   
   <counter>
-   <particles-per-sec>
-    <property>velocities/airspeed-kt</property>
-    <factor>0.25</factor>
-    <spread>0.25</spread>
-   </particles-per-sec>
-  </counter>
+      <particles-per-sec>
+        <value>125</value>
+        <spread>0</spread>
+      </particles-per-sec>
+    </counter>
   
   <align>billboard</align>
   
@@ -92,7 +91,7 @@
     </size>
    </end>
    <life-sec>
-    <value>2.0</value>
+    <value>50.0</value>
    </life-sec>
    <mass-kg>0.000001</mass-kg>
    <radius-m>0.010</radius-m>

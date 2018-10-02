@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <sim>
+  <model>
+   <livery>
+    <name type="string">RDAF Esk 727, "60 years"</name>
+    <texture>Liveries/Block20/78-0194.png</texture>
+    <owner type="string">RDAF</owner>
+   </livery>
+   <livery-logo>
+    <texture>Liveries/Block20/E-602.png</texture>
+   </livery-logo>
+
+   <livery-patch>
+      <texture>Liveries/Block20/patch.rdaf.png</texture>
+  </livery-patch>
+  </model>
+ </sim>
+</PropertyList>

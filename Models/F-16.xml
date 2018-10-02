@@ -3,15 +3,30 @@
 <PropertyList>
 
  <path>f16.ac</path>
- <offsets>
+ <offsets><!--
   <z-m>0.08</z-m>
-  <pitch-deg>0.7</pitch-deg>
+  <pitch-deg>0.7</pitch-deg>-->
  </offsets>
 
  <nasal>
   <load>
-   var livery_update = aircraft.livery_update.new(
-        "Aircraft/f16/Models/Liveries", 10);
+    var self = cmdarg();
+    var id = self.getNode("sim/multiplay/generic/int[9]");
+    var folder = "Aircraft/f16/Models/Liveries";
+    if (id != nil and id.getValue() == 3) {
+      folder = "Aircraft/f16/Models/Liveries/Block30"
+    } elsif (id != nil and id.getValue() == 1) {
+      folder = "Aircraft/f16/Models/Liveries/Block10"
+    } elsif (id != nil and id.getValue() == 2) {
+      folder = "Aircraft/f16/Models/Liveries/Block20"
+    } elsif (id != nil and id.getValue() == 5) {
+      folder = "Aircraft/f16/Models/Liveries/Block50"
+    } elsif (id != nil and id.getValue() == 4) {
+      folder = "Aircraft/f16/Models/Liveries/Block40"
+    } elsif (id != nil and id.getValue() == 6) {
+      folder = "Aircraft/f16/Models/Liveries/Block60"
+    }
+    var livery_update = aircraft.livery_update.new(folder, 10);
   </load>
   <unload>
    livery_update.stop();
@@ -23,17 +38,50 @@
 <!-- start submodels -->
  <!-- decide which cockpit we select based upon selected livery -->
  <model>
-  <name>Cockpit</name>
-  <path>Aircraft/f16/Models/Cockpit/F-16A-MLU/cockpit.xml</path>
+  <name>interior</name>
+  <usage>interior</usage>
+  <path>Aircraft/f16/Models/Cockpit/Main/cockpit.xml</path>
+</model> 
+
+<model>
+  <name>Pilot_ext</name>
+  <path>Aircraft/f16/Models/pilot_externalview.xml</path>
+ </model>
+
+ <animation>
+  <type>select</type>
+  <object-name>Pilot_ext</object-name>
   <condition>
-   <equals>
-    <property>sim/model/livery/actype</property>
-    <value>F-16A-MLU</value>
-   </equals>
+   <not><property>sim/current-view/internal</property></not>
+            <not>
+                <equals>
+                    <property>f16/done</property>
+                    <value>1</value>
+                </equals>
+            </not>
   </condition>
+ </animation>
+
+ <model>
+  <name>ex</name>
+  <path>Aircraft/f16/Models/Effects/explosion.xml</path>
  </model>
 
  <model>
+  <name>smoking</name>
+  <path>Aircraft/f16/Models/Effects/damage-smoke.xml</path>
+ </model>
+
+ <model>
+    <path>Effects/trail/trail.xml</path>
+      <offsets>
+        <x-m>20.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.2</z-m>
+      </offsets>
+  </model>
+
+ <!--<model>
   <name>Cockpit</name>
   <path>Aircraft/f16/Models/Cockpit/F-16C-40/cockpit.xml</path>
   <condition>
@@ -65,7 +113,7 @@
     </equals>
    </or>
   </condition>
- </model>
+ </model>-->
 
  <model>
   <name>new_nozzle</name>
@@ -78,143 +126,68 @@
  </model>
 
 
-<!-- ===================== START ARMAMENT =========================== -->
-<!-- The armament section should probably be placed in a seperate file -->
 
-<!-- Station 5 -->
- <model>
-  <name>VentralTank</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/300G.ac</path>
-  <offsets>
-   <x-m>0</x-m>
-   <y-m>0</y-m>
-   <z-m>-1.15</z-m>
-   <pitch-deg>-2</pitch-deg>
-  </offsets>
- </model>
 
-<!-- Station 4 -->
- <model>
-  <name>LExtTank</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/370G.ac</path>
-  <offsets>
-   <x-m>-0.50</x-m>
-   <y-m>-1.65</y-m>
-   <z-m>-0.55</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
+  <effect>
+      <inherits-from>Aircraft/f16/Models/Effects/fuselage/model-combined-fuselage</inherits-from>
+      <parameters>
+          <metallic type="float">0.80</metallic>
+          <ambient-factor type="float">0.35</ambient-factor>
+          <rain-enabled type="int">2</rain-enabled>
+          <ambient-correction type="float">0.00</ambient-correction>
+          <reflection-enabled type="int">0</reflection-enabled>
+      </parameters>
+      <object-name>RadarDomeTop</object-name>
+      <object-name>Tail</object-name>
+      <object-name>LeftLowerSpeedbrake</object-name>
+      <object-name>RightLowerSpeedbrake</object-name>
+      <object-name>RightUpperSpeedbrake</object-name>
+      <object-name>LeftUpperSpeedbrake</object-name>
+      <object-name>LeftUpperHorizonTail</object-name>
+      <object-name>LeftLowerHorizonTail</object-name>
+      <object-name>RightUpperHorizonTail</object-name>
+      <object-name>RightLowerHorizonTail</object-name>
+      <object-name>RNLAF_Tailroot</object-name>
+      <object-name>USAF_Tailroot</object-name>
+      <object-name>WingTips</object-name>
+      <object-name>LeftUpperFlap</object-name>
+      <object-name>LeftLowerFlap</object-name>
+      <object-name>RightUpperFlap</object-name>
+      <object-name>RightLowerFlap</object-name>
+      <object-name>LeftUpperAileron</object-name>
+      <object-name>LeftLowerAileron</object-name>
+      <object-name>RightUpperAileron</object-name>
+      <object-name>RightLowerAileron</object-name>
+      <object-name>LeftLowerLef</object-name>
+      <object-name>LeftUpperLef</object-name>
+      <object-name>RightUpperLef</object-name>
+      <object-name>RightLowerLef</object-name>
+      <object-name>CanopyFrame</object-name>
+      <object-name>Rudder.001</object-name>
+      <object-name>Rudder.003</object-name>
+      <object-name>Rudder.004</object-name>
+      <object-name>Rudder.005</object-name>
+      <object-name>Rudder.006</object-name>
+      <object-name>Rudder</object-name>
+      <object-name>VentralFins</object-name>
+      <object-name>InternalFrontGearDoor</object-name>
+      <object-name>ExternalFrontGearDoor</object-name>
+      <object-name>ExternalRightMainDoor</object-name>
+      <object-name>ExternalLeftMainDoor</object-name>
+      <object-name>RWStation1</object-name>
+      <object-name>RWStation2</object-name>
+      <object-name>LWStation1</object-name>
+      <object-name>LWStation2</object-name>
+      <object-name>RWStation3</object-name>
+      <object-name>LWStation3</object-name>
+      <object-name>ArresterHook</object-name>
+ </effect>
 
-<!-- Station 6 -->
- <model>
-  <name>RExtTank</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/370G.ac</path>
-  <offsets>
-   <x-m>-0.50</x-m>
-   <y-m>1.65</y-m>
-   <z-m>-0.55</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
-<!-- Station 1 -->
- <model>
-  <name>Station1_AIM-9L</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L.ac</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>-4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
- <model>
-  <name>Station1_AIM-9L_dummy</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L_dummy.ac</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>-4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
- <model>
-  <name>Station1_AIM-9_smokewinder</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9_smokewinder.ac</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>-4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
- <model>
-  <name>Station1_AIM-120C5_amraam</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-120/AIM-120C5.ac</path>
-  <offsets>
-   <x-m>0.5</x-m>
-   <y-m>-4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
-<!-- Station 9 -->
- <model>
-  <name>Station9_AIM-9L</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L.ac</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
- <model>
-  <name>Station9_AIM-9L_dummy</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9L_dummy.ac</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
- <model>
-  <name>Station9_AIM-9_smokewinder</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-9/AIM-9_smokewinder.ac</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
- <model>
-  <name>Station9_AIM-120C5_amraam</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AIM-120/AIM-120C5.ac</path>
-  <offsets>
-   <x-m>0.5</x-m>
-   <y-m>4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
-
-<!-- ======================= END ARMAMENT =========================== -->
-
- <!-- glass effects -->
+ <!-- glass effects, Cylinder.008 removed as HUD is factored out. -->
  <effect>
   <inherits-from>Aircraft/f16/Models/Effects/glass/glass</inherits-from>
   <object-name>CanopyForwardInside</object-name>
   <object-name>CanopyBackInside</object-name>
-  <object-name>cylinder.008</object-name>       <!-- HUD -->
  </effect>
 
  <effect>
@@ -265,27 +238,7 @@
  </model>
 
  <!-- smokepods -->
- <model>
-  <name>Station1_AIM-9_smokewinder_smoke</name>
-  <path>Aircraft/f16/Models/Effects/smoke.xml</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
 
- <model>
-  <name>Station9_AIM-9_smokewinder_smoke</name>
-  <path>Aircraft/f16/Models/Effects/smoke.xml</path>
-  <offsets>
-   <x-m>1.5</x-m>
-   <y-m>-4.87</y-m>
-   <z-m>0.0</z-m>
-   <pitch-deg>-4.5</pitch-deg>
-  </offsets>
- </model>
 
  <model>
   <name>left-strake-vortex</name>
@@ -417,7 +370,13 @@
 
 <!-- end submodels -->
 
+ 
 
+   <model>
+    <path>Aircraft/f16/Models/Armament/loads.xml</path>
+  </model>
+
+ 
 <!-- ===================== START LIGHTING =========================== -->
 
 <!-- start position lights -->
@@ -508,10 +467,10 @@
   <object-name>FwdFormationLight</object-name>
   <object-name>AftPosLight2</object-name>
   <condition>
-    <equals>
-     <property>sim/model/livery/actype</property>
-     <value>F-16A-MLU</value>
-    </equals>
+    <less-than>
+     <property>sim/variant-id</property>
+     <value>3</value>
+    </less-than>
      <property>controls/lighting/ext-lighting-panel/master</property>
     <equals>
      <property>controls/lighting/ext-lighting-panel/form-knob</property>
@@ -527,10 +486,10 @@
   <object-name>FwdFormationLight</object-name>
   <object-name>AftPosLight1</object-name>
   <condition>
-    <equals>
-     <property>sim/model/livery/actype</property>
-     <value>F-16C-40</value>
-    </equals>
+    <greater-than>
+     <property>sim/variant-id</property>
+     <value>2</value>
+    </greater-than>
      <property>controls/lighting/ext-lighting-panel/master</property>
     <equals>
      <property>controls/lighting/ext-lighting-panel/form-knob</property>
@@ -562,7 +521,7 @@
   <object-name>CanopyFrame</object-name>
   <object-name>CanopyForwardInside</object-name>
   <object-name>CanopyForwardOutside</object-name>
- <property>fdm/jsbsim/fcs/canopy-pos-norm</property>
+ <property>canopy/position-norm</property>
   <factor>30.0</factor>
   <center>
    <x-m>-3.30</x-m>
@@ -640,15 +599,49 @@
   <type>select</type>
   <object-name>InternalFlame</object-name>
   <condition>
-   <property>engines/engine[0]/augmentation</property>
+   <property>sim/multiplay/generic/float[1]</property>
   </condition>
+ </animation>
+
+  <animation>
+  <type>material</type>
+  <condition>
+    <equals>
+      <property>/sim/rendering/rembrandt/enabled</property>
+      <value>0</value>
+    </equals>
+  </condition>
+  <object-name>Turbine</object-name>
+  <emission>
+   <red>  0.0100</red>
+   <green>0.0050</green>
+   <blue> 0.0039</blue>
+   <factor-prop>engines/engine[0]/n1</factor-prop>
+  </emission>
+ </animation>
+
+   <animation>
+  <type>material</type>
+  <condition>
+    <equals>
+      <property>/sim/rendering/rembrandt/enabled</property>
+      <value>0</value>
+    </equals>
+  </condition>
+  <object-name>InternalFlame</object-name>
+  <emission>
+   <red>0.01</red>
+   <green>0.01</green>
+   <blue>0.01</blue>
+   <factor-prop>engines/engine[0]/n1</factor-prop>
+  </emission>
  </animation>
 
  <model>
   <name>AB_Flame</name>
   <path>Aircraft/f16/Models/Effects/afterburner.xml</path>
   <condition>
-   <property>engines/engine[0]/augmentation</property>
+   <property>sim/multiplay/generic/float[1]</property>
   </condition>
   <offsets>
    <x-m>5.44</x-m>
@@ -661,7 +654,7 @@
   <type>select</type>
   <object-name>ExternalFlame</object-name>
   <condition>
-   <property>engines/engine[0]/augmentation1</property>
+   <property>sim/multiplay/generic/float[2]</property>
   </condition>
  </animation>
 
@@ -718,7 +711,7 @@
   <type>rotate</type>
   <object-name>RightUpperFlap</object-name>
   <object-name>RightLowerFlap</object-name>
-  <property>fdm/jsbsim/fcs/right-flaperon-norm</property>
+  <property>sim/multiplay/generic/float[6]</property>
   <factor>20.0</factor>
   <center>
    <x-m>1.54</x-m>
@@ -736,7 +729,7 @@
   <type>rotate</type>
   <object-name>LeftUpperFlap</object-name>
   <object-name>LeftLowerFlap</object-name>
-  <property>fdm/jsbsim/fcs/left-flaperon-norm</property>
+  <property>sim/multiplay/generic/float[5]</property>
   <factor>20.0</factor>
   <center>
    <x-m>1.54</x-m>
@@ -754,7 +747,7 @@
   <type>rotate</type>
   <object-name>RightUpperLef</object-name>
   <object-name>RightLowerLef</object-name>
-  <property>fdm/jsbsim/fcs/lef-pos-deg</property>
+  <property>surface-positions/flap-pos-norm</property>
   <factor>-1</factor>
   <center>
    <x-m>0.24</x-m>
@@ -772,7 +765,7 @@
   <type>rotate</type>
   <object-name>LeftUpperLef</object-name>
   <object-name>LeftLowerLef</object-name>
-  <property>fdm/jsbsim/fcs/lef-pos-deg</property>
+  <property>surface-positions/flap-pos-norm</property>
   <center>
    <x-m>0.24</x-m>
    <y-m>-3.0</y-m>
@@ -814,7 +807,7 @@
   <type>rotate</type>
   <object-name>RightUpperHorizonTail</object-name>
   <object-name>RightLowerHorizonTail</object-name>
-  <property>fdm/jsbsim/fcs/dht-right-pos-rad</property>
+  <property>sim/multiplay/generic/float[4]</property>
   <factor>57.3</factor>
   <center>
    <x-m>4.36</x-m>
@@ -832,7 +825,7 @@
   <type>rotate</type>
   <object-name>LeftUpperHorizonTail</object-name>
   <object-name>LeftLowerHorizonTail</object-name>
-  <property>fdm/jsbsim/fcs/dht-left-pos-rad</property>
+  <property>surface-positions/elevator-pos-norm</property>
   <factor>57.3</factor>
   <center>
    <x-m>4.36</x-m>
@@ -871,6 +864,8 @@
   </axis>
  </animation>
 
+
+
  <animation>
   <type>translate</type>
   <object-name>FrontTire</object-name>
@@ -884,12 +879,14 @@
   </axis>
  </animation>
 
+
+
  <animation>
   <type>rotate</type>
   <object-name>FrontTire</object-name>
   <object-name>FrontLowerStrut</object-name>
-  <property>gear/gear[0]/steering-norm</property>
-  <factor>-80</factor>
+  <property>sim/multiplay/generic/float[7]</property> 
+  <factor>-32</factor>
   <center>
    <x-m>-2.97</x-m>
    <y-m>0.0</y-m>
@@ -960,12 +957,38 @@
   </axis>
  </animation>
 
+   <!-- spinning wheel calc
+
+     radius = 1.91735 - 1.68517 = 0.23218
+     circum = 2*pi*radius = 1.4588
+     factor = 1/circum * 60 = 0.6318 * 60 = 41.1288
+
+     -->
+<animation>
+    <type>spin</type>
+    <object-name>FrontTire</object-name>
+    <condition>
+        <property>gear/gear[0]/wow</property>
+    </condition>
+    <property>rotors/main/blade[0]/position-deg</property><!-- gear/gear[0]/rollspeed-ms -->
+    <factor>41.1288</factor>
+    <center>
+        <x-m>-3.02035</x-m>
+        <y-m>-0.029114</y-m>
+        <z-m>-1.68664</z-m>
+    </center>
+    <axis>
+        <x>0</x>
+        <y>-1</y>
+        <z>0</z>
+    </axis>
+</animation>
+
 
  <!-- right gear -->
 
  <animation>
   <type>rotate</type>
-  <object-name>InternalRightMainDoor</object-name>
   <object-name>ExternalRightMainDoor</object-name>
   <property>gear/gear[2]/position-norm</property>
   <factor>460</factor>
@@ -1118,12 +1141,36 @@
   </axis>
  </animation>
 
+   <!-- spinning wheel calc
+
+     radius = 1.80323 - 1.51444 = 0.28879
+     circum = 2*pi*radius = 1.8145
+     factor = 1/circum * 60 = 0.6318 * 60 = 33.0666
+
+     -->
+<animation>
+    <type>spin</type>
+    <object-name>RightMainTire</object-name>
+    <condition>
+        <property>gear/gear[1]/wow</property>
+    </condition>
+    <property>rotors/main/blade[1]/position-deg</property><!-- gear/gear[0]/rollspeed-ms -->
+    <factor>33.0666</factor>
+    <axis>   
+     <x1-m>0.563844</x1-m>
+     <y1-m> 1.27316</y1-m>
+     <z1-m>-1.51444</z1-m>
+     <x2-m>  0.562878 </x2-m>
+     <y2-m>  1.1289 </y2-m>
+     <z2-m> -1.48814 </z2-m>
+  </axis>
+</animation>
+
 
  <!-- left gear -->
  
  <animation>
   <type>rotate</type>
-  <object-name>InternalLeftMainDoor</object-name>
   <object-name>ExternalLeftMainDoor</object-name>
   <property>gear/gear[1]/position-norm</property>
   <factor>460</factor>
@@ -1256,6 +1303,31 @@
   </axis>
  </animation>
 
+  <!-- spinning wheel calc
+
+     radius = 1.80323 - 1.51444 = 0.28879
+     circum = 2*pi*radius = 1.8145
+     factor = 1/circum * 60 = 0.6318 * 60 = 33.0666
+
+     -->
+<animation>
+    <type>spin</type>
+    <object-name>LeftMainTire</object-name>
+    <condition>
+        <property>gear/gear[2]/wow</property>
+    </condition>
+    <property>rotors/main/blade[2]/position-deg</property><!-- gear/gear[0]/rollspeed-ms -->
+    <factor>-33.0666</factor>
+    <axis>   
+     <x1-m>0.563844</x1-m>
+     <y1-m>-1.27316</y1-m>
+     <z1-m>-1.51444</z1-m>
+     <x2-m>  0.562878 </x2-m>
+     <y2-m> -1.1289 </y2-m>
+     <z2-m> -1.48814 </z2-m>
+  </axis>
+</animation>
+
  <animation>
   <type>rotate</type>
   <object-name>LeftUpperMainStrut</object-name>
@@ -1370,7 +1442,6 @@
   <object-name>LeftMainStrut</object-name>
   <object-name>LeftUpperMainStrut</object-name>
   <object-name>LeftLowerMainStrut</object-name>
-  <object-name>InternalLeftMainDoor</object-name>
   <condition>
    <not>
    <equals>
@@ -1387,7 +1458,6 @@
   <object-name>RightMainStrut</object-name>
   <object-name>RightUpperMainStrut</object-name>
   <object-name>RightLowerMainStrut</object-name>
-  <object-name>InternalRightMainDoor</object-name>
   <condition>
    <not>
    <equals>
@@ -1412,6 +1482,8 @@
  <animation>
   <type>select</type>
   <object-name>RNLAF_Tailroot</object-name>
+  <object-name>Chute</object-name>
+  <object-name>AftPosLight2</object-name>
   <condition>
    <property>sim/model/f16/dragchute</property>
   </condition>
@@ -1427,79 +1499,209 @@
 
  <animation>
   <type>select</type>
-  <object-name>LWStation1</object-name>
+  <object-name>LWStation3</object-name>
+  <condition>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-1-set</property>
+        <value>Empty</value>
+      </equals>
+    </not>
+  </and>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>RWStation3</object-name>
+  <condition>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-7-set</property>
+        <value>Empty</value>
+      </equals>
+    </not>
+  </and>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>LWStation2</object-name>
+  <condition>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-2-set</property>
+        <value>Empty</value>
+      </equals>
+    </not>
+    <not>
+      <or>
+     <equals>
+        <property>payload/armament/station/id-2-set</property>
+        <value>3 x GBU-12</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-2-set</property>
+        <value>3 x MK-82</value>
+      </equals>
+    </or>
+    </not>
+  </and>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>LWStation1</object-name>
+  <condition>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-3-set</property>
+        <value>Empty</value>
+      </equals>
+    </not>
+    <not>
+      <or>
+     <equals>
+        <property>payload/armament/station/id-3-set</property>
+        <value>2 x GBU-12</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-3-set</property>
+        <value>2 x MK-82</value>
+      </equals>
+    </or>
+    </not>
+  </and>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>RWStation1</object-name>
+  <condition>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-5-set</property>
+        <value>Empty</value>
+      </equals>
+    </not>
+    <not>
+      <or>
+     <equals>
+        <property>payload/armament/station/id-5-set</property>
+        <value>2 x GBU-12</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-5-set</property>
+        <value>2 x MK-82</value>
+      </equals>
+    </or>
+    </not>
+  </and>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>RWStation2</object-name>
   <condition>
-   <property>sim/model/f16/wingmounts</property>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-6-set</property>
+        <value>Empty</value>
+      </equals>
+    </not>
+    <not>
+      <or>
+     <equals>
+        <property>payload/armament/station/id-6-set</property>
+        <value>3 x GBU-12</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-6-set</property>
+        <value>3 x MK-82</value>
+      </equals>
+    </or>
+    </not>
+  </and>
   </condition>
  </animation>
 
- <animation>
-  <type>select</type>
-  <object-name>VentralTank</object-name>
-  <condition>
-   <property>sim/model/f16/ventraltank</property>
-  </condition>
- </animation>
+ 
 
- <animation>
-  <type>select</type>
-  <object-name>LExtTank</object-name>
-  <object-name>RExtTank</object-name>
-  <condition>
-   <property>sim/model/f16/wingtanks</property>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>Station1_AIM-9L</object-name>
-  <object-name>Station9_AIM-9L</object-name>
-  <condition>
-   <property>sim/model/f16/AIM-9L</property>
-  </condition>
- </animation>
-
-<!-- in peacetime we don't carry live ammunition -->
-<!-- however for aerodynamic reasons we carry dummy missiles -->
- <animation>
-  <type>select</type>
-  <object-name>Station1_AIM-9L_dummy</object-name>
-  <object-name>Station9_AIM-9L_dummy</object-name>
-  <condition>
-   <property>sim/model/f16/AIM-9L_dummy</property>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>Station1_AIM-9_smokewinder</object-name>
-  <object-name>Station9_AIM-9_smokewinder</object-name>
-  <object-name>Station1_AIM-9_smokewinder_smoke</object-name>
-  <object-name>Station9_AIM-9_smokewinder_smoke</object-name>
-  <condition>
-   <property>sim/model/f16/AIM-9_smokewinders</property>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>Station1_AIM-120C5_amraam</object-name>
-  <object-name>Station9_AIM-120C5_amraam</object-name>
-  <condition>
-   <property>sim/model/f16/AIM-120C5</property>
-  </condition>
- </animation>
+ 
 
  <!-- livery selection -->
  <animation>
   <type>material</type>
+  <!--<object-name>ArresterHook</object-name>
+  <object-name>CanopyFrame</object-name>
+  <object-name>ExternalFrontGearDoor</object-name>
+  <object-name>ExternalLeftMainDoor</object-name>
+  <object-name>ExternalRightMainDoor</object-name>
+  <object-name>InternalFrontGearDoor</object-name>
+  <object-name>LeftLowerAileron</object-name>
+  <object-name>LeftLowerFlap</object-name>
+  <object-name>LeftLowerHorizonTail</object-name>
+  <object-name>LeftLowerLef</object-name>
+  <object-name>LeftLowerSpeedbrake</object-name>
+  <object-name>LeftUpperAileron</object-name>
+  <object-name>LeftUpperFlap</object-name>
+  <object-name>LeftUpperHorizonTail</object-name>
+  <object-name>LeftUpperLef</object-name>
+  <object-name>LeftUpperSpeedbrake</object-name>
+  <object-name>LWStation1</object-name>
+  <object-name>LWStation2</object-name>
+  <object-name>LWStation3</object-name>
+  <object-name>RadarDomeTop</object-name>
+  <object-name>RightLowerAileron</object-name>
+  <object-name>RightLowerFlap</object-name>
+  <object-name>RightLowerHorizonTail</object-name>
+  <object-name>RightLowerLef</object-name>
+  <object-name>RightLowerSpeedbrake</object-name>
+  <object-name>RightUpperAileron</object-name>
+  <object-name>RightUpperFlap</object-name>
+  <object-name>RightUpperHorizonTail</object-name>
+  <object-name>RightUpperLef</object-name>
+  <object-name>RightUpperSpeedbrake</object-name>
+  <object-name>RNLAF_Tailroot</object-name>
+  <object-name>Rudder</object-name>
+  <object-name>Rudder.001</object-name>
+  <object-name>Rudder.003</object-name>
+  <object-name>Rudder.004</object-name>
+  <object-name>Rudder.005</object-name>
+  <object-name>Rudder.006</object-name>
+  <object-name>RWStation1</object-name>
+  <object-name>RWStation2</object-name>
+  <object-name>RWStation3</object-name>
+  <object-name>Tail</object-name>
+  <object-name>USAF_Tailroot</object-name>
+  <object-name>VentralFins</object-name>
+  <object-name>WingTips</object-name>
+  <object-name>AftPosLight1</object-name>
+  <object-name>Chute</object-name>
+  <object-name>Fan</object-name>
+  <object-name>FanSpinning</object-name>
+  <object-name>FlashLightProtector</object-name>
+  <object-name>FwdFormationLight</object-name>
+  <object-name>Link16Antennas</object-name>
+  <object-name>Poly</object-name>
+  <object-name>Poly.001</object-name>
+  <object-name>Poly.002</object-name>
+  <object-name>Turbine</object-name>-->
   <object-name>Fuselage</object-name>
+  <!--<object-name>LandingGear</object-name>-->
   <property-base>sim/model/livery</property-base>
   <texture-prop>texture</texture-prop>
-  <texture>f16.rgb</texture>
+  <texture>f16.png</texture>
  </animation>
 
 
@@ -1508,7 +1710,7 @@
   <object-name>Logos</object-name>
   <property-base>sim/model/livery-logo</property-base>
   <texture-prop>texture</texture-prop>
-  <texture>f16trans.rgb</texture>
+  <texture>f16trans.png</texture>
  </animation>
 
 <model>

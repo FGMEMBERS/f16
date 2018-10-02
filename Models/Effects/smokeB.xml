@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+<particlesystem>
+  <name>smoke</name>
+  <texture>smokepuff.png</texture>
+  <emissive>false</emissive>
+  <lighting>false</lighting>
+  
+  <offsets>
+   <x-m>0</x-m>
+   <y-m>0</y-m>
+   <z-m>0</z-m>
+  </offsets>
+
+  <condition>
+   <property>sim/multiplay/generic/int[10]</property>
+  </condition>
+   
+  <attach>world</attach>
+
+  <placer>
+   <type>point</type>
+  </placer>
+  
+  <shooter>
+      <theta-min-deg>10</theta-min-deg>
+      <theta-max-deg>86</theta-max-deg>
+      <phi-min-deg>-1.5</phi-min-deg>
+      <phi-max-deg>8</phi-max-deg>
+      <speed-mps>
+        <value>10</value>
+        <spread>2.5</spread>
+      </speed-mps>
+      <rotation-speed>
+        <x-min-deg-sec>5</x-min-deg-sec>
+        <y-min-deg-sec>5</y-min-deg-sec>
+        <z-min-deg-sec>5</z-min-deg-sec>
+        <x-max-deg-sec>60</x-max-deg-sec>
+        <y-max-deg-sec>60</y-max-deg-sec>
+        <z-max-deg-sec>60</z-max-deg-sec>
+      </rotation-speed>
+    </shooter>
+  
+  <counter><!-- 125 -->
+      <particles-per-sec>
+        <property>sim/multiplay/generic/float[3]</property>
+        <factor>0.5</factor>
+        <spread>0.0</spread>
+      </particles-per-sec>
+  </counter>
+  
+  <align>billboard</align>
+  
+  <particle>
+   <start>
+    <color>
+     <red><value>0.4</value></red>
+     <green><value>0.4</value></green>
+     <blue>
+      <value>1</value>
+     </blue>
+     <alpha>
+      <value>1.0</value>
+     </alpha>
+    </color>
+    <size>
+     <value>0.5</value>
+    </size>
+   </start>
+   <end>
+    <color>
+     <red><value>0.4</value></red>
+     <green><value>0.4</value></green>
+     <blue>
+      <value>1</value>
+     </blue>
+     <alpha>
+      <value>0.4</value>
+     </alpha>
+    </color>
+    <size>
+     <value>6</value>
+    </size>
+   </end>
+   <life-sec>
+    <value>30.0</value>
+   </life-sec>
+   <mass-kg>0.000001</mass-kg>
+   <radius-m>0.010</radius-m>
+  </particle>
+  
+  <program>
+   <fluid>air</fluid>
+   <gravity type="bool">false</gravity>
+   <wind type="bool">true</wind>
+  </program>
+  
+</particlesystem>
+
+</PropertyList>
+
