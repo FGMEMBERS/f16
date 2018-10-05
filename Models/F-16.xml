@@ -68,6 +68,19 @@
  </model>
 
  <model>
+  <name>dc</name>
+  <path>Aircraft/f16/Models/Effects/dragchute/dragchute.xml</path>
+ </model>
+
+ <animation>
+  <type>select</type>
+  <object-name>dc</object-name>
+  <condition>
+   <property>sim/multiplay/generic/bool[35]</property>
+  </condition>
+ </animation>
+
+ <model>
   <name>smoking</name>
   <path>Aircraft/f16/Models/Effects/damage-smoke.xml</path>
  </model>
@@ -336,9 +349,9 @@
   <path>Aircraft/Generic/Effects/tyre-smoke-nose.xml</path>
   <name>tyre-smoke-n</name>
   <offsets>
-   <x-m>-2.97</x-m>
-   <y-m>0.0</y-m>
-   <z-m>-2.0</z-m>
+   <x-m> -3.02153 </x-m>
+    <y-m> -0.03405 </y-m>
+    <z-m> -1.91735 </z-m>
   </offsets>
  </model>
 
@@ -346,9 +359,9 @@
    <path>Aircraft/Generic/Effects/tyre-smoke-port.xml</path>
    <name>tyre-smoke-p</name>
    <offsets>
-    <x-m>0.0</x-m>
-    <y-m>-1.21</y-m>
-    <z-m>-2.0</z-m>
+    <x-m> 0.56097 </x-m>
+    <y-m> 1.16952 </y-m>
+    <z-m> -1.79705 </z-m>
    </offsets>
   </model>
 
@@ -356,9 +369,39 @@
    <path>Aircraft/Generic/Effects/tyre-smoke-stbd.xml</path>
    <name>tyre-smoke-s</name>
    <offsets>
-   <x-m>0.0</x-m>
-    <y-m>1.21</y-m>
-    <z-m>-2.0</z-m>
+   <x-m> 0.56097 </x-m>
+    <y-m> -1.18118 </y-m>
+    <z-m> -1.79705 </z-m>
+   </offsets>
+  </model>
+
+  <model>
+  <path>Aircraft/Generic/Effects/rain-nose.xml</path>
+  <name>tyre-rain-n</name>
+  <offsets>
+   <x-m> -3.02153 </x-m>
+    <y-m> -0.03405 </y-m>
+    <z-m> -1.91735 </z-m>
+  </offsets>
+ </model>
+
+  <model>
+   <path>Aircraft/Generic/Effects/rain-port.xml</path>
+   <name>tyre-rain-p</name>
+   <offsets>
+    <x-m> 0.56097 </x-m>
+    <y-m> 1.16952 </y-m>
+    <z-m> -1.79705 </z-m>
+   </offsets>
+  </model>
+
+  <model>
+   <path>Aircraft/Generic/Effects/rain-stbd.xml</path>
+   <name>tyre-rain-s</name>
+   <offsets>
+   <x-m> 0.56097 </x-m>
+    <y-m> -1.18118 </y-m>
+    <z-m> -1.79705 </z-m>
    </offsets>
   </model>
  <!-- end effects -->
@@ -407,20 +450,134 @@
   <type>select</type>
   <object-name>pos_lights_flash</object-name>
   <condition>
-   <property>controls/lighting/ext-lighting-panel/pos-lights-flash</property>
-   <or>
-   <equals>
-    <property>controls/lighting/ext-lighting-panel/wing-tail</property>
-    <value>2</value>
-   </equals>
-   <equals>
-    <property>controls/lighting/ext-lighting-panel/wing-tail</property>
-    <value>0.0</value>
-   </equals>
-   </or>
-   <property>controls/lighting/ext-lighting-panel/master</property>
+    <not>
+    <property>sim/rendering/shaders/skydome</property>
+  </not>
+   <property>sim/multiplay/generic/bool[40]</property>
   </condition>
  </animation>
+
+<model>
+  <name>posleft1</name>
+  <path>Aircraft/f16/Models/pos-left.xml</path> 
+  <offsets>
+            <x-m> 1.60236 </x-m>
+            <y-m> -4.55165 </y-m>
+            <z-m> 0.012629 </z-m>
+        </offsets>   
+ </model>
+
+ <model>
+  <name>posright1</name>
+  <path>Aircraft/f16/Models/pos-right.xml</path>    
+  <offsets>
+            <x-m> 1.60236 </x-m>
+            <y-m> 4.55165 </y-m>
+            <z-m> 0.012629 </z-m>
+        </offsets>
+ </model>
+
+ <model>
+  <name>posleft2</name>
+  <path>Aircraft/f16/Models/pos-left2.xml</path> 
+  <offsets>
+            <x-m> -3.36687 </x-m>
+            <y-m> -0.748387 </y-m>
+            <z-m> -0.555937 </z-m>
+        </offsets>   
+ </model>
+
+ <model>
+  <name>posright2</name>
+  <path>Aircraft/f16/Models/pos-right2.xml</path> 
+  <offsets>
+            <x-m> -3.36687 </x-m>
+            <y-m> 0.748387 </y-m>
+            <z-m> -0.555937 </z-m>
+        </offsets>   
+ </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>posleft1</object-name>
+    <object-name>posright1</object-name>
+    <object-name>posleft2</object-name>
+    <object-name>posright2</object-name>
+    <condition><and>
+      <property>sim/rendering/shaders/skydome</property>
+      <property>sim/multiplay/generic/bool[40]</property> 
+    </and> 
+    </condition>
+  </animation>
+
+
+
+<model>
+  <name>belly</name>
+  <path>Aircraft/f16/Models/belly-light.xml</path> 
+  <offsets>
+            <x-m> -1.23466 </x-m>
+            <y-m> 0 </y-m>
+            <z-m> -0.862066 </z-m>
+        </offsets>   
+ </model>
+ <model>
+  <name>spine</name>
+  <path>Aircraft/f16/Models/spine-light.xml</path> 
+  <offsets>
+            <x-m> -2.05409 </x-m>
+            <y-m> 0 </y-m>
+            <z-m> 0.849391 </z-m>
+        </offsets>   
+ </model>
+ <model>
+  <name>tl</name>
+  <path>Aircraft/f16/Models/tail-light.xml</path> 
+  <offsets>
+            <x-m> 5.50707 </x-m>
+            <y-m> 0 </y-m>
+            <z-m> 1.13691 </z-m>
+        </offsets>   
+ </model>
+ <model>
+  <name>tl2</name>
+  <path>Aircraft/f16/Models/tail-light.xml</path> 
+  <offsets>
+            <x-m> 5.03444 </x-m>
+            <y-m> 0 </y-m>
+            <z-m> 0.853577 </z-m>
+        </offsets>   
+ </model>
+
+<animation>
+    <type>select</type>
+    <object-name>belly</object-name>
+    <object-name>spine</object-name>
+    <condition>
+      <property>sim/rendering/shaders/skydome</property>
+      <property>sim/multiplay/generic/bool[41]</property> 
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>tl</object-name>
+    <condition>
+      <property>sim/rendering/shaders/skydome</property>
+      <property>sim/multiplay/generic/bool[42]</property>  
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>tl2</object-name>
+    <condition>
+      <property>sim/rendering/shaders/skydome</property>
+      <property>sim/multiplay/generic/bool[43]</property> 
+    </condition>
+  </animation>
+
+
 <!-- flash causes this not to work, since flash is what we use during flight
      we'll disable steady/off for now
  <animation>
@@ -461,40 +618,41 @@
 
 <!-- start formation lights -->
  <animation>
+  <name>Fformation_lights</name>
+  <type>select</type>
+  <object-name>LowFormationLlight</object-name>
+  <object-name>FwdFormationLight</object-name>
+  <condition><and>
+    <not>
+    <property>sim/rendering/shaders/skydome</property>
+  </not>
+     <property>sim/multiplay/generic/bool[41]</property> 
+  </and>
+  </condition>
+ </animation>
+
+ <animation>
   <name>F-16A-MLU-rnlaf_formation_lights</name>
   <type>select</type>
-  <object-name>LowFormationLight</object-name>
-  <object-name>FwdFormationLight</object-name>
   <object-name>AftPosLight2</object-name>
   <condition>
-    <less-than>
-     <property>sim/variant-id</property>
-     <value>3</value>
-    </less-than>
-     <property>controls/lighting/ext-lighting-panel/master</property>
-    <equals>
-     <property>controls/lighting/ext-lighting-panel/form-knob</property>
-     <value>1</value>
-    </equals>
+    <not>
+    <property>sim/rendering/shaders/skydome</property>
+  </not>
+    <property>sim/multiplay/generic/bool[42]</property>   
   </condition>
  </animation>
 
  <animation>
   <name>F-16C_formation_lights</name>
   <type>select</type>
-  <object-name>LowFormationLight</object-name>
-  <object-name>FwdFormationLight</object-name>
   <object-name>AftPosLight1</object-name>
-  <condition>
-    <greater-than>
-     <property>sim/variant-id</property>
-     <value>2</value>
-    </greater-than>
-     <property>controls/lighting/ext-lighting-panel/master</property>
-    <equals>
-     <property>controls/lighting/ext-lighting-panel/form-knob</property>
-     <value>1</value>
-    </equals>
+  <condition><and>
+    <not>
+    <property>sim/rendering/shaders/skydome</property>
+  </not>
+    <property>sim/multiplay/generic/bool[43]</property>   
+  </and>
   </condition>
  </animation>
 <!-- end formation lights -->
@@ -599,7 +757,7 @@
   <type>select</type>
   <object-name>InternalFlame</object-name>
   <condition>
-   <property>sim/multiplay/generic/float[1]</property>
+   <property>sim/multiplay/generic/bool[39]</property>
   </condition>
  </animation>
 
@@ -641,7 +799,7 @@
   <name>AB_Flame</name>
   <path>Aircraft/f16/Models/Effects/afterburner.xml</path>
   <condition>
-   <property>sim/multiplay/generic/float[1]</property>
+   <property>sim/multiplay/generic/bool[39]</property>
   </condition>
   <offsets>
    <x-m>5.44</x-m>
@@ -1483,7 +1641,6 @@
   <type>select</type>
   <object-name>RNLAF_Tailroot</object-name>
   <object-name>Chute</object-name>
-  <object-name>AftPosLight2</object-name>
   <condition>
    <property>sim/model/f16/dragchute</property>
   </condition>

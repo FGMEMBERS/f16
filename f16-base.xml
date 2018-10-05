@@ -344,7 +344,8 @@
                 <bool n="0" type="bool" alias="/damage/sounds/explode-on"/>
                 <bool n="1" type="bool" alias="/damage/fire/serviceable"/>
                 <bool n="2" type="bool">true</bool><!-- this must stay true to prevent bug in MP protocol for bools -->
-
+                <bool n="45" type="bool" alias="/sim/model/lighting/strobe/state"/>
+                <bool n="35" type="bool" alias="/f16/chute/enable"/>
                 <int n="2" type="int">0</int><!-- radar-standby -->
                 <int n="9" type="int" alias="/sim/variant-id"/>
                 <int n="10" type="int" alias="/controls/smoke"/>
@@ -358,13 +359,18 @@
                 <int n="18" type="int" alias="/sim/model/f16/smokewinderW9"/>
 
                 <float n="0" type="double" alias="/engines/engine[0]/nozzle-pos-norm"/>
-                <float n="1" type="double" alias="/engines/engine[0]/augmentation"/>
+                <bool n="39" type="bool" alias="/engines/engine[0]/augmentation"/>
                 <float n="2" type="double" alias="/engines/engine[0]/augmentation1"/>
                 <float n="3" type="double" alias="/velocities/airspeed-kt"/>
                 <float n="4" type="double" alias="/fdm/jsbsim/fcs/dht-right-pos-rad"/>
                 <float n="5" type="double" alias="/fdm/jsbsim/fcs/left-flaperon-norm"/>
                 <float n="6" type="double" alias="/fdm/jsbsim/fcs/right-flaperon-norm"/>
                 <float n="7" type="double" alias="/gear/gear[0]/steering-norm"/>
+                <float n="10" type="double">0</float><!-- afterburner -->
+                <float n="11" type="double">0</float>
+                <float n="12" type="double">0</float>
+                <float n="13" type="double">0</float>
+                <float n="14" type="double">0</float><!-- scene red inverted -->
             </generic>
             <visibility-range-nm type="int">150</visibility-range-nm>
         </multiplay>
@@ -448,6 +454,10 @@
             <key>
                 <name>S</name>
                 <desc>Toggle smoke if installed</desc>
+            </key>
+            <key>
+                <name>F4 (if variant support it)</name>
+                <desc>Deploy dragchute</desc>
             </key>
             <key>
                 <name>F6</name>
@@ -550,6 +560,9 @@ This will deploy flaps as if the gears were extended. They will still retract at
 NIGHTTIME FLYING
 There is flood and instrument lights that can be turned up.
 If running ALS you can also go into filters and enable one of the night vision modes.
+
+DRAGCHUTE
+Only a visual effect for now. Nosewheel must touch ground.
 
 FLYING IN MP
 Firstly be sure to use "Visible to 2017+", else others will not see everything working okay when they see your aircraft.
@@ -1037,6 +1050,17 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                </script>
               </binding>
              </key>
+             <key n="260">
+              <name>F4</name>
+              <desc>noop</desc>
+              <repeatable type="bool">false</repeatable>
+              <binding>
+               <command>nasal</command>
+               <script>
+                f16.chute();
+               </script>
+              </binding>
+             </key>
         </keyboard>
     </input>
     <controls>
@@ -1226,6 +1250,11 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                     <util-system-preload-input type="double">0</util-system-preload-input>
                     <emerg-pump-on type="bool">false</emerg-pump-on><!-- Set by electrical system -->
                 </hydraulics>
+                <external_reactions>
+                    <chute>
+                        <magnitude type="double">0</magnitude>
+                    </chute>
+                </external_reactions>
             </systems>
             <fcs>
                 <fly-by-wire>
@@ -1968,6 +1997,12 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
             <running-state type="bool">false</running-state>
         </engine>
         <done type="bool">false</done>
+        <chute>
+            <force type="double">2.0</force>
+            <fold type="double">0.0</fold>
+            <done type="bool">false</done>
+            <enable type="bool">false</enable>
+        </chute>
     </f16>
     <damage>
         <sound>

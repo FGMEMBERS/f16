@@ -227,6 +227,7 @@ var loop_flare = func {
       } else {
         setprop("f16/force", 7);
       }
+      
     settimer(loop_flare, 0.10);
 };
 
@@ -337,9 +338,61 @@ var medium = {
     
     batteryChargeDischarge(); ########## To work optimally, should run at or below 0.5 in a loop ##########
     
+    sendLightsToMp();
+    sendABtoMP();
+
     settimer(func {me.loop()},0.5);
   },
 };
+
+var sendABtoMP = func {
+  var red = getprop("rendering/scene/diffuse/red");
+  setprop("sim/multiplay/generic/float[10]",  1-red*0.75);
+
+  setprop("sim/multiplay/generic/float[11]",  0.75+(0.25-red*0.25));
+  setprop("sim/multiplay/generic/float[12]",  0.25+(0.75-red*0.75));
+  setprop("sim/multiplay/generic/float[13]",  0.2+(0.8-red*0.8));
+  setprop("sim/multiplay/generic/float[14]",  1-red);
+}
+
+var sendLightsToMp = func {
+  var master = getprop("controls/lighting/ext-lighting-panel/master");
+  var pos = getprop("controls/lighting/ext-lighting-panel/pos-lights-flash");
+  var wing = getprop("controls/lighting/ext-lighting-panel/wing-tail");
+  var dc = getprop("fdm/jsbsim/elec/bus/ess-dc");
+  var form = getprop("controls/lighting/ext-lighting-panel/form-knob");
+  var vi = getprop("sim/model/f16/dragchute");
+
+  if (pos and (wing == 0 or wing == 2) and master and dc > 20) {
+    setprop("sim/multiplay/generic/bool[40]",1);
+  } else {
+    setprop("sim/multiplay/generic/bool[40]",0);
+  }
+
+  if (form == 1 and master and dc > 20) {
+    setprop("sim/multiplay/generic/bool[41]",1);
+  } else {
+    setprop("sim/multiplay/generic/bool[41]",0);
+  }
+
+  if (form == 1 and master and dc > 20 and vi) {
+    setprop("sim/multiplay/generic/bool[42]",1);
+  } else {
+    setprop("sim/multiplay/generic/bool[42]",0);
+  }
+
+  if (form == 1 and master and dc > 20 and !vi) {
+    setprop("sim/multiplay/generic/bool[43]",1);
+  } else {
+    setprop("sim/multiplay/generic/bool[43]",0);
+  }
+
+  if (master and dc > 20) {
+    setprop("sim/multiplay/generic/bool[44]",1);
+  } else {
+    setprop("sim/multiplay/generic/bool[44]",0);
+  }
+}
 
 var batteryChargeDischarge = func {
     var battery_percent = getprop("/fdm/jsbsim/elec/sources/battery-percent");
@@ -397,6 +450,7 @@ var repair = func {
 
 var repair2 = func {
   setprop("f16/done",0);
+  setprop("f16/chute/done",0);
   setprop("sim/view[0]/enabled",1);
   setprop("sim/current-view/view-number",0);
   if (inAutostart) {
@@ -727,4 +781,32 @@ var eject = func{
   view.view_firing_missile(es);
   #setprop("sim/view[0]/enabled",0); #disabled since it might get saved so user gets no pilotview in next aircraft he flies in.
   settimer(func {crash.exp();},3.5);
+}
+
+var chute = func{
+  if (!getprop("sim/model/f16/dragchute") or (getprop("f16/chute/enable")==0  and (getprop("f16/chute/done")==1 or !getprop("fdm/jsbsim/gear/unit[0]/WOW")))) {
+      return;
+  } elsif (getprop("f16/chute/enable")==0) {
+    setprop("f16/chute/done",1);
+    setprop("f16/chute/enable",1);
+    setprop("f16/chute/force",2);
+    setprop("f16/chute/fold",0);
+  } else {
+    setprop("f16/chute/force",getprop("/velocities/groundspeed-kt")*0.01);
+    setprop("fdm/jsbsim/external_reactions/chute/magnitude", getprop("/velocities/airspeed-kt")*30);
+    if (getprop("/velocities/groundspeed-kt")<=3 or getprop("/velocities/groundspeed-kt")>300) {
+      setprop("f16/chute/fold",1);
+      setprop("fdm/jsbsim/external_reactions/chute/magnitude", 0);
+      settimer(chute2,2.0);
+      return;
+    } elsif (getprop("/velocities/groundspeed-kt")<=25) {
+      setprop("f16/chute/fold",1-getprop("/velocities/groundspeed-kt")/25);
+    }
+  }
+  settimer(chute,0.05);
+}
+
+var chute2 = func{
+  setprop("fdm/jsbsim/external_reactions/chute/magnitude", 0);
+  setprop("f16/chute/enable",0);
 }
