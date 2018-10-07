@@ -3144,7 +3144,7 @@ var AIM = {
             }
         }
 
-		if (me.Tgt != nil and me.guidance != "inertial") {
+		if (me.Tgt != nil and me.t_coord != nil and me.guidance != "inertial") {
 			# Get current direct distance.
 			me.cur_dir_dist_m = me.coord.direct_distance_to(me.t_coord);
 			if (me.useHitInterpolation == TRUE) { # use Nikolai V. Chr. interpolation
@@ -3360,7 +3360,7 @@ var AIM = {
 				continue;
 			}
 			var min_distance = me.testMe.get_Coord().direct_distance_to(explode_coord);
-			if (min_distance < me.reportDist and me.testMe.getUnique() != me.Tgt.getUnique()) {
+			if (min_distance < me.reportDist and (me.Tgt == nil or me.testMe.getUnique() != me.Tgt.getUnique())) {
 				var phrase = sprintf("%s %s: %.1f meters from: %s", me.type,event, min_distance, me.testMe.get_Callsign());
 				me.printStats(phrase);
 				me.sendMessage(phrase);
