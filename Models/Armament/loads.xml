@@ -201,13 +201,9 @@
   <object-name>Station3_AGM-65</object-name>
   <condition>
     <equals>
-      <property>payload/armament/station/id-2-type</property>
-      <value>AGM-65</value>
+      <property>payload/armament/station/id-2-set</property>
+      <value>3 x AGM-65</value>
     </equals>
-    <greater-than>
-      <property>payload/armament/station/id-2-count</property>
-      <value>0</value>
-    </greater-than>
   </condition>
  </animation>
  
@@ -265,6 +261,17 @@
 
  <animation>
   <type>select</type>
+  <object-name>Station3_MK83</object-name>
+  <condition>
+    <equals>
+        <property>payload/armament/station/id-2-set</property>
+        <value>2 x MK-83</value>
+      </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>Station3_GBU-31</object-name>
   <condition>
     <equals>
@@ -280,27 +287,11 @@
 
  <animation>
   <type>select</type>
-  <object-name>Station3_B61-12</object-name>
+  <object-name>Station3_GBU-24</object-name>
   <condition>
     <equals>
       <property>payload/armament/station/id-2-type</property>
-      <value>B61-12</value>
-    </equals>
-    <greater-than>
-      <property>payload/armament/station/id-2-count</property>
-      <value>0</value>
-    </greater-than>
-  </condition>
- </animation>
- 
-
- <animation>
-  <type>select</type>
-  <object-name>Station3_B61-7</object-name>
-  <condition>
-    <equals>
-      <property>payload/armament/station/id-2-type</property>
-      <value>B61-7</value>
+      <value>GBU-24</value>
     </equals>
     <greater-than>
       <property>payload/armament/station/id-2-count</property>
@@ -349,6 +340,21 @@
     </greater-than>
   </condition>
  </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>Station4_AGM-88</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-3-type</property>
+      <value>AGM-88</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-3-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
  
  <animation>
   <type>select</type>
@@ -374,11 +380,37 @@
 
  <animation>
   <type>select</type>
+  <object-name>Station4_MK83</object-name>
+  <condition>
+    <equals>
+        <property>payload/armament/station/id-3-set</property>
+        <value>2 x MK-83</value>
+      </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>Station4_GBU-31</object-name>
   <condition>
     <equals>
       <property>payload/armament/station/id-3-type</property>
       <value>GBU-31</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-3-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>Station4_GBU-24</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-3-type</property>
+      <value>GBU-24</value>
     </equals>
     <greater-than>
       <property>payload/armament/station/id-3-count</property>
@@ -501,6 +533,21 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
 
  <animation>
   <type>select</type>
+  <object-name>Station6_AGM-88</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-5-type</property>
+      <value>AGM-88</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-5-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>Station6_GBU12</object-name>
   <condition>
     <equals>
@@ -523,11 +570,37 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
 
  <animation>
   <type>select</type>
+  <object-name>Station6_MK83</object-name>
+  <condition>
+    <equals>
+        <property>payload/armament/station/id-5-set</property>
+        <value>2 x MK-83</value>
+      </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>Station6_GBU-31</object-name>
   <condition>
     <equals>
       <property>payload/armament/station/id-5-type</property>
       <value>GBU-31</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-5-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>Station6_GBU-24</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-5-type</property>
+      <value>GBU-24</value>
     </equals>
     <greater-than>
       <property>payload/armament/station/id-5-count</property>
@@ -609,16 +682,23 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
 
  <animation>
   <type>select</type>
+  <object-name>Station7_MK83</object-name>
+  <condition>
+    <equals>
+        <property>payload/armament/station/id-6-set</property>
+        <value>2 x MK-83</value>
+      </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>Station7_AGM-65</object-name>
   <condition>
     <equals>
-      <property>payload/armament/station/id-6-type</property>
-      <value>AGM-65</value>
+      <property>payload/armament/station/id-6-set</property>
+      <value>3 x AGM-65</value>
     </equals>
-    <greater-than>
-      <property>payload/armament/station/id-6-count</property>
-      <value>0</value>
-    </greater-than>
   </condition>
  </animation>
 
@@ -669,26 +749,11 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
 
  <animation>
   <type>select</type>
-  <object-name>Station7_B61-12</object-name>
+  <object-name>Station7_GBU-24</object-name>
   <condition>
     <equals>
       <property>payload/armament/station/id-6-type</property>
-      <value>B61-12</value>
-    </equals>
-    <greater-than>
-      <property>payload/armament/station/id-6-count</property>
-      <value>0</value>
-    </greater-than>
-  </condition>
- </animation>
-
- <animation>
-  <type>select</type>
-  <object-name>Station7_B61-7</object-name>
-  <condition>
-    <equals>
-      <property>payload/armament/station/id-6-type</property>
-      <value>B61-7</value>
+      <value>GBU-24</value>
     </equals>
     <greater-than>
       <property>payload/armament/station/id-6-count</property>

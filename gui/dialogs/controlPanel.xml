@@ -542,6 +542,150 @@
 				</group>
 
 			</group>
+
+			<hrule/>
+
+			<group>
+			    <layout>hbox</layout>
+			    <checkbox>
+				    <property>f16/avionics/hud-ded</property>
+				    <live>true</live>
+				    <binding>
+						<command>property-toggle</command>
+						<property>f16/avionics/hud-ded</property>
+			      	</binding>
+			    </checkbox>
+			    <text><label>HUD DED DATA</label></text>
+			</group>
+
+			<hrule/>
+			<group>
+			    <layout>hbox</layout>
+					<group>
+						<layout>vbox</layout>
+						
+						<text>
+							<label>HUD VELOCITY</label>
+						</text>
+						
+						<group>
+							<layout>hbox</layout>
+						
+							<group>
+								<layout>vbox</layout>
+								<halign>left</halign>
+								
+								<text>
+									<label>CAS</label>
+								</text>
+								<text>
+									<label>TAS</label>
+								</text>
+								<text>
+									<label>GND SPD</label>
+								</text>
+								
+							</group>
+							
+							<slider>
+								<halign>left</halign>
+								<property>/f16/avionics/hud-velocity</property>
+								<min>-1</min>
+								<max>1</max>
+								<step>1</step>
+								<live>true</live>
+								<vertical>true</vertical>
+								<binding>
+									<command>dialog-apply</command>
+								</binding>
+							</slider>
+							
+						</group>
+					
+					</group>
+
+					<group>
+						<layout>vbox</layout>
+						
+						<text>
+							<label>HUD SCALES</label>
+						</text>
+						
+						<group>
+							<layout>hbox</layout>
+						
+							<group>
+								<layout>vbox</layout>
+								<halign>left</halign>
+								
+								<text>
+									<label>VAH</label>
+								</text>
+								<text>
+									<label>OFF</label>
+								</text>								
+							</group>
+							
+							<slider>
+								<halign>left</halign>
+								<property>/f16/avionics/hud-scales</property>
+								<min>0</min>
+								<max>1</max>
+								<step>1</step>
+								<live>true</live>
+								<vertical>true</vertical>
+								<binding>
+									<command>dialog-apply</command>
+								</binding>
+							</slider>
+							
+						</group>
+					
+					</group>
+
+					<group>
+						<layout>vbox</layout>
+						
+						<text>
+							<label>HUD FPM</label>
+						</text>
+						
+						<group>
+							<layout>hbox</layout>
+						
+							<group>
+								<layout>vbox</layout>
+								<halign>left</halign>
+								
+								<text>
+									<label>ATT/FPM</label>
+								</text>
+								<text>
+									<label>FPM</label>
+								</text>
+								<text>
+									<label>OFF</label>
+								</text>								
+							</group>
+							
+							<slider>
+								<halign>left</halign>
+								<property>/f16/avionics/hud-fpm</property>
+								<min>0</min>
+								<max>2</max>
+								<step>1</step>
+								<live>true</live>
+								<vertical>true</vertical>
+								<binding>
+									<command>dialog-apply</command>
+								</binding>
+							</slider>
+							
+						</group>
+					
+					</group>
+
+				</group>
 			
 		</group>
 
@@ -758,7 +902,64 @@
 			    <text><label>EMER STORES JETTISON</label></text>
 			</group>
 
-		</group>
+			<hrule/>
+
+			<input>
+			  	<width>75</width>
+			  	<height>25</height>
+			  	<label>BINGO</label>
+			  	<property>f16/settings/bingo</property>
+			  	<live>true</live>
+			  	<halign>left</halign>
+		        <binding>
+		            <command>dialog-apply</command>
+		      	</binding>
+		      	<!--<color>
+		      		<red>0.5</red>
+		      		<green>1</green>
+		      		<blue>0.5</blue>
+		      	</color>-->
+			</input>
+
+			<hrule/>
+
+			<input>
+			  	<width>75</width>
+			  	<height>25</height>
+			  	<label>CARA ALOW</label>
+			  	<property>f16/settings/cara-alow</property>
+			  	<live>true</live>
+			  	<halign>left</halign>
+		        <binding>
+		            <command>dialog-apply</command>
+		      	</binding>
+		      	<!--<color>
+		      		<red>0.5</red>
+		      		<green>1</green>
+		      		<blue>0.5</blue>
+		      	</color>-->
+			</input>
+
+			<hrule/>
+
+			<input>
+			  	<width>75</width>
+			  	<height>25</height>
+			  	<label>MSL FLOOR</label>
+			  	<property>f16/settings/msl-floor</property>
+			  	<live>true</live>
+			  	<halign>left</halign>
+		        <binding>
+		            <command>dialog-apply</command>
+		      	</binding>
+		      	<!--<color>
+		      		<red>0.5</red>
+		      		<green>1</green>
+		      		<blue>0.5</blue>
+		      	</color>-->
+			</input>
+
+		</group>		
 
 	</group>
 

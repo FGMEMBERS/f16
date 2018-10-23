@@ -425,7 +425,7 @@
  
   <stall>
    <name>stall</name>
-   <path>Aircraft/f16/Sounds/warning.wav</path>
+   <path>Aircraft/f16/Sounds/betty/warning.wav</path>
    <mode>looped</mode>
    <type>avionics</type>
    <condition>
@@ -457,7 +457,7 @@
 
   <stall>
    <name>stall2</name>
-   <path>Aircraft/f16/Sounds/warning.wav</path>
+   <path>Aircraft/f16/Sounds/betty/caution.wav</path>
    <mode>once</mode>
    <type>avionics</type>
    <condition>
@@ -485,7 +485,7 @@
 
   <impact>
    <name>pullUp</name>
-   <path>Aircraft/f16/Sounds/warning.wav</path>
+   <path>Aircraft/f16/Sounds/betty/pullup.wav</path>
    <mode>looped</mode>
    <type>avionics</type>
    <condition>
@@ -509,7 +509,7 @@
 
   <bingo>
    <name>bingo</name>
-   <path>Aircraft/f16/Sounds/bingo.wav</path>
+   <path>Aircraft/f16/Sounds/betty/bingo.wav</path>
    <mode>once</mode>
    <type>avionics</type>
    <condition>
@@ -520,6 +520,62 @@
         <factor>1</factor>
     </volume>
   </bingo>
+
+  <alow>
+   <name>alow</name>
+   <path>Aircraft/f16/Sounds/betty/altitude.wav</path>
+   <mode>once</mode>
+   <type>avionics</type>
+   <condition>
+        <equals>
+          <property>gear/gear/position-norm</property>
+          <value>0</value>
+        </equals>
+        <greater-than>
+          <property>f16/settings/cara-alow</property>
+          <property>position/altitude-agl-ft</property>
+        </greater-than>
+        <property>f16/avionics/cara-on</property>
+    </condition>
+   <volume>
+        <property>sim/current-view/internal</property>
+        <factor>1</factor>
+    </volume>
+  </alow>
+
+  <msl>
+   <name>msl-floor</name>
+   <path>Aircraft/f16/Sounds/betty/altitude.wav</path>
+   <mode>once</mode>
+   <type>avionics</type>
+   <condition>
+        <greater-than>
+          <property>instrumentation/altimeter/indicated-altitude-ft</property>
+          <property>f16/settings/msl-floor</property>
+        </greater-than>
+    </condition>
+   <volume>
+        <property>sim/current-view/internal</property>
+        <factor>1</factor>
+    </volume>
+  </msl>
+
+  <msl>
+   <name>msl-floor2</name>
+   <path>Aircraft/f16/Sounds/betty/altitude.wav</path>
+   <mode>once</mode>
+   <type>avionics</type>
+   <condition>
+        <greater-than>
+          <property>f16/settings/msl-floor</property>
+          <property>instrumentation/altimeter/indicated-altitude-ft</property>          
+        </greater-than>
+    </condition>
+   <volume>
+        <property>sim/current-view/internal</property>
+        <factor>1</factor>
+    </volume>
+  </msl>
   
 
   <cannon>
@@ -758,7 +814,7 @@
                 <factor>1.00</factor>
                 <offset>1.60</offset>
                 <min>0</min>
-                <max>1</max>
+                <max>2</max>
             </pitch>
             <volume>
                 <property>payload/armament/aim-9/sound-volume</property>
@@ -766,92 +822,131 @@
         </lock-tone>
 
         <lock-tone>
-            <name>aim-7-signal</name>
-            <mode>looped</mode>
+            <name>aim-9-signal2</name>
+            <mode>once</mode>
             <type>avionics</type>
-            <path>Aircraft/f16/Sounds/115hz-square.wav</path>
+            <path>Aircraft/f16/Sounds/betty/lock.wav</path>
             <condition>
                 <property>sim/current-view/internal</property>
-                <property>payload/armament/aim-7/sound-on-off</property>
+                <property>payload/armament/aim-9/sound-on-off</property>
+                <equals>
+                    <property>payload/armament/aim-9/sound-volume</property>
+                    <value>0.25</value>
+                </equals>
             </condition>
-            <pitch>
-                <factor>1.8</factor><!-- changes it to beep -->
-                <max>2</max>
-            </pitch>
             <volume>
-                <property>payload/armament/aim-7/sound-volume</property>
+                <property>sim/current-view/internal</property>
+                <factor>1</factor>
+            </volume>
+        </lock-tone>
+
+        <lock-tone>
+            <name>aim-7-signal</name>
+            <type>avionics</type>
+            <path>Aircraft/f16/Sounds/betty/lock.wav</path>
+            <mode>once</mode>
+            <condition>
+                <property>payload/armament/aim-7/sound-on-off</property>
+                <equals>
+                  <property>payload/armament/aim-7/sound-volume</property>
+                  <value>1</value>
+                </equals>
+            </condition>
+            <!--<pitch>
+                <factor>1.8</factor>
+                <max>2</max>
+            </pitch>-->
+            <volume>
+                <property>sim/current-view/internal</property>
+                <factor>1</factor>
             </volume>
         </lock-tone>
     
         <lock-tone>
             <name>aim-120-signal</name>
-            <mode>looped</mode>
             <type>avionics</type>
-            <path>Aircraft/f16/Sounds/115hz-square.wav</path>
+            <path>Aircraft/f16/Sounds/betty/lock.wav</path>
+            <mode>once</mode>
             <condition>
-                <property>sim/current-view/internal</property>
                 <property>payload/armament/aim-120/sound-on-off</property>
+                <equals>
+                  <property>payload/armament/aim-120/sound-volume</property>
+                  <value>1</value>
+                </equals>
             </condition>
-            <pitch>
-                <factor>1.8</factor><!-- changes it to beep -->
+            <!--<pitch>
+                <factor>1.8</factor>
                 <max>2</max>
-            </pitch>
+            </pitch>-->
             <volume>
-                <property>payload/armament/aim-120/sound-volume</property>
+                <property>sim/current-view/internal</property>
+                <factor>1</factor>
             </volume>
         </lock-tone>
 
         <lock-tone>
-            <name>agm-65-signal</name>
-            <mode>looped</mode>
+            <name>aim-65-signal</name>
             <type>avionics</type>
-            <path>Aircraft/f16/Sounds/115hz-square.wav</path>
+            <path>Aircraft/f16/Sounds/betty/lock.wav</path>
+            <mode>once</mode>
             <condition>
-                <property>sim/current-view/internal</property>
                 <property>payload/armament/agm-65/sound-on-off</property>
+                <equals>
+                  <property>payload/armament/agm-65/sound-volume</property>
+                  <value>1</value>
+                </equals>
             </condition>
-            <pitch>
-                <factor>1.4</factor><!-- changes it to deep beep -->
+            <!--<pitch>
+                <factor>1.8</factor>
                 <max>2</max>
-            </pitch>
+            </pitch>-->
             <volume>
-                <property>payload/armament/agm-65/sound-volume</property>
+                <property>sim/current-view/internal</property>
+                <factor>1</factor>
             </volume>
         </lock-tone>
 
         <lock-tone>
-            <name>agm-84-signal</name>
-            <mode>looped</mode>
+            <name>aim-84-signal</name>
             <type>avionics</type>
-            <path>Aircraft/f16/Sounds/115hz-square.wav</path>
+            <path>Aircraft/f16/Sounds/betty/lock.wav</path>
+            <mode>once</mode>
             <condition>
-                <property>sim/current-view/internal</property>
                 <property>payload/armament/agm-84/sound-on-off</property>
+                <equals>
+                  <property>payload/armament/agm-84/sound-volume</property>
+                  <value>1</value>
+                </equals>
             </condition>
-            <pitch>
-                <factor>1.4</factor><!-- changes it to deep beep -->
+            <!--<pitch>
+                <factor>1.8</factor>
                 <max>2</max>
-            </pitch>
+            </pitch>-->
             <volume>
-                <property>payload/armament/agm-84/sound-volume</property>
+                <property>sim/current-view/internal</property>
+                <factor>1</factor>
             </volume>
         </lock-tone>
 
         <lock-tone>
-            <name>agm-88-signal</name>
-            <mode>looped</mode>
+            <name>aim-88-signal</name>
             <type>avionics</type>
-            <path>Aircraft/f16/Sounds/115hz-square.wav</path>
+            <path>Aircraft/f16/Sounds/betty/lock.wav</path>
+            <mode>once</mode>
             <condition>
-                <property>sim/current-view/internal</property>
                 <property>payload/armament/agm-88/sound-on-off</property>
+                <equals>
+                  <property>payload/armament/agm-88/sound-volume</property>
+                  <value>1</value>
+                </equals>
             </condition>
-            <pitch>
-                <factor>1.4</factor><!-- changes it to deep beep -->
+            <!--<pitch>
+                <factor>1.8</factor>
                 <max>2</max>
-            </pitch>
+            </pitch>-->
             <volume>
-                <property>payload/armament/agm-88/sound-volume</property>
+                <property>sim/current-view/internal</property>
+                <factor>1</factor>
             </volume>
         </lock-tone>
 
@@ -881,7 +976,7 @@
             <name>flare</name>
             <mode>once</mode>
             <type>avionics</type>
-            <path>Aircraft/f16/Sounds/flare.wav</path>
+            <path>Aircraft/f16/Sounds/betty/chaff-flare.wav</path>
             <condition>
                 <property>ai/submodels/submodel[0]/flare-release-snd</property>
                 <property>sim/current-view/internal</property>
@@ -896,7 +991,7 @@
             <name>flareOut</name>
             <mode>once</mode>
             <type>avionics</type>
-            <path>Aircraft/f16/Sounds/flareOut.wav</path>
+            <path>Aircraft/f16/Sounds/betty/chaff-flare-out.wav</path>
             <condition>
                 <property>ai/submodels/submodel[0]/flare-release-out-snd</property>
                 <property>sim/current-view/internal</property>
@@ -1482,7 +1577,7 @@
             </condition>
             <volume>
                 <property>/sim/current-view/internal</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
         </rwr>
 
@@ -1499,7 +1594,7 @@
             </condition>
             <volume>
                 <property>/sim/current-view/internal</property>
-                <factor>1</factor>
+                <factor>0.5</factor>
             </volume>
         </rwr>
 
@@ -1623,6 +1718,29 @@
                 <max>1</max>
             </volume>
         </gamma>
+
+        <boom>
+            <name>boom</name>
+            <path>Aircraft/f16/Sounds/Sonic-Boom.wav</path>
+            <mode>once</mode>
+            <condition>
+              <greater-than>
+                 <property>velocities/mach</property>
+                 <value>1.00</value>
+              </greater-than>
+            </condition>
+            <reference-dist>3000</reference-dist>
+            <max-dist>15000</max-dist>
+            <position>
+                <x> 0.1 </x>
+                <y> 0.1 </y>
+                <z> 0.1 </z>
+            </position>
+            <volume>
+                <property>f16/external</property>
+                <factor>1</factor>
+            </volume>
+        </boom>
 
     </fx>
  

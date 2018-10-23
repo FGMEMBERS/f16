@@ -51,11 +51,14 @@ var AImodel = {
         {
             #print(n.getName());
             
-            if((var valid = n.getNode("valid")) == nil or (!valid.getValue()) or n.getNode("missile") == nil or n.getNode("missile").getValue() != 1)
+            if((var valid = n.getNode("valid")) == nil or !valid.getValue() or ((n.getNode("missile") == nil or n.getNode("missile").getValue() != 1) and (n.getNode("type") == nil or (n.getNode("type").getValue() != "Mig-28" and n.getNode("type").getValue() != "F-16"))))
             {
                 continue;
             }
             var myName = string.replace(n.getPath(), "/ai/models/", "");
+            if (n.getNode("callsign") != nil and n.getNode("callsign").getValue()!=nil) {
+              myName = n.getNode("callsign").getValue();
+            }
             #print( string.replace(n.getPath(),"/ai/models/",""));
 
             var root = n.getPath();

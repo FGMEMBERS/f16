@@ -108,7 +108,7 @@ var resetView = func () {
   
   if (getprop("sim/current-view/view-number") == 0) {
     interpolate("sim/current-view/x-offset-m", 0, 1); 
-    interpolate("sim/current-view/y-offset-m", 0.82, 1); 
+    interpolate("sim/current-view/y-offset-m", 0.85, 1); 
     interpolate("sim/current-view/z-offset-m", -4, 1);
   } else {
     interpolate("sim/current-view/x-offset-m", 0, 1);
@@ -220,6 +220,8 @@ var loop_flare = func {
       setprop("/gui/map/draw-traffic", 0);
       setprop("/sim/gui/dialogs/map-canvas/draw-TFC", 0);
       setprop("/sim/rendering/als-filters/use-filtering", 1);
+      call(func{var interfaceController = fg1000.GenericInterfaceController.getOrCreateInstance();
+      interfaceController.stop();},nil,var err2=[]);
     }
     setprop("sim/multiplay/visibility-range-nm", 150);
     if (getprop("payload/armament/es/flags/deploy-id-10")!= nil) {
@@ -237,6 +239,8 @@ var loop_flare = func {
       setprop("controls/lighting/lighting-panel/flood-inst-pnl", getprop("controls/lighting/lighting-panel/flood-inst-pnl-knob"));
       setprop("controls/lighting/lighting-panel/pri-inst-pnl", getprop("controls/lighting/lighting-panel/pri-inst-pnl-knob"));
     }
+
+    setprop("f16/external", !getprop("sim/current-view/internal"));
       
     settimer(loop_flare, 0.10);
 };
@@ -307,10 +311,29 @@ var medium = {
     setprop("/consumables/fuel/total-fuel-lbs-100",   int(fuel*0.01  )*100 -int(fuel*0.001)*1000);
     setprop("/consumables/fuel/total-fuel-lbs-1000",  int(fuel*0.001 )*1000-int(fuel*0.0001)*10000);
     setprop("/consumables/fuel/total-fuel-lbs-10000", int(fuel*0.0001)*10000);
-    if (fuel<500) {
+    if (fuel<getprop("f16/settings/bingo")) {
       setprop("f16/avionics/bingo", 1);
     } else {
       setprop("f16/avionics/bingo", 0);
+    }
+    var tcnTrue = getprop("instrumentation/tacan/indicated-bearing-true-deg");
+    var trueH   = getprop("orientation/heading-deg");
+    var tcnDev  = geo.normdeg180(tcnTrue-trueH);
+    setprop("instrumentation/tacan/bearing-relative-deg", tcnDev);
+#    if (getprop("autopilot/route-manager/wp/dist") != nil) {
+#      setprop("autopilot/route-manager/wp/dist-int",int(getprop("autopilot/route-manager/wp/dist")));
+#    } else {
+#      setprop("autopilot/route-manager/wp/dist-int",0);
+#    }
+    if (getprop("sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob") == 0 or getprop("sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob") == 1) {
+      #tacan
+      setprop("f16/avionics/hsi-dist",getprop("instrumentation/tacan/indicated-distance-nm"));
+    } else {
+      if (getprop("autopilot/route-manager/wp/dist") != nil) {
+        setprop("f16/avionics/hsi-dist",getprop("autopilot/route-manager/wp/dist"));
+      } else {
+        setprop("f16/avionics/hsi-dist",0);
+      }
     }
     # HUD power:
     if (getprop("fdm/jsbsim/elec/bus/emergency-ac-2")>100 or getprop("fdm/jsbsim/elec/bus/emergency-dc-2")>20) {
@@ -350,6 +373,7 @@ var medium = {
     
     sendLightsToMp();
     sendABtoMP();
+    CARA();
 
     settimer(func {me.loop()},0.5);
   },
@@ -357,12 +381,13 @@ var medium = {
 
 var sendABtoMP = func {
   var red = getprop("rendering/scene/diffuse/red");
+  setprop("rendering/scene/diffuse/red-unbound", red);
   setprop("sim/multiplay/generic/float[10]",  1-red*0.75);
 
   setprop("sim/multiplay/generic/float[11]",  0.75+(0.25-red*0.25));
   setprop("sim/multiplay/generic/float[12]",  0.25+(0.75-red*0.75));
   setprop("sim/multiplay/generic/float[13]",  0.2+(0.8-red*0.8));
-  setprop("sim/multiplay/generic/float[14]",  1-red);
+  setprop("sim/multiplay/generic/float[14]",  (1-red)*0.5);
 }
 
 var sendLightsToMp = func {
@@ -402,6 +427,16 @@ var sendLightsToMp = func {
   } else {
     setprop("sim/multiplay/generic/bool[44]",0);
   }
+}
+
+var CARA = func {
+  # Tri-service combined altitude radar altimeter
+  var viewOnGround = 0;
+  var attitudeConv = vector.Math.convertAngles(getprop("orientation/heading-deg"),getprop("orientation/pitch-deg"),getprop("orientation/roll-deg"));
+  var down = vector.Math.eulerToCartesian3Z(attitudeConv[0],attitudeConv[1],attitudeConv[2]);#vector pointing up from aircraft
+  var up = [0,0,1];#vector pointing up from ground
+  var angle = vector.Math.angleBetweenVectors(down,up);
+  setprop("f16/avionics/cara-on",angle<70 and getprop("position/altitude-agl-ft")<50000);#yep, really goes up to 50000 ft!
 }
 
 var batteryChargeDischarge = func {
@@ -468,7 +503,7 @@ var repair2 = func {
   }
   inAutostart = 1;
   screen.log.write("Repairing, standby..");
-  setprop("ai/submodels/submodel[0]/count",100);
+  reloadCannon();
   crash.repair();
   if (getprop("f16/engine/running-state")) {
     setprop("fdm/jsbsim/elec/switches/epu",1);
@@ -779,6 +814,11 @@ var play_thunder = func (name, timeout=0.1, delay=0) {
 };
 
 setlistener("/environment/lightning/lightning-pos-y", thunder_listener);
+
+var reloadCannon = func {
+    setprop("ai/submodels/submodel[0]/count", 100);
+    pylons.cannon.reloadAmmo();
+}
 
 var eject = func{
   if (getprop("f16/done")==1 or !getprop("controls/seat/ejection-safety-lever")) {

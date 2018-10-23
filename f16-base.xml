@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
     <sim>
-        <aircraft-version>3.00</aircraft-version>
+        <aircraft-version>3.01</aircraft-version>
         <minimum-fg-version>2018.1.1</minimum-fg-version>
         <!-- enable "parkpos=AVAILABLE" option for the F-16 -->
         <dimensions>
@@ -246,15 +246,15 @@
         <view>
             <internal archive="y">true</internal>
             <config>
-                <pitch-offset-deg>-12</pitch-offset-deg>
+                <pitch-offset-deg>-13.75</pitch-offset-deg>
                 <x-offset-m archive="y">0</x-offset-m>
-                <y-offset-m archive="y">0.82</y-offset-m>
+                <y-offset-m archive="y">0.85</y-offset-m>
                 <z-offset-m archive="y">-4</z-offset-m>
                 <default-field-of-view-deg>60</default-field-of-view-deg>
             </config>
         </view>        
         <view n="101">
-          <name>Missile view</name>
+          <name>Missile View</name>
             <type>lookat</type>
             <heading-offset-deg>180</heading-offset-deg>
             <pitch-offset-deg>10</pitch-offset-deg>
@@ -336,6 +336,15 @@
                             <dialog-name>pushback</dialog-name>
                         </binding>
                     </item>                   
+                    <item>
+                        <label>Training Scenario</label>
+                        <enabled type="bool">true</enabled>
+                        <name>scenario28</name>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>scenario28</dialog-name>
+                        </binding>
+                    </item> 
                 </menu>
             </default>
         </menubar>
@@ -351,6 +360,7 @@
                 <bool n="44" type="bool">true</bool>
                 <bool n="45" type="bool" alias="/sim/model/lighting/strobe/state"/>
                 <bool n="35" type="bool" alias="/f16/chute/enable"/>
+                <bool n="36" type="bool" alias="/sim/model/f16/dragchute"/>
                 <int n="2" type="int">0</int><!-- radar-standby -->
                 <int n="9" type="int" alias="/sim/variant-id"/>
                 <int n="10" type="int" alias="/controls/smoke"/>
@@ -470,9 +480,10 @@
             </key>
             <text><![CDATA[
 LANDING
-No fixed landing speed, however a suggested approach speed will display in left side of HUD when gears is down.
+No fixed landing speed, however a suggested approach speed will display in left side of HUD when gears is down and masterarm is off.
 A little AoA bracket will appear down in the HUD, keep the flight path indicator inside the bracket. The top of the bracket is 11 and bottom is 15 deg AoA.
 Notice that it can be hard to see the touchdown point when landing with that high AoA, raising the seat with key 'u' will help.
+If the runway is wet, icy or short use the dragchute (F4).
 
 TAKE-OFF
 You can rotate around 150 KT when aircraft is light. Be somewhat gentle on the stick if you rotate early as you otherwise might tail-scrape.
@@ -491,7 +502,7 @@ Do not roll faster than 225 kt groundspeed for main landing gear tires, or 217 f
 Do not operate below 200 KT with cat III stores, unless for landing or take-off.
 
 HUD
-The speed in HUD is calibrated airspeed.
+The speed in HUD is calibrated airspeed per default, and always when gear is commanded down. It can be switched in the control-panel.
 
 Text left side:
   NAV or ARM depending on masterarm. But BRAKES if parking brakes is on, and F 15 G if flaps is deployed, F for flaps, 15 for 15 deg extended, and G for gears down.
@@ -500,10 +511,20 @@ Text left side:
   Selected weapon or AoA if gears down.
 
 Text Right side:
-  FUEL if bingo fuel. Callsign if masterarm.
-  ETA to next steerpoint. TA 20 if masterarm on, 20 stand for 20k target altitude.
+  R XXXXX is the CARA radar altimeter altitude above ground.
+  FUEL if bingo fuel. CARA ALOW elsewise.
+  B XX.X is  slant range to steerpoint. Callsign if masterarm.
+  ETA to next steerpoint. TA XX if masterarm on, XX stand for 1000s ft of target altitude.
   023>2 means 23 NM to next steerpoint number 2. F034.2 if masterarm on, means 34.2 NM in slant range to target.
   Type of target if masterarm on.
+
+Text Center:
+  LIMIT if Vne exceeded.
+  NO RAD if the aircraft radar is off.
+  FLY UP if collision with terrain is emminent.
+
+Text Bottom
+  Here DED DATA will show if enabled.
 
 RWR
 The round display above left MFD display is a Radar Warning Reciever.
@@ -537,6 +558,7 @@ page HSD: Horizontal situation display. Shows route and radar echoes.
           CEN: Centered ownship in display
           CPL: Range will follow (approx) radar distance
           DCPL: Range can be set independently of radar range by clicking on the up/down arrows.
+page SIT: Mostly for radio navigation.
 
 AUTOPILOT
 Notice that even when A/P is enabled you can control the airplane with the stick. When you let go of stick A/P will recalculate from current situation.
@@ -554,8 +576,49 @@ First mount some armament.
 Secondly make sure masterarm is enabled.
 Thirdly select the arm. (use 'w' key or click buttons 'A-A' or 'A-G' under HUD)
 Fourthly make sure target is selected (key 'y')
-For GBU-12 make sure laser is armed.
-For GBU-12, GBU-31, MK-82 when getting close a vertical line will appear in HUD. Align flight path indicator on the line, when a small horizontal line on that line starts dropping down and reach another line then its time to release (key 'e' or 'trigger').
+For GBU-12 and GBU-24 make sure laser is armed.
+For GBU-12, GBU-24, GBU-31, MK-82, MK-83 when getting close a vertical line will appear in HUD. Align flight path indicator on the line, when a small horizontal line on that line starts dropping down and reach another line then its time to release (key 'e' or 'trigger').
+For AIM-120 the trigger can be held for 2 second to fire it without a lock in MADDOG mode, where it will lock onto anyone it sees. This feature is still not entirely bug free so do this on own risk.
+
+NIGHTTIME FLYING
+There is flood and instrument lights that can be turned up.
+If running ALS you can also go into filters and enable one of the night vision modes.
+
+DRAGCHUTE
+Max recommended KIAS for deployment is 170. Key is F4.
+
+DED
+The DED is the small display above the right color MFD.
+Clicking on certain buttons on the ICP (the panel below the HUD) can bring up different pages.
+The DED can also be brought up on the HUD in the controlpanel.
+
+CONTROLPANEL and CONFIG
+You can find these in the FG menu (the last item).
+They contains various aircraft and experience settings.
+Once the cockpit controls is full 3D the aircraft settings will be removed.
+
+BITCHING BETTY
+Thats the nickname of the annunciation voice. :)
+
+CARA ALOW
+Combined Altitude Radar Altimeter Automatic LOw altitude Warning.
+Is radar altitude warning from Betty when get below that. The CARA must have view of the ground for this to work.
+
+MSL FLOOR
+Mean Sea Level altitude advisory Floor.
+Is when you want Betty to remind you to switch to/from QNH/standard baro pressure.
+
+HUD VELOCITY
+Can switch the HUD scale to show true or ground speed.
+
+HUD SCALES
+Can switch the HUD Velocity, Altitude and Heading scales off, the digital readouts will remain though.
+
+HUD FPM
+Can switch off the ATTitude lines and/or the Flight Path Marker.
+
+BINGO
+The fuel level where the system and Betty will warn that the fuel is low.
 
 EMER STORES JETTISON
 This will jettison all A/G ordnance and other payloads like fuel tanks that is not A/A. It will NOT jettison wingtips.
@@ -563,12 +626,19 @@ This will jettison all A/G ordnance and other payloads like fuel tanks that is n
 ALT FLAPS
 This will deploy flaps as if the gears were extended. They will still retract at higher speeds though.
 
-NIGHTTIME FLYING
-There is flood and instrument lights that can be turned up.
-If running ALS you can also go into filters and enable one of the night vision modes.
+HSI
+Is located at the bottom of the center console.
+This can be used to navigate steerpoints if the knob to the left is in NAV mode.
+It can be used to navigate TACAN if the knob is in TCN mode.
 
-DRAGCHUTE
-Max recommended KIAS for deployment is 170.
+DOGFIGHT SCENARIO
+Bring this up in the menu.
+Select a difficulty.
+Aim with the '+' bore symbol in HUD on a enemy for 1 second to score a kill.
+Friendly fire is off.
+Its meant to be use without using missiles to simulate gun fight, but if you find it hard we recommend you practice on setting 0 with AIM-9.
+Some of the settings will give you a wingman.
+To view the AI flying, switch to missile view and click the arrows in lower left corner.
 
 FLYING IN MP
 Firstly be sure to use "Visible to 2017+", else others will not see everything working okay when they see your aircraft.
@@ -579,15 +649,9 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
             <autopilot n="0">
                 <path>Aircraft/f16/Systems/autoflight-rules.xml</path>
             </autopilot>
-            <property-rule n="100">
-                <path>Aircraft/f16/Systems/zoom-views.xml</path>
-            </property-rule>
+            <path>Aircraft/f16/Systems/f16-airdata.xml</path>
         </systems>
         <current-view>
-            <z-offset-dec-step type="double">0.0</z-offset-dec-step>
-            <z-offset-inc-step type="double">0.0</z-offset-inc-step>
-            <can-change-z-offset type="bool">false</can-change-z-offset>
-            
             <z-offset-default type="float">25.0</z-offset-default>
             <z-offset-min-m type="float">10.0</z-offset-min-m>
             <z-offset-max-m type="float">200.0</z-offset-max-m>
@@ -600,128 +664,68 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
     </sim>
     <input n="0">
         <mice n="0">
-            <mouse n="0">
-                <mode n="0">
-                    <button n="3">
-                        <binding n="0">
-                            <script></script>
-                        </binding>
-                        <binding n="1">
-                            <condition>
-                                <and>
-                                    <property>/devices/status/mice/mouse[0]/button[2]</property>
-                                    <not><property>/sim/mouse/right-button-mode-cycle-enabled</property></not>
-                                </and>
-                            </condition>
-                            <command>nasal</command>
-                            <script>
-                            if (getprop("/sim/current-view/can-change-z-offset")) {
-                                var distance = getprop("/sim/current-view/z-offset-m");
-                                var multiple = getprop("/sim/current-view/z-offset-inc-step");
-                                var min_dist = getprop("/sim/current-view/z-offset-min-m");
-
-                                distance = math.round(std.min(-min_dist, distance + multiple) / multiple) * multiple;
-                                setprop("/sim/current-view/z-offset-m", distance);
-
-                                gui.popupTip(sprintf("%d meters", abs(distance)));
-                            } else {
-                                view.decrease();
-                            }
-                            </script>
-                        </binding>
-                    </button>
-                    <button n="4">
-                        <binding n="0">
-                            <script></script>
-                        </binding>
-                        <binding n="1">
-                            <condition>
-                                <and>
-                                    <property>/devices/status/mice/mouse[0]/button[2]</property>
-                                    <not><property>/sim/mouse/right-button-mode-cycle-enabled</property></not>
-                                </and>
-                            </condition>
-                            <command>nasal</command>
-                            <script>
-                                if (getprop("/sim/current-view/can-change-z-offset")) {
-                                    var distance = getprop("/sim/current-view/z-offset-m");
-                                    var multiple = getprop("/sim/current-view/z-offset-dec-step");
-                                    var max_dist = getprop("/sim/current-view/z-offset-max-m");
-
-                                    distance = math.round(std.max(-max_dist, distance + multiple) / multiple) * multiple;
-                                    setprop("/sim/current-view/z-offset-m", distance);
-
-                                    gui.popupTip(sprintf("%d meters", abs(distance)));
-                                } else {
-                                    view.increase();
-                                }
-                            </script>
-                        </binding>
-                    </button>
-                </mode>
-            </mouse>
+			<mouse n="0">
+				<mode n="0">
+					<button n="3">
+						<binding n="0">
+							<script></script>
+						</binding>
+						<binding n="1">
+							<condition>
+								<and>
+									<property>/devices/status/mice/mouse[0]/button[2]</property>
+									<not><property>/sim/mouse/right-button-mode-cycle-enabled</property></not>
+								</and>
+							</condition>
+							<command>nasal</command>
+							<script>f16.fovZoom(-1);</script>
+						</binding>
+					</button>
+					<button n="4">
+						<binding n="0">
+							<script></script>
+						</binding>
+						<binding n="1">
+							<condition>
+								<and>
+									<property>/devices/status/mice/mouse[0]/button[2]</property>
+									<not><property>/sim/mouse/right-button-mode-cycle-enabled</property></not>
+								</and>
+							</condition>
+							<command>nasal</command>
+							<script>f16.fovZoom(1);</script>
+						</binding>
+					</button>
+				</mode>
+			</mouse>
         </mice>
         <keyboard n="0">
-            <key n="24">
-                <name>Ctrl-x</name>
-                <desc>Reset zoom to default</desc>
-                <binding>
-                    <command>nasal</command>
-                    <script>
-                        if (getprop("/sim/current-view/can-change-z-offset")) {
-                            setprop("/sim/current-view/z-offset-m", getprop("/sim/current-view/z-offset-default") * -1);
-
-                            gui.popupTip(sprintf("%d meters", getprop("/sim/current-view/z-offset-default")));
-                        } else {
-                            setprop("/sim/current-view/field-of-view", getprop("/sim/view/config/default-field-of-view-deg"));
-                        }
-                    </script>
-                </binding>
-            </key>
-            <key n="88">
-                <name>X</name>
-                <desc>Increase field of view</desc>
-                <repeatable type="bool">true</repeatable>
-                <binding>
-                <command>nasal</command>
-                <script>
-                    if (getprop("/sim/current-view/can-change-z-offset")) {
-                        var distance = getprop("/sim/current-view/z-offset-m");
-                        var multiple = getprop("/sim/current-view/z-offset-dec-step");
-                        var max_dist = getprop("/sim/current-view/z-offset-max-m");
-
-                        distance = math.round(std.max(-max_dist, distance + multiple) / multiple) * multiple;
-                        setprop("/sim/current-view/z-offset-m", distance);
-
-                        gui.popupTip(sprintf("%d meters", abs(distance)));
-                    } else {
-                        view.increase();
-                    }
-                </script>
-                </binding>
-            </key>
-            <key n="120">
-                <name>x</name>
-                <desc>Decrease field of view</desc>
-                <repeatable type="bool">true</repeatable>
-                <binding>
-                    <command>nasal</command>
-                    <script>
-                        if (getprop("/sim/current-view/can-change-z-offset")) {
-                            var distance = getprop("/sim/current-view/z-offset-m");
-                            var multiple = getprop("/sim/current-view/z-offset-inc-step");
-                            var min_dist = getprop("/sim/current-view/z-offset-min-m");
-
-                            distance = math.round(std.min(-min_dist, distance + multiple) / multiple) * multiple;
-                            setprop("/sim/current-view/z-offset-m", distance);
-
-                            gui.popupTip(sprintf("%d meters", abs(distance)));
-                        } else {
-                            view.decrease();
-                        }
-                    </script>
-                </binding>
-            </key>
+			<key n="24">
+				<name>Ctrl-x</name>
+				<desc>Reset zoom to default</desc>
+				<binding>
+					<command>nasal</command>
+					<script>f16.fovZoom(0);</script>
+				</binding>
+			</key>
+			<key n="88">
+				<name>X</name>
+				<desc>Increase field of view</desc>
+				<repeatable type="bool">true</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>f16.fovZoom(1);</script>
+				</binding>
+			</key>
+			<key n="120">
+				<name>x</name>
+				<desc>Decrease field of view</desc>
+				<repeatable type="bool">true</repeatable>
+				<binding>
+					<command>nasal</command>
+					<script>f16.fovZoom(-1);</script>
+				</binding>
+			</key>
             <key n="81">
                 <name>Q</name>
                 <desc>Reset view</desc>
@@ -1115,6 +1119,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <flood-inst-pnl-knob type="double">0</flood-inst-pnl-knob>
                 <console-primary-knob type="double">0</console-primary-knob>
                 <console-primary type="double">0</console-primary>
+                <data-entry-display type="double">1.0</data-entry-display>
             </lighting-panel>
         </lighting>
         <seat>
@@ -1316,8 +1321,12 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
             </outputs>
         </electrical>
         <refuel>
-            <type>boom</type>
+            <type type="string">boom</type>
             <serviceable type="bool">false</serviceable>
+            <offset-x-m>0.26</offset-x-m>
+            <offset-y-m>0.00</offset-y-m>
+            <offset-z-m>0.68</offset-z-m>
+            <max-fuel-transfer-lbs-min>6000</max-fuel-transfer-lbs-min>
         </refuel>
     </systems>
     <instrumentation>
@@ -1342,18 +1351,21 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
             <ref-range type="double">70</ref-range>
             <ref-strength type="double">3.2</ref-strength>
             <ranges n="0">
-                <entry type="int">10</entry>
+                <entry type="int">5</entry>
             </ranges>
             <ranges n="1">
-                <entry type="int">20</entry>
+                <entry type="int">10</entry>
             </ranges>
             <ranges n="2">
-                <entry type="int">40</entry>
+                <entry type="int">20</entry>
             </ranges>
             <ranges n="3">
-                <entry type="int">80</entry>
+                <entry type="int">40</entry>
             </ranges>
             <ranges n="4">
+                <entry type="int">80</entry>
+            </ranges>
+            <ranges n="5">
                 <entry type="int">160</entry>
             </ranges>
             <cycle-range type="bool">false</cycle-range>
@@ -1374,6 +1386,17 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         <ecm>
             <on-off type="bool">true</on-off>
         </ecm>
+        <heading-indicator>
+            <offset-deg type="double">0</offset-deg>
+            <use-mag-in-hud type="bool">true</use-mag-in-hud><!-- as per manual the HUD shows magnetic -->
+        </heading-indicator>
+        <dme n="1">
+            <serviceable type="bool">true</serviceable>
+            <frequencies>
+                <source type="string">/instrumentation/nav[1]/frequencies/selected-mhz</source>
+            </frequencies>
+            <volume type="double">0</volume>
+        </dme>
     </instrumentation>
     <environment>
         <aircraft-effects>
@@ -1425,14 +1448,10 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <serviceable type="bool">true</serviceable><!-- why is this not auto created by failure system in 2018.3?? -->
             </fire-control>
             <aim-9>
-                <short-name type="string">AIM9</short-name>
+                <short-name type="string">A-9L</short-name>
                 <long-name type="string">AIM-9L Sidewinder</long-name>
-                <sound-on-off type="bool">false</sound-on-off>
-                <sound-fire-on-off type="bool">false</sound-fire-on-off>
-                <sound-volume type="double">0.0</sound-volume>
                 <vol-search type="double">0.075</vol-search>
                 <vol-track type="double">0.25</vol-track>
-                <vol-track-weak type="double">0.175</vol-track-weak>
                 <guidance type="string">heat</guidance>                       <!-- heat, radar or semi-radar -->
                 <navigation type="string">APN</navigation>
                 <all-aspect type="bool">true</all-aspect>                     <!-- all or rear-only -->
@@ -1465,7 +1484,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <DLZ type="bool">true</DLZ>
                 <DLZ-optimal-alt-feet type="double">25000</DLZ-optimal-alt-feet>
                 <DLZ-optimal-closing-mach type="double">2.0</DLZ-optimal-closing-mach>
-
+                <seeker-beam-width-deg type="double">4</seeker-beam-width-deg>
                 <reaquire type="bool">true</reaquire>
                 <lock-on-after-launch type="bool">true</lock-on-after-launch>
                 <auto-switch-target-allowed type="bool">true</auto-switch-target-allowed>
@@ -1473,12 +1492,11 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <switch-time-sec type="double">5</switch-time-sec>
             </aim-9>
             <aim-120>
-                <short-name type="string">AIM120</short-name>
+                <short-name type="string">A120B</short-name>
                 <long-name type="string">AIM-120B Amraam</long-name>
                 <guidance type="string">radar</guidance>
                 <vol-search type="double">0.00</vol-search>
-                <vol-track type="double">0.15</vol-track>
-                <vol-track-weak type="double">0.1</vol-track-weak>
+                <vol-track type="double">1.00</vol-track>
                 <max-fire-range-nm type="int">38.8</max-fire-range-nm>
                 <min-fire-range-nm type="double">0.35</min-fire-range-nm>
                 <FCS-field-deg type="int">30</FCS-field-deg>
@@ -1514,12 +1532,11 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <switch-time-sec type="double">5</switch-time-sec>
             </aim-120>
             <aim-7>
-                <short-name type="string">AIM7</short-name>
+                <short-name type="string">A-7F</short-name>
                 <long-name type="string">AIM-7F Sparrow</long-name>
                 <guidance type="string">semi-radar</guidance>
                 <vol-search type="double">0.00</vol-search>
-                <vol-track type="double">0.15</vol-track>
-                <vol-track-weak type="double">0.1</vol-track-weak>
+                <vol-track type="double">1.00</vol-track>
                 <max-fire-range-nm type="int">22</max-fire-range-nm><!-- authentic 21.5 for 2m2 RCS -->
                 <min-fire-range-nm type="double">0.16</min-fire-range-nm>
                 <FCS-field-deg type="int">25</FCS-field-deg>
@@ -1552,7 +1569,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <auto-switch-target-allowed type="bool">false</auto-switch-target-allowed>
             </aim-7>
             <gbu-12>
-                <short-name type="string">GBU12</short-name>
+                <short-name type="string">GB12</short-name>
                 <long-name type="string">GBU-12 Paveway II</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
                 <class type="string">GM</class>
@@ -1600,7 +1617,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <require-lock-to-fire type="bool">false</require-lock-to-fire>
             </gbu-12>
             <gbu-31>
-                <short-name type="string">GBU31</short-name>
+                <short-name type="string">GB31</short-name>
                 <long-name type="string">GBU-31 JDAM</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
                 <class type="string">GM</class>
@@ -1622,7 +1639,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <weight-warhead-lbs type="double"> 945 </weight-warhead-lbs><!-- weapons file 2004 -->
                 <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
                 <drag-coeff type="double"> 0.012 </drag-coeff>
-                <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
+                <cross-section-sqft type="double"> 1.78886 </cross-section-sqft><!-- the MK84 which is the bomb part is 640 mm diam -->
                 <arming-time-sec type="double"> 3 </arming-time-sec>
                 <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
                 <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
@@ -1647,12 +1664,59 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
                 <require-lock-to-fire type="bool">false</require-lock-to-fire>
             </gbu-31>
+            <gbu-24>
+                <short-name type="string">GB24</short-name>
+                <long-name type="string">GBU-24 Paveway III</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GM</class>
+                <max-fire-range-nm type="double">15 </max-fire-range-nm>
+                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
+                <guidance type="string">laser</guidance>
+                <navigation type="string">APN</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 200 </FCS-field-deg>
+                <seeker-field-deg type="int"> 32 </seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <max-g type="double"> 2.0 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 2267 </weight-launch-lbs><!-- weapons file 1984 -->
+                <weight-warhead-lbs type="double"> 945 </weight-warhead-lbs><!-- weapons file 2004 -->
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <cross-section-sqft type="double"> 1.78886 </cross-section-sqft>
+                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 350 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">2</drop-time>
+                <deploy-time type="double">2</deploy-time>
+                <lateral-dps type="double"> 10 </lateral-dps>
+                <max-pitch-deg type="double">-45</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <!-- the following 6 properties not used yet: -->
+                <release-limit-mach type="double"> 1.2 </release-limit-mach>
+                <release-limit-altitude type="double"> 45000 </release-limit-altitude>
+                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
+                <release-limit-roll type="double"> 90 </release-limit-roll>
+                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
+                <require-lock-to-fire type="bool">false</require-lock-to-fire>
+            </gbu-24>
             <agm-65>
-                <short-name type="string">AGM65</short-name>
+                <short-name type="string">AG65</short-name>
                 <long-name type="string">AGM-65B Maverick</long-name>
                 <vol-search type="double">0.00</vol-search>
-                <vol-track type="double">0.15</vol-track>
-                <vol-track-weak type="double">0.1</vol-track-weak>
+                <vol-track type="double">1.00</vol-track>
                 <guidance type="string">vision</guidance>
                 <navigation type="string">direct</navigation>                           
                 <all-aspect type="bool">true</all-aspect>
@@ -1681,11 +1745,10 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <fire-msg type="string">Rifle</fire-msg>
             </agm-65>
             <agm-84>                    <!-- A variant: 0.85 mach cruise, E is calibrated to just under 1.00 -->
-                <short-name type="string">AGM84</short-name>
+                <short-name type="string">AG84</short-name>
                 <long-name type="string">AGM-84E Harpoon</long-name>
                 <vol-search type="double">0.00</vol-search>
-                <vol-track type="double">0.15</vol-track>
-                <vol-track-weak type="double">0.1</vol-track-weak>
+                <vol-track type="double">1.00</vol-track>
                 <guidance type="string">gps</guidance><!--  -->
                 <navigation type="string">direct</navigation>                           
                 <all-aspect type="bool">true</all-aspect>
@@ -1715,7 +1778,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <fire-msg type="string">Bruiser</fire-msg>
             </agm-84>
             <mk-82> 
-                <short-name type="string">MK82</short-name>
+                <short-name type="string">B82</short-name>
                 <long-name type="string">MK-82 General Purpose Bomb</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
                 <class type="string">GM</class>
@@ -1754,12 +1817,51 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <max-pitch-deg type="double">-90</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
             </mk-82>
+            <mk-83> 
+                <short-name type="string">B83</short-name>
+                <long-name type="string">MK-83 General Purpose Bomb</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GM</class>
+                <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
+                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 240 </FCS-field-deg>
+                <seeker-field-deg type="int"> 360 </seeker-field-deg>
+                <max-g type="double"> 1.5 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 1014 </weight-launch-lbs>
+                <weight-warhead-lbs type="double"> 445 </weight-warhead-lbs>
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <cross-section-sqft type="double"> 1.07744817 </cross-section-sqft><!-- the MK83 is 357 mm diam -->
+                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 275 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">0</drop-time>
+                <deploy-time type="double">0</deploy-time>
+                <lateral-dps type="double"> -10 </lateral-dps>
+                <max-pitch-deg type="double">-90</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+            </mk-83>
             <agm-88>
-                <short-name type="string">AGM88</short-name>
+                <short-name type="string">AG88</short-name>
                 <long-name type="string">AGM-88 HARM</long-name>
                 <vol-search type="double">0.00</vol-search>
-                <vol-track type="double">0.15</vol-track>
-                <vol-track-weak type="double">0.1</vol-track-weak>
+                <vol-track type="double">1.00</vol-track>
                 <guidance type="string">radiation</guidance>
                 <navigation type="string">PN</navigation>                           
                 <all-aspect type="bool">true</all-aspect>
@@ -1791,104 +1893,6 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <class type="string">GM</class>
                 <fire-msg type="string">Sniper</fire-msg>
             </agm-88>
-            <b61-12>
-                <short-name type="string">B61-12</short-name>
-                <long-name type="string">B61-12 Test body</long-name>
-                <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
-                <max-fire-range-nm type="double">12 </max-fire-range-nm>
-                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
-                <guidance type="string">gps</guidance>
-                <navigation type="string">PN</navigation>
-                <loft-altitude type="int"> 0 </loft-altitude>
-                <terrain-follow type="bool">false</terrain-follow>
-                <FCS-field-deg type="int"> 200 </FCS-field-deg>
-                <seeker-field-deg type="int"> 32 </seeker-field-deg>
-                <reaquire type="bool">true</reaquire>
-                <max-g type="double"> 1.5 </max-g>
-                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
-                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
-                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
-                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
-                <weight-launch-lbs type="double"> 700 </weight-launch-lbs>
-                <weight-warhead-lbs type="double"> 640 </weight-warhead-lbs>
-                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
-                <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
-                <arming-time-sec type="double"> 5000 </arming-time-sec>
-                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
-                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
-                <all-aspect type="bool">true</all-aspect>
-                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
-                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
-                <rail type="bool">false</rail>
-                <max-report-distance type="double"> 275 </max-report-distance>
-                <vol-search type="double"> 0.075 </vol-search>
-                <vol-track type="double"> 0.25 </vol-track>
-                <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">2</drop-time>
-                <deploy-time type="double">2</deploy-time>
-                <lateral-dps type="double"> 10 </lateral-dps>
-                <max-pitch-deg type="double">-45</max-pitch-deg>
-                <hit-everything-nearby type="bool">true</hit-everything-nearby>
-                <inert type="bool">true</inert>
-                <!-- the following 6 properties not used yet: -->
-                <release-limit-mach type="double"> 1.2 </release-limit-mach>
-                <release-limit-altitude type="double"> 30000 </release-limit-altitude>
-                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
-                <release-limit-roll type="double"> 90 </release-limit-roll>
-                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
-                <require-lock-to-fire type="bool">false</require-lock-to-fire>
-            </b61-12>
-            <b61-7>
-                <short-name type="string">B61-7</short-name>
-                <long-name type="string">B61-7 Inert</long-name>
-                <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
-                <max-fire-range-nm type="double">12 </max-fire-range-nm>
-                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
-                <guidance type="string">unguided</guidance>
-                <navigation type="string">direct</navigation>
-                <loft-altitude type="int"> 0 </loft-altitude>
-                <terrain-follow type="bool">false</terrain-follow>
-                <FCS-field-deg type="int"> 200 </FCS-field-deg>
-                <seeker-field-deg type="int"> 32 </seeker-field-deg>
-                <reaquire type="bool">true</reaquire>
-                <max-g type="double"> 1.5 </max-g>
-                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
-                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
-                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
-                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
-                <weight-launch-lbs type="double"> 700 </weight-launch-lbs>
-                <weight-warhead-lbs type="double"> 640 </weight-warhead-lbs>
-                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
-                <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
-                <arming-time-sec type="double"> 5000 </arming-time-sec>
-                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
-                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
-                <all-aspect type="bool">true</all-aspect>
-                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
-                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
-                <rail type="bool">false</rail>
-                <max-report-distance type="double"> 275 </max-report-distance>
-                <vol-search type="double"> 0.075 </vol-search>
-                <vol-track type="double"> 0.25 </vol-track>
-                <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">2</drop-time>
-                <deploy-time type="double">2</deploy-time>
-                <lateral-dps type="double"> 10 </lateral-dps>
-                <max-pitch-deg type="double">-45</max-pitch-deg>
-                <hit-everything-nearby type="bool">true</hit-everything-nearby>
-                <inert type="bool">true</inert>
-                <!-- the following 6 properties not used yet: -->
-                <release-limit-mach type="double"> 1.2 </release-limit-mach>
-                <release-limit-altitude type="double"> 30000 </release-limit-altitude>
-                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
-                <release-limit-roll type="double"> 90 </release-limit-roll>
-                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
-                <require-lock-to-fire type="bool">false</require-lock-to-fire>
-            </b61-7>
             <es>                    <!-- Ejection seat -->
                     <vol-search type="double">0.075</vol-search>
                     <vol-track type="double">0.25</vol-track>
@@ -1977,6 +1981,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         <wingman-1 type="string"></wingman-1>
         <wingman-2 type="string"></wingman-2>
         <wingman-3 type="string"></wingman-3>
+        <wingman-4 type="string"></wingman-4>
     </link16>
     <sound>
         <rwr-new type="bool">false</rwr-new>
@@ -1990,6 +1995,12 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
             <thunder2 type="bool">false</thunder2>
             <thunder3 type="bool">false</thunder3>
         </sound>
+        <settings>
+            <bingo type="int">1250</bingo>
+            <msl-floor type="int">18000</msl-floor><!-- Mean Sea Level altitude advisory floor
+value. 18000=standard US transition altitude -->
+            <cara-alow type="int">500</cara-alow><!-- Combined Altitude Radar Altimeter Automatic LOw altitude Warning -->
+        </settings>
         <avionics>
             <hud-brt type="double">1.0</hud-brt>
             <rwr-int type="double">1.0</rwr-int>
@@ -1997,6 +2008,11 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
             <mfd-l-con type="double">1.0</mfd-l-con>
             <mfd-r-brt type="double">1.0</mfd-r-brt>
             <mfd-r-con type="double">1.0</mfd-r-con>
+            <hud-velocity type="int">1</hud-velocity>
+            <hud-scales type="int">1</hud-scales>
+            <hud-fpm type="int">2</hud-fpm>
+            <cara type="bool">false</cara>
+            <hud-ded type="bool">false</hud-ded>
         </avionics>
         <fcs>
             <autopilot-on type="int">0</autopilot-on> <!-- Ignored on Block 20+ -->
@@ -2058,7 +2074,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         </notifications>
         <f16> 
             <file>Aircraft/f16/Nasal/exec.nas</file>
-
+            <file>Aircraft/f16/Nasal/zoom-views.nas</file>
             <file>Aircraft/f16/Nasal/f16.nas</file>
             <file>Aircraft/f16/Nasal/liveries.nas</file>
             <file>Aircraft/f16/Nasal/tyresmoke.nas</file>
@@ -2108,5 +2124,11 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         <crash>
             <file>Aircraft/f16/Nasal/crash-and-stress.nas</file>
         </crash>
+        <mig28>
+            <file>Aircraft/f16/Nasal/mig28.nas</file>
+        </mig28>
+        <ded>
+          <file>Aircraft/f16/Nasal/ded.nas</file>
+        </ded>
     </nasal>
 </PropertyList>

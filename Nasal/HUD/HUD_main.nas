@@ -14,7 +14,7 @@ var ht_yco = -30;
 var ht_debug = 0;
 
 var pitch_offset = 12;
-var pitch_factor = 19.8;
+var pitch_factor = 14.85;#19.8;
 var pitch_factor_2 = pitch_factor * 180.0 / math.pi;
 var alt_range_factor = (9317-191) / 100000; # alt tape size and max value.
 var ias_range_factor = (694-191) / 1100;
@@ -27,7 +27,8 @@ var F16_HUD = {
                 "name": "F16 HUD",
                     "size": [1024,1024], 
                     "view": [sx,sy],#340,260
-                    "mipmapping": 0 # mipmapping will make the HUD text blurry on smaller screens     
+                    "mipmapping": 0, # mipmapping will make the HUD text blurry on smaller screens     
+                    "additive-blend": 1# bool
                     });  
 
         obj.sy = sy;                        
@@ -48,7 +49,8 @@ var F16_HUD = {
                 "name": "F16 HUD",
                     "size": [1024,1024], 
                     "view": [sx,sy],
-                    "mipmapping": 0     
+                    "mipmapping": 0,
+                    "additive-blend": 1# bool
                     });
 
         obj.svg.setTranslation (tran_x,tran_y);
@@ -64,37 +66,94 @@ var F16_HUD = {
         obj.heading_tape_pointer = obj.get_element("path3419");
 
         obj.roll_pointer = obj.get_element("roll-pointer");
+        obj.roll_lines = obj.get_element("g3415");
+
         obj.alt_range = obj.get_element("alt_range");
         obj.ias_range = obj.get_element("ias_range");
         obj.oldBore = obj.get_element("path4530-6");
         obj.target_locked = obj.get_element("target_locked");
         obj.target_locked.setVisible(0);
+        obj.alt_line = obj.get_element("alt_tick_vert_line");
+        obj.alt_line.hide();
+        obj.vel_line = obj.get_element("ias_tick_vert_line");
+        obj.vel_line.hide();
+        obj.vel_ind = obj.get_element("path3111");
+        obj.vel_ind.hide();
+        obj.alt_ind = obj.get_element("path3111-1");
+        obj.alt_ind.hide();
+        obj.scaling = [obj.get_element("alt_tick_0"),obj.get_element("alt_label0"),obj.heading_tape,obj.heading_tape_pointer];
+        obj.total   = [obj.get_element("alt_tick_0"),obj.get_element("alt_label0"),obj.heading_tape,obj.heading_tape_pointer];
+        for(var ii=1;ii<=1000;ii+=1) {
+          var tmp = obj.get_element("alt_tick_"~ii~"00");
+          append(obj.scaling, tmp);
+          append(obj.total, tmp);
+        }
+        for(var ii=500;ii<=100000;ii+=500) {
+          var tmp = obj.get_element("alt_label"~ii);
+          append(obj.scaling, tmp);
+          append(obj.total, tmp);
+        }
+        for(var ii=0;ii<=1100;ii+=20) {
+          var tmp = obj.get_element("ias_tick_"~ii);
+          append(obj.scaling, tmp);
+          append(obj.total, tmp);
+        }
+        for(var ii=0;ii<=1100;ii+=100) {
+          var tmp = obj.get_element("ias_label"~ii);
+          append(obj.scaling, tmp);
+          append(obj.total, tmp);
+        }
+
 
         HUD_FONT = "LiberationFonts/LiberationMono-Bold.ttf";#"condensed.txf";  with condensed the FLYUP text was not displayed until minutes into flight, no clue why
-        obj.window1 = obj.get_text("window1", HUD_FONT,9,1.4);
-        obj.window2 = obj.get_text("window2", HUD_FONT,9,1.4);
-        obj.window3 = obj.get_text("window3", HUD_FONT,9,1.4);
-        obj.window4 = obj.get_text("window4", HUD_FONT,9,1.4);
-        obj.window5 = obj.get_text("window5", HUD_FONT,9,1.4);
-        obj.window6 = obj.get_text("window6", HUD_FONT,9,1.4);
-        obj.window7 = obj.get_text("window7", HUD_FONT,9,1.4);
-        obj.window8 = obj.get_text("window8", HUD_FONT,9,1.4);
-        obj.window9 = obj.get_text("window9", HUD_FONT,9,1.4);
-        obj.window2.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
-        obj.window3.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
-        obj.window4.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
-        obj.window5.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
-        obj.window6.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
-        obj.window7.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
-        obj.window8.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
-        obj.window9.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(10,1.1);
+        obj.window1 = obj.get_text("window1", HUD_FONT,9,1.1);
+        obj.window2 = obj.get_text("window2", HUD_FONT,9,1.1);
+        obj.window3 = obj.get_text("window3", HUD_FONT,9,1.1);
+        obj.window4 = obj.get_text("window4", HUD_FONT,9,1.1);
+        obj.window5 = obj.get_text("window5", HUD_FONT,9,1.1);
+        obj.window6 = obj.get_text("window6", HUD_FONT,9,1.1);
+        obj.window7 = obj.get_text("window7", HUD_FONT,9,1.1);
+        obj.window8 = obj.get_text("window8", HUD_FONT,9,1.1);
+        obj.window9 = obj.get_text("window9", HUD_FONT,9,1.1);
+        obj.window10 = obj.get_text("window10", HUD_FONT,9,1.1);
 
-        obj.ralt = obj.get_text("radalt", HUD_FONT,9,1.4);
-        obj.ralt.setFont("LiberationFonts/LiberationMono-Bold.ttf").setFontSize(9,1.1);
+        obj.ralt = obj.get_text("radalt", HUD_FONT,9,1.1);
+
+        #append(obj.total, obj.ladder);
+        append(obj.total, obj.heading_tape);
+        #append(obj.total, obj.VV);
+        append(obj.total, obj.heading_tape_pointer);
+        append(obj.total, obj.roll_pointer);
+        append(obj.total, obj.roll_lines);
+        append(obj.total, obj.alt_range);
+        append(obj.total, obj.ias_range);
+        #append(obj.total, obj.target_locked);
+        append(obj.total, obj.alt_line);
+        append(obj.total, obj.vel_ind);
+        append(obj.total, obj.vel_line);
+        append(obj.total, obj.alt_ind);
+        append(obj.total, obj.window1);
+        append(obj.total, obj.window2);
+        append(obj.total, obj.window3);
+        append(obj.total, obj.window4);
+        append(obj.total, obj.window5);
+        append(obj.total, obj.window6);
+        append(obj.total, obj.window7);
+        append(obj.total, obj.window8);
+        append(obj.total, obj.window9);
+        append(obj.total, obj.window10);
+        append(obj.total, obj.ralt);
+
+        #obj.VV.set("z-index", 11000);# hmm, its inside layer1, so will still be below the heading readout.
+        obj.layer1 = obj.get_element("layer1");#main svg layer.
 
         input = {
                  IAS                       : "/velocities/airspeed-kt",
                  calibrated                : "/fdm/jsbsim/velocities/vc-kts",
+                 TAS                       : "/fdm/jsbsim/velocities/vtrue-kts",
+                 GND_SPD                   : "/velocities/groundspeed-kt",
+                 HUD_VEL                   : "/f16/avionics/hud-velocity",
+                 HUD_SCA                   : "/f16/avionics/hud-scales",
                  Nz                        : "/accelerations/pilot-gdamped",
                  alpha                     : "/fdm/jsbsim/aero/alpha-deg",
                  altitude_ft               : "/position/altitude-ft",
@@ -104,6 +163,8 @@ var F16_HUD = {
                  flap_pos_deg              : "/fdm/jsbsim/fcs/flap-pos-deg",
                  gear_down                 : "/controls/gear/gear-down",
                  heading                   : "/orientation/heading-deg",
+                 headingMag                : "/orientation/heading-magnetic-deg",
+                 useMag:                     "/instrumentation/heading-indicator/use-mag-in-hud",
                  mach                      : "/instrumentation/airspeed-indicator/indicated-mach",
                  measured_altitude         : "/instrumentation/altimeter/indicated-altitude-ft",
                  pitch                     : "/orientation/pitch-deg",
@@ -114,6 +175,7 @@ var F16_HUD = {
                  symbol_reject             : "/controls/HUD/sym-rej",
                  target_display            : "/sim/model/f16/instrumentation/radar-awg-9/hud/target-display",
                  wow                       : "/fdm/jsbsim/gear/wow",
+                 wow0                      : "/fdm/jsbsim/gear/unit[0]/WOW",
                  current_view_x_offset_m   : "sim/current-view/x-offset-m",
                  current_view_y_offset_m   : "sim/current-view/y-offset-m",
                  current_view_z_offset_m   : "sim/current-view/z-offset-m",
@@ -132,9 +194,16 @@ var F16_HUD = {
                  texUp                     : "f16/hud/texels-up",
                  wp_bearing_deg            : "autopilot/route-manager/wp/true-bearing-deg",
                  total_fuel_lbs            : "/consumables/fuel/total-fuel-lbs",
+                 bingo                     : "f16/settings/bingo",
+                 alow                      : "f16/settings/cara-alow",
                  altitude_agl_ft           : "position/altitude-agl-ft",
                  wp0_eta                   : "autopilot/route-manager/wp[0]/eta",
                  approach_speed            : "fdm/jsbsim/systems/approach-speed",
+                 standby                   : "instrumentation/radar/radar-standby",
+                 elapsed                   : "sim/time/elapsed-sec",
+                 cara                      : "f16/avionics/cara-on",
+                 fpm                       : "f16/avionics/hud-fpm",
+                 ded                       : "f16/avionics/hud-ded",
                 };
 
         foreach (var name; keys(input)) {
@@ -148,10 +217,21 @@ var F16_HUD = {
             props.UpdateManager.FromHashList(["hud_serviceable", "hud_display", "hud_brightness", "hud_power"], 0.1, func(hdp)#changed to 0.1, this function is VERY heavy to run.
                                       {
 # print("HUD hud_serviceable=", hdp.hud_serviceable," display=", hdp.hud_display, " brt=", hdp.hud_brightness, " power=", hdp.hud_power);
+
                                           if (!hdp.hud_display or !hdp.hud_serviceable) {
-                                            obj.svg.setColor(0.3,1,0.3,0);
+                                            var color = [0.3,1,0.3,0];
+                                            foreach(item;obj.total) {
+                                              item.setColor(color);
+                                            }
+                                            obj.triangle120.setColorFill(color);
+                                            obj.triangle65.setColorFill(color);
                                           } elsif (hdp.hud_brightness != nil and hdp.hud_power != nil) {
-                                            obj.svg.setColor(0.3,1,0.3,hdp.hud_brightness * hdp.hud_power);
+                                            var color = [0.3,1,0.3,hdp.hud_brightness * hdp.hud_power];
+                                            foreach(item;obj.total) {
+                                              item.setColor(color);
+                                            }
+                                            obj.triangle120.setColorFill(color);
+                                            obj.triangle65.setColorFill(color);
                                           }
                                       }),
             props.UpdateManager.FromHashList([], 0.01, func(hdp)
@@ -199,36 +279,107 @@ var F16_HUD = {
                                                  }
                                                  obj.oldBore.hide();
                                       }),
-            props.UpdateManager.FromHashList(["texUp","VV_x","VV_y"], 0.01, func(hdp)
+            props.UpdateManager.FromHashList(["texUp","VV_x","VV_y","fpm"], 0.001, func(hdp)
                                       {
-                                        obj.VV.setTranslation (hdp.VV_x * obj.texelPerDegreeX, hdp.VV_y * obj.texelPerDegreeY+pitch_offset);
-                                        obj.VV.update();
+                                        if (hdp.fpm > 0) {
+                                            obj.VV.setTranslation (obj.sx*0.5+hdp.VV_x * obj.texelPerDegreeX, obj.sy-obj.texels_up_into_hud+hdp.VV_y * obj.texelPerDegreeY);
+                                            obj.VV.show();
+                                            obj.VV.update();
+                                        } else {
+                                            obj.VV.hide();
+                                        }
                                       }),
-            props.UpdateManager.FromHashList(["texUp","gear_down","VV_x","VV_y", "wow"], 0.01, func(hdp)
+            props.UpdateManager.FromHashList(["fpm","texUp","gear_down","VV_x","VV_y", "wow"], 0.01, func(hdp)
                                       {
                                         if (hdp.gear_down and !hdp.wow) {
                                           obj.bracket.setTranslation (obj.sx/2+hdp.VV_x * obj.texelPerDegreeX, obj.sy-obj.texels_up_into_hud+13 * obj.texelPerDegreeY);
                                           obj.bracket.show();
+                                          obj.roll_lines.hide();
+                                          obj.roll_pointer.hide();
                                         } else {
                                           obj.bracket.hide();
+                                          if (hdp.fpm==2) {
+                                              obj.roll_lines.show();
+                                              obj.roll_pointer.show();
+                                          } else {
+                                              obj.roll_lines.hide();
+                                              obj.roll_pointer.hide();
+                                          }
                                         }
                                       }),
-            props.UpdateManager.FromHashList(["texUp","pitch","roll"], 0.025, func(hdp)
+            props.UpdateManager.FromHashList(["texUp","pitch","roll","fpm","VV_x","VV_y"], 0.001, func(hdp)
                                       {
-                                          obj.ladder.setTranslation (0.0, hdp.pitch * pitch_factor+pitch_offset);                                           
-                                          obj.ladder.setCenter (obj.ladder_center[0], obj.ladder_center[1] - hdp.pitch * pitch_factor);
-                                          obj.ladder.setRotation (hdp.roll_rad);
+                                          obj.ladder.hide();
                                           obj.roll_pointer.setRotation (hdp.roll_rad);
-                                          obj.ladder.update();
+                                          if (hdp.fpm != 2) {
+                                            obj.ladder_group.hide();
+                                            return;
+                                          }
+                                            #obj.ladder.setTranslation (0.0, hdp.pitch * pitch_factor+pitch_offset);                                           
+                                            #obj.ladder.setCenter (obj.ladder_center[0], obj.ladder_center[1] - hdp.pitch * pitch_factor);
+                                            #obj.ladder.setRotation (hdp.roll_rad);
+                                            
+                                            #obj.ladder.show();
+                                            
+                                        
+                                        #############################
+                                        # start new ladder:
+                                        #############################
+                                        obj.fpi_x = hdp.VV_x * obj.texelPerDegreeX;
+                                        obj.fpi_y = hdp.VV_y * obj.texelPerDegreeY;
+                                        obj.rot = -hdp.roll * D2R;
+                                        
+                                        obj.pos_y_rel = obj.fpi_y;#position from bore
+                                        obj.fpi_polar = clamp(math.sqrt(obj.fpi_x*obj.fpi_x+obj.pos_y_rel*obj.pos_y_rel),0.0001,10000);
+                                        obj.inv_angle = clamp(-obj.pos_y_rel/obj.fpi_polar,-1,1);
+                                        obj.fpi_angle = math.acos(obj.inv_angle);
+                                        if (obj.fpi_x < 0) {
+                                          obj.fpi_angle *= -1;
+                                        }
+                                        obj.fpi_pos_rel_x    = math.sin(obj.fpi_angle-obj.rot)*obj.fpi_polar;
+
+                                        obj.rot_deg = geo.normdeg(-hdp.roll);
+                                        obj.default_lateral_pitchnumbers = obj.sx*0.25;
+                                        var centerOffset = -obj.texels_up_into_hud+0.5*obj.sy;
+                                        var frac = 1;
+                                        if (obj.rot_deg >= 0 and obj.rot_deg < 90) {
+                                          obj.max_lateral_pitchnumbers   = obj.extrapolate(obj.rot_deg,0,90,obj.default_lateral_pitchnumbers,obj.default_lateral_pitchnumbers+centerOffset);
+                                          obj.max_lateral_pitchnumbers_p = obj.extrapolate(obj.rot_deg,0,90,obj.default_lateral_pitchnumbers*frac,obj.default_lateral_pitchnumbers*frac-centerOffset);
+                                        } elsif (obj.rot_deg >= 90 and obj.rot_deg < 180) {
+                                          obj.max_lateral_pitchnumbers   = obj.extrapolate(obj.rot_deg,90,180,obj.default_lateral_pitchnumbers+centerOffset,obj.default_lateral_pitchnumbers);
+                                          obj.max_lateral_pitchnumbers_p = obj.extrapolate(obj.rot_deg,90,180,obj.default_lateral_pitchnumbers*frac-centerOffset,obj.default_lateral_pitchnumbers*frac);
+                                        } elsif (obj.rot_deg >= 180 and obj.rot_deg < 270) {
+                                          obj.max_lateral_pitchnumbers   = obj.extrapolate(obj.rot_deg,180,270,obj.default_lateral_pitchnumbers,obj.default_lateral_pitchnumbers-centerOffset);
+                                          obj.max_lateral_pitchnumbers_p = obj.extrapolate(obj.rot_deg,180,270,obj.default_lateral_pitchnumbers*frac,obj.default_lateral_pitchnumbers*frac+centerOffset);
+                                        } else {
+                                          obj.max_lateral_pitchnumbers   = obj.extrapolate(obj.rot_deg,270,360,obj.default_lateral_pitchnumbers-centerOffset,obj.default_lateral_pitchnumbers);
+                                          obj.max_lateral_pitchnumbers_p = obj.extrapolate(obj.rot_deg,270,360,obj.default_lateral_pitchnumbers*frac+centerOffset,obj.default_lateral_pitchnumbers*frac);
+                                        }
+                                        obj.horizon_lateral  = clamp(obj.fpi_pos_rel_x,-obj.max_lateral_pitchnumbers,obj.max_lateral_pitchnumbers_p);
+
+
+
+
+                                        #obj.horizon_vertical = clamp(-math.cos(obj.fpi_angle-obj.rot)*obj.fpi_polar, -obj.sy*0, obj.sy*0.75);
+                                        obj.h_rot.setRotation(obj.rot);
+                                        obj.horizon_group.setTranslation(obj.sx*0.5, obj.sy-obj.texels_up_into_hud);#place it on bore
+                                        obj.ladder_group.setTranslation(obj.horizon_lateral, obj.texelPerDegreeY * hdp.pitch);
+                                        obj.ladder_group.show();
+                                        obj.ladder_group.update();
+                                        obj.horizon_group.update();
                                       }),
 #            props.UpdateManager.FromHashValue("roll_rad", 1.0, func(roll_rad)
 #                                      {
 #                                      }),
-            props.UpdateManager.FromHashList(["altitude_agl_ft"], 1.0, func(hdp)
+            props.UpdateManager.FromHashList(["altitude_agl_ft","cara"], 1.0, func(hdp)
                                       {
                                           obj.agl=hdp.altitude_agl_ft;
-                                          if(obj.agl < 13000) {
-                                              obj.ralt.setText(sprintf("R %05d ",obj.agl));
+                                          if(hdp.cara) {
+                                              if(obj.agl < 10) {
+                                                obj.ralt.setText(sprintf("R %05d ",obj.agl));
+                                              } else {
+                                                obj.ralt.setText(sprintf("R %05d ",math.round(obj.agl,10)));
+                                              }
                                               obj.ralt.show();
                                               obj.raltFrame.hide();
                                           } else {
@@ -239,11 +390,36 @@ var F16_HUD = {
             props.UpdateManager.FromHashValue("measured_altitude", 1.0, func(measured_altitude)
                                       {
                                           obj.alt_range.setTranslation(0, measured_altitude * alt_range_factor);
+                                          obj.alt_curr.setText(sprintf("%5d",10*int(measured_altitude*0.1)));
                                       }),
-            props.UpdateManager.FromHashValue("calibrated", 0.1, func(calibrated)
+            props.UpdateManager.FromHashValue("HUD_SCA", 0.5, func(HUD_SCA)
+                                      {
+                                          if (HUD_SCA) {
+                                            foreach(tck;obj.scaling) {
+                                                tck.show();
+                                              }
+                                          } else {
+                                              foreach(tck;obj.scaling) {
+                                                tck.hide();
+                                              }
+                                          }
+                                      }),
+            props.UpdateManager.FromHashList(["calibrated", "GND_SPD", "HUD_VEL", "gear_down"], 0.5, func(hdp)
                                       {   
                                           # the real F-16 has calibrated airspeed as default in HUD.
-                                          obj.ias_range.setTranslation(0, calibrated * ias_range_factor);
+                                          if (hdp.HUD_VEL == 1 or hdp.gear_down) {
+                                            obj.ias_range.setTranslation(0, hdp.calibrated * ias_range_factor);
+                                            obj.speed_type.setText("C");
+                                            obj.speed_curr.setText(sprintf("%d",hdp.calibrated));
+                                          } elsif (hdp.HUD_VEL == 0) {
+                                            obj.ias_range.setTranslation(0, hdp.TAS * ias_range_factor);
+                                            obj.speed_type.setText("T");
+                                            obj.speed_curr.setText(sprintf("%d",hdp.TAS));
+                                          } else {
+                                            obj.ias_range.setTranslation(0, hdp.GND_SPD * ias_range_factor);
+                                            obj.speed_type.setText("G");
+                                            obj.speed_curr.setText(sprintf("%d",hdp.GND_SPD));
+                                          }
                                       }),
             props.UpdateManager.FromHashValue("range_rate", 0.01, func(range_rate)
                                       {
@@ -252,24 +428,33 @@ var F16_HUD = {
                                               obj.window1.setText("");
                                           } else
                                             obj.window1.setVisible(0);
-                                      }
+                                          }
                                              ),
             props.UpdateManager.FromHashValue("Nz", 0.1, func(Nz)
                                       {
                                           obj.window8.setText(sprintf("%.1f", Nz));
                                           obj.window8.show();
                                       }),
-            props.UpdateManager.FromHashList(["heading", "gear_down"], 0.1, func(hdp)
+            props.UpdateManager.FromHashList(["heading", "headingMag", "useMag","gear_down"], 0.1, func(hdp)
                                       {
-                                          if (hdp.heading < 180)
-                                            obj.heading_tape_position = -hdp.heading*54/10;
+                                          var head = hdp.useMag?hdp.headingMag:hdp.heading;
+                                          obj.head_curr.setText(sprintf("%03d",head));
+                                          if (head < 180)
+                                            obj.heading_tape_position = -head*54/10;
                                           else
-                                            obj.heading_tape_position = (360-hdp.heading)*54/10;
+                                            obj.heading_tape_position = (360-head)*54/10;
                                           if (hdp.gear_down) {
                                               obj.heading_tape_positionY = -10;
+                                              obj.head_curr.setTranslation(0.5*sx*0.695633,sy*0.1-12);
+                                              obj.head_mask.setTranslation(-10+0.5*sx*0.695633,sy*0.1-20);
+                                              obj.head_frame.setTranslation(0,0);
                                           } else {
                                               obj.heading_tape_positionY = 95;
+                                              obj.head_curr.setTranslation(0.5*sx*0.695633,sy*0.1-12+105);
+                                              obj.head_mask.setTranslation(-10+0.5*sx*0.695633,sy*0.1-20+105);
+                                              obj.head_frame.setTranslation(0,105);
                                           }
+
                                           obj.heading_tape.setTranslation (obj.heading_tape_position,obj.heading_tape_positionY);
                                           obj.heading_tape_pointer.setTranslation (0,obj.heading_tape_positionY);
                                       }
@@ -292,38 +477,47 @@ var F16_HUD = {
                                                  obj.flyup.update();
                                              }
                                             ),
-
+            props.UpdateManager.FromHashList(["standby"], 0.5, func(hdp)
+                                             {
+                                                 if (hdp.standby) {
+                                                     obj.stby.setText("NO RAD");
+                                                     obj.stby.show();
+                                                 } else {
+                                                     obj.stby.hide();
+                                                 }
+                                                 obj.stby.update();
+                                             }
+                                            ),
             props.UpdateManager.FromHashList(["brake_parking", "gear_down", "flap_pos_deg", "CCRP_active", "master_arm"], 0.1, func(hdp)
                                              {
                                                  if (hdp.brake_parking) {
                                                      obj.window2.setVisible(1);
-                                                     obj.window2.setText("BRAKES");
+                                                     obj.window2.setText(" BRAKES");
                                                  } elsif (hdp.flap_pos_deg > 0 or hdp.gear_down) {
                                                      obj.window2.setVisible(1);
                                                      obj.gd = "";
                                                      if (hdp.gear_down)
                                                        obj.gd = " G";
-                                                     obj.window2.setText(sprintf("F %d%s",hdp.flap_pos_deg,obj.gd));
+                                                     obj.window2.setText(sprintf(" F %d%s",hdp.flap_pos_deg,obj.gd));
                                                  } elsif (hdp.master_arm) {
                                                      if (hdp.CCRP_active) {
-                                                         obj.window2.setText("ARM CCRP");
+                                                         obj.window2.setText(" ARM CCRP");
                                                      } else {
-                                                         obj.window2.setText("ARM");
+                                                         obj.window2.setText(" ARM");
                                                      }
                                                      obj.window2.setVisible(1);
                                                  } else {
-                                                     obj.window2.setText("NAV");
+                                                     obj.window2.setText(" NAV");
                                                      obj.window2.setVisible(1);
                                                  }
                                              }
                                             ),
             props.UpdateManager.FromHashValue("window3_txt", nil, func(txt)
-                                      {
+                                      { 
                                           if (txt != nil and txt != ""){
-                                              obj.window3.show();
                                               obj.window3.setText(txt);
-                                          }
-                                          else
+                                              obj.window3.show();
+                                          }else
                                             obj.window3.hide();
 
                                       }),
@@ -377,6 +571,16 @@ var F16_HUD = {
                                             obj.window9.hide();
 
                                       }),
+            props.UpdateManager.FromHashValue("window10_txt", nil, func(txt)
+                                      {
+                                          if (txt != nil and txt != ""){
+                                              obj.window10.show();
+                                              obj.window10.setText(txt);
+                                          }
+                                          else
+                                            obj.window10.hide();
+
+                                      }),
 
         ];
 # A 2D 3x2 matrix with six parameters a, b, c, d, e and f is equivalent to the matrix:
@@ -399,6 +603,7 @@ var F16_HUD = {
                 obj.tgt_symbols[i] = tgt;
                 tgt.updateCenter();
                 tgt.setVisible(0);
+                append(obj.total, tgt);
 #                print("HUD: loaded ",name);
             }
             else
@@ -412,6 +617,16 @@ var F16_HUD = {
                 .setColor(0,1,0,1)
                 .setFont(HUD_FONT)
                 .setFontSize(13, 1.4);
+        append(obj.total, obj.flyup);
+        obj.stby = obj.svg.createChild("text")
+                .setText("NO RAD")
+                .setTranslation(sx*0.5*0.695633,sy*0.15)
+                .setAlignment("center-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(11, 1.1);
+
+          append(obj.total, obj.stby);
 #        obj.ralt = obj.svg.createChild("text")
 #                .setText("R 00000 ")
 #                .setTranslation(sx*1*0.675633-5,sy*0.45)
@@ -427,6 +642,7 @@ var F16_HUD = {
                 .vert(10)
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
+              append(obj.total, obj.raltFrame);
         obj.boreSymbol = obj.svg.createChild("path")
                 .moveTo(-5,0)
                 .horiz(10)
@@ -434,6 +650,7 @@ var F16_HUD = {
                 .vert(10)
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
+            append(obj.total, obj.boreSymbol);
         obj.bracket = obj.svg.createChild("path")
                 .moveTo(0,-34)
                 .horiz(-10)
@@ -441,28 +658,200 @@ var F16_HUD = {
                 .horiz(10)
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
+                append(obj.total, obj.bracket);
+        obj.speed_indicator = obj.svg.createChild("path")
+                .moveTo(0.25*sx*0.695633,sy*0.245)
+                .horiz(7)
+                .setStrokeLineWidth(1)
+                .setColor(1,0,0);
+                append(obj.total, obj.speed_indicator);
+        obj.alti_indicator = obj.svg.createChild("path")
+                .moveTo(3+0.75*sx*0.695633,sy*0.245)
+                .horiz(7)
+                .setStrokeLineWidth(1)
+                .setColor(1,0,0);
+                append(obj.total, obj.alti_indicator);
+        append(obj.scaling, obj.alti_indicator);
+        append(obj.scaling, obj.speed_indicator);
+        append(obj.total, obj.alti_indicator);
+        append(obj.total, obj.speed_indicator);
+        obj.speed_type = obj.svg.createChild("text")
+                .setText("C")
+                .setTranslation(1+0.25*sx*0.695633,sy*0.24)
+                .setAlignment("left-bottom")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+        append(obj.total, obj.speed_type);
+        obj.speed_mask = obj.svg.createChild("image")
+                .setTranslation(-27+0.21*sx*0.695633,sy*0.245-6)
+                .set("z-index",10000)
+                #.set("blend-source-rgb","one")
+                #.set("blend-source-alpha","one")
+                .set("blend-source","zero")
+                .set("blend-destination-rgb","one")
+                .set("blend-destination-alpha","one-minus-src-alpha")
+                #.set("blend-destination","zero")
+                .set("src", "Aircraft/f16/Nasal/HUD/speed_mask.png");
+        obj.speed_frame = obj.svg.createChild("path")
+                .set("z-index",10001)
+                .moveTo(2+0.20*sx*0.695633,sy*0.245)
+                .lineTo(2+0.20*sx*0.695633-5,sy*0.245-6)
+                .horiz(-25)
+                .vert(12)
+                .horiz(25)
+                .lineTo(2+0.20*sx*0.695633,sy*0.245)
+                .setStrokeLineWidth(1)
+                .setColor(1,0,0);
+                append(obj.total, obj.speed_frame);
+        obj.speed_curr = obj.svg.createChild("text")
+                .set("z-index",10002)
+                .set("blend-source-rgb","one")
+                .set("blend-source-alpha","one")
+                .set("blend-destination-rgb","one")
+                .set("blend-destination-alpha","one")
+                .setText("425")
+                .setTranslation(0.18*sx*0.695633,sy*0.245)
+                .setAlignment("right-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+append(obj.total, obj.speed_curr);
+        obj.alt_mask = obj.svg.createChild("image")
+                .setTranslation(5+3+0.79*sx*0.695633,sy*0.245-6)
+                .set("z-index",10000)
+                #.set("blend-source-rgb","one")
+                #.set("blend-source-alpha","one")
+                .set("blend-source","zero")
+                .set("blend-destination-rgb","one")
+                .set("blend-destination-alpha","one-minus-src-alpha")
+                #.set("blend-destination","zero")
+                .set("src", "Aircraft/f16/Nasal/HUD/alt_mask.png");
+        obj.alt_frame = obj.svg.createChild("path")
+                .set("z-index",10001)
+                .moveTo(8-2+0.80*sx*0.695633,sy*0.245)
+                .lineTo(8-2+0.80*sx*0.695633+5,sy*0.245-6)
+                .horiz(28)
+                .vert(12)
+                .horiz(-28)
+                .lineTo(8-2+0.80*sx*0.695633,sy*0.245)
+                .setStrokeLineWidth(1)
+                .setColor(1,0,0);
+                append(obj.total, obj.alt_frame);
+        obj.alt_curr = obj.svg.createChild("text")
+                .set("z-index",10002)
+                .set("blend-source-rgb","one")
+                .set("blend-source-alpha","one")
+                .set("blend-destination-rgb","one")
+                .set("blend-destination-alpha","one")
+                .setText("88888")
+                .setTranslation(8+0.82*sx*0.695633,sy*0.245)
+                .setAlignment("left-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.alt_curr);
+        obj.head_mask = obj.svg.createChild("image")
+                .setTranslation(-10+0.5*sx*0.695633,sy*0.1-20)
+                .set("z-index",10000)
+                #.set("blend-source-rgb","one")
+                #.set("blend-source-alpha","one")
+                .set("blend-source","zero")
+                .set("blend-destination-rgb","one")
+                .set("blend-destination-alpha","one-minus-src-alpha")
+                #.set("blend-destination","zero")
+                .set("src", "Aircraft/f16/Nasal/HUD/head_mask.png");
+                #append(obj.total, obj.head_mask);
+        obj.head_frame = obj.svg.createChild("path")
+                .set("z-index",10001)
+                .moveTo(10+0.50*sx*0.695633,sy*0.1-10)
+                .vert(-10)
+                .horiz(-20)
+                .vert(10)
+                .horiz(20)
+                .setStrokeLineWidth(1)
+                .setColor(1,0,0);
+                append(obj.total, obj.head_frame);
+        obj.head_curr = obj.svg.createChild("text")
+                .set("z-index",10002)
+                .set("blend-source-rgb","one")
+                .set("blend-source-alpha","one")
+                .set("blend-destination-rgb","one")
+                .set("blend-destination-alpha","one")
+                .setText("360")
+                .setTranslation(0.5*sx*0.695633,sy*0.1-12)
+                .setAlignment("center-bottom")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.head_curr);
+        obj.ded0 = obj.svg.createChild("text")
+                .setText("360")
+                .setTranslation(0.25*sx*0.695633,sy*0.75-20)
+                .setAlignment("left-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.ded0);
+        obj.ded1 = obj.svg.createChild("text")
+                .setText("360")
+                .setTranslation(0.25*sx*0.695633,sy*0.75-10)
+                .setAlignment("left-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.ded1);
+        obj.ded2 = obj.svg.createChild("text")
+                .setText("360")
+                .setTranslation(0.25*sx*0.695633,sy*0.75+0)
+                .setAlignment("left-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.ded2);
+        obj.ded3 = obj.svg.createChild("text")
+                .setText("360")
+                .setTranslation(0.25*sx*0.695633,sy*0.75+10)
+                .setAlignment("left-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.ded3);
+        obj.ded4 = obj.svg.createChild("text")
+                .setText("360")
+                .setTranslation(0.25*sx*0.695633,sy*0.75+20)
+                .setAlignment("left-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.ded4);
         obj.trackLine = obj.svg.createChild("path")
                 .moveTo(0,0)
                 #.horiz(10)
                 .vert(-30)
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
+
+            append(obj.total, obj.trackLine);
         obj.bombFallLine = obj.svg.createChild("path")
                 .moveTo(sx*0.5*0.695633,0)
                 #.horiz(10)
                 .vert(400)
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
+                append(obj.total, obj.bombFallLine);
         obj.solutionCue = obj.svg.createChild("path")
                 .moveTo(sx*0.5*0.695633-5,0)
                 .horiz(10)
-                .setStrokeLineWidth(1)
+                .setStrokeLineWidth(2)
                 .setColor(0,1,0);
+                append(obj.total, obj.solutionCue);
         obj.ccrpMarker = obj.svg.createChild("path")
                 .moveTo(sx*0.5*0.695633-10,sy*0.5)
                 .horiz(20)
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
+                append(obj.total, obj.ccrpMarker);
         obj.thing = obj.svg.createChild("path")
             .moveTo(-3,0)
             .arcSmallCW(3,3, 0, 3*2, 0)
@@ -471,6 +860,230 @@ var F16_HUD = {
             .vert(-6)
             .setStrokeLineWidth(1)
             .setColor(0,1,0);
+            append(obj.total, obj.thing);
+        var mr = 0.4;#milliradians
+        obj.circle262 = obj.svg.createChild("path")#rdsearch (Allowable Steering Error Circle (ASEC))
+            .moveTo(-262*mr,0)
+            .arcSmallCW(262*mr,262*mr, 0, 262*mr*2, 0)
+            .arcSmallCW(262*mr,262*mr, 0, -262*mr*2, 0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0)
+            .setTranslation(sx*0.5*0.695633,sy*0.25+262*mr*0.5);
+            append(obj.total, obj.circle262);
+        obj.circle100 = obj.svg.createChild("path")#irsearch
+            .moveTo(-100*mr,0)
+            .arcSmallCW(100*mr,100*mr, 0, 100*mr*2, 0)
+            .arcSmallCW(100*mr,100*mr, 0, -100*mr*2, 0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0)
+            .setTranslation(sx*0.5*0.695633,sy*0.25);
+            append(obj.total, obj.circle100);
+        obj.circle120 = obj.svg.createChild("path")#rdlock
+            .moveTo(-120*mr,0)
+            .arcSmallCW(120*mr,120*mr, 0, 120*mr*2, 0)
+            .arcSmallCW(120*mr,120*mr, 0, -120*mr*2, 0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0)
+            .setTranslation(sx*0.5*0.695633,sy*0.25);
+            append(obj.total, obj.circle120);
+        obj.circle65 = obj.svg.createChild("path")#irlock
+            .moveTo(-65*mr,0)
+            .arcSmallCW(65*mr,65*mr, 0, 65*mr*2, 0)
+            .arcSmallCW(65*mr,65*mr, 0, -65*mr*2, 0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0)
+            .setTranslation(sx*0.5*0.695633,sy*0.25);
+            append(obj.total, obj.circle65);
+        obj.triangle65  = obj.svg.createChild("path")
+            .moveTo(0,-65*mr)
+            .lineTo(-5*mr,-75*mr)
+            .lineTo(5*mr,-75*mr)
+            .lineTo(0,-65*mr)
+            .setStrokeLineWidth(1)
+            .setColorFill(0,1,0)
+            .setColor(0,1,0)
+            #.set("z-index",10500)
+            .setTranslation(sx*0.5*0.695633,sy*0.25);
+            append(obj.total, obj.triangle65);
+        obj.triangle120 = obj.svg.createChild("path")
+            .setCenter(0,0)
+            .moveTo(0,-0*mr)
+            .lineTo(-5*mr,-10*mr)
+            .lineTo(5*mr,-10*mr)
+            .lineTo(0,-0*mr)
+            .setColorFill(0,1,0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0)
+            #.set("z-index",10500)
+            .setTranslation(sx*0.5*0.695633,sy*0.25);
+            append(obj.total, obj.triangle120);
+        var boxRadius = 10;
+        var boxRadiusHalf = boxRadius*0.5;
+        obj.radarLock = obj.svg.createChild("path")
+            .moveTo(-boxRadius,0)
+            .horiz(boxRadiusHalf)
+            .lineTo(0,boxRadiusHalf)
+            .moveTo(boxRadius,0)
+            .horiz(-boxRadiusHalf)
+            .lineTo(0,-boxRadiusHalf)
+            .moveTo(0,boxRadius)
+            .vert(-boxRadiusHalf)
+            .lineTo(boxRadiusHalf,0)
+            .moveTo(0,-boxRadius)
+            .vert(boxRadiusHalf)
+            .lineTo(-boxRadiusHalf,0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+            append(obj.total, obj.radarLock);
+        obj.irLock = obj.svg.createChild("path")
+            .moveTo(-boxRadius,0)
+            .lineTo(0,-boxRadius)
+            .lineTo(boxRadius,0)
+            .lineTo(0,boxRadius)
+            .lineTo(-boxRadius,0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+            append(obj.total, obj.irLock);
+        obj.irSearch = obj.svg.createChild("path")
+            .moveTo(-boxRadiusHalf,0)
+            .lineTo(0,-boxRadiusHalf)
+            .lineTo(boxRadiusHalf,0)
+            .lineTo(0,boxRadiusHalf)
+            .lineTo(-boxRadiusHalf,0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+            append(obj.total, obj.irSearch);
+        obj.target_locked.hide();
+        obj.target_locked = obj.svg.createChild("path")
+            .moveTo(-boxRadius,-boxRadius)
+            .vert(boxRadius*2)
+            .horiz(boxRadius*2)
+            .vert(-boxRadius*2)
+            .horiz(-boxRadius*2)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+            append(obj.total, obj.target_locked);
+        obj.VV.hide();
+        mr = mr*1.5;#incorrect, but else in FG it will seem too small.
+        obj.VV = obj.svg.createChild("path")
+            .moveTo(-5*mr,0)
+            .arcSmallCW(5*mr,5*mr, 0, 5*mr*2, 0)
+            .arcSmallCW(5*mr,5*mr, 0, -5*mr*2, 0)
+            .moveTo(-5*mr,0)
+            .horiz(-10*mr)
+            .moveTo(5*mr,0)
+            .horiz(10*mr)
+            .moveTo(0,-5*mr)
+            .vert(-5*mr)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0)
+            .set("z-index",11000);
+            #.setTranslation(sx*0.5*0.695633,sy*0.25);
+            append(obj.total, obj.VV);
+
+
+    obj.horizon_group = obj.svg.createChild("group")
+      .set("z-order", 1);
+    obj.ladder_group = obj.horizon_group.createChild("group");
+    obj.h_rot   = obj.horizon_group.createTransform();
+
+    # pitch lines
+    var pixelPerDegreeY = 15.43724802231049;
+    var pixelPerDegreeX = 16.70527172464148;
+    var distance = pixelPerDegreeY * 5;
+    var minuss = 0.125*sx*0.695633;
+    var minuso = 20*mr;
+    for(var i = 1; i <= 18; i += 1) # full drawn lines
+      append(obj.total, obj.ladder_group.createChild("path")
+         .moveTo(minuso, -i * distance)
+         .horiz(minuss)
+         .vert(minuso*0.5)
+
+         .moveTo(-minuso, -i * distance)
+         .horiz(-minuss)
+         .vert(minuso*0.5)
+         
+         .setStrokeLineWidth(1)
+         .setColor(0,0,0));
+    
+    for(var i = -18; i <= -1; i += 1) { # stipled lines
+      append(obj.total, obj.ladder_group.createChild("path")
+                     .moveTo(minuso, -i * distance)
+                     .horiz(minuss*0.2)
+                     .moveTo(minuso+minuss*0.4, -i * distance)
+                     .horiz(minuss*0.2)
+                     .moveTo(minuso+minuss*0.8, -i * distance)
+                     .horiz(minuss*0.2)
+                     .vert(-minuso*0.5)
+
+                     .moveTo(-minuso, -i * distance)
+                     .horiz(-minuss*0.2)
+                     .moveTo(-minuso-minuss*0.4, -i * distance)
+                     .horiz(-minuss*0.2)
+                     .moveTo(-minuso-minuss*0.8, -i * distance)
+                     .horiz(-minuss*0.2)
+                     .vert(-minuso*0.5)
+
+                     .setStrokeLineWidth(1)
+                     .setColor(0,0,0));
+    }
+
+    #pitch line numbers
+    for(var i = -18; i <= 0; i += 1) {
+      if (i==0) continue;
+      append(obj.total, obj.ladder_group.createChild("text")
+         .setText(i*-5)
+         .setFontSize(9,1.1)
+         .setFont(HUD_FONT)
+         .setAlignment("right-center")
+         .setTranslation(-minuso-minuss-minuss*0.2, -i * distance)
+         .setColor(0,0,0));
+      append(obj.total, obj.ladder_group.createChild("text")
+         .setText(i*-5)
+         .setFontSize(9,1.1)
+         .setFont(HUD_FONT)
+         .setAlignment("left-center")
+         .setTranslation(minuso+minuss+minuss*0.2, -i * distance)
+         .setColor(0,0,0));
+    }
+    for(var i = 1; i <= 18; i += 1) {
+      if (i==0) continue;
+      append(obj.total, obj.ladder_group.createChild("text")
+         .setText(i*5)
+         .setFontSize(9,1.1)
+         .setFont(HUD_FONT)
+         .setAlignment("right-center")
+         .setTranslation(-minuso-minuss-minuss*0.2, -i * distance)
+         .setColor(0,0,0));
+      append(obj.total, obj.ladder_group.createChild("text")
+         .setText(i*5)
+         .setFontSize(9,1.1)
+         .setFont(HUD_FONT)
+         .setAlignment("left-center")
+         .setTranslation(minuso+minuss+minuss*0.2, -i * distance)
+         .setColor(0,0,0));
+    }
+
+    #Horizon line
+    obj.ladder_group.createChild("path")
+                     .moveTo(-0.40*sx*0.695633, 0)
+                     .horiz(0.40*sx*0.695633-20*mr)
+                     .moveTo(20*mr, 0)
+                     .horiz(0.40*sx*0.695633)
+                     .setStrokeLineWidth(1)
+                     .setColor(0,0,0);
+
+
+
+
+
+
+
+
+
+
+
+
         obj.initUpdate =1;
         
         obj.alpha = getprop("f16/avionics/hud-brt");
@@ -483,6 +1096,7 @@ var F16_HUD = {
         obj.dlzLW     =   1;
         obj.dlz      = obj.svg.createChild("group")
                         .setTranslation(obj.dlzX, obj.dlzY);
+        append(obj.total, obj.dlz);
         obj.dlz2     = obj.dlz.createChild("group");
         obj.dlzArrow = obj.dlz.createChild("path")
            .moveTo(0, 0)
@@ -580,10 +1194,10 @@ var F16_HUD = {
     },
 
     CCRP: func(hdp) {
-        if (pylons.fcs != nil and pylons.fcs.getSelectedWeapon() != nil and (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="GBU-12" or pylons.fcs.getSelectedWeapon().type=="B61-7" or pylons.fcs.getSelectedWeapon().type=="B61-12" or pylons.fcs.getSelectedWeapon().type=="GBU-31") 
+        if (pylons.fcs != nil and pylons.fcs.getSelectedWeapon() != nil and (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="MK-83" or pylons.fcs.getSelectedWeapon().type=="GBU-12" or pylons.fcs.getSelectedWeapon().type=="GBU-31" or pylons.fcs.getSelectedWeapon().type=="GBU-24") 
             and hdp.active_u != nil and hdp.master_arm ==1 and pylons.fcs.getSelectedWeapon().status == armament.MISSILE_LOCK) {
 
-            if (pylons.fcs.getSelectedWeapon().type=="MK-82") {
+            if (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="MK-83") {
                 me.dt = 0.1;
                 me.maxFallTime = 20;
             } else {
@@ -729,19 +1343,21 @@ var F16_HUD = {
         if (me.initUpdate) {
             hdp.window1_txt = "1";
             hdp.window2_txt = "2";
-            hdp.window4_txt = "3";
-            hdp.window5_txt = "4";
-            hdp.window6_txt = "5";
-            hdp.window7_txt = "6";
-            hdp.window8_txt = "7";
-            hdp.window9_txt = "8";
+            hdp.window2_txt = "3";
+            hdp.window4_txt = "4";
+            hdp.window5_txt = "5";
+            hdp.window6_txt = "6";
+            hdp.window7_txt = "7";
+            hdp.window8_txt = "8";
+            hdp.window9_txt = "9";
+            hdp.window10_txt = "10";
         }
 
         if (hdp.FrameCount == 2 or me.initUpdate == 1) {
             # calc of pitch_offset (compensates for AC3D model translated and rotated when loaded. Also semi compensates for HUD being at an angle.)
-            me.Hz_b =    0.663711;#0.801701;# HUD position inside ac model after it is loaded, translated (0.08m) and rotated (0.7d).
-            me.Hz_t =    0.841082;#0.976668;
-            me.Hx_m =   -4.65453;#-4.6429;# HUD median X pos
+            me.Hz_b =    0.669786;#0.676226;#0.663711;#0.801701;# HUD position inside ac model after it is loaded, translated (0.08m) and rotated (0.7d).
+            me.Hz_t =    0.85608;#0.86608;#0.841082;#0.976668;
+            me.Hx_m =   -4.62918;#-4.62737;#-4.65453;#-4.6429;# HUD median X pos
             me.Vz   =    hdp.current_view_y_offset_m; # view Z position (0.94 meter per default)
             me.Vx   =    hdp.current_view_z_offset_m; # view X position (0.94 meter per default)
 
@@ -768,8 +1384,25 @@ var F16_HUD = {
         me.pixelPerMeterX = (340*0.695633)/0.15627;
         me.pixelPerMeterY = 260/(me.Hz_t-me.Hz_b);
 
-        hdp.VV_x = hdp.beta;
-        hdp.VV_y = hdp.alpha;
+        if (hdp.wow0) {
+            me.vectorMag = math.sqrt(hdp.speed_east_fps*hdp.speed_east_fps+hdp.speed_north_fps*hdp.speed_north_fps);
+            if (me.vectorMag == 0) {
+                me.vectorMag = 0.0001;
+            }
+            me.headingvv = -math.asin(hdp.speed_north_fps/me.vectorMag)*R2D+90;#divide by vector mag, to get normalized unit vector length
+            if (hdp.speed_east_fps/me.vectorMag < 0) {
+              me.headingvv = -me.headingvv;
+            }
+            if (me.vectorMag < 0.1) {
+                me.headingvv = hdp.heading;
+            }
+            hdp.VV_x = geo.normdeg180(me.headingvv-hdp.heading);
+            hdp.VV_y = 0;
+        } else {
+            hdp.VV_x = hdp.beta;
+            hdp.VV_y = hdp.alpha;
+        }
+        
 
         # UV mapped to x: 0-0.695633
         me.averageDegX = math.atan2(0.078135*1.0, me.Vx-me.Hx_m)*R2D;
@@ -805,11 +1438,17 @@ var F16_HUD = {
             hdp.window7_txt = "";
             hdp.window8_txt = "";
             hdp.window9_txt = "";
+            hdp.window10_txt = "";
+
+            me.circle262.hide();
+            me.circle100.hide();
+            me.circle120.hide();
+            me.circle65.hide();
 
             if(hdp.master_arm and pylons.fcs != nil)
             {
                 hdp.weapon_selected = pylons.fcs.selectedType;
-                me.window9.setVisible(1);
+                hdp.weapn = pylons.fcs.getSelectedWeapon();
                 
                 if (hdp.weapon_selected != nil)
                 {
@@ -817,35 +1456,57 @@ var F16_HUD = {
                         hdp.window9_txt = sprintf("%3d", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "AIM-9") {
                         hdp.window9_txt = sprintf("%d SRM", pylons.fcs.getAmmo());
+                        if (hdp.weapn != nil) {
+                            if (hdp.weapn.status == armament.MISSILE_LOCK) {
+                                me.circle65.show();
+                            } else {
+                                me.circle100.show();
+                            }
+                        }
                     } elsif (hdp.weapon_selected == "AIM-120") {
                         hdp.window9_txt = sprintf("%d LRM", pylons.fcs.getAmmo());
+                        if (hdp.weapn != nil) {
+                            if (hdp.weapn.status == armament.MISSILE_LOCK) {
+                                me.circle120.show();
+                            } else {
+                                me.circle262.show();
+                            }
+                        }
                     } elsif (hdp.weapon_selected == "AIM-7") {
                         hdp.window9_txt = sprintf("%d MRM", pylons.fcs.getAmmo());
+                        if (hdp.weapn != nil) {
+                            if (hdp.weapn.status == armament.MISSILE_LOCK) {
+                                me.circle120.show();
+                            } else {
+                                me.circle262.show();
+                            }
+                        }
                     } elsif (hdp.weapon_selected == "GBU-12") {
-                        hdp.window9_txt = sprintf("%d B12", pylons.fcs.getAmmo());
+                        hdp.window9_txt = sprintf("%d GB12", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "AGM-65") {
-                        hdp.window9_txt = sprintf("%d M65", pylons.fcs.getAmmo());
+                        hdp.window9_txt = sprintf("%d AG65", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "AGM-84") {
-                        hdp.window9_txt = sprintf("%d M84", pylons.fcs.getAmmo());
+                        hdp.window9_txt = sprintf("%d AG84", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "MK-82") {
                         hdp.window9_txt = sprintf("%d B82", pylons.fcs.getAmmo());
+                    } elsif (hdp.weapon_selected == "MK-83") {
+                        hdp.window9_txt = sprintf("%d B83", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "AGM-88") {
-                        hdp.window9_txt = sprintf("%d M88", pylons.fcs.getAmmo());
+                        hdp.window9_txt = sprintf("%d AG88", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "GBU-31") {
-                        hdp.window9_txt = sprintf("%d B31", pylons.fcs.getAmmo());
-                    } elsif (hdp.weapon_selected == "B61-12") {
-                        hdp.window9_txt = sprintf("%d B61-12", pylons.fcs.getAmmo());
-                    } elsif (hdp.weapon_selected == "B61-7") {
-                        hdp.window9_txt = sprintf("%d B61-7", pylons.fcs.getAmmo());
+                        hdp.window9_txt = sprintf("%d GB31", pylons.fcs.getAmmo());
+                    } elsif (hdp.weapon_selected == "GBU-24") {
+                        hdp.window9_txt = sprintf("%d GB24", pylons.fcs.getAmmo());
                     } else hdp.window9_txt = "";
+                    
+
                 }
                 if (hdp.active_u != nil)
                 {
                     if (hdp.active_u.Callsign != nil) {
                         hdp.window3_txt = hdp.active_u.Callsign.getValue();
-                        me.window3.show();
                     } else {
-                        me.window3.hide();
+                        hdp.window3_txt = "";
                     }
 
     #        var w2 = sprintf("%-4d", hdp.active_u.get_closure_rate());
@@ -857,60 +1518,83 @@ var F16_HUD = {
                     if (hdp.active_u.get_display() == 0) {
                         hdp.window4_txt = "TA XX";
                         hdp.window5_txt = "FXXX.X";#slant range
-                        me.window4.show();
-                        me.window5.show();
                     } else {
                         hdp.window4_txt = sprintf("TA%3d", hdp.active_u.get_altitude()*0.001);
                         hdp.window5_txt = sprintf("F%05.1f", hdp.active_u.get_slant_range());#slant range
-                        me.window4.show();
-                        me.window5.show();
                     }
                     
                     hdp.window6_txt = hdp.active_target_model;
-                    me.window6.show(); # SRM UNCAGE / TARGET ASPECT
                 }
                 else {
-                    me.window3.hide();
-                    me.window4.hide();
-                    me.window5.hide();
-                    me.window6.hide();
+                    hdp.window3_txt = "";
+                    hdp.window4_txt = "";
+                    hdp.window5_txt = "";
+                    hdp.window6_txt = "";
                 }
             }
             else # weapons not armed
             {
                 #me.window7.setVisible(0);
-
                 if (hdp.nav_range != nil) {
                     me.plan = flightplan();
                     me.planSize = me.plan.getPlanSize();
                     if (me.plan.current != nil and me.plan.current >= 0 and me.plan.current < me.planSize) {
                         hdp.window5_txt = sprintf("%d>%d", hdp.nav_range, me.plan.current+1);
-                        me.window5.show();
                     } else {
-                        me.window5.hide();
+                        hdp.window5_txt = "";
                     }
                     me.eta = hdp.wp0_eta;
                     if (me.eta != nil and me.eta != "") {
                         hdp.window4_txt = me.eta;
                     } else {
-                        hdp.window4 = "XX:XX";
+                        hdp.window4_txt = "XX:XX";
                     }
-                    me.window4.show();
                 } else {
-                    me.window4.hide();
-                    me.window5.hide();
+                    hdp.window4_txt = "";
+                    hdp.window5_txt = "";
                 }
                 
                 if (hdp.gear_down and !hdp.wow) {
                     hdp.window6_txt = sprintf("A%d", hdp.approach_speed);
-                    me.window6.show();
                 } else {
-                    me.window6.hide(); # SRM UNCAGE / TARGET ASPECT
+                    hdp.window6_txt = "";
                 }
+                var fp = flightplan();
+                var slant = "";
+                if (fp != nil) {
+                    var wp = fp.currentWP();
+                    if (wp != nil) {
+                      slant = "B XXX";
+                      var lat = wp.lat;
+                      var lon = wp.lon;
+                      var alt = wp.alt_cstr;
+                      if (alt != nil) {
+                        var g = geo.Coord.new();
+                        g.set_latlon(lat,lon,alt*FT2M);
+                        var a = geo.aircraft_position();
+                        var r = a.direct_distance_to(g)*M2NM;
+                        if (r>= 1) {
+                            slant = sprintf("B %5.1f",r);#tenths of NM.
+                        } else {
+                            slant = sprintf("B %4.2f",r);#should really be hundreds of feet, but that will confuse everyone.
+                        }
+                      }
+                    }
+                }
+                hdp.window3_txt = slant;
             }
 
-            if (hdp.total_fuel_lbs < 500)
-              hdp.window3_txt = "FUEL";
+            if (hdp.total_fuel_lbs < hdp.bingo and math.mod(int(4*(hdp.elapsed-int(hdp.elapsed))),2)>0) {
+              hdp.window10_txt = "FUEL";
+            } elsif (hdp.total_fuel_lbs < hdp.bingo) {
+              hdp.window10_txt = "";
+            } else {
+              if (hdp.alow<hdp.altitude_agl_ft or math.mod(int(4*(hdp.elapsed-int(hdp.elapsed))),2)>0 or !hdp.cara or hdp.gear_down) {
+                hdp.window10_txt = sprintf("AL%4d",hdp.alow);
+              } else {
+                hdp.window10_txt = "";
+              }
+            }
 
             if (hdp.window9_txt=="") {
                 me.alphaHUD = hdp.alpha;
@@ -922,14 +1606,10 @@ var F16_HUD = {
                 hdp.window9_txt = sprintf("AOA %d",me.alphaHUD);
             }
 
-            hdp.window7_txt = sprintf("%.2f",hdp.mach);
-            me.window7.show();
+            hdp.window7_txt = sprintf(" %.2f",hdp.mach);
         }
 
-        foreach(var update_item; me.update_items)
-        {
-            update_item.update(hdp);
-        }
+        
 
 
         me.trackLineShow = 0;
@@ -941,8 +1621,43 @@ var F16_HUD = {
             ht_xcf = me.pixelPerMeterX;
             ht_ycf = -me.pixelPerMeterY;
             
-            me.target_locked.setVisible(0);
+        me.target_locked.setVisible(0);
 
+        me.irL = 0;
+        me.irS = 0;
+        me.rdL = 0;
+        me.irT = 0;
+        me.rdT = 0;
+        #printf("%d %d %d %s",hdp.master_arm,pylons.fcs != nil,pylons.fcs.getAmmo(),hdp.weapon_selected);
+        if(hdp.master_arm and pylons.fcs != nil and pylons.fcs.getAmmo() > 0) {
+            hdp.weapon_selected = pylons.fcs.selectedType;
+            if (hdp.weapon_selected == "AIM-120" or hdp.weapon_selected == "AIM-7") {
+                if (!pylons.fcs.isLock()) {
+                    me.radarLock.setTranslation(me.sx/2, me.sy*0.25+262*0.4*0.5);
+                    me.rdL = 1;
+                }                
+            } elsif (!pylons.fcs.isLock() and hdp.weapon_selected == "AIM-9") {
+                if (pylons.bore) {
+                    var aim = pylons.fcs.getSelectedWeapon();
+                    if (aim != nil) {
+                        var coords = aim.getSeekerInfo();
+                        me.irSearch.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                    }
+                } else {
+                    me.irSearch.setTranslation(me.sx/2, me.sy*0.25);
+                }
+                me.irS = 1;
+            } elsif (pylons.fcs.isLock() and hdp.weapon_selected == "AIM-9" and pylons.bore) {
+                var aim = pylons.fcs.getSelectedWeapon();
+                if (aim != nil) {
+                    var coords = aim.getSeekerInfo();
+                    if (coords != nil) {
+                        me.irLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                        me.irL = 1;
+                    }
+                }
+            }
+        }
         if (hdp["tgt_list"] != nil) {
             foreach ( me.u; hdp.tgt_list ) {
                 me.callsign = "XX";
@@ -971,11 +1686,26 @@ var F16_HUD = {
 
                             if (hdp.active_u != nil and hdp.active_u.Callsign != nil and me.u.Callsign != nil and me.u.Callsign.getValue() == hdp.active_u.Callsign.getValue()) {
                                 me.target_locked.setVisible(1);
-                                me.target_locked.setTranslation (me.xc, me.yc);
-                                if (pylons.fcs.isLock()) {
-                                    me.target_locked.setRotation(45*D2R);
+                                me.tgt.hide();
+                                me.xcS = me.sx/2                     + (me.pixelPerMeterX * me.combined_dev_length * math.sin(me.combined_dev_deg*D2R));
+                                me.ycS = me.sy-me.texels_up_into_hud - (me.pixelPerMeterY * me.combined_dev_length * math.cos(me.combined_dev_deg*D2R));
+                                me.target_locked.setTranslation (me.xcS, me.ycS);
+                                
+                                if (pylons.fcs != nil and pylons.fcs.isLock()) {
+                                    #me.target_locked.setRotation(45*D2R);
+                                    if (hdp.weapon_selected == "AIM-120" or hdp.weapon_selected == "AIM-7") {
+                                        me.radarLock.setTranslation(me.xcS, me.ycS);
+                                        me.triangle120.setRotation(D2R*(hdp.active_u.get_heading()-hdp.heading));
+                                        me.rdL = 1;
+                                        me.rdT = 1;
+                                    } elsif (hdp.weapon_selected == "AIM-9") {
+                                        me.irLock.setTranslation(me.xcS, me.ycS);
+                                        me.triangle65.setRotation(D2R*(hdp.active_u.get_heading()-hdp.heading));
+                                        me.irL = 1;
+                                        me.irT = 1;
+                                    }                                    
                                 } else {
-                                    me.target_locked.setRotation(0);
+                                    #me.target_locked.setRotation(0);
                                 }
                                 if (me.clamped) {
                                     me.trackLine.setTranslation(me.sx/2,me.sy-me.texels_up_into_hud);
@@ -1008,6 +1738,9 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
         }
         else print("[ERROR] Radar system missing or uninit (frame notifier)");
         
+        
+        #print(me.irS~" "~me.irL);
+
         me.trackLine.setVisible(me.trackLineShow);
 
         
@@ -1024,6 +1757,21 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
             if (hdp.active_u != nil) {
                 me.dlzClo.setTranslation(0,-me.dlzArray[4]/me.dlzArray[0]*me.dlzHeight);
                 me.dlzClo.setText(sprintf("%+d ",hdp.active_u.get_closure_rate()));
+                if (pylons.fcs.isLock() and me.dlzArray[4] < me.dlzArray[2] and math.mod(int(4*(hdp.elapsed-int(hdp.elapsed))),2)>0) {
+                    me.irL = 0;
+                    me.rdL = 0;
+                }
+                if (pylons.fcs.isLock()) {
+                    me.scale120 = me.extrapolate(me.dlzArray[4],me.dlzArray[2],me.dlzArray[3],1,30/120);
+                    me.scale120 = clamp(me.scale120,30/120,1);
+                    me.circle120.setScale(me.scale120,me.scale120);
+                    me.circle120.setStrokeLineWidth(1/me.scale120);
+                    #me.triangle120.setScale(me.scale120,me.scale120);
+                    #me.triangle120.setStrokeLineWidth(1/me.scale120);
+                    me.triangle120.setTranslation(me.sx*0.5,me.sy*0.25-me.scale120*0.4*120);#0.4=mr
+                    #me.triangle120.setCenter(0,me.scale120*0.4*120);
+                    me.triangle120.setCenter(0,me.scale120*0.4*120);
+                }
             } else {
                 me.dlzClo.setText("");
             }
@@ -1045,9 +1793,43 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
             me.dlz.show();
         }
 
+        me.radarLock.setVisible(me.rdL);
+        me.irSearch.setVisible(me.irS);
+        me.irLock.setVisible(me.irL);
+        me.triangle120.setVisible(me.rdT);
+        me.triangle65.setVisible(me.irT);
+
+        if (hdp.ded) {
+            me.ded0.setText(ded.text[0]);
+            me.ded1.setText(ded.text[1]);
+            me.ded2.setText(ded.text[2]);
+            me.ded3.setText(ded.text[3]);
+            me.ded4.setText(ded.text[4]);
+            me.ded0.show();
+            me.ded1.show();
+            me.ded2.show();
+            me.ded3.show();
+            me.ded4.show();
+        } else {
+            me.ded0.hide();
+            me.ded1.hide();
+            me.ded2.hide();
+            me.ded3.hide();
+            me.ded4.hide();
+        }
+
+
         me.initUpdate = 0;
- 
+        
+        foreach(var update_item; me.update_items)
+        {
+            update_item.update(hdp);
+        } 
     },
+    extrapolate: func (x, x1, x2, y1, y2) {
+        return y1 + ((x - x1) / (x2 - x1)) * (y2 - y1);
+    },
+    clamp: func(v, min, max) { v < min ? min : v > max ? max : v },
     list: [],
 };
 

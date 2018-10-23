@@ -69,8 +69,8 @@
   <menubar>
    <default>
     <menu n="100">
-     <label>F-16</label>
-           <item n="7">
+     <label>F-16AM Block 20</label>
+           <item n="8">
           <label>Payload quick select</label>
           <binding>
             <command>dialog-show</command>

@@ -1915,7 +1915,7 @@ var AIM = {
 			# check stats while flying:
 			#
 			me.printFlight("Mach %04.2f , time %05.1f s , thrust %05.1f lbf , G-force %05.2f", me.speed_m, me.life_time, me.thrust_lbf, me.g);
-			me.printFlight("Alt %07.1f ft , direct distance to target %04.1f NM", me.alt_ft, me.Tgt!=nil?me.direct_dist_m*M2NM:-1);			
+			me.printFlight("Alt %07.1f ft , direct distance to target %04.1f NM", me.alt_ft, (me.Tgt!=nil and me.direct_dist_m!=nil)?me.direct_dist_m*M2NM:-1);			
 			
 			if (me.exploded == TRUE) {
 				me.printStats("%s max absolute %.2f Mach. Max relative %.2f Mach. Max alt %6d ft. Terminal %.2f mach.", me.type, me.maxMach, me.maxMach-me.startMach, me.maxAlt, me.speed_m);
@@ -3130,12 +3130,16 @@ var AIM = {
 
 		####Ground interaction
         me.ground = geo.elevation(me.coord.lat(), me.coord.lon());
-        if(me.ground != nil)
-        {
+        if(me.ground != nil) {
             if(me.ground > me.coord.alt()) {
             	me.event = "exploded";
             	if(me.life_time < me.arming_time) {
                 	me.event = "landed disarmed";
+            	}
+            	if (me.Tgt != nil and me.direct_dist_m == nil) {
+            		# maddog might go here
+            		me.Tgt = nil;
+            		#me.direct_dist_m = me.coord.direct_distance_to(me.Tgt.get_Coord());
             	}
             	if ((me.Tgt != nil and me.direct_dist_m != nil) or me.Tgt == nil) {
             		me.explode("Hit terrain.", me.event);
@@ -3249,7 +3253,7 @@ var AIM = {
 			var min_distance = me.direct_dist_m;
 			
 			for (var i = 0.00; i <= 1; i += 0.025) {
-				var t_coord = me.interpolate(me.last_t_coord, me.t_coord, i);
+				var t_coord = me.interpolate(me.last_t_coord, me.t_coord, i);#todo: nil in numric inside this
 				var coord = me.interpolate(me.last_coord, me.coord, i);
 				var dist = coord.direct_distance_to(t_coord);
 				if (dist < min_distance) {
@@ -3477,10 +3481,36 @@ var AIM = {
 						and (me.guidance != "radiation" or me.is_radiating_aircraft(me.tagt) == TRUE)
 					    and me.rng < me.max_fire_range_nm and me.rng > me.min_fire_range_nm and me.FOV_check(me.total_horiz, me.total_elev, me.fcs_fov)
 					    and (me.rng < me.detect_range_curr_nm or (me.guidance != "radar" and me.guidance != "semi-radar" and me.guidance != "heat" and me.guidance != "vision" and me.guidance != "heat" and me.guidance != "radiation"))
-					    and (me.guidance != "heat" or (me.all_aspect == TRUE or me.rear_aspect(geo.aircraft_position(), me.tagt) == TRUE))) {
+					    and (me.guidance != "heat" or (me.all_aspect == TRUE or me.rear_aspect(geo.aircraft_position(), me.tagt) == TRUE))
+					    and me.checkForView()) {
 			return TRUE;
 		}
 		return FALSE;
+	},
+
+	checkForView: func {
+		if (me.guidance != "gps" and me.guidance != "inertial") {
+			me.launchCoord = geo.aircraft_position();
+			me.potentialCoord = me.tagt.get_Coord();
+			me.xyz          = {"x":me.launchCoord.x(),                  "y":me.launchCoord.y(),                 "z":me.launchCoord.z()};
+		    me.directionLOS = {"x":me.potentialCoord.x()-me.launchCoord.x(),   "y":me.potentialCoord.y()-me.launchCoord.y(),  "z":me.potentialCoord.z()-me.launchCoord.z()};
+
+			# Check for terrain between own weapon and target:
+			me.terrainGeod = get_cart_ground_intersection(me.xyz, me.directionLOS);
+			if (me.terrainGeod == nil) {
+				return TRUE;
+			} else {
+				me.terrain = geo.Coord.new();
+				me.terrain.set_latlon(me.terrainGeod.lat, me.terrainGeod.lon, me.terrainGeod.elevation);
+				me.maxDist = me.launchCoord.direct_distance_to(me.potentialCoord)-1;#-1 is to avoid z-fighting distance
+				me.terrainDist = me.launchCoord.direct_distance_to(me.terrain);
+				if (me.terrainDist >= me.maxDist) {
+					return TRUE;
+				}
+			}
+			return FALSE;
+		}
+		return TRUE;
 	},
 
 	checkForClass: func {
