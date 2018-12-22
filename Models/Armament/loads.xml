@@ -270,6 +270,21 @@
   </condition>
  </animation>
 
+<animation>
+  <type>select</type>
+  <object-name>Station3_MK84</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-2-type</property>
+      <value>MK-84</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-2-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
  <animation>
   <type>select</type>
   <object-name>Station3_GBU-31</object-name>
@@ -343,6 +358,21 @@
 
  <animation>
   <type>select</type>
+  <object-name>LExtTank6</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-3-type</property>
+      <value>Left 600 Gal Tank</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-3-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>Station4_AGM-88</object-name>
   <condition>
     <equals>
@@ -373,7 +403,7 @@
   <condition>
     <equals>
         <property>payload/armament/station/id-3-set</property>
-        <value>2 x MK-82</value>
+        <value>3 x MK-82</value>
       </equals>
   </condition>
  </animation>
@@ -386,6 +416,21 @@
         <property>payload/armament/station/id-3-set</property>
         <value>2 x MK-83</value>
       </equals>
+  </condition>
+ </animation>
+
+<animation>
+  <type>select</type>
+  <object-name>Station4_MK84</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-3-type</property>
+      <value>MK-84</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-3-count</property>
+      <value>0</value>
+    </greater-than>
   </condition>
  </animation>
 
@@ -533,6 +578,21 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
 
  <animation>
   <type>select</type>
+  <object-name>RExtTank6</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-5-type</property>
+      <value>Right 600 Gal Tank</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-5-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
   <object-name>Station6_AGM-88</object-name>
   <condition>
     <equals>
@@ -563,7 +623,7 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
   <condition>
     <equals>
         <property>payload/armament/station/id-5-set</property>
-        <value>2 x MK-82</value>
+        <value>3 x MK-82</value>
       </equals>
   </condition>
  </animation>
@@ -576,6 +636,21 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
         <property>payload/armament/station/id-5-set</property>
         <value>2 x MK-83</value>
       </equals>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>Station6_MK84</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-5-type</property>
+      <value>MK-84</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-5-count</property>
+      <value>0</value>
+    </greater-than>
   </condition>
  </animation>
 
@@ -688,6 +763,21 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
         <property>payload/armament/station/id-6-set</property>
         <value>2 x MK-83</value>
       </equals>
+  </condition>
+ </animation>
+
+<animation>
+  <type>select</type>
+  <object-name>Station7_MK84</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-6-type</property>
+      <value>MK-84</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-6-count</property>
+      <value>0</value>
+    </greater-than>
   </condition>
  </animation>
 
@@ -914,6 +1004,83 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
   </condition>
  </animation>
 
+ <!--  ===========================================================================================================-->
+<!--  ================================================= id-9   ==================================================-->
+<!--  ===========================================================================================================-->
+
+<animation>
+  <type>select</type>
+  <object-name>Station10_SniperATP</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-10-type</property>
+      <value>AN/AAQ-33 Sniper ATP</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-10-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>Station10_LANTIRNtarget</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-10-type</property>
+      <value>AN/AAQ-14 LANTIRN Target Pod</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-10-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>Station11_LANTIRNnav</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-11-type</property>
+      <value>AN/AAQ-13 LANTIRN Nav Pod</value>
+    </equals>
+    <greater-than>
+      <property>payload/armament/station/id-11-count</property>
+      <value>0</value>
+    </greater-than>
+  </condition>
+ </animation>
+
+<animation>
+  <type>select</type>
+  <object-name>Podpylon_right</object-name>
+  <condition>
+  <or>
+    <equals>
+      <property>payload/armament/station/id-10-set</property>
+      <value>AN/AAQ-33 Sniper ATP</value>
+    </equals>
+    <equals>
+      <property>payload/armament/station/id-10-set</property>
+      <value>AN/AAQ-14 LANTIRN Target Pod</value>
+    </equals>
+  </or>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <object-name>Podpylon_left</object-name>
+  <condition>
+    <equals>
+      <property>payload/armament/station/id-11-set</property>
+      <value>not used yet</value>
+    </equals>
+  </condition>
+ </animation>
+
  <!-- livery selection -->
 
  <animation>
@@ -921,7 +1088,11 @@ to center pylon when it has "AN/ALQ-131 ECM Pod" active..
   <object-name>VentralTank</object-name>
   <object-name>RExtTank</object-name>
   <object-name>LExtTank</object-name>
+  <object-name>RExtTank6</object-name>
+  <object-name>LExtTank6</object-name>
   <object-name>Centerpylon</object-name>
+  <object-name>Podpylon_left</object-name>
+  <object-name>Podpylon_right</object-name>
   <property-base>sim/model/livery</property-base>
   <texture-prop>texture</texture-prop>
   <texture>f16.png</texture>

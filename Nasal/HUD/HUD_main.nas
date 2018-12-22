@@ -81,6 +81,7 @@ var F16_HUD = {
         obj.vel_ind.hide();
         obj.alt_ind = obj.get_element("path3111-1");
         obj.alt_ind.hide();
+        obj.radalt_box = obj.get_element("radalt-box");
         obj.scaling = [obj.get_element("alt_tick_0"),obj.get_element("alt_label0"),obj.heading_tape,obj.heading_tape_pointer];
         obj.total   = [obj.get_element("alt_tick_0"),obj.get_element("alt_label0"),obj.heading_tape,obj.heading_tape_pointer];
         for(var ii=1;ii<=1000;ii+=1) {
@@ -116,6 +117,7 @@ var F16_HUD = {
         obj.window8 = obj.get_text("window8", HUD_FONT,9,1.1);
         obj.window9 = obj.get_text("window9", HUD_FONT,9,1.1);
         obj.window10 = obj.get_text("window10", HUD_FONT,9,1.1);
+        obj.window11 = obj.get_text("window11", HUD_FONT,9,1.1);
 
         obj.ralt = obj.get_text("radalt", HUD_FONT,9,1.1);
 
@@ -142,7 +144,9 @@ var F16_HUD = {
         append(obj.total, obj.window8);
         append(obj.total, obj.window9);
         append(obj.total, obj.window10);
+        append(obj.total, obj.window11);
         append(obj.total, obj.ralt);
+        append(obj.total, obj.radalt_box);
 
         #obj.VV.set("z-index", 11000);# hmm, its inside layer1, so will still be below the heading readout.
         obj.layer1 = obj.get_element("layer1");#main svg layer.
@@ -204,6 +208,8 @@ var F16_HUD = {
                  cara                      : "f16/avionics/cara-on",
                  fpm                       : "f16/avionics/hud-fpm",
                  ded                       : "f16/avionics/hud-ded",
+                 tgp_mounted               : "f16/stores/tgp-mounted",
+                 view_number               : "sim/current-view/view-number",
                 };
 
         foreach (var name; keys(input)) {
@@ -242,7 +248,7 @@ var F16_HUD = {
                                           hdp.CCRP_active = obj.CCRP(hdp);
                                       }),
 
-            props.UpdateManager.FromHashList(["texUp","route_manager_active", "wp_bearing_deg", "heading"], 0.01, func(hdp)
+            props.UpdateManager.FromHashList(["texUp","route_manager_active", "wp_bearing_deg", "heading","VV_x","VV_y"], 0.01, func(hdp)
                                              {
                                                  # the Y position is still not accurate due to HUD being at an angle, but will have to do.
                                                  if (hdp.route_manager_active) {
@@ -257,7 +263,7 @@ var F16_HUD = {
                                                          } elsif (obj.thingX<obj.sx*0.33) {
                                                              obj.thingX=obj.sx*0.33;
                                                          }
-                                                         obj.thing.setTranslation(obj.thingX,obj.sy-obj.texels_up_into_hud+15);
+                                                         obj.thing.setTranslation(obj.thingX, obj.sy-obj.texels_up_into_hud+hdp.VV_y * obj.texelPerDegreeY);
                                                          obj.thing.setRotation(obj.wpbear*D2R);
                                                          obj.thing.show();
                                                      } else {
@@ -275,9 +281,18 @@ var F16_HUD = {
                                                      obj.boreSymbol.hide();
                                                  } else {
                                                      obj.boreSymbol.setTranslation(obj.sx/2,obj.sy-obj.texels_up_into_hud);
+                                                     obj.offangle.setTranslation(obj.sx/2-10,obj.sy-obj.texels_up_into_hud);
                                                      obj.boreSymbol.show();
                                                  }
                                                  obj.oldBore.hide();
+                                      }),
+            props.UpdateManager.FromHashList(["gear_down"], 0.5, func(val)
+                                             {
+                                                 if (val.gear_down) {
+                                                     obj.appLine.show();
+                                                 } else {
+                                                     obj.appLine.hide();
+                                                 }
                                       }),
             props.UpdateManager.FromHashList(["texUp","VV_x","VV_y","fpm"], 0.001, func(hdp)
                                       {
@@ -307,11 +322,11 @@ var F16_HUD = {
                                           }
                                         }
                                       }),
-            props.UpdateManager.FromHashList(["texUp","pitch","roll","fpm","VV_x","VV_y"], 0.001, func(hdp)
+            props.UpdateManager.FromHashList(["texUp","pitch","roll","fpm","VV_x","VV_y","gear_down"], 0.001, func(hdp)
                                       {
                                           obj.ladder.hide();
                                           obj.roll_pointer.setRotation (hdp.roll_rad);
-                                          if (hdp.fpm != 2) {
+                                          if (hdp.fpm != 2 and !hdp.gear_down) {
                                             obj.ladder_group.hide();
                                             return;
                                           }
@@ -339,7 +354,7 @@ var F16_HUD = {
                                         obj.fpi_pos_rel_x    = math.sin(obj.fpi_angle-obj.rot)*obj.fpi_polar;
 
                                         obj.rot_deg = geo.normdeg(-hdp.roll);
-                                        obj.default_lateral_pitchnumbers = obj.sx*0.25;
+                                        obj.default_lateral_pitchnumbers = obj.sx*0.40;
                                         var centerOffset = -obj.texels_up_into_hud+0.5*obj.sy;
                                         var frac = 1;
                                         if (obj.rot_deg >= 0 and obj.rot_deg < 90) {
@@ -488,7 +503,7 @@ var F16_HUD = {
                                                  obj.stby.update();
                                              }
                                             ),
-            props.UpdateManager.FromHashList(["brake_parking", "gear_down", "flap_pos_deg", "CCRP_active", "master_arm"], 0.1, func(hdp)
+            props.UpdateManager.FromHashList(["brake_parking", "gear_down", "flap_pos_deg", "CCRP_active", "master_arm","submode"], 0.1, func(hdp)
                                              {
                                                  if (hdp.brake_parking) {
                                                      obj.window2.setVisible(1);
@@ -500,11 +515,13 @@ var F16_HUD = {
                                                        obj.gd = " G";
                                                      obj.window2.setText(sprintf(" F %d%s",hdp.flap_pos_deg,obj.gd));
                                                  } elsif (hdp.master_arm) {
+                                                     var submode = "";
                                                      if (hdp.CCRP_active) {
-                                                         obj.window2.setText(" ARM CCRP");
-                                                     } else {
-                                                         obj.window2.setText(" ARM");
+                                                        submode = "CCRP";
+                                                     } elsif (hdp.submode == 1) {
+                                                        submode = "BORE";
                                                      }
+                                                     obj.window2.setText(" ARM "~submode);
                                                      obj.window2.setVisible(1);
                                                  } else {
                                                      obj.window2.setText(" NAV");
@@ -579,6 +596,16 @@ var F16_HUD = {
                                           }
                                           else
                                             obj.window10.hide();
+
+                                      }),
+            props.UpdateManager.FromHashValue("window11_txt", nil, func(txt)
+                                      {
+                                          if (txt != nil and txt != ""){
+                                              obj.window11.show();
+                                              obj.window11.setText(txt);
+                                          }
+                                          else
+                                            obj.window11.hide();
 
                                       }),
 
@@ -786,7 +813,7 @@ append(obj.total, obj.speed_curr);
                 .setFontSize(9, 1.1);
                 append(obj.total, obj.head_curr);
         obj.ded0 = obj.svg.createChild("text")
-                .setText("360")
+                .setText("")
                 .setTranslation(0.25*sx*0.695633,sy*0.75-20)
                 .setAlignment("left-center")
                 .setColor(0,1,0,1)
@@ -794,7 +821,7 @@ append(obj.total, obj.speed_curr);
                 .setFontSize(9, 1.1);
                 append(obj.total, obj.ded0);
         obj.ded1 = obj.svg.createChild("text")
-                .setText("360")
+                .setText("")
                 .setTranslation(0.25*sx*0.695633,sy*0.75-10)
                 .setAlignment("left-center")
                 .setColor(0,1,0,1)
@@ -802,7 +829,7 @@ append(obj.total, obj.speed_curr);
                 .setFontSize(9, 1.1);
                 append(obj.total, obj.ded1);
         obj.ded2 = obj.svg.createChild("text")
-                .setText("360")
+                .setText("")
                 .setTranslation(0.25*sx*0.695633,sy*0.75+0)
                 .setAlignment("left-center")
                 .setColor(0,1,0,1)
@@ -810,7 +837,7 @@ append(obj.total, obj.speed_curr);
                 .setFontSize(9, 1.1);
                 append(obj.total, obj.ded2);
         obj.ded3 = obj.svg.createChild("text")
-                .setText("360")
+                .setText("")
                 .setTranslation(0.25*sx*0.695633,sy*0.75+10)
                 .setAlignment("left-center")
                 .setColor(0,1,0,1)
@@ -818,13 +845,20 @@ append(obj.total, obj.speed_curr);
                 .setFontSize(9, 1.1);
                 append(obj.total, obj.ded3);
         obj.ded4 = obj.svg.createChild("text")
-                .setText("360")
+                .setText("")
                 .setTranslation(0.25*sx*0.695633,sy*0.75+20)
                 .setAlignment("left-center")
                 .setColor(0,1,0,1)
                 .setFont(HUD_FONT)
                 .setFontSize(9, 1.1);
                 append(obj.total, obj.ded4);
+        obj.offangle = obj.svg.createChild("text")# real name: locator line
+                .setText("0")
+                .setAlignment("right-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+                append(obj.total, obj.offangle);
         obj.trackLine = obj.svg.createChild("path")
                 .moveTo(0,0)
                 #.horiz(10)
@@ -838,7 +872,7 @@ append(obj.total, obj.speed_curr);
                 #.horiz(10)
                 .vert(400)
                 .setStrokeLineWidth(1)
-                .setColor(0,1,0);
+                .setColor(0,1,0).hide();
                 append(obj.total, obj.bombFallLine);
         obj.solutionCue = obj.svg.createChild("path")
                 .moveTo(sx*0.5*0.695633-5,0)
@@ -853,11 +887,11 @@ append(obj.total, obj.speed_curr);
                 .setColor(0,1,0);
                 append(obj.total, obj.ccrpMarker);
         obj.thing = obj.svg.createChild("path")
-            .moveTo(-3,0)
-            .arcSmallCW(3,3, 0, 3*2, 0)
-            .arcSmallCW(3,3, 0, -3*2, 0)
-            .moveTo(0,-3)
-            .vert(-6)
+            .moveTo(-2.5,0)
+            .arcSmallCW(2.5,2.5, 0, 2.5*2, 0)
+            .arcSmallCW(2.5,2.5, 0, -2.5*2, 0)
+            .moveTo(0,-2.5)
+            .vert(-10)
             .setStrokeLineWidth(1)
             .setColor(0,1,0);
             append(obj.total, obj.thing);
@@ -867,7 +901,7 @@ append(obj.total, obj.speed_curr);
             .arcSmallCW(262*mr,262*mr, 0, 262*mr*2, 0)
             .arcSmallCW(262*mr,262*mr, 0, -262*mr*2, 0)
             .setStrokeLineWidth(1)
-            .setColor(0,1,0)
+            .setColor(0,1,0).hide()
             .setTranslation(sx*0.5*0.695633,sy*0.25+262*mr*0.5);
             append(obj.total, obj.circle262);
         obj.circle100 = obj.svg.createChild("path")#irsearch
@@ -875,7 +909,7 @@ append(obj.total, obj.speed_curr);
             .arcSmallCW(100*mr,100*mr, 0, 100*mr*2, 0)
             .arcSmallCW(100*mr,100*mr, 0, -100*mr*2, 0)
             .setStrokeLineWidth(1)
-            .setColor(0,1,0)
+            .setColor(0,1,0).hide()
             .setTranslation(sx*0.5*0.695633,sy*0.25);
             append(obj.total, obj.circle100);
         obj.circle120 = obj.svg.createChild("path")#rdlock
@@ -883,7 +917,7 @@ append(obj.total, obj.speed_curr);
             .arcSmallCW(120*mr,120*mr, 0, 120*mr*2, 0)
             .arcSmallCW(120*mr,120*mr, 0, -120*mr*2, 0)
             .setStrokeLineWidth(1)
-            .setColor(0,1,0)
+            .setColor(0,1,0).hide()
             .setTranslation(sx*0.5*0.695633,sy*0.25);
             append(obj.total, obj.circle120);
         obj.circle65 = obj.svg.createChild("path")#irlock
@@ -891,7 +925,7 @@ append(obj.total, obj.speed_curr);
             .arcSmallCW(65*mr,65*mr, 0, 65*mr*2, 0)
             .arcSmallCW(65*mr,65*mr, 0, -65*mr*2, 0)
             .setStrokeLineWidth(1)
-            .setColor(0,1,0)
+            .setColor(0,1,0).hide()
             .setTranslation(sx*0.5*0.695633,sy*0.25);
             append(obj.total, obj.circle65);
         obj.triangle65  = obj.svg.createChild("path")
@@ -919,19 +953,20 @@ append(obj.total, obj.speed_curr);
             append(obj.total, obj.triangle120);
         var boxRadius = 10;
         var boxRadiusHalf = boxRadius*0.5;
+        var hairFactor = 0.8;
         obj.radarLock = obj.svg.createChild("path")
-            .moveTo(-boxRadius,0)
-            .horiz(boxRadiusHalf)
-            .lineTo(0,boxRadiusHalf)
-            .moveTo(boxRadius,0)
-            .horiz(-boxRadiusHalf)
-            .lineTo(0,-boxRadiusHalf)
-            .moveTo(0,boxRadius)
-            .vert(-boxRadiusHalf)
-            .lineTo(boxRadiusHalf,0)
-            .moveTo(0,-boxRadius)
-            .vert(boxRadiusHalf)
-            .lineTo(-boxRadiusHalf,0)
+            .moveTo(-boxRadius*hairFactor,0)
+            .horiz(boxRadiusHalf*hairFactor)
+            .lineTo(0,boxRadiusHalf*hairFactor)
+            .moveTo(boxRadius*hairFactor,0)
+            .horiz(-boxRadiusHalf*hairFactor)
+            .lineTo(0,-boxRadiusHalf*hairFactor)
+            .moveTo(0,boxRadius*hairFactor)
+            .vert(-boxRadiusHalf*hairFactor)
+            .lineTo(boxRadiusHalf*hairFactor,0)
+            .moveTo(0,-boxRadius*hairFactor)
+            .vert(boxRadiusHalf*hairFactor)
+            .lineTo(-boxRadiusHalf*hairFactor,0)
             .setStrokeLineWidth(1)
             .setColor(0,1,0);
             append(obj.total, obj.radarLock);
@@ -1064,15 +1099,58 @@ append(obj.total, obj.speed_curr);
          .setColor(0,0,0));
     }
 
+    # approach line
+    var i = -0.5;
+    obj.appLine = obj.ladder_group.createChild("path")
+                     .moveTo(minuso, -i * distance)
+                     .horiz(minuss*0.2)
+                     .moveTo(minuso+minuss*0.4, -i * distance)
+                     .horiz(minuss*0.2)
+                     .moveTo(minuso+minuss*0.8, -i * distance)
+                     .horiz(minuss*0.2)
+
+                     .moveTo(-minuso, -i * distance)
+                     .horiz(-minuss*0.2)
+                     .moveTo(-minuso-minuss*0.4, -i * distance)
+                     .horiz(-minuss*0.2)
+                     .moveTo(-minuso-minuss*0.8, -i * distance)
+                     .horiz(-minuss*0.2)
+
+                     .setStrokeLineWidth(1)
+                     .setColor(0,0,0);
+    
+    append(obj.total, obj.appLine);
+
     #Horizon line
-    obj.ladder_group.createChild("path")
+    append(obj.total, obj.ladder_group.createChild("path")
                      .moveTo(-0.40*sx*0.695633, 0)
                      .horiz(0.40*sx*0.695633-20*mr)
                      .moveTo(20*mr, 0)
                      .horiz(0.40*sx*0.695633)
                      .setStrokeLineWidth(1)
-                     .setColor(0,0,0);
+                     .setColor(0,0,0));
 
+    obj.tgpPointF = obj.svg.createChild("path")
+                     .moveTo(-10*mr, -10*mr)
+                     .horiz(20*mr)
+                     .vert(20*mr)
+                     .horiz(-20*mr)
+                     .vert(-20*mr)
+                     .moveTo(-1*mr,-1*mr)
+                     .horiz(2*mr)
+                     .moveTo(-1*mr,0*mr)
+                     .horiz(2*mr)
+                     .setStrokeLineWidth(1)
+                     .setColor(0,0,0);
+    obj.tgpPointC = obj.svg.createChild("path")
+                     .moveTo(-10*mr, -10*mr)
+                     .lineTo(10*mr, 10*mr)
+                     .moveTo(10*mr, -10*mr)
+                     .lineTo(-10*mr, 10*mr)
+                     .setStrokeLineWidth(1)
+                     .setColor(0,0,0);
+    append(obj.total, obj.tgpPointF);
+    append(obj.total, obj.tgpPointC);
 
 
 
@@ -1194,7 +1272,7 @@ append(obj.total, obj.speed_curr);
     },
 
     CCRP: func(hdp) {
-        if (pylons.fcs != nil and pylons.fcs.getSelectedWeapon() != nil and (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="MK-83" or pylons.fcs.getSelectedWeapon().type=="GBU-12" or pylons.fcs.getSelectedWeapon().type=="GBU-31" or pylons.fcs.getSelectedWeapon().type=="GBU-24") 
+        if (pylons.fcs != nil and pylons.fcs.getSelectedWeapon() != nil and (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="MK-83" or pylons.fcs.getSelectedWeapon().type=="MK-84" or pylons.fcs.getSelectedWeapon().type=="GBU-12" or pylons.fcs.getSelectedWeapon().type=="GBU-31" or pylons.fcs.getSelectedWeapon().type=="GBU-24") 
             and hdp.active_u != nil and hdp.master_arm ==1 and pylons.fcs.getSelectedWeapon().status == armament.MISSILE_LOCK) {
 
             if (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="MK-83") {
@@ -1351,6 +1429,7 @@ append(obj.total, obj.speed_curr);
             hdp.window8_txt = "8";
             hdp.window9_txt = "9";
             hdp.window10_txt = "10";
+            hdp.window11_txt = "11";
         }
 
         if (hdp.FrameCount == 2 or me.initUpdate == 1) {
@@ -1383,20 +1462,25 @@ append(obj.total, obj.speed_curr);
         # 0.078135*2 = width of HUD  = 0.15627m
         me.pixelPerMeterX = (340*0.695633)/0.15627;
         me.pixelPerMeterY = 260/(me.Hz_t-me.Hz_b);
+        me.submode = 0;
 
         if (hdp.wow0) {
             me.vectorMag = math.sqrt(hdp.speed_east_fps*hdp.speed_east_fps+hdp.speed_north_fps*hdp.speed_north_fps);
             if (me.vectorMag == 0) {
                 me.vectorMag = 0.0001;
             }
-            me.headingvv = -math.asin(hdp.speed_north_fps/me.vectorMag)*R2D+90;#divide by vector mag, to get normalized unit vector length
-            if (hdp.speed_east_fps/me.vectorMag < 0) {
-              me.headingvv = -me.headingvv;
+            if (me.vectorMag<0.5) {
+                hdp.VV_x = 0;
+            } else {
+                me.headingvv = -math.asin(hdp.speed_north_fps/me.vectorMag)*R2D+90;#divide by vector mag, to get normalized unit vector length
+                if (hdp.speed_east_fps/me.vectorMag < 0) {
+                  me.headingvv = -me.headingvv;
+                }
+                if (me.vectorMag < 0.1) {
+                    me.headingvv = hdp.heading;
+                }
+                hdp.VV_x = geo.normdeg180(me.headingvv-hdp.heading);
             }
-            if (me.vectorMag < 0.1) {
-                me.headingvv = hdp.heading;
-            }
-            hdp.VV_x = geo.normdeg180(me.headingvv-hdp.heading);
             hdp.VV_y = 0;
         } else {
             hdp.VV_x = hdp.beta;
@@ -1439,6 +1523,7 @@ append(obj.total, obj.speed_curr);
             hdp.window8_txt = "";
             hdp.window9_txt = "";
             hdp.window10_txt = "";
+            hdp.window11_txt = "";
 
             me.circle262.hide();
             me.circle100.hide();
@@ -1491,6 +1576,8 @@ append(obj.total, obj.speed_curr);
                         hdp.window9_txt = sprintf("%d B82", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "MK-83") {
                         hdp.window9_txt = sprintf("%d B83", pylons.fcs.getAmmo());
+                    } elsif (hdp.weapon_selected == "MK-84") {
+                        hdp.window9_txt = sprintf("%d B84", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "AGM-88") {
                         hdp.window9_txt = sprintf("%d AG88", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "GBU-31") {
@@ -1585,26 +1672,28 @@ append(obj.total, obj.speed_curr);
             }
 
             if (hdp.total_fuel_lbs < hdp.bingo and math.mod(int(4*(hdp.elapsed-int(hdp.elapsed))),2)>0) {
-              hdp.window10_txt = "FUEL";
+              hdp.window11_txt = "FUEL";
             } elsif (hdp.total_fuel_lbs < hdp.bingo) {
-              hdp.window10_txt = "";
-            } else {
-              if (hdp.alow<hdp.altitude_agl_ft or math.mod(int(4*(hdp.elapsed-int(hdp.elapsed))),2)>0 or !hdp.cara or hdp.gear_down) {
+              hdp.window11_txt = "";
+            }
+            if (!hdp.cara) {
+                hdp.window10_txt = "AL";
+            } elsif (hdp.alow<hdp.altitude_agl_ft or math.mod(int(4*(hdp.elapsed-int(hdp.elapsed))),2)>0 or hdp.gear_down) {
                 hdp.window10_txt = sprintf("AL%4d",hdp.alow);
-              } else {
+            } else {
                 hdp.window10_txt = "";
-              }
             }
+            
 
-            if (hdp.window9_txt=="") {
-                me.alphaHUD = hdp.alpha;
-                if (hdp.gear_down) {
-                    if (hdp.wow) {
-                        me.alphaHUD = 0;
-                    }
-                }
-                hdp.window9_txt = sprintf("AOA %d",me.alphaHUD);
-            }
+            #if (hdp.window9_txt=="") {
+            #    me.alphaHUD = hdp.alpha;
+            #    if (hdp.gear_down) {
+            #        if (hdp.wow) {
+            #            me.alphaHUD = 0;
+            #        }
+            #    }
+            #    hdp.window9_txt = sprintf("AOA %d",me.alphaHUD);
+            #}
 
             hdp.window7_txt = sprintf(" %.2f",hdp.mach);
         }
@@ -1640,6 +1729,7 @@ append(obj.total, obj.speed_curr);
                 if (pylons.bore) {
                     var aim = pylons.fcs.getSelectedWeapon();
                     if (aim != nil) {
+                        me.submode = 1;
                         var coords = aim.getSeekerInfo();
                         me.irSearch.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
                     }
@@ -1693,13 +1783,23 @@ append(obj.total, obj.speed_curr);
                                 
                                 if (pylons.fcs != nil and pylons.fcs.isLock()) {
                                     #me.target_locked.setRotation(45*D2R);
+                                    if (hdp.weapon_selected == "AIM-120" or hdp.weapon_selected == "AIM-7" or hdp.weapon_selected == "AIM-9") {
+                                        var aim = pylons.fcs.getSelectedWeapon();
+                                        if (aim != nil) {
+                                            var coords = aim.getSeekerInfo();
+                                            if (coords != nil) {
+                                                me.irLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                                                me.radarLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                                            }
+                                        }
+                                    }
                                     if (hdp.weapon_selected == "AIM-120" or hdp.weapon_selected == "AIM-7") {
-                                        me.radarLock.setTranslation(me.xcS, me.ycS);
+                                        #me.radarLock.setTranslation(me.xcS, me.ycS); too perfect
                                         me.triangle120.setRotation(D2R*(hdp.active_u.get_heading()-hdp.heading));
                                         me.rdL = 1;
                                         me.rdT = 1;
                                     } elsif (hdp.weapon_selected == "AIM-9") {
-                                        me.irLock.setTranslation(me.xcS, me.ycS);
+                                        #me.irLock.setTranslation(me.xcS, me.ycS);
                                         me.triangle65.setRotation(D2R*(hdp.active_u.get_heading()-hdp.heading));
                                         me.irL = 1;
                                         me.irT = 1;
@@ -1710,6 +1810,9 @@ append(obj.total, obj.speed_curr);
                                 if (me.clamped) {
                                     me.trackLine.setTranslation(me.sx/2,me.sy-me.texels_up_into_hud);
                                     me.trackLine.setRotation(me.combined_dev_deg*D2R);
+                                    me.dev_h_d = me.u.get_deviation(hdp.heading);
+                                    me.dev_e_d = me.u.get_total_elevation(hdp.pitch);
+                                    me.offangle.setText(sprintf("%d", math.sqrt(me.dev_h_d*me.dev_h_d+me.dev_e_d*me.dev_e_d)));
                                     me.trackLineShow = 1;
                                 }
                             } else {
@@ -1742,6 +1845,7 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
         #print(me.irS~" "~me.irL);
 
         me.trackLine.setVisible(me.trackLineShow);
+        me.offangle.setVisible(me.trackLineShow);
 
         
 
@@ -1798,6 +1902,8 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
         me.irLock.setVisible(me.irL);
         me.triangle120.setVisible(me.rdT);
         me.triangle65.setVisible(me.irT);
+        me.radarLock.update();
+        me.irLock.update();
 
         if (hdp.ded) {
             me.ded0.setText(ded.text[0]);
@@ -1818,13 +1924,33 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
             me.ded4.hide();
         }
 
+        if (hdp.tgp_mounted and tgp.flir_updater.click_coord_cam != nil) {
+            var b = geo.normdeg180(getprop("sim/view[102]/heading-offset-deg"));
+            var p = getprop("sim/view[102]/pitch-offset-deg");
+            var y = me.clamp(-p*me.texelPerDegreeY+me.sy-me.texels_up_into_hud,me.sy*0.05,me.sy*0.95);
+            var x = me.clamp(b*me.texelPerDegreeX+me.sx*0.5,me.sx*0.025,me.sx*0.975);
+            if (y == me.sy*0.05 or y == me.sy*0.95 or x == me.sx*0.025 or x == me.sx*0.975) {
+                me.tgpPointC.setTranslation(x,y);
+                me.tgpPointC.show();
+            } else {
+                me.tgpPointC.hide();
+            }
+            me.tgpPointF.setTranslation(x,y);
+            me.tgpPointF.show();
+        } else {
+            me.tgpPointF.hide();
+            me.tgpPointC.hide();
+        }
+
 
         me.initUpdate = 0;
+
+        hdp.submode = me.submode;
         
         foreach(var update_item; me.update_items)
         {
             update_item.update(hdp);
-        } 
+        }        
     },
     extrapolate: func (x, x1, x2, y1, y2) {
         return y1 + ((x - x1) / (x2 - x1)) * (y2 - y1);

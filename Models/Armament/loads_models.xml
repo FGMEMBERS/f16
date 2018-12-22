@@ -212,6 +212,17 @@
 </model>
 
 <model>
+  <name>Station3_MK84</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/MK-84/MK-84.xml</path>
+  <offsets>
+   <x-m>0.61</x-m>
+   <y-m>-2.872</y-m>
+   <z-m>-0.485</z-m>
+   <pitch-deg>-3.35</pitch-deg>
+  </offsets>
+ </model>
+
+<model>
   <name>Station3_AGM-65</name>
   <path>Aircraft/f16/Models/Armament/Weapons/AGM-65/trirack-3.xml</path>
   <offsets>
@@ -268,7 +279,7 @@
 
 <model>
   <name>Station3_MXU-648</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/MXU-648.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/MXU-648/MXU-648.xml</path>
   <offsets>
    <x-m>0.62</x-m>
    <y-m>-2.872</y-m>
@@ -283,11 +294,22 @@
 
   <model>
   <name>LExtTank</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/370G.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/370G.xml</path>
   <offsets>
    <x-m>-0.50</x-m>
    <y-m>-1.65</y-m>
    <z-m>-0.55</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>LExtTank6</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/600G.xml</path>
+  <offsets>
+   <x-m>-0.50</x-m>
+   <y-m>-1.65</y-m>
+   <z-m>-0.65</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -316,7 +338,7 @@
 
 <model>
   <name>Station4_MK82</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/MK-82/duorack-4.xml</path>
+  <path>Aircraft/f16/Models/Armament/Weapons/MK-82/trirack-4.xml</path>
   <offsets>
     <x-m>0.388102</x-m>
     <y-m>-1.63859</y-m>
@@ -335,6 +357,17 @@
     <pitch-deg>0</pitch-deg>
   </offsets>
 </model>
+
+<model>
+  <name>Station4_MK84</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/MK-84/MK-84.xml</path>
+  <offsets>
+   <x-m>0.06</x-m>
+   <y-m>-1.63</y-m>
+   <z-m>-0.482</z-m>
+   <pitch-deg>-3.35</pitch-deg>
+  </offsets>
+ </model>
 
 <model>
   <name>Station4_GBU-31</name>
@@ -363,7 +396,7 @@
 <!-- =============================================================================================================  -->  
  <model>
   <name>AN-ALQ-131</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/AN-ALQ-131.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/AN-ALQ-131/AN-ALQ-131.xml</path>
   <offsets>
    <x-m>-0.02</x-m>
    <y-m>0</y-m>
@@ -375,7 +408,7 @@
   
  <model>
   <name>VentralTank</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/300G.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/300G.xml</path>
   <offsets>
    <x-m>0</x-m>
    <y-m>0</y-m>
@@ -386,7 +419,7 @@
  
  <model>
   <name>Station5_MXU-648</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/MXU-648.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/MXU-648/MXU-648.xml</path>
   <offsets>
    <x-m>-0.02</x-m>
    <y-m>0</y-m>
@@ -414,11 +447,22 @@
  
   <model>
   <name>RExtTank</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/370G.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/370G.xml</path>
   <offsets>
    <x-m>-0.50</x-m>
    <y-m>1.65</y-m>
    <z-m>-0.55</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>RExtTank6</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/600G.xml</path>
+  <offsets>
+   <x-m>-0.50</x-m>
+   <y-m>1.65</y-m>
+   <z-m>-0.65</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -447,7 +491,7 @@
 
  <model>
   <name>Station6_MK82</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/MK-82/duorack-6.xml</path>
+  <path>Aircraft/f16/Models/Armament/Weapons/MK-82/trirack-6.xml</path>
   <offsets>
     <x-m>0.388102</x-m>
     <y-m>1.63859</y-m>
@@ -466,6 +510,17 @@
     <pitch-deg>0</pitch-deg>
   </offsets>
 </model>
+
+<model>
+  <name>Station6_MK84</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/MK-84/MK-84.xml</path>
+  <offsets>
+   <x-m>0.06</x-m>
+   <y-m>1.63</y-m>
+   <z-m>-0.482</z-m>
+   <pitch-deg>-3.35</pitch-deg>
+  </offsets>
+ </model>
  
  <model>
   <name>Station6_GBU-31</name>
@@ -572,6 +627,17 @@
 </model>
 
 <model>
+  <name>Station7_MK84</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/MK-84/MK-84.xml</path>
+  <offsets>
+   <x-m>0.61</x-m>
+   <y-m>2.872</y-m>
+   <z-m>-0.485</z-m>
+   <pitch-deg>-3.35</pitch-deg>
+  </offsets>
+ </model>
+
+<model>
   <name>Station7_AGM-65</name>
   <path>Aircraft/f16/Models/Armament/Weapons/AGM-65/trirack-7.xml</path>
   <offsets>
@@ -628,7 +694,7 @@
 
  <model>
   <name>Station7_MXU-648</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/MXU-648.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/MXU-648/MXU-648.xml</path>
   <offsets>
    <x-m>0.62</x-m>
    <y-m>2.872</y-m>
@@ -769,6 +835,64 @@
   </offsets>
  </model>
 
+ <!-- =============================================================================================================  --> 
+<!-- =========================================== Station 10 =======================================================  -->
+<!-- =============================================================================================================  --> 
+
+<model>
+  <name>Station10_SniperATP</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/SniperATP/SniperATP.xml</path>
+  <offsets>
+   <x-m>-2.25</x-m>
+   <y-m>0.80</y-m>
+   <z-m>-0.95</z-m>
+   <pitch-deg>-0.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station10_LANTIRNtarget</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/LANTIRN/AN-AAQ-14.xml</path>
+  <offsets>
+   <x-m>-2.3</x-m>
+   <y-m>0.69</y-m>
+   <z-m>-1.01</z-m>
+   <pitch-deg>-0.5</pitch-deg>
+  </offsets>
+ </model>
+
+<model>
+  <name>Station11_LANTIRNnav</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/LANTIRN/AN-AAQ-13.xml</path>
+  <offsets>
+   <x-m>-2.45</x-m>
+   <y-m>-0.66</y-m>
+   <z-m>-1.02</z-m>
+   <pitch-deg>-0.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Podpylon_right</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/Pylons/fuselage-pylon-right.xml</path>
+  <offsets>
+   <x-m>0</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0</z-m>
+   <pitch-deg>0</pitch-deg>
+  </offsets>
+ </model>
+
+<model>
+  <name>Podpylon_left</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/Pylons/fuselage-pylon-left.xml</path>
+  <offsets>
+   <x-m>0</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0</z-m>
+   <pitch-deg>0</pitch-deg>
+  </offsets>
+ </model>
 
 <!-- ======================= END ARMAMENT =========================== -->
 </PropertyList>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
     <sim>
-        <aircraft-version>3.01</aircraft-version>
+        <aircraft-version>3.02</aircraft-version>
         <minimum-fg-version>2018.1.1</minimum-fg-version>
         <!-- enable "parkpos=AVAILABLE" option for the F-16 -->
         <dimensions>
@@ -107,6 +107,8 @@
                 <ventraltank type="bool">false</ventraltank>
                 <wingtankL type="bool">false</wingtankL>
                 <wingtankR type="bool">false</wingtankR>
+                <wingtankL6 type="bool">false</wingtankL6>
+                <wingtankR6 type="bool">false</wingtankR6>
                 <controls>
                     <navigation>
                         <!-- INSTRUMENT MODE PANEL -->
@@ -254,11 +256,28 @@
             </config>
         </view>        
         <view n="101">
-          <name>Missile View</name>
+            <name>Missile View</name>
             <type>lookat</type>
             <heading-offset-deg>180</heading-offset-deg>
             <pitch-offset-deg>10</pitch-offset-deg>
-          </view>
+        </view>
+        <view n="102">
+            <name>TGP</name>
+            <enabled>false</enabled>
+            <internal archive="y">true</internal>
+            <pitch-offset-deg type="double">-30</pitch-offset-deg>
+            <heading-offset-deg type="double">0</heading-offset-deg>
+            <config>
+              <from-model type="bool">true</from-model>
+              <from-model-idx type="int">0</from-model-idx>
+              <x-offset-m archive="y">0.8536</x-offset-m><!-- Right -->
+              <y-offset-m archive="y">-1.4121</y-offset-m><!-- Up -->
+              <z-offset-m archive="y">-2.5856</z-offset-m><!-- Back -->
+              <pitch-offset-deg type="double"> -30 </pitch-offset-deg>
+              <heading-offset-deg type="double">0</heading-offset-deg>
+              <default-field-of-view-deg type="double">20</default-field-of-view-deg>
+            </config>
+        </view>
 
         <rendering>
             <redout>
@@ -361,6 +380,9 @@
                 <bool n="45" type="bool" alias="/sim/model/lighting/strobe/state"/>
                 <bool n="35" type="bool" alias="/f16/chute/enable"/>
                 <bool n="36" type="bool" alias="/sim/model/f16/dragchute"/>
+                <bool n="50" type="bool" alias="/instrumentation/gci/picture"/>
+                <bool n="51" type="bool" alias="/instrumentation/gci/bogeydope"/>
+                <bool n="52" type="bool" alias="/instrumentation/gci/cutoff"/>
                 <int n="2" type="int">0</int><!-- radar-standby -->
                 <int n="9" type="int" alias="/sim/variant-id"/>
                 <int n="10" type="int" alias="/controls/smoke"/>
@@ -478,6 +500,18 @@
                 <name>F6</name>
                 <desc>Eject</desc>
             </key>
+            <key>
+                <name>Ctrl-1</name>
+                <desc>GCI Picture</desc>
+            </key>
+            <key>
+                <name>Ctrl-2</name>
+                <desc>GCI Dope</desc>
+            </key>
+            <key>
+                <name>Ctrl-3</name>
+                <desc>GCI Cutoff</desc>
+            </key>
             <text><![CDATA[
 LANDING
 No fixed landing speed, however a suggested approach speed will display in left side of HUD when gears is down and masterarm is off.
@@ -509,10 +543,11 @@ Text left side:
   Mach number
   G-Force number.
   Selected weapon or AoA if gears down.
+  FUEL if bingo fuel.
 
 Text Right side:
   R XXXXX is the CARA radar altimeter altitude above ground.
-  FUEL if bingo fuel. CARA ALOW elsewise.
+  CARA ALOW.
   B XX.X is  slant range to steerpoint. Callsign if masterarm.
   ETA to next steerpoint. TA XX if masterarm on, XX stand for 1000s ft of target altitude.
   023>2 means 23 NM to next steerpoint number 2. F034.2 if masterarm on, means 34.2 NM in slant range to target.
@@ -577,7 +612,7 @@ Secondly make sure masterarm is enabled.
 Thirdly select the arm. (use 'w' key or click buttons 'A-A' or 'A-G' under HUD)
 Fourthly make sure target is selected (key 'y')
 For GBU-12 and GBU-24 make sure laser is armed.
-For GBU-12, GBU-24, GBU-31, MK-82, MK-83 when getting close a vertical line will appear in HUD. Align flight path indicator on the line, when a small horizontal line on that line starts dropping down and reach another line then its time to release (key 'e' or 'trigger').
+For GBU-12, GBU-24, GBU-31, MK-82, MK-83, MK-84 when getting close a vertical line will appear in HUD. Align flight path indicator on the line, when a small horizontal line on that line starts dropping down and reach another line then its time to release (key 'e' or 'trigger').
 For AIM-120 the trigger can be held for 2 second to fire it without a lock in MADDOG mode, where it will lock onto anyone it sees. This feature is still not entirely bug free so do this on own risk.
 
 NIGHTTIME FLYING
@@ -1070,7 +1105,49 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 f16.chute();
                </script>
               </binding>
-             </key>
+             </key>Ground_Targeting
+             <!--<key n="261">
+              <name>F5</name>
+              <desc>noop</desc>
+              <repeatable type="bool">false</repeatable>
+              <binding>
+                    <command>dialog-show</command>
+                    <dialog-name>Ground_Targeting</dialog-name>
+                </binding>
+             </key>-->
+             <key n="49">
+                <name>CTRL-1</name>
+                <mod-ctrl>
+                    <desc>GCI pict</desc>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>instrumentation/gci/picture</property>
+                        <value>1</value>
+                    </binding>
+                </mod-ctrl>
+            </key>
+            <key n="50">
+                <name>CTRL-1</name>
+                <mod-ctrl>
+                    <desc>GCI dope</desc>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>instrumentation/gci/bogeydope</property>
+                        <value>1</value>
+                    </binding>
+                </mod-ctrl>
+            </key>
+            <key n="51">
+                <name>CTRL-1</name>
+                <mod-ctrl>
+                    <desc>GCI cutoff</desc>
+                    <binding>
+                        <command>property-assign</command>
+                        <property>instrumentation/gci/cutoff</property>
+                        <value>1</value>
+                    </binding>
+                </mod-ctrl>
+            </key>
         </keyboard>
     </input>
     <controls>
@@ -1330,6 +1407,12 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         </refuel>
     </systems>
     <instrumentation>
+        <altimeter>
+            <indicated-altitude-ft type="double">0</indicated-altitude-ft>
+        </altimeter>
+        <gps>
+            <indicated-vertical-speed type="double">0</indicated-vertical-speed>
+        </gps>
         <radar>
             <enabled type="bool">true</enabled>
             <az-field type="int">120</az-field>
@@ -1487,7 +1570,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <seeker-beam-width-deg type="double">4</seeker-beam-width-deg>
                 <reaquire type="bool">true</reaquire>
                 <lock-on-after-launch type="bool">true</lock-on-after-launch>
-                <auto-switch-target-allowed type="bool">true</auto-switch-target-allowed>
+                <auto-switch-target-allowed type="bool">true</auto-switch-target-allowed><!-- bug in m-code prevents from using this option atm. -->
                 <prowl-flight type="string">gyro-pitch</prowl-flight>
                 <switch-time-sec type="double">5</switch-time-sec>
             </aim-9>
@@ -1530,6 +1613,14 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <auto-switch-target-allowed type="bool">false</auto-switch-target-allowed>
                 <prowl-flight type="string">gyro-pitch</prowl-flight>
                 <switch-time-sec type="double">5</switch-time-sec>
+
+                <!-- do NOT enable this: -->
+                <!-- More correct induced drag and PN, plus plume drag. Will make it acc. and bleed speed differently and guide differently. -->
+                <!--<advanced type="bool">true</advanced>
+                <wing-aspect-ratio type="double">1.72</wing-aspect-ratio>
+                <wing-efficiency-relative-to-an-elliptical-planform type="double">0.872</wing-efficiency-relative-to-an-elliptical-planform>
+                <exhaust-plume-paracitic-drag-factor type="double">0.6</exhaust-plume-paracitic-drag-factor>
+                <proportionality-constant type="double">5</proportionality-constant>--><!-- puts required Amraam acc. advantage down to 1.67 -->
             </aim-120>
             <aim-7>
                 <short-name type="string">A-7F</short-name>
@@ -1718,7 +1809,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <vol-search type="double">0.00</vol-search>
                 <vol-track type="double">1.00</vol-track>
                 <guidance type="string">vision</guidance>
-                <navigation type="string">direct</navigation>                           
+                <navigation type="string">APN</navigation>                           
                 <all-aspect type="bool">true</all-aspect>
                 <max-fire-range-nm type="double">12</max-fire-range-nm>              <!-- source -->
                 <FCS-field-deg type="int">25</FCS-field-deg>            
@@ -1741,8 +1832,9 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <min-fire-range-nm type="double">0.2</min-fire-range-nm>
                 <rail type="bool">false</rail>
                 <max-report-distance type="double">65</max-report-distance>
-                <class type="string">GM</class>
+                <class type="string">P</class>
                 <fire-msg type="string">Rifle</fire-msg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
             </agm-65>
             <agm-84>                    <!-- A variant: 0.85 mach cruise, E is calibrated to just under 1.00 -->
                 <short-name type="string">AG84</short-name>
@@ -1857,6 +1949,54 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <max-pitch-deg type="double">-90</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
             </mk-83>
+            <mk-84>
+                <short-name type="string">B84</short-name>
+                <long-name type="string">MK-84 General Purpose Bomb</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GM</class>
+                <max-fire-range-nm type="double">8 </max-fire-range-nm>
+                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 200 </FCS-field-deg>
+                <seeker-field-deg type="int"> 32 </seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <max-g type="double"> 1.8 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 2039 </weight-launch-lbs><!-- weapons file 2004 -->
+                <weight-warhead-lbs type="double"> 945 </weight-warhead-lbs><!-- weapons file 2004 -->
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <cross-section-sqft type="double"> 1.78886 </cross-section-sqft><!-- the MK84 which is the bomb part is 640 mm diam -->
+                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 350 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">2</drop-time>
+                <deploy-time type="double">2</deploy-time>
+                <lateral-dps type="double"> 10 </lateral-dps>
+                <max-pitch-deg type="double">-45</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <!-- the following 6 properties not used yet: -->
+                <release-limit-mach type="double"> 1.2 </release-limit-mach>
+                <release-limit-altitude type="double"> 45000 </release-limit-altitude>
+                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
+                <release-limit-roll type="double"> 90 </release-limit-roll>
+                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
+                <require-lock-to-fire type="bool">false</require-lock-to-fire>
+            </mk-84>
             <agm-88>
                 <short-name type="string">AG88</short-name>
                 <long-name type="string">AGM-88 HARM</long-name>
@@ -2013,6 +2153,7 @@ value. 18000=standard US transition altitude -->
             <hud-fpm type="int">2</hud-fpm>
             <cara type="bool">false</cara>
             <hud-ded type="bool">false</hud-ded>
+            <lock-flir type="double">0.05</lock-flir>
         </avionics>
         <fcs>
             <autopilot-on type="int">0</autopilot-on> <!-- Ignored on Block 20+ -->
@@ -2034,6 +2175,9 @@ value. 18000=standard US transition altitude -->
             <done type="bool">false</done>
             <enable type="bool">false</enable>
         </chute>
+        <stores>
+            <tgp-mounted type="bool">false</tgp-mounted>
+        </stores>
     </f16>
     <damage>
         <sound>
@@ -2043,6 +2187,27 @@ value. 18000=standard US transition altitude -->
             <serviceable type="bool">true</serviceable>
         </fire>
     </damage>
+
+    <aircraft> 
+        <flir> 
+            <input> 
+                <yaw-deg type="double">0.0</yaw-deg> 
+                <pitch-deg type="double">0.0</pitch-deg> 
+            </input>
+            <swivel> 
+                <roll-deg type="double">0.0</roll-deg> 
+                <pitch-deg type="double">30.0</pitch-deg> 
+            </swivel> 
+            <target> 
+                <yaw-deg type="double">0.0</yaw-deg> 
+                <pitch-deg type="double">0.0</pitch-deg> 
+                <auto-track type="bool">false</auto-track> 
+            </target> 
+            <locks> 
+                <auto-track type="bool">true</auto-track> 
+            </locks> 
+        </flir> 
+    </aircraft>
 
     <nasal>
         <hack>
@@ -2130,5 +2295,17 @@ value. 18000=standard US transition altitude -->
         <ded>
           <file>Aircraft/f16/Nasal/ded.nas</file>
         </ded>
+        <math_ext>
+          <file>Aircraft/c172p/Nasal/generic/math_ext.nas</file>
+        </math_ext>
+        <tgp>
+          <file>Aircraft/f16/Nasal/tgp.nas</file>
+        </tgp>
+        <!--<tgpTarget>
+          <file>Aircraft/f16/Nasal/tgp-target.nas</file>
+        </tgpTarget>-->
+        <gci>
+            <file>Aircraft/f16/Nasal/gci-listener.nas</file>
+        </gci>
     </nasal>
 </PropertyList>

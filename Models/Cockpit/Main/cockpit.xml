@@ -18,6 +18,14 @@
   <name>chair</name>
   <path>Aircraft/f16/Models/Cockpit/chair/chair.xml</path>
  </model>
+
+ <animation>
+  <type>select</type>
+  <object-name>chair</object-name>
+  <condition>
+   <not><property>f16/done</property></not>
+  </condition>
+ </animation>
  
 <!-- <model>
   <name>Pilot_ext</name>
@@ -79,6 +87,48 @@
    <z>0.0</z>
   </axis>
  </animation>
+
+ <animation>
+        <type>rotate</type>
+        <object-name>side_stick</object-name>
+        <object-name>cylinder.004</object-name>
+        <object-name>cylinder.002</object-name>
+        <object-name>cylinder.003</object-name>
+        <object-name>box</object-name>
+        <object-name>disk.002</object-name>
+        <object-name>side_stick</object-name>
+        <property>controls/flight/elevator</property>
+        <factor>0.75</factor>
+        <center>
+         <x-m>-4.43221</x-m>
+         <y-m>0.274842</y-m>
+         <z-m>0.180894</z-m>
+        </center>
+        <axis>
+            <y>-1</y>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>side_stick</object-name>
+        <object-name>cylinder.004</object-name>
+        <object-name>cylinder.002</object-name>
+        <object-name>cylinder.003</object-name>
+        <object-name>box</object-name>
+        <object-name>disk.002</object-name>
+        <object-name>side_stick</object-name>
+        <property>controls/flight/aileron</property>
+        <factor>0.75</factor>
+        <center>
+         <x-m>-4.43221</x-m>
+         <y-m>0.274842</y-m>
+         <z-m>0.180894</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+        </axis>
+    </animation>
 
  <animation>
   <type>translate</type>
