@@ -39,6 +39,7 @@ var AIR = 0;
 var MARINE = 1;
 var SURFACE = 2;
 var ORDNANCE = 3;
+var POINT = 4;
 
 var knownShips = {
     "missile_frigate":       nil,
@@ -272,6 +273,7 @@ init = func() {
 
 	my_radarcorr = radardist.my_maxrange( our_ac_name ); # in kilometers
 }
+
 
 # Radar main processing entry point
 # Run at 20hz - invoked from main loop in instruments.nas
@@ -666,6 +668,9 @@ var az_scan = func(notification) {
         if (active_u != nil) {
             tmp_nearest_u = active_u;
         }
+        if (u.get_Speed() > 60 and u.get_type() != ORDNANCE) {
+            u.setClass(AIR);
+        }
     }
 
 
@@ -970,9 +975,9 @@ var TerrainManager = {
 
     # There is no terrain on earth that can be between these altitudes
     # so shortcut the whole thing and return now.
-    if(fn.altitude_ft > 8900 and SelectCoord.alt() > 8900){
+    #if(fn.altitude_ft > 8900 and SelectCoord.alt() > 8900){
  #       return 1;   cannot compare ft and meters
-    }
+    #}
 
         
             me.myOwnPos = geo.aircraft_position();
@@ -1275,6 +1280,9 @@ var Target = {
 	new : func (c) {
 		var obj = { parents : [Target]};
         obj.propNode = c;
+        obj.inac_x = 0;
+        obj.inac_y = 0;
+        obj.inac_z = 0;
 		obj.RdrProp = c.getNode("radar");
 		obj.Heading = c.getNode("orientation/true-heading-deg");
         obj.pitch   = c.getNode("orientation/pitch-deg");
@@ -1446,7 +1454,7 @@ var Target = {
 		obj.deviationA = nil;
         obj.deviationE = nil;
         obj.elevation = nil;
-
+        obj.virtual = 0;
 		return obj;
 	},
 #
@@ -1608,7 +1616,36 @@ var Target = {
         }
         return 0;
     },
-    get_Coord: func(){
+    get_Coord: func(inaccurate = 1) {
+        if (me.class != SURFACE) {
+            #double check
+            me.inac_x = 0;
+            me.inac_y = 0;
+            me.inac_z = 0;
+        }
+        if (me.x != nil)
+        {
+            var x = me.x.getValue()+me.inac_x*inaccurate;
+            var y = me.y.getValue()+me.inac_y*inaccurate;
+            var z = me.z.getValue()+me.inac_z*inaccurate;
+
+            me.TgTCoord.set_xyz(x, y, z);
+            if (inaccurate and me.inac_x != 0) {
+                me.ele = geo.elevation(me.TgTCoord.lat(),me.TgTCoord.lon());
+                if (me.ele != nil) {
+                    #prevents it from being underground so cant get lock
+                    me.TgTCoord.set_alt(me.ele);
+                }
+            }
+        } elsif (me.lat != nil) {
+            me.TgTCoord.set_latlon(me.lat.getValue(), me.lon.getValue(), me.Alt.getValue() * FT2M);
+        } else {
+            return nil;#hopefully wont happen
+        }
+        return geo.Coord.new(me.TgTCoord);#best to pass a copy
+    },
+    get_aCoord: func(){
+        #get accurate coord
         if (me.x != nil)
         {
             var x = me.x.getValue();
@@ -1701,7 +1738,19 @@ var Target = {
         }
         return myBearing;
     },
-    setClass: func(cl){me.class=cl},
+    setClass: func(cl){
+        me.class=cl;
+        me.inac = getprop("payload/armament/inac");
+        if (cl == SURFACE and me.inac != nil) {
+            me.inac_x = rand()*me.inac-me.inac*0.5;
+            me.inac_y = rand()*me.inac-me.inac*0.5;
+            me.inac_z = rand()*me.inac-me.inac*0.5;
+        } else {
+            me.inac_x = 0;
+            me.inac_y = 0;
+            me.inac_z = 0;
+        }
+    },
     get_type: func{me.class},
     isPainted: func{
         #if (active_u !=nil) printf("%s %s %d", active_u.getUnique(), me.getUnique(), me.get_display());
@@ -1714,6 +1763,9 @@ var Target = {
     isLaserPainted: func{
         if (LaserArm.getValue() != 1) {
             return 0;
+        }
+        if (me.class == POINT) {
+            return 1;
         }
         if (active_u != nil and active_u.getUnique() == me.getUnique()) {
             return 1;
@@ -1784,9 +1836,12 @@ var Target = {
         }
         return 0;
     },
+    setVirtual: func (virt) {
+        me.virtual = virt;
+    },
     isVirtual: func {
         # used by missile-code
-        return FALSE;
+        return me.virtual;
     },
 	list : [],
 };

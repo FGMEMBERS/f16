@@ -201,6 +201,17 @@
 </model>
 
 <model>
+  <name>Station3_GBU54</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/GBU-54/duorack-3.xml</path>
+  <offsets>
+    <x-m>1</x-m>
+    <y-m>-2.87</y-m>
+    <z-m>-0.071944</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
+<model>
   <name>Station3_MK83</name>
   <path>Aircraft/f16/Models/Armament/Weapons/MK-83/duorack-3.xml</path>
   <offsets>
@@ -222,6 +233,17 @@
   </offsets>
  </model>
 
+ <model>
+  <name>Station3_CBU87</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/CBU-87/duorack-3.xml</path>
+  <offsets>
+    <x-m>1</x-m>
+    <y-m>-2.87</y-m>
+    <z-m>-0.071944</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
 <model>
   <name>Station3_AGM-65</name>
   <path>Aircraft/f16/Models/Armament/Weapons/AGM-65/trirack-3.xml</path>
@@ -235,7 +257,7 @@
 
  <model>
   <name>Station3_AGM-84</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AGM-84/agm84.xml</path>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-84/AGM-84.xml</path>
   <offsets>
    <x-m>-0.35133</x-m>
    <y-m>-2.87928</y-m>
@@ -251,6 +273,39 @@
    <x-m>0</x-m>
    <y-m>-2.86988</y-m>
    <z-m>-0.438099</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+  <model>
+  <name>Station3_AGM-119</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-119/AGM-119.xml</path>
+  <offsets>
+   <x-m>0.05</x-m>
+   <y-m>-2.87922</y-m>
+   <z-m>-0.447</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station3_AGM-154A</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-154A/AGM-154A.xml</path>
+  <offsets>
+   <x-m>0.58</x-m>
+   <y-m>-2.872</y-m>
+   <z-m>-0.523</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station3_AGM-158</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-158/AGM-158.xml</path>
+  <offsets>
+   <x-m>0.725</x-m>
+   <y-m>-2.872</y-m>
+   <z-m>-0.48</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -296,9 +351,9 @@
   <name>LExtTank</name>
   <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/370G.xml</path>
   <offsets>
-   <x-m>-0.50</x-m>
-   <y-m>-1.65</y-m>
-   <z-m>-0.55</z-m>
+   <x-m>-0.785</x-m>
+   <y-m>-1.63</y-m>
+   <z-m>-0.61</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -307,9 +362,9 @@
   <name>LExtTank6</name>
   <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/600G.xml</path>
   <offsets>
-   <x-m>-0.50</x-m>
-   <y-m>-1.65</y-m>
-   <z-m>-0.65</z-m>
+   <x-m>-0.62</x-m>
+   <y-m>-1.63</y-m>
+   <z-m>-0.725</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -326,6 +381,29 @@
 </model>
 
  <model>
+  <name>Station4_AGM-119</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-119/AGM-119.xml</path>
+  <offsets>
+    <x-m>-0.5</x-m>
+    <y-m>-1.63</y-m>
+    <z-m>-0.439</z-m>
+    <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+</model>
+
+
+<model>
+  <name>Station4_AGM-154A</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-154A/AGM-154A.xml</path>
+  <offsets>
+   <x-m>-0.05</x-m>
+   <y-m>-1.63</y-m>
+   <z-m>-0.525</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
   <name>Station4_GBU12</name>
   <path>Aircraft/f16/Models/Armament/Weapons/GBU-12/duorack-4.xml</path>
   <offsets>
@@ -339,6 +417,17 @@
 <model>
   <name>Station4_MK82</name>
   <path>Aircraft/f16/Models/Armament/Weapons/MK-82/trirack-4.xml</path>
+  <offsets>
+    <x-m>0.388102</x-m>
+    <y-m>-1.63859</y-m>
+    <z-m>-0.049251</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
+<model>
+  <name>Station4_GBU54</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/GBU-54/duorack-4.xml</path>
   <offsets>
     <x-m>0.388102</x-m>
     <y-m>-1.63859</y-m>
@@ -368,6 +457,17 @@
    <pitch-deg>-3.35</pitch-deg>
   </offsets>
  </model>
+
+ <model>
+  <name>Station4_CBU87</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/CBU-87/duorack-4.xml</path>
+  <offsets>
+    <x-m>0.388102</x-m>
+    <y-m>-1.63859</y-m>
+    <z-m>-0.049251</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
 
 <model>
   <name>Station4_GBU-31</name>
@@ -410,9 +510,9 @@
   <name>VentralTank</name>
   <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/300G.xml</path>
   <offsets>
-   <x-m>0</x-m>
+   <x-m>-0.055</x-m>
    <y-m>0</y-m>
-   <z-m>-1.15</z-m>
+   <z-m>-1.21</z-m>
    <pitch-deg>-2</pitch-deg>
   </offsets>
  </model>
@@ -449,9 +549,9 @@
   <name>RExtTank</name>
   <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/370G.xml</path>
   <offsets>
-   <x-m>-0.50</x-m>
-   <y-m>1.65</y-m>
-   <z-m>-0.55</z-m>
+   <x-m>-0.785</x-m>
+   <y-m>1.63</y-m>
+   <z-m>-0.61</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -460,9 +560,9 @@
   <name>RExtTank6</name>
   <path>Aircraft/f16/Models/Armament/External-stores/Fueltanks/600G.xml</path>
   <offsets>
-   <x-m>-0.50</x-m>
-   <y-m>1.65</y-m>
-   <z-m>-0.65</z-m>
+   <x-m>-0.62</x-m>
+   <y-m>1.63</y-m>
+   <z-m>-0.725</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -479,6 +579,28 @@
 </model>
 
  <model>
+  <name>Station6_AGM-119</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-119/AGM-119.xml</path>
+  <offsets>
+    <x-m>-0.5</x-m>
+    <y-m>1.63</y-m>
+    <z-m>-0.439</z-m>
+    <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+</model>
+
+<model>
+  <name>Station6_AGM-154A</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-154A/AGM-154A.xml</path>
+  <offsets>
+   <x-m>-0.05</x-m>
+   <y-m>1.63</y-m>
+   <z-m>-0.525</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
   <name>Station6_GBU12</name>
   <path>Aircraft/f16/Models/Armament/Weapons/GBU-12/duorack-6.xml</path>
   <offsets>
@@ -492,6 +614,17 @@
  <model>
   <name>Station6_MK82</name>
   <path>Aircraft/f16/Models/Armament/Weapons/MK-82/trirack-6.xml</path>
+  <offsets>
+    <x-m>0.388102</x-m>
+    <y-m>1.63859</y-m>
+    <z-m>-0.049251</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
+<model>
+  <name>Station6_GBU54</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/GBU-54/duorack-6.xml</path>
   <offsets>
     <x-m>0.388102</x-m>
     <y-m>1.63859</y-m>
@@ -521,6 +654,17 @@
    <pitch-deg>-3.35</pitch-deg>
   </offsets>
  </model>
+
+ <model>
+  <name>Station6_CBU87</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/CBU-87/duorack-6.xml</path>
+  <offsets>
+    <x-m>0.388102</x-m>
+    <y-m>1.63859</y-m>
+    <z-m>-0.049251</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
  
  <model>
   <name>Station6_GBU-31</name>
@@ -616,6 +760,17 @@
 </model>
 
 <model>
+  <name>Station7_GBU54</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/GBU-54/duorack-7.xml</path>
+  <offsets>
+    <x-m>1</x-m>
+    <y-m>2.87</y-m>
+    <z-m>-0.071944</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
+<model>
   <name>Station7_MK83</name>
   <path>Aircraft/f16/Models/Armament/Weapons/MK-83/duorack-7.xml</path>
   <offsets>
@@ -637,6 +792,17 @@
   </offsets>
  </model>
 
+ <model>
+  <name>Station7_CBU87</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/CBU-87/duorack-7.xml</path>
+  <offsets>
+    <x-m>1</x-m>
+    <y-m>2.87</y-m>
+    <z-m>-0.071944</z-m>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+</model>
+
 <model>
   <name>Station7_AGM-65</name>
   <path>Aircraft/f16/Models/Armament/Weapons/AGM-65/trirack-7.xml</path>
@@ -650,7 +816,7 @@
 
  <model>
   <name>Station7_AGM-84</name>
-  <path>Aircraft/f16/Models/Armament/Weapons/AGM-84/agm84.xml</path>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-84/AGM-84.xml</path>
   <offsets>
    <x-m>-0.35133</x-m>
    <y-m>2.87928</y-m>
@@ -666,6 +832,39 @@
    <x-m>0</x-m>
    <y-m>2.86988</y-m>
    <z-m>-0.438099</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+  <model>
+  <name>Station7_AGM-119</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-119/AGM-119.xml</path>
+  <offsets>
+   <x-m>0.05</x-m>
+   <y-m>2.87922</y-m>
+   <z-m>-0.447</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station7_AGM-154A</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-154A/AGM-154A.xml</path>
+  <offsets>
+   <x-m>0.58</x-m>
+   <y-m>2.872</y-m>
+   <z-m>-0.523</z-m>
+   <pitch-deg>-4.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station7_AGM-158</name>
+  <path>Aircraft/f16/Models/Armament/Weapons/AGM-158/AGM-158.xml</path>
+  <offsets>
+   <x-m>0.725</x-m>
+   <y-m>2.872</y-m>
+   <z-m>-0.48</z-m>
    <pitch-deg>-4.5</pitch-deg>
   </offsets>
  </model>
@@ -841,11 +1040,11 @@
 
 <model>
   <name>Station10_SniperATP</name>
-  <path>Aircraft/f16/Models/Armament/External-stores/SniperATP/SniperATP.xml</path>
+  <path>Aircraft/f16/Models/Armament/External-stores/SniperATP/AN-AAQ-33.xml</path>
   <offsets>
-   <x-m>-2.25</x-m>
-   <y-m>0.80</y-m>
-   <z-m>-0.95</z-m>
+   <x-m>-2.6</x-m>
+   <y-m>0.675</y-m>
+   <z-m>-1.005</z-m>
    <pitch-deg>-0.5</pitch-deg>
   </offsets>
  </model>
@@ -861,6 +1060,40 @@
   </offsets>
  </model>
 
+  <model>
+  <name>Station10_LITENINGat</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/LITENING_AT/AN-AAQ-28.xml</path>
+  <offsets>
+   <x-m>-2.2</x-m>
+   <y-m>0.69</y-m>
+   <z-m>-1.02</z-m>
+   <pitch-deg>-0.5</pitch-deg>
+  </offsets>
+ </model>
+
+ <model>
+  <name>Station10_LegionPodirst</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/LegionPod_IRST/LegionPod_IRST.xml</path>
+  <offsets>
+   <x-m>-2.49</x-m>
+   <y-m>0.69</y-m>
+   <z-m>-1.027</z-m>
+   <pitch-deg>-0.5</pitch-deg>
+  </offsets>
+ </model>
+
+<model>
+  <name>Station10_HARMts</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/HARM_TS/AN-ASQ-213.xml</path>
+  <offsets>
+   <x-m>-2.75</x-m>
+   <y-m>0.727</y-m>
+   <z-m>-0.95</z-m>
+   <pitch-deg>-0.5</pitch-deg>
+   <roll-deg>21.0</roll-deg>
+  </offsets>
+ </model>
+
 <model>
   <name>Station11_LANTIRNnav</name>
   <path>Aircraft/f16/Models/Armament/External-stores/LANTIRN/AN-AAQ-13.xml</path>
@@ -869,6 +1102,18 @@
    <y-m>-0.66</y-m>
    <z-m>-1.02</z-m>
    <pitch-deg>-0.5</pitch-deg>
+  </offsets>
+ </model>
+
+<model>
+  <name>Station11_HARMts</name>
+  <path>Aircraft/f16/Models/Armament/External-stores/HARM_TS/AN-ASQ-213.xml</path>
+  <offsets>
+   <x-m>-2.75</x-m>
+   <y-m>-0.695</y-m>
+   <z-m>-0.95</z-m>
+   <pitch-deg>-0.5</pitch-deg>
+   <roll-deg>-21.0</roll-deg>
   </offsets>
  </model>
 

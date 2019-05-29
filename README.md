@@ -6,8 +6,8 @@ Includes the following Aircraft variants:
 - F-16E block 60
 - F-16CJ block 52
 - F-16CJ block 50
-- F-16C block 42
-- F-16C block 40
+- F-16CG block 42
+- F-16CG block 40
 - F-16C block 32
 - F-16C block 30
 - F-16AM block 20 (MLU)
@@ -19,3 +19,5 @@ The liveries you get available depends on which variant you choose to fly.
 Notice that the quality of liveries differ.
 
 Beside from that, the variants also differ in engine, FBW system and aerodynamics. See manual.txt for more info.
+
+Weapons available and quick payload options are U.S. type.

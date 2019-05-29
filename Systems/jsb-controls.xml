@@ -1868,13 +1868,11 @@
 
         <fcs_function name="fcs/fly-by-wire/pitch/normal-1">
             <function>
-                <product>
                     <!--<p>fcs/fly-by-wire/enable-nz</p>-->
                     <difference>
                         <property> accelerations/a_n </property>
                         <value> 1 </value>
                     </difference>
-                </product>
             </function>
         </fcs_function>
 
@@ -2721,7 +2719,7 @@
                 <table>
                     <independentVar lookup="row">inertia/weight-lbs</independentVar>
                     <tableData>
-                      17000 150
+                      17000 125
                       20000 136
                       25000 152
                       30000 167

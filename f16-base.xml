@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
     <sim>
-        <aircraft-version>3.02</aircraft-version>
+        <aircraft-version>3.14</aircraft-version>
         <minimum-fg-version>2018.1.1</minimum-fg-version>
         <!-- enable "parkpos=AVAILABLE" option for the F-16 -->
         <dimensions>
@@ -31,7 +31,7 @@
         <submodels>
             <serviceable type="bool">1</serviceable>
             <path>Aircraft/f16/Systems/f16-submodels.xml</path>
-            <path>Aircraft/f16/Models/Armament/loads.xml</path>
+            <!--<path>Aircraft/f16/Models/Armament/loads.xml</path>-->
         </submodels>
         <sound>
             <path>Aircraft/f16/Systems/f16-sound.xml</path>
@@ -114,7 +114,7 @@
                         <!-- INSTRUMENT MODE PANEL -->
                         <instrument-mode-panel>
                             <mode>
-                                <rotary-switch-knob type="int">0</rotary-switch-knob>
+                                <rotary-switch-knob type="int">1</rotary-switch-knob>
                             </mode>
                             <hdg>
                                 <!-- if true than knob is pushed and compass can be calibrated -->
@@ -409,7 +409,7 @@
                 <float n="13" type="double">0</float>
                 <float n="14" type="double">0</float><!-- scene red inverted -->
             </generic>
-            <visibility-range-nm type="int">150</visibility-range-nm>
+            <visibility-range-nm type="int">160</visibility-range-nm>
         </multiplay>
         <help>
             <key>
@@ -493,7 +493,7 @@
                 <desc>Toggle smoke if installed</desc>
             </key>
             <key>
-                <name>F4 (if variant support it)</name>
+                <name>F5 (if variant support it)</name>
                 <desc>Deploy dragchute</desc>
             </key>
             <key>
@@ -517,7 +517,7 @@ LANDING
 No fixed landing speed, however a suggested approach speed will display in left side of HUD when gears is down and masterarm is off.
 A little AoA bracket will appear down in the HUD, keep the flight path indicator inside the bracket. The top of the bracket is 11 and bottom is 15 deg AoA.
 Notice that it can be hard to see the touchdown point when landing with that high AoA, raising the seat with key 'u' will help.
-If the runway is wet, icy or short use the dragchute (F4).
+If the runway is wet, icy or short use the dragchute (F5).
 
 TAKE-OFF
 You can rotate around 150 KT when aircraft is light. Be somewhat gentle on the stick if you rotate early as you otherwise might tail-scrape.
@@ -560,6 +560,15 @@ Text Center:
 
 Text Bottom
   Here DED DATA will show if enabled.
+  
+Localizer in HUD
+To enable localizer in HUD turn the mode knob on centerpanel left of the HSI.
+It can show both glidepath and ILS, with vertical and horizontal lines.
+If a line is centered on the FPM and segmented it means its invalid.
+If a line is not centered but segmented it means its valid but out of range.
+If a line is not segmented, its in range and valid.
+Keep the lines centered on the FPM to aim for the localizer beams.
+
 
 RWR
 The round display above left MFD display is a Radar Warning Reciever.
@@ -575,7 +584,7 @@ Hat above designation: Airborne
 Use Link 16 in menu to define your wingmen, so they don't show up on RWR.
 
 For something to show up in the RWR at all these conditions must be met:
-1: Be a threat or unknown.
+1: Be a threat.
 2: Be picked up by your radar OR having an active radar pointed your way OR having transponder on and not be too far away.
 
 Notice that the RWR can sometimes pick up threat much further away than your radar is capable off.
@@ -606,21 +615,29 @@ Roll:  HDG SEL:  Hold current heading
        ATT HOLD: Hold current roll attitude
        STRG SEL: Follow route from Route Manager
 
+AIMING THE CANNON
+Once you have selected cannon and masterarm switch is ON, a timer will start and after around 2 seconds you will get the EEGS funnel on the HUD.
+EEGS stands for Enhanced Envelope Gun Sight. Keep you targets wingtips so that they touch the sides of the funnel, and keep your aircraft attitude movement stable for around 1 second, then fire a burst. This will give you the best chance of hitting. The sides of the funnel is computed for a 35ft wingspan, so if you are aiming at a larger or smaller aircraft you need to compensate for that.
+
 RELEASING ORDNANCE
 First mount some armament.
 Secondly make sure masterarm is enabled.
 Thirdly select the arm. (use 'w' key or click buttons 'A-A' or 'A-G' under HUD)
 Fourthly make sure target is selected (key 'y')
 For GBU-12 and GBU-24 make sure laser is armed.
-For GBU-12, GBU-24, GBU-31, MK-82, MK-83, MK-84 when getting close a vertical line will appear in HUD. Align flight path indicator on the line, when a small horizontal line on that line starts dropping down and reach another line then its time to release (key 'e' or 'trigger').
-For AIM-120 the trigger can be held for 2 second to fire it without a lock in MADDOG mode, where it will lock onto anyone it sees. This feature is still not entirely bug free so do this on own risk.
+For GBU-12, GBU-24, GBU-31, GBU-54, MK-82, MK-83, MK-84, CBU-87, AGM-154A when getting close a vertical line will appear in HUD. Align flight path indicator on the line, when a small horizontal line on that line starts dropping down and reach another line then its time to release (key 'e' or 'trigger').
+For AIM-120 the trigger can be held for 2 second to fire it without a lock in MADDOG mode, where it will lock onto anyone it sees.
+
+TARGETPODS
+On the MFDs you can select TGP. This however only works if you have mounted one of the target-pods.
+Per default the target pod fixed looking at some offset from you aircraft bore attitude. However if you select something with the radar it will if the distance is not too large look at that. You will notice in the TGP view on the MFD that it is not very accurate. So after selecting a radar target, use the TGP buttons (LEFT;RIGHT;UP;DOWN) to aim better and click LOCK. This will now make released ordnance hit more accurate. There is also keys to ZOOM and switch from narrow to wide field of view.
 
 NIGHTTIME FLYING
 There is flood and instrument lights that can be turned up.
 If running ALS you can also go into filters and enable one of the night vision modes.
 
 DRAGCHUTE
-Max recommended KIAS for deployment is 170. Key is F4.
+Max recommended KIAS for deployment is 170. Key is F5.
 
 DED
 The DED is the small display above the right color MFD.
@@ -630,7 +647,7 @@ The DED can also be brought up on the HUD in the controlpanel.
 CONTROLPANEL and CONFIG
 You can find these in the FG menu (the last item).
 They contains various aircraft and experience settings.
-Once the cockpit controls is full 3D the aircraft settings will be removed.
+Once the cockpit controls is full 3D the menu aircraft settings will be removed.
 
 BITCHING BETTY
 Thats the nickname of the annunciation voice. :)
@@ -651,6 +668,14 @@ Can switch the HUD Velocity, Altitude and Heading scales off, the digital readou
 
 HUD FPM
 Can switch off the ATTitude lines and/or the Flight Path Marker.
+
+HUD ALT
+RDR sets the altimeter scale to CARA whenever that is available.
+BARO sets the altimeter scale to barometric.
+AUTO sets the altimeter scale to CARA at low AGL and barometric at higher AGL.
+
+HUD DED
+Will copy the DED panel onto the HUD.
 
 BINGO
 The fuel level where the system and Betty will warn that the fuel is low.
@@ -1095,8 +1120,8 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                </script>
               </binding>
              </key>
-             <key n="260">
-              <name>F4</name>
+             <key n="261">
+              <name>F5</name>
               <desc>noop</desc>
               <repeatable type="bool">false</repeatable>
               <binding>
@@ -1105,7 +1130,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 f16.chute();
                </script>
               </binding>
-             </key>Ground_Targeting
+             </key>
              <!--<key n="261">
               <name>F5</name>
               <desc>noop</desc>
@@ -1252,24 +1277,24 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         <jsbsim>
             <autoflight>
                 <pitch>
-                    <altitude-2-sec-ahead type="double">0</altitude-2-sec-ahead> <!-- autoflight-rules.xml -->
-                    <d-gain-att type="double">-5</d-gain-att>
-                    <i-gain-att type="double">0</i-gain-att> <!-- This gain is dynamic -->
+                    <d-gain-att type="double">0</d-gain-att> <!-- Set in autoflight.xml -->
+                    <i-gain-att type="double">-35</i-gain-att>
                     <master-pid type="double">0</master-pid>
-                    <p-gain-att type="double">0</p-gain-att> <!-- This gain is dynamic -->
+                    <p-gain-att type="double">-70</p-gain-att>
                     <vs>
                         <pid type="double">0</pid>
                     </vs>
                 </pitch>
                 <roll>
-                    <d-gain-att type="double">-0.2</d-gain-att>
-                    <i-gain-att type="double">-6.4</i-gain-att>
+                    <d-gain-att type="double">0</d-gain-att>
+                    <i-gain-att type="double">0</i-gain-att>
                     <heading>
                         <pi type="double">0</pi>
                     </heading>
                     <heading-error-deg type="double">0</heading-error-deg> <!-- autoflight-rules.xml -->
                     <master-pid type="double">0</master-pid>
-                    <p-gain-att type="double">-3.8</p-gain-att>
+                    <no-rte-strg-sel type="bool">0</no-rte-strg-sel>
+                    <p-gain-att type="double">0</p-gain-att>
                 </roll>
             </autoflight>
             <elec>
@@ -1298,6 +1323,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 </sources>
                 <switches>
                     <epu type="int">0</epu>
+                    <epu-cover type="int">1</epu-cover>
                     <main-pwr type="int">0</main-pwr>
                 </switches>
                 <unused type="int">0</unused>
@@ -1492,6 +1518,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         <precipitation-control>
             <clip-distance type="double">3.5</clip-distance>
         </precipitation-control>
+        <star-magnitude-cutoff type="float">6.0</star-magnitude-cutoff>
     </environment>
     <limits>
         <max-gear-extension-speed>300</max-gear-extension-speed>
@@ -1513,6 +1540,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
             <station-name type="string">station</station-name>
             <hit-interpolation type="bool">true</hit-interpolation>
             <one-xml-per-type type="bool">false</one-xml-per-type>            
+            <inac type="double">250</inac>
             <MP-lat type="string">rotors/main/blade[0]/flap-deg</MP-lat>
             <MP-lon type="string">rotors/main/blade[1]/flap-deg</MP-lon>
             <MP-alt type="string">rotors/main/blade[2]/flap-deg</MP-alt>
@@ -1663,7 +1691,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <short-name type="string">GB12</short-name>
                 <long-name type="string">GBU-12 Paveway II</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
+                <class type="string">GMP</class>
                 <max-fire-range-nm type="double">12 </max-fire-range-nm>
                 <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
                 <guidance type="string">laser</guidance>
@@ -1694,8 +1722,8 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <vol-search type="double"> 0.075 </vol-search>
                 <vol-track type="double"> 0.25 </vol-track>
                 <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">2</drop-time>
-                <deploy-time type="double">2</deploy-time>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1.5</deploy-time>
                 <lateral-dps type="double"> 10 </lateral-dps>
                 <max-pitch-deg type="double">-45</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
@@ -1707,11 +1735,59 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
                 <require-lock-to-fire type="bool">false</require-lock-to-fire>
             </gbu-12>
+            <gbu-54>
+                <short-name type="string">GB54</short-name>
+                <long-name type="string">GBU-54 Laser JDAM</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double">15</max-fire-range-nm>
+                <min-fire-range-nm type="double">0</min-fire-range-nm>
+                <guidance type="string">gps</guidance>
+                <navigation type="string">APN</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 200 </FCS-field-deg>
+                <seeker-field-deg type="int"> 45 </seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <max-g type="double"> 1.8 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double">558</weight-launch-lbs>
+                <weight-warhead-lbs type="double">190</weight-warhead-lbs>
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.013 </drag-coeff>
+                <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
+                <arming-time-sec type="double"> 2 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 275 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
+                <lateral-dps type="double"> 10 </lateral-dps>
+                <max-pitch-deg type="double">-45</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <!-- the following 6 properties not used yet: -->
+                <release-limit-mach type="double"> 1.2 </release-limit-mach>
+                <release-limit-altitude type="double"> 16000 </release-limit-altitude>
+                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
+                <release-limit-roll type="double"> 90 </release-limit-roll>
+                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
+                <require-lock-to-fire type="bool">false</require-lock-to-fire>
+            </gbu-54>
             <gbu-31>
                 <short-name type="string">GB31</short-name>
                 <long-name type="string">GBU-31 JDAM</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
+                <class type="string">GMP</class>
                 <max-fire-range-nm type="double">15 </max-fire-range-nm>
                 <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
                 <guidance type="string">gps</guidance>
@@ -1719,7 +1795,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <loft-altitude type="int"> 0 </loft-altitude>
                 <terrain-follow type="bool">false</terrain-follow>
                 <FCS-field-deg type="int"> 200 </FCS-field-deg>
-                <seeker-field-deg type="int"> 32 </seeker-field-deg>
+                <seeker-field-deg type="int"> 45 </seeker-field-deg>
                 <reaquire type="bool">true</reaquire>
                 <max-g type="double"> 1.8 </max-g>
                 <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
@@ -1731,7 +1807,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
                 <drag-coeff type="double"> 0.012 </drag-coeff>
                 <cross-section-sqft type="double"> 1.78886 </cross-section-sqft><!-- the MK84 which is the bomb part is 640 mm diam -->
-                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <arming-time-sec type="double"> 2 </arming-time-sec>
                 <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
                 <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
                 <all-aspect type="bool">true</all-aspect>
@@ -1742,8 +1818,8 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <vol-search type="double"> 0.075 </vol-search>
                 <vol-track type="double"> 0.25 </vol-track>
                 <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">2</drop-time>
-                <deploy-time type="double">2</deploy-time>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
                 <lateral-dps type="double"> 10 </lateral-dps>
                 <max-pitch-deg type="double">-45</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
@@ -1759,7 +1835,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <short-name type="string">GB24</short-name>
                 <long-name type="string">GBU-24 Paveway III</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
+                <class type="string">GMP</class>
                 <max-fire-range-nm type="double">15 </max-fire-range-nm>
                 <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
                 <guidance type="string">laser</guidance>
@@ -1790,8 +1866,8 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <vol-search type="double"> 0.075 </vol-search>
                 <vol-track type="double"> 0.25 </vol-track>
                 <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">2</drop-time>
-                <deploy-time type="double">2</deploy-time>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
                 <lateral-dps type="double"> 10 </lateral-dps>
                 <max-pitch-deg type="double">-45</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
@@ -1832,7 +1908,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <min-fire-range-nm type="double">0.2</min-fire-range-nm>
                 <rail type="bool">false</rail>
                 <max-report-distance type="double">65</max-report-distance>
-                <class type="string">P</class>
+                <class type="string">MGP</class>
                 <fire-msg type="string">Rifle</fire-msg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
             </agm-65>
@@ -1864,16 +1940,144 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <loft-altitude type="int">200</loft-altitude>
                 <min-fire-range-nm type="double">0.5</min-fire-range-nm>
                 <rail type="bool">false</rail>
-                <max-report-distance type="double">65</max-report-distance>
+                <max-report-distance type="double">125</max-report-distance>
                 <class type="string">M</class>
                 <terrain-follow type="bool">true</terrain-follow>
                 <fire-msg type="string">Bruiser</fire-msg>
             </agm-84>
+            <agm-119>
+                <short-name type="string">AG119</short-name>
+                <long-name type="string">AGM-119A Penguin MK3</long-name>
+                <vol-search type="double">0.00</vol-search>
+                <vol-track type="double">1.00</vol-track>
+                <guidance type="string">heat</guidance><!--  -->
+                <navigation type="string">APN</navigation>                           
+                <all-aspect type="bool">true</all-aspect>
+                <class type="string">M</class>
+                <max-fire-range-nm type="double">30</max-fire-range-nm>              <!--  -->
+                <FCS-field-deg type="int">45</FCS-field-deg>            
+                <seeker-field-deg type="int">360</seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <auto-switch-target-allowed type="bool">true</auto-switch-target-allowed>
+                <max-g type="int">5</max-g>
+                <max-launch-g type="int">7</max-launch-g>               
+                <thrust-lbf-stage-1 type="double">530</thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double">470</thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double">60</stage-1-duration-sec>
+                <stage-2-duration-sec type="double">290</stage-2-duration-sec>
+                <weight-launch-lbs type="double">820</weight-launch-lbs>              <!--  -->
+                <weight-warhead-lbs type="double">264.5</weight-warhead-lbs>            <!--  -->
+                <weight-fuel-lbm type="double">104</weight-fuel-lbm>
+                <drag-coeff type="double">0.10</drag-coeff>
+                <cross-section-sqft type="double">0.844</cross-section-sqft>                             <!--  -->
+                <arming-time-sec type="double">3</arming-time-sec>          
+                <min-speed-for-guiding-mach type="double">0.5</min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double">400</self-destruct-time-sec>  
+                <loft-altitude type="int">180</loft-altitude>
+                <min-fire-range-nm type="double">0.5</min-fire-range-nm>
+                <rail type="bool">false</rail>
+                <lock-on-sun-deg type="double">1</lock-on-sun-deg>
+                <max-report-distance type="double">85</max-report-distance>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <terrain-follow type="bool">true</terrain-follow>
+                <seeker-angular-speed-dps type="double">40</seeker-angular-speed-dps>
+                <fire-msg type="string">Bruiser</fire-msg>
+            </agm-119>
+            <agm-154a>
+                <short-name type="string">AG154</short-name>
+                <long-name type="string">AGM-154A JSOW</long-name>
+                <fire-msg type="string">Greyhound</fire-msg>
+                <class type="string">P</class>
+                <max-fire-range-nm type="double">70</max-fire-range-nm>
+                <min-fire-range-nm type="double">0</min-fire-range-nm>
+                <guidance type="string">gps</guidance>
+                <navigation type="string">GPN</navigation>
+                <loft-altitude type="int">0</loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int">90</FCS-field-deg>
+                <seeker-field-deg type="int">180</seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <switch-time-sec type="double">0.5</switch-time-sec>
+                <auto-switch-target-allowed type="bool">true</auto-switch-target-allowed>
+                <prowl-flight type="string">5</prowl-flight>
+                <max-g type="double">2.9</max-g>
+                <max-launch-g type="int">7</max-launch-g>
+                <thrust-lbf-stage-1 type="double">0.0</thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double">0.0</thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double">0</stage-1-duration-sec>
+                <stage-2-duration-sec type="double">0</stage-2-duration-sec>
+                <weight-launch-lbs type="double">1065</weight-launch-lbs>
+                <weight-warhead-lbs type="double">493</weight-warhead-lbs>
+                <weight-fuel-lbm type="double">0</weight-fuel-lbm>
+                <drag-coeff type="double">0.02</drag-coeff>
+                <cross-section-sqft type="double">1.9121</cross-section-sqft>
+                <arming-time-sec type="double">2.5</arming-time-sec>
+                <min-speed-for-guiding-mach type="double">0</min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double">1100</self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <rail type="bool">false</rail>
+                <no-common-target type="bool">true</no-common-target>
+                <max-report-distance type="double">800</max-report-distance>
+                <vol-search type="double">0.075</vol-search>
+                <vol-track type="double">0.25</vol-track>
+                <drop-time type="double">3.5</drop-time>
+                <deploy-time type="double">1.0</deploy-time>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <!--terminal-alt-factor type="double">2</terminal-alt-factor>
+                <terminal-rise-time type="double">9.0</terminal-rise-time>
+                <terminal-dive-time type="double">6.0</terminal-dive-time-->
+                <seeker-angular-speed-dps type="double">45</seeker-angular-speed-dps>
+            </agm-154a>
+            <agm-158>
+                <short-name type="string">AG158</short-name>
+                <long-name type="string">AGM-158A JASSM</long-name>
+                <fire-msg type="string">Greyhound</fire-msg>
+                <class type="string">P</class>
+                <max-fire-range-nm type="double">150</max-fire-range-nm>  <!--real is 200, reduced for obvious reasons-->
+                <min-fire-range-nm type="double">1.0</min-fire-range-nm>
+                <guidance type="string">gps</guidance>
+                <navigation type="string">APN</navigation>
+                <loft-altitude type="int">500</loft-altitude>
+                <terrain-follow type="bool">true</terrain-follow>
+                <FCS-field-deg type="int">120</FCS-field-deg>
+                <seeker-field-deg type="int">270</seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <switch-time-sec type="double">0.5</switch-time-sec>
+                <auto-switch-target-allowed type="bool">true</auto-switch-target-allowed>
+                <prowl-flight type="string">5</prowl-flight>
+                <max-g type="double">4</max-g>
+                <max-launch-g type="int">7</max-launch-g>
+                <thrust-lbf-stage-1 type="double">680</thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double">0.0</thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double">1800</stage-1-duration-sec>
+                <stage-2-duration-sec type="double">0.0</stage-2-duration-sec>
+                <weight-launch-lbs type="double">2150</weight-launch-lbs>
+                <weight-warhead-lbs type="double">1000</weight-warhead-lbs>
+                <weight-fuel-lbm type="double">300</weight-fuel-lbm>
+                <drag-coeff type="double">0.02</drag-coeff>
+                <cross-section-sqft type="double">3.2332</cross-section-sqft>
+                <arming-time-sec type="double">2.0</arming-time-sec>
+                <min-speed-for-guiding-mach type="double">0.3</min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double">2000</self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <rail type="bool">false</rail>
+                <no-common-target type="bool">true</no-common-target>
+                <max-report-distance type="double">350</max-report-distance>
+                <vol-search type="double">0.075</vol-search>
+                <vol-track type="double">0.25</vol-track>
+                <drop-time type="double">1.0</drop-time>
+                <deploy-time type="double">1.0</deploy-time>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <terminal-alt-factor type="double">2</terminal-alt-factor>
+                <terminal-rise-time type="double">9.0</terminal-rise-time>
+                <terminal-dive-time type="double">6.0</terminal-dive-time>
+                <seeker-angular-speed-dps type="double">45</seeker-angular-speed-dps>
+            </agm-158>
             <mk-82> 
                 <short-name type="string">B82</short-name>
                 <long-name type="string">MK-82 General Purpose Bomb</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
+                <class type="string">GMP</class>
                 <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
                 <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
                 <guidance type="string">unguided</guidance>
@@ -1903,8 +2107,8 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <vol-search type="double"> 0.075 </vol-search>
                 <vol-track type="double"> 0.25 </vol-track>
                 <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">0</drop-time>
-                <deploy-time type="double">0</deploy-time>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
                 <lateral-dps type="double"> -10 </lateral-dps>
                 <max-pitch-deg type="double">-90</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
@@ -1913,7 +2117,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <short-name type="string">B83</short-name>
                 <long-name type="string">MK-83 General Purpose Bomb</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
+                <class type="string">GMP</class>
                 <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
                 <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
                 <guidance type="string">unguided</guidance>
@@ -1939,12 +2143,12 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
                 <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
                 <rail type="bool">false</rail>
-                <max-report-distance type="double"> 275 </max-report-distance>
+                <max-report-distance type="double"> 300 </max-report-distance>
                 <vol-search type="double"> 0.075 </vol-search>
                 <vol-track type="double"> 0.25 </vol-track>
                 <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">0</drop-time>
-                <deploy-time type="double">0</deploy-time>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
                 <lateral-dps type="double"> -10 </lateral-dps>
                 <max-pitch-deg type="double">-90</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
@@ -1953,7 +2157,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <short-name type="string">B84</short-name>
                 <long-name type="string">MK-84 General Purpose Bomb</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GM</class>
+                <class type="string">GMP</class>
                 <max-fire-range-nm type="double">8 </max-fire-range-nm>
                 <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
                 <guidance type="string">unguided</guidance>
@@ -1984,8 +2188,8 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <vol-search type="double"> 0.075 </vol-search>
                 <vol-track type="double"> 0.25 </vol-track>
                 <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">2</drop-time>
-                <deploy-time type="double">2</deploy-time>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
                 <lateral-dps type="double"> 10 </lateral-dps>
                 <max-pitch-deg type="double">-45</max-pitch-deg>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
@@ -1997,6 +2201,46 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
                 <require-lock-to-fire type="bool">false</require-lock-to-fire>
             </mk-84>
+            <cbu-87> 
+                <short-name type="string">CB87</short-name>
+                <long-name type="string">CBU-87 Combined Effects Munition</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double">7</max-fire-range-nm>
+                <min-fire-range-nm type="double">0</min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 240 </FCS-field-deg>
+                <seeker-field-deg type="int"> 360 </seeker-field-deg>
+                <max-g type="double"> 1.5 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 950 </weight-launch-lbs>
+                <weight-warhead-lbs type="double"> 128 </weight-warhead-lbs>
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.018 </drag-coeff>
+                <cross-section-sqft type="double"> 1.8094133 </cross-section-sqft>
+                <arming-time-sec type="double"> 2.6 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double">90</max-report-distance><!-- real: max 120x240 meter area, so 90 is average radius of that -->
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">0.75</deploy-time>
+                <lateral-dps type="double"> -50 </lateral-dps>
+                <max-pitch-deg type="double">-90</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+            </cbu-87>
             <agm-88>
                 <short-name type="string">AG88</short-name>
                 <long-name type="string">AGM-88 HARM</long-name>
@@ -2148,12 +2392,17 @@ value. 18000=standard US transition altitude -->
             <mfd-l-con type="double">1.0</mfd-l-con>
             <mfd-r-brt type="double">1.0</mfd-r-brt>
             <mfd-r-con type="double">1.0</mfd-r-con>
-            <hud-velocity type="int">1</hud-velocity>
-            <hud-scales type="int">1</hud-scales>
-            <hud-fpm type="int">2</hud-fpm>
-            <cara type="bool">false</cara>
+            <hud-velocity type="int">1</hud-velocity><!-- 0=TRUE 1=CAL 2=GND -->
+            <hud-scales type="int">1</hud-scales><!-- 0=OFF 1=VAH 2=VV/VAH -->
+            <hud-fpm type="int">2</hud-fpm><!-- 0=OFF 1=FPM 2=ATT/FPM -->
+            <cara-on type="bool">false</cara-on><!-- if CARA radar altimeter is detecting ground (whether enabled or not) -->
             <hud-ded type="bool">false</hud-ded>
+            <hud-alt type="int">0</hud-alt><!-- 0=AUTO 1=BARO 2=RADAR -->
             <lock-flir type="double">0.05</lock-flir>
+            <tgp-lock type="bool">false</tgp-lock>
+            <gps-lat type="double">36.858</gps-lat>
+            <gps-lon type="double">-115.3</gps-lon>
+            <gps-alt type="double">4870</gps-alt>
         </avionics>
         <fcs>
             <autopilot-on type="int">0</autopilot-on> <!-- Ignored on Block 20+ -->
@@ -2177,6 +2426,8 @@ value. 18000=standard US transition altitude -->
         </chute>
         <stores>
             <tgp-mounted type="bool">false</tgp-mounted>
+            <harm-mounted type="bool">false</harm-mounted>
+            <nav-mounted type="bool">false</nav-mounted>
         </stores>
     </f16>
     <damage>

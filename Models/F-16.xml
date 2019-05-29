@@ -233,7 +233,35 @@
  </model>
 
 
-
+<effect>
+      <inherits-from>Aircraft/f16/Models/Effects/fuselage/model-combined-fuselage</inherits-from>
+      <parameters>
+          <metallic type="float">0.80</metallic>
+          <ambient-factor type="float">0.35</ambient-factor>
+          <rain-enabled type="int">2</rain-enabled>
+          <snow-enabled type="int">0</snow-enabled>
+          <ambient-correction type="float">0.00</ambient-correction>
+          <reflection-enabled type="int">0</reflection-enabled>
+          <transparent type="int">1</transparent>
+          <rendering-hint>transparent</rendering-hint>
+      </parameters>
+      <!-- logos -->
+      <object-name>VstabBandLeftAft</object-name>
+      <object-name>VstabBandLeftFront</object-name>
+      <object-name>VstabBandRightAft</object-name>
+      <object-name>VstabBandRightFront</object-name>
+      <object-name>VstabLogoLeftBottom</object-name>
+      <object-name>VstabLogoLeftTop</object-name>
+      <object-name>VstabLogoRightBottom</object-name>
+      <object-name>VstabLogoRightTop</object-name>
+      <object-name>WinglogoLeftTop</object-name>
+      <object-name>WinglogoRightBottom</object-name>
+      <object-name>WinglogoRightTop</object-name>
+      <object-name>Rect</object-name>
+      <object-name>LogoPilotRight</object-name>
+      <object-name>FuselageLogoRight</object-name>
+      <object-name>FuselageLogoLeft</object-name>
+  </effect>
 
   <effect>
       <inherits-from>Aircraft/f16/Models/Effects/fuselage/model-combined-fuselage</inherits-from>
@@ -245,6 +273,7 @@
           <ambient-correction type="float">0.00</ambient-correction>
           <reflection-enabled type="int">0</reflection-enabled>
       </parameters>
+      <!-- fuselage -->
       <object-name>RadarDomeTop</object-name>
       <object-name>Tail</object-name>
       <object-name>LeftLowerSpeedbrake</object-name>
@@ -289,6 +318,7 @@
       <object-name>RWStation3</object-name>
       <object-name>LWStation3</object-name>
       <object-name>ArresterHook</object-name>
+      <object-name>Link16Antennas</object-name>
  </effect>
 
  <effect>
@@ -1881,11 +1911,19 @@
       </equals>
       <equals>
         <property>payload/armament/station/id-2-set</property>
+        <value>2 x GBU-54</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-2-set</property>
         <value>3 x AGM-65</value>
       </equals>
       <equals>
         <property>payload/armament/station/id-2-set</property>
         <value>2 x MK-83</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-2-set</property>
+        <value>2 x CBU-87</value>
       </equals>
     </or>
     </not>
@@ -1916,7 +1954,15 @@
       </equals>
       <equals>
         <property>payload/armament/station/id-3-set</property>
+        <value>2 x GBU-54</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-3-set</property>
         <value>2 x MK-83</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-3-set</property>
+        <value>2 x CBU-87</value>
       </equals>
     </or>
     </not>
@@ -1947,7 +1993,15 @@
       </equals>
       <equals>
         <property>payload/armament/station/id-5-set</property>
+        <value>2 x GBU-54</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-5-set</property>
         <value>2 x MK-83</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-5-set</property>
+        <value>2 x CBU-87</value>
       </equals>
     </or>
     </not>
@@ -1978,17 +2032,74 @@
       </equals>
       <equals>
         <property>payload/armament/station/id-6-set</property>
+        <value>2 x GBU-54</value>
+      </equals>
+      <equals>
+        <property>payload/armament/station/id-6-set</property>
         <value>3 x AGM-65</value>
       </equals>
       <equals>
         <property>payload/armament/station/id-6-set</property>
         <value>2 x MK-83</value>
       </equals>
+      <equals>
+        <property>payload/armament/station/id-6-set</property>
+        <value>2 x CBU-87</value>
+      </equals>
     </or>
     </not>
   </and>
   </condition>
  </animation>
+ 
+ <model>
+    <path>Aircraft/f16/Models/Armament/loads.xml</path>
+ </model>
+
+<!--<animation>
+  <type>select</type>
+  <object-name>Podpylon_left</object-name>
+  <condition>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-11-set</property>
+        <value>AN/AAQ-13 LANTIRN Nav Pod</value>
+      </equals>
+    </not>
+  </and>
+  </condition>
+ </animation>
+
+<animation>
+  <type>select</type>
+  <object-name>Podpylon_left</object-name>
+  <condition>
+    <and>
+    <not>
+     <equals>
+        <property>payload/armament/station/id-11-set</property>
+        <value>AN/ASQ-213 HARM TS Pod</value>
+      </equals>
+    </not>
+  </and>
+  </condition>
+ </animation>
+
+<animation>
+  <type>select</type>
+  <object-name>Podpylon_right</object-name>
+  <condition>
+    <and>
+    <not>
+      <equals>
+        <property>payload/armament/station/id-10-set</property>
+        <value>AN/ASQ-213 HARM TS Pod</value>
+      </equals>
+    </not>
+  </and>
+  </condition>
+ </animation>-->
 
  <!-- livery selection -->
  <animation>

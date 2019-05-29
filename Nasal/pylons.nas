@@ -29,70 +29,82 @@ var smokewinderGreen9 = stations.Smoker.new("Smokewinder Green", "SmokeG", "sim/
 var smokewinderBlue9 = stations.Smoker.new("Smokewinder Blue", "SmokeB", "sim/model/f16/smokewinderB9");
 var smokewinderWhite1 = stations.Smoker.new("Smokewinder White", "SmokeW", "sim/model/f16/smokewinderW1");
 var smokewinderWhite9 = stations.Smoker.new("Smokewinder White", "SmokeW", "sim/model/f16/smokewinderW9");
-var tgp = stations.Smoker.new("AN/AAQ-33 Sniper ATP", "AAQ-33", "f16/stores/tgp-mounted");
-var tgp2 = stations.Smoker.new("AN/AAQ-14 LANTIRN Target Pod", "AAQ-14", "f16/stores/tgp-mounted");
-var tgp3 = stations.Smoker.new("AN/AAQ-13 LANTIRN Nav Pod", "AAQ-13", "f16/stores/nav-mounted");
+var atp = stations.Smoker.new("AN/AAQ-33 Sniper ATP", "AAQ-33", "f16/stores/tgp-mounted");
+var tgp = stations.Smoker.new("AN/AAQ-14 LANTIRN Target Pod", "AAQ-14", "f16/stores/tgp-mounted");
+var nav = stations.Smoker.new("AN/AAQ-13 LANTIRN Nav Pod", "AAQ-13", "f16/stores/nav-mounted");
+var lite = stations.Smoker.new("AN/AAQ-28 LITENING Advanced Targeting", "AAQ-28", "f16/stores/tgp-mounted");
+var irst = stations.Smoker.new("Legion Pod IRST", "IRST", "f16/stores/irst-mounted");
+var harm = stations.Smoker.new("AN/ASQ-213 HARM TS Pod", "ASQ-213", "f16/stores/harm-mounted");
 var dummy = stations.Dummy.new("AN-T-17", nil);
 var dummy2 = stations.Dummy.new("CATM-9L", nil);# nil for shortname makes them not show up in MFD SMS page. If shortname is nil it MUST have showLongTypeInsteadOfCount: 1
-var dummy3 = stations.Dummy.new("AN/ALQ-131 ECM Pod", "AL131");
-var dummy4 = stations.Dummy.new("MXU-648 Cargopod", "TRVL");
+var ecmp = stations.Dummy.new("AN/ALQ-131 ECM Pod", "AL131");
+var crgpd = stations.Dummy.new("MXU-648 Cargopod", "TRVL");
+
 var pylonSets = {
 	empty: {name: "Empty", content: [], fireOrder: [], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},
-	e:  {name: "20mm Cannon", content: [cannon], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	a:  {name: "3 x AGM-65", content: ["AGM-65", "AGM-65", "AGM-65"], fireOrder: [0,1,2], launcherDragArea: 0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
-	b:  {name: "1 x AGM-84", content: ["AGM-84"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
-    b2: {name: "1 x AGM-88", content: ["AGM-88"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
-    c3: {name: "1 x GBU-31", content: ["GBU-31"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
-    c4: {name: "1 x GBU-24", content: ["GBU-24"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
-    i:  {name: "3 x GBU-12", content: ["GBU-12","GBU-12", "GBU-12"], fireOrder: [0,1,2], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 1, showLongTypeInsteadOfCount: 0, category: 2},
-	j:  {name: "2 x GBU-12", content: ["GBU-12", "GBU-12"], fireOrder: [0,1], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 1, showLongTypeInsteadOfCount: 0, category: 2},
-	c:  {name: "3 x MK-82", content: ["MK-82","MK-82","MK-82"], fireOrder: [0,1,2], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
-    c5: {name: "1 x MK-84", content: ["MK-84"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
-    d:  {name: "2 x MK-83", content: ["MK-83","MK-83"], fireOrder: [0,1], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
-	g:  {name: "1 x AIM-9", content: ["AIM-9"], fireOrder: [0], launcherDragArea: -0.0785, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#wingtip
-	q:  {name: "1 x AIM-9", content: ["AIM-9"], fireOrder: [0], launcherDragArea: -0.025, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#non wingtip
-	h:  {name: "1 x AIM-120", content: ["AIM-120"], fireOrder: [0], launcherDragArea: -0.025, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#non wingtip
-	r:  {name: "1 x AIM-120", content: ["AIM-120"], fireOrder: [0], launcherDragArea: -0.05, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#wingtip
-	q7: {name: "1 x AIM-7", content: ["AIM-7"], fireOrder: [0], launcherDragArea: -0.025, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},
-	k:  {name: "AN-T-17", content: [dummy], fireOrder: [], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	k2: {name: "CATM-9L", content: [dummy2], fireOrder: [], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	f2: {name: "AN/ALQ-131 ECM Pod", content: [dummy3], fireOrder: [], launcherDragArea: 0.18, launcherMass: 410, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 1},
-    f3: {name: "MXU-648 Cargopod", content: [dummy4], fireOrder: [], launcherDragArea: 0.18, launcherMass: 104, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 1},
-	f:  {name: "300 Gal Fuel tank", content: [fuelTankCenter], fireOrder: [0], launcherDragArea: 0.18, launcherMass: 392, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 1},
-	l:  {name: "370 Gal Fuel tank", content: [fuelTank370Left], fireOrder: [0], launcherDragArea: 0.35, launcherMass: 531, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 2},
-	m:  {name: "370 Gal Fuel tank", content: [fuelTank370Right], fireOrder: [0], launcherDragArea: 0.35, launcherMass: 531, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 2},
-	o:  {name: "600 Gal Fuel tank", content: [fuelTank600Left], fireOrder: [0], launcherDragArea: 0.30, launcherMass: 399, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 3},
-	p:  {name: "600 Gal Fuel tank", content: [fuelTank600Right], fireOrder: [0], launcherDragArea: 0.30, launcherMass: 399, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 3},
-	s: {name: "Smokewinder Red", content: [smokewinderRed1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	t: {name: "Smokewinder Green", content: [smokewinderGreen1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	u: {name: "Smokewinder Blue", content: [smokewinderBlue1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	v: {name: "Smokewinder Red", content: [smokewinderRed9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	w: {name: "Smokewinder Green", content: [smokewinderGreen9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	x: {name: "Smokewinder Blue", content: [smokewinderBlue9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	w1: {name: "Smokewinder White", content: [smokewinderWhite1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-	w9: {name: "Smokewinder White", content: [smokewinderWhite9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-    tgp: {name: "AN/AAQ-33 Sniper ATP", content: [tgp], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 446, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-    tgp2: {name: "AN/AAQ-14 LANTIRN Target Pod", content: [tgp2], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 470, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
-    tgp3: {name: "AN/AAQ-13 LANTIRN Nav Pod", content: [tgp3], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 470, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	mm20:  {name: "20mm Cannon", content: [cannon], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	agm65x3:  {name: "3 x AGM-65", content: ["AGM-65", "AGM-65", "AGM-65"], fireOrder: [0,1,2], launcherDragArea: 0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
+	a84:  {name: "1 x AGM-84", content: ["AGM-84"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    a88: {name: "1 x AGM-88", content: ["AGM-88"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    a119:  {name: "1 x AGM-119", content: ["AGM-119"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    a158: {name: "1 x AGM-158", content: ["AGM-158"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    a154: {name: "1 x AGM-154A", content: ["AGM-154A"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    g54: {name: "2 x GBU-54", content: ["GBU-54","GBU-54"], fireOrder: [0,1], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
+    g31: {name: "1 x GBU-31", content: ["GBU-31"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    g24: {name: "1 x GBU-24", content: ["GBU-24"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    g12x3:  {name: "3 x GBU-12", content: ["GBU-12","GBU-12", "GBU-12"], fireOrder: [0,1,2], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 1, showLongTypeInsteadOfCount: 0, category: 2},
+	g12x2:  {name: "2 x GBU-12", content: ["GBU-12", "GBU-12"], fireOrder: [0,1], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 1, showLongTypeInsteadOfCount: 0, category: 2},
+	m82:  {name: "3 x MK-82", content: ["MK-82","MK-82","MK-82"], fireOrder: [0,1,2], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
+    m84: {name: "1 x MK-84", content: ["MK-84"], fireOrder: [0], launcherDragArea: 0, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 3},
+    m83:  {name: "2 x MK-83", content: ["MK-83","MK-83"], fireOrder: [0,1], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
+    c87:  {name: "2 x CBU-87", content: ["CBU-87","CBU-87"], fireOrder: [0,1], launcherDragArea: 0.005, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 2},
+	dumb1:  {name: "AN-T-17", content: [dummy], fireOrder: [], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	dumb2: {name: "CATM-9L", content: [dummy2], fireOrder: [], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeRL: {name: "Smokewinder Red", content: [smokewinderRed1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeGL: {name: "Smokewinder Green", content: [smokewinderGreen1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeBL: {name: "Smokewinder Blue", content: [smokewinderBlue1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeRR: {name: "Smokewinder Red", content: [smokewinderRed9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeGR: {name: "Smokewinder Green", content: [smokewinderGreen9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeBR: {name: "Smokewinder Blue", content: [smokewinderBlue9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeWL: {name: "Smokewinder White", content: [smokewinderWhite1], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	smokeWR: {name: "Smokewinder White", content: [smokewinderWhite9], fireOrder: [0], launcherDragArea: 0.0, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+	fuel30:  {name: "300 Gal Fuel tank", content: [fuelTankCenter], fireOrder: [0], launcherDragArea: 0.18, launcherMass: 392, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 1},
+	fuel37L: {name: "370 Gal Fuel tank", content: [fuelTank370Left], fireOrder: [0], launcherDragArea: 0.35, launcherMass: 531, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 2},
+	fuel37R: {name: "370 Gal Fuel tank", content: [fuelTank370Right], fireOrder: [0], launcherDragArea: 0.35, launcherMass: 531, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 2},
+	fuel60L: {name: "600 Gal Fuel tank", content: [fuelTank600Left], fireOrder: [0], launcherDragArea: 0.30, launcherMass: 399, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 3},
+	fuel60R: {name: "600 Gal Fuel tank", content: [fuelTank600Right], fireOrder: [0], launcherDragArea: 0.30, launcherMass: 399, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 3},
+	aim9WT:  {name: "1 x AIM-9",   content: ["AIM-9"], fireOrder: [0], launcherDragArea: -0.0785, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#wingtip
+	aim9:    {name: "1 x AIM-9",   content: ["AIM-9"], fireOrder: [0], launcherDragArea: -0.025, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#non wingtip
+	aim120:  {name: "1 x AIM-120", content: ["AIM-120"], fireOrder: [0], launcherDragArea: -0.025, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#non wingtip
+	aim120WT:{name: "1 x AIM-120", content: ["AIM-120"], fireOrder: [0], launcherDragArea: -0.05, launcherMass: 0, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},#wingtip
+	aim7:    {name: "1 x AIM-7",   content: ["AIM-7"], fireOrder: [0], launcherDragArea: -0.025, launcherMass: 10, launcherJettisonable: 0, showLongTypeInsteadOfCount: 0, category: 1},
+	podEcm: {name: "AN/ALQ-131 ECM Pod", content: [ecmp], fireOrder: [], launcherDragArea: 0.18, launcherMass: 410, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 1},
+    podTrvl: {name: "MXU-648 Cargopod", content: [crgpd], fireOrder: [], launcherDragArea: 0.15, launcherMass: 104, launcherJettisonable: 1, showLongTypeInsteadOfCount: 1, category: 1},
+    podSAtp: {name: "AN/AAQ-33 Sniper ATP", content: [atp], fireOrder: [0], launcherDragArea: 0.06, launcherMass: 446, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+    podLTgp: {name: "AN/AAQ-14 LANTIRN Target Pod", content: [tgp], fireOrder: [0], launcherDragArea: 0.07, launcherMass: 530, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+    podLNav:  {name: "AN/AAQ-13 LANTIRN Nav Pod", content: [nav], fireOrder: [0], launcherDragArea: 0.1, launcherMass: 451.1, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+    podLite: {name: "AN/AAQ-28 LITENING Advanced Targeting", content: [lite], fireOrder: [0], launcherDragArea: 0.08, launcherMass: 460, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
+    podIrst: {name: "Legion Pod IRST", content: [irst], fireOrder: [0], launcherDragArea: 0.08, launcherMass: 500, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1}, #mass guess based on available data
+    podHarm: {name: "AN/ASQ-213 HARM TS Pod", content: [harm], fireOrder: [0], launcherDragArea: 0.03, launcherMass: 100, launcherJettisonable: 0, showLongTypeInsteadOfCount: 1, category: 1},
 };
 
 if (getprop("sim/model/f16/wingmounts") != 0) {
-	# all variants except YF-16 gets store options:
+	# all variants except YF-16 get store options:
 
 	# source for fuel tanks content, fuel type, jettisonable and drag: TO. GR1F-16CJ-1-1
 
 	# sets
-	var pylon120set = [pylonSets.empty, pylonSets.q, pylonSets.h, pylonSets.k];
-	var wingtipSet1  = [pylonSets.k,pylonSets.k2,     pylonSets.g, pylonSets.r,pylonSets.s,pylonSets.t,pylonSets.u,pylonSets.w1];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
-	var wingtipSet9  = [pylonSets.k,pylonSets.k2,     pylonSets.g, pylonSets.r,pylonSets.v,pylonSets.w,pylonSets.x,pylonSets.w9];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
-	var pylon9mix   = [pylonSets.empty, pylonSets.q, pylonSets.i, pylonSets.h, pylonSets.q7, pylonSets.a, pylonSets.b, pylonSets.c, pylonSets.b2, pylonSets.c3, pylonSets.f3, pylonSets.c4, pylonSets.d, pylonSets.c5];
-	var pylon12setL = [pylonSets.empty, pylonSets.j, pylonSets.l, pylonSets.o, pylonSets.c, pylonSets.c3, pylonSets.c4, pylonSets.b2, pylonSets.d, pylonSets.c5];
-	var pylon12setR = [pylonSets.empty, pylonSets.j, pylonSets.m, pylonSets.p, pylonSets.c, pylonSets.c3, pylonSets.c4, pylonSets.b2, pylonSets.d, pylonSets.c5];
+	var pylon120set = [pylonSets.empty, pylonSets.aim9, pylonSets.aim120, pylonSets.dumb1];
+	var wingtipSet1  = [pylonSets.dumb1,pylonSets.dumb2,     pylonSets.aim9WT, pylonSets.aim120WT,pylonSets.smokeRL,pylonSets.smokeGL,pylonSets.smokeBL,pylonSets.smokeWL];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
+	var wingtipSet9  = [pylonSets.dumb1,pylonSets.dumb2,     pylonSets.aim9WT, pylonSets.aim120WT,pylonSets.smokeRR,pylonSets.smokeGR,pylonSets.smokeBR,pylonSets.smokeWR];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
+	var pylon9mix   = [pylonSets.empty, pylonSets.aim9, pylonSets.g12x3, pylonSets.aim120, pylonSets.aim7, pylonSets.agm65x3, pylonSets.a84, pylonSets.m82, pylonSets.a88, pylonSets.a119, pylonSets.a154, pylonSets.g54, pylonSets.g31, pylonSets.podTrvl, pylonSets.g24, pylonSets.m83, pylonSets.c87, pylonSets.m84, pylonSets.a158];
+	var pylon12setL = [pylonSets.empty, pylonSets.g12x2, pylonSets.fuel37L, pylonSets.fuel60L, pylonSets.m82, pylonSets.a119, pylonSets.a154, pylonSets.g54, pylonSets.g31, pylonSets.g24, pylonSets.a88, pylonSets.m83, pylonSets.c87, pylonSets.m84];
+	var pylon12setR = [pylonSets.empty, pylonSets.g12x2, pylonSets.fuel37R, pylonSets.fuel60R, pylonSets.m82, pylonSets.a119, pylonSets.a154, pylonSets.g54, pylonSets.g31, pylonSets.g24, pylonSets.a88, pylonSets.m83, pylonSets.c87, pylonSets.m84];
 
 	#HTS can be carried on both left and right side.
-	#LITENING only on right	
-    var fuselageRset = [pylonSets.empty, pylonSets.tgp, pylonSets.tgp2];
-    var fuselageLset = [pylonSets.empty, pylonSets.tgp3];
+	#Sniper, LITENING, IRST only on right	
+    var fuselageRset = [pylonSets.empty, pylonSets.podSAtp, pylonSets.podLTgp, pylonSets.podLite, pylonSets.podIrst, pylonSets.podHarm];
+    var fuselageLset = [pylonSets.empty, pylonSets.podLNav, pylonSets.podHarm];
 
 	# pylons
 	pylon1 = stations.Pylon.new("Left Wingtip Pylon",     0, [0.082,-4.79412, 0.01109], wingtipSet1, 0, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[1]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[1]",1),func{return getprop("payload/armament/fire-control/serviceable")});
@@ -100,18 +112,18 @@ if (getprop("sim/model/f16/wingmounts") != 0) {
 	pylon3 = stations.Pylon.new("Left Wing Pylon",        2, [0.082,-2.88034,-0.25696], pylon9mix, 2, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[3]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[3]",1),func{return getprop("payload/armament/fire-control/serviceable")});
 	pylon4 = stations.Pylon.new("Left Inner Wing Pylon",  3, [0.082,-1.62889,-0.25696], pylon12setL, 3, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[4]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[4]",1),func{return getprop("payload/armament/fire-control/serviceable")});
 	pylon11= stations.Pylon.new("Left Fuselage Pylon",   11, [0,0,0]                  , fuselageLset, 4, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[31]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[31]",1),func{return 1;});
-	pylon5 = stations.Pylon.new("Center Pylon",           4, [0.082, 0,      -0.83778], [pylonSets.empty, pylonSets.f,pylonSets.f2, pylonSets.f3], 5, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[5]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[5]",1),func{return getprop("payload/armament/fire-control/serviceable")});
+	pylon5 = stations.Pylon.new("Center Pylon",           4, [0.082, 0,      -0.83778], [pylonSets.empty, pylonSets.fuel30,pylonSets.podEcm, pylonSets.podTrvl], 5, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[5]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[5]",1),func{return getprop("payload/armament/fire-control/serviceable")});
 	pylon10= stations.Pylon.new("Right Fuselage Pylon",  10, [0,0,0]                  , fuselageRset, 6, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[30]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[30]",1),func{return 1;});
 	pylon6 = stations.Pylon.new("Right Inner Wing Pylon", 5, [0.082, 1.62889,-0.25696], pylon12setR, 7, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[6]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[6]",1),func{return getprop("payload/armament/fire-control/serviceable")});
 	pylon7 = stations.Pylon.new("Right Wing Pylon",       6, [0.082, 2.88034,-0.25696], pylon9mix, 8, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[7]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[7]",1),func{return getprop("payload/armament/fire-control/serviceable")});
 	pylon8 = stations.Pylon.new("Right Outer Wing Pylon", 7, [0.082, 3.95167,-0.25696], pylon120set, 9, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[8]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[8]",1),func{return getprop("payload/armament/fire-control/serviceable")});
 	pylon9 = stations.Pylon.new("Right Wingtip Pylon",    8, [0.082, 4.79412, 0.01109], wingtipSet9,10, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[9]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[9]",1),func{return getprop("payload/armament/fire-control/serviceable")});
-	pylonI = stations.InternalStation.new("Internal gun mount", 9, [pylonSets.e], props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[10]",1));
+	pylonI = stations.InternalStation.new("Internal gun mount", 9, [pylonSets.mm20], props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[10]",1));
 	
 
     var pylons = [pylon1,pylon2,pylon3,pylon4,pylon5,pylon6,pylon7,pylon8,pylon9,pylonI,pylon10,pylon11];
 
-	fcs = fc.FireControl.new(pylons, [9,0,8,1,7,2,6,3,5,4], ["20mm Cannon","AIM-9","AIM-120","AIM-7","AGM-65","GBU-12","AGM-84","MK-82","AGM-88", "GBU-31", "GBU-24", "MK-83", "MK-84"]);
+	fcs = fc.FireControl.new(pylons, [9,0,8,1,7,2,6,3,5,4], ["20mm Cannon","AIM-9","AIM-120","AIM-7","AGM-65","GBU-12","AGM-84","MK-82","AGM-88","GBU-31","GBU-24","MK-83","MK-84","AGM-158","CBU-87","AGM-154A","GBU-54","AGM-119"]);
 
 	var aimListener = func (obj) {
 		#If auto focus on missile is activated the we call the function
@@ -134,8 +146,8 @@ if (getprop("sim/model/f16/wingmounts") != 0) {
 	# YF-16 only get wingtip aim9 dummies plus smoke:
 
 	# sets
-	var wingtipSet1yf  = [pylonSets.k,pylonSets.k2, pylonSets.s,pylonSets.t,pylonSets.u];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
-	var wingtipSet9yf  = [pylonSets.k,pylonSets.k2, pylonSets.v,pylonSets.w,pylonSets.x];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
+	var wingtipSet1yf  = [pylonSets.dumb1,pylonSets.dumb2, pylonSets.smokeRL,pylonSets.smokeGL,pylonSets.smokeBL,pylonSets.smokeWL];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
+	var wingtipSet9yf  = [pylonSets.dumb1,pylonSets.dumb2, pylonSets.smokeRR,pylonSets.smokeGR,pylonSets.smokeBR,pylonSets.smokeWR];# wingtips are normally not empty, so AN-T-17 dummy aim9 is loaded instead.
 
 	# pylons
 	pylon1 = stations.Pylon.new("Left Wingtip Pylon", 0, [0,0,0], wingtipSet1yf, 0, props.globals.getNode("fdm/jsbsim/inertia/pointmass-weight-lbs[1]",1),props.globals.getNode("fdm/jsbsim/inertia/pointmass-dragarea-sqft[1]",1));
@@ -156,18 +168,18 @@ var getDLZ = func {
     return nil;
 }
 
-# Air patrol
+# Standard Air patrol (AIM-9, AIM-120, AIM-7)
 var a2a_patrol = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.q7);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.aim7);
         pylon4.loadSet(pylonSets.empty);
-        pylon5.loadSet(pylonSets.f);
+        pylon5.loadSet(pylonSets.fuel30);
         pylon6.loadSet(pylonSets.empty);
-        pylon7.loadSet(pylonSets.q7);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
+        pylon7.loadSet(pylonSets.aim7);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
         pylon10.loadSet(pylonSets.empty);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
@@ -176,19 +188,19 @@ var a2a_patrol = func {
     }
 }
 
-# Air superiority
+# Air Superiority (AIM-120)
 var a2a_super = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-    	pylon1.loadSet(pylonSets.r);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.h);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+    	pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.aim120);
         pylon4.loadSet(pylonSets.empty);
-        pylon5.loadSet(pylonSets.f);
+        pylon5.loadSet(pylonSets.fuel30);
         pylon6.loadSet(pylonSets.empty);
-        pylon7.loadSet(pylonSets.h);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.r);
-        pylon10.loadSet(pylonSets.empty);
+        pylon7.loadSet(pylonSets.aim120);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podIrst);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
     } else {
@@ -196,19 +208,19 @@ var a2a_super = func {
     }
 }
 
-# CAP
+# CAP (AIM-9, AIM-120)
 var a2a_cap = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.h);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.aim120);
         pylon4.loadSet(pylonSets.empty);
-        pylon5.loadSet(pylonSets.f);
+        pylon5.loadSet(pylonSets.fuel30);
         pylon6.loadSet(pylonSets.empty);
-        pylon7.loadSet(pylonSets.h);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.empty);
+        pylon7.loadSet(pylonSets.aim120);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.podIrst);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
     } else {
@@ -216,18 +228,58 @@ var a2a_cap = func {
     }
 }
 
-# CAP (extended loiter)
+# CAP (Extended loiter)
 var a2a_capext = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.h);
-        pylon4.loadSet(pylonSets.l);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.aim120);
+        pylon4.loadSet(pylonSets.fuel37L);
         pylon5.loadSet(pylonSets.empty);
-        pylon6.loadSet(pylonSets.m);
-        pylon7.loadSet(pylonSets.h);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.aim120);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.podIrst);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# NFZ (AIM-120, AIM-7, AIM-9, ECM)
+var a2a_nfz = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.aim7);
+        pylon4.loadSet(pylonSets.fuel37L);
+        pylon5.loadSet(pylonSets.podEcm);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.aim7);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podIrst);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# DCA (AIM-9, AIM-120)
+var a2a_dca = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.aim9);
+        pylon4.loadSet(pylonSets.empty);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.empty);
+        pylon7.loadSet(pylonSets.aim9);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
         pylon10.loadSet(pylonSets.empty);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
@@ -235,120 +287,281 @@ var a2a_capext = func {
       screen.log.write(f16.msgB);
     }
 }
-# CAS: 2 3XMK82 and 2 AGM65
+
+# CAS (AGM-65, MK-82)
 var a2g_cas = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.a);
-        pylon4.loadSet(pylonSets.c);
-        pylon5.loadSet(pylonSets.f);
-        pylon6.loadSet(pylonSets.c);
-        pylon7.loadSet(pylonSets.a);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.agm65x3);
+        pylon4.loadSet(pylonSets.m82);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.m82);
+        pylon7.loadSet(pylonSets.agm65x3);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podLTgp);
+        pylon11.loadSet(pylonSets.podLNav);
         f16.reloadCannon();
     } else {
       screen.log.write(f16.msgB);
     }
 }
 
-# CAS (extended loiter): 2 3XAGM-65
+# CAS (Extended loiter)
 var a2g_casext = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.a);
-        pylon4.loadSet(pylonSets.l);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.agm65x3);
+        pylon4.loadSet(pylonSets.fuel37L);
         pylon5.loadSet(pylonSets.empty);
-        pylon6.loadSet(pylonSets.m);
-        pylon7.loadSet(pylonSets.a);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.agm65x3);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podLTgp);
+        pylon11.loadSet(pylonSets.podLNav);
         f16.reloadCannon();
     } else {
       screen.log.write(f16.msgB);
     }
 }
 
-# Air strike : 2 3XGBU and 2 2XMK83
-var a2g_mix = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.i);
-        pylon4.loadSet(pylonSets.d);
+# A/G Unguided 1: (MK-82, MK-84)
+var a2g_mk1 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.m82);
+        pylon4.loadSet(pylonSets.m84);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.m84);
+        pylon7.loadSet(pylonSets.m82);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.empty);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# A/G Unguided 2 (MK-83, MK-84)
+var a2g_mk2 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.m83);
+        pylon4.loadSet(pylonSets.m84);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.m84);
+        pylon7.loadSet(pylonSets.m83);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.empty);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# A/G CEM 1 (CBU-87)
+var a2g_cem1 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.c87);
+        pylon4.loadSet(pylonSets.c87);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.c87);
+        pylon7.loadSet(pylonSets.c87);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.empty);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# A/G LGB Strike 1 (GBU-12)
+var a2g_lgb1 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.g12x3);
+        pylon4.loadSet(pylonSets.fuel37L);
         pylon5.loadSet(pylonSets.empty);
-        pylon6.loadSet(pylonSets.d);
-        pylon7.loadSet(pylonSets.i);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.g12x3);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.podLTgp);
+        pylon11.loadSet(pylonSets.podLNav);
         f16.reloadCannon();
     } else {
       screen.log.write(f16.msgB);
     }
 }
 
-# Guided A/G 1 : 2 GBU-24 and 2 2XGBU
-var a2g_guided1 = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.c4);
-        pylon4.loadSet(pylonSets.j);
+# A/G LBG Strike 2 (GBU-12, GBU-24)
+var a2g_lgb2 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.g24);
+        pylon4.loadSet(pylonSets.g12x2);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.g12x2);
+        pylon7.loadSet(pylonSets.g24);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.podLTgp);
+        pylon11.loadSet(pylonSets.podLNav);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# A/G GPS Strike 1 (GBU-54)
+var a2g_gps1 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.g54);
+        pylon4.loadSet(pylonSets.fuel37L);
         pylon5.loadSet(pylonSets.empty);
-        pylon6.loadSet(pylonSets.j);
-        pylon7.loadSet(pylonSets.c4);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.g54);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.podLite);
+        pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
     } else {
       screen.log.write(f16.msgB);
     }
 }
 
-# Guided A/G 2 : 2 JDAM and 2 3XGBU
-var a2g_guided2 = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.i);
-        pylon4.loadSet(pylonSets.c3);
-        pylon5.loadSet(pylonSets.f);
-        pylon6.loadSet(pylonSets.c3);
-        pylon7.loadSet(pylonSets.i);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
+# A/G GPS Strike 2 (GBU-54, GBU-31)
+var a2g_gps2 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
+        pylon3.loadSet(pylonSets.g54);
+        pylon4.loadSet(pylonSets.g31);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.g31);
+        pylon7.loadSet(pylonSets.g54);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
+        pylon10.loadSet(pylonSets.podLite);
+        pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
     } else {
       screen.log.write(f16.msgB);
     }
 }
 
-# Anti-ship: 2 2XGBU and 2 AGM84
+# A/S Anti-Ship (AGM-84, GBU-31)
 var a2s_antiship = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.b);
-        pylon4.loadSet(pylonSets.c3);
-        pylon5.loadSet(pylonSets.f);
-        pylon6.loadSet(pylonSets.c3);
-        pylon7.loadSet(pylonSets.b);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.a84);
+        pylon4.loadSet(pylonSets.g31);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.g31);
+        pylon7.loadSet(pylonSets.a84);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podLite);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# A/S Anti-Ship (AGM-119)
+var a2s_antiship2 = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.a119);
+        pylon4.loadSet(pylonSets.a119);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.a119);
+        pylon7.loadSet(pylonSets.a119);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podSAtp);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# SEAD "Wild Weasel" (AGM-88, ECM pod)
+var a2g_sead = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.a88);
+        pylon4.loadSet(pylonSets.fuel37L);
+        pylon5.loadSet(pylonSets.podEcm);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.a88);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podSAtp);
+        pylon11.loadSet(pylonSets.podHarm);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# A/G Stand-off Strike mode 1 (AGM-154A)
+var a2g_jsow = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.a154);
+        pylon4.loadSet(pylonSets.fuel37L);
+        pylon5.loadSet(pylonSets.podEcm);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.a154);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podLite);
+        pylon11.loadSet(pylonSets.empty);
+        f16.reloadCannon();
+    } else {
+      screen.log.write(f16.msgB);
+    }
+}
+
+# A/G Stand-off Strike mode 2 (AGM-158)
+var a2g_jassm = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.a158);
+        pylon4.loadSet(pylonSets.fuel37L);
+        pylon5.loadSet(pylonSets.empty);
+        pylon6.loadSet(pylonSets.fuel37R);
+        pylon7.loadSet(pylonSets.a158);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podSAtp);
+        pylon11.loadSet(pylonSets.podHarm);
         f16.reloadCannon();
     } else {
       screen.log.write(f16.msgB);
@@ -357,16 +570,16 @@ var a2s_antiship = func {
 
 # Ferry configuration: 3 droptanks
 var a2a_ferry = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim9WT);
+        pylon2.loadSet(pylonSets.aim120);
         pylon3.loadSet(pylonSets.empty);
-        pylon4.loadSet(pylonSets.l);
-        pylon5.loadSet(pylonSets.f);
-        pylon6.loadSet(pylonSets.m);
+        pylon4.loadSet(pylonSets.fuel37L);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.fuel37R);
         pylon7.loadSet(pylonSets.empty);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
+        pylon8.loadSet(pylonSets.aim120);
+        pylon9.loadSet(pylonSets.aim9WT);
         pylon10.loadSet(pylonSets.empty);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
@@ -377,16 +590,16 @@ var a2a_ferry = func {
 
 # Ferry configuration w/ cargo: 2 droptanks, 2 cargopods
 var a2a_ferrycargo = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.r);
-        pylon2.loadSet(pylonSets.g);
-        pylon3.loadSet(pylonSets.f3);
-        pylon4.loadSet(pylonSets.o);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.podTrvl);
+        pylon4.loadSet(pylonSets.fuel60L);
         pylon5.loadSet(pylonSets.empty);
-        pylon6.loadSet(pylonSets.p);
-        pylon7.loadSet(pylonSets.f3);
-        pylon8.loadSet(pylonSets.g);
-        pylon9.loadSet(pylonSets.r);
+        pylon6.loadSet(pylonSets.fuel60R);
+        pylon7.loadSet(pylonSets.podTrvl);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
         pylon10.loadSet(pylonSets.empty);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
@@ -395,40 +608,20 @@ var a2a_ferrycargo = func {
     }
 }
 
-# SEAD: 2 AGM88 and ECM pod
-var a2g_sead = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.r);
-        pylon2.loadSet(pylonSets.q);
-        pylon3.loadSet(pylonSets.b2);
-        pylon4.loadSet(pylonSets.l);
-        pylon5.loadSet(pylonSets.f2);
-        pylon6.loadSet(pylonSets.m);
-        pylon7.loadSet(pylonSets.b2);
-        pylon8.loadSet(pylonSets.q);
-        pylon9.loadSet(pylonSets.r);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
-        f16.reloadCannon();
-    } else {
-      screen.log.write(f16.msgB);
-    }
-}
-
 # OCA: 4 AA missiles and 2 3x AGM65
 var a2g_oca = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.g);
-        pylon2.loadSet(pylonSets.h);
-        pylon3.loadSet(pylonSets.a);
-        pylon4.loadSet(pylonSets.b2);
-        pylon5.loadSet(pylonSets.f);
-        pylon6.loadSet(pylonSets.b2);
-        pylon7.loadSet(pylonSets.a);
-        pylon8.loadSet(pylonSets.h);
-        pylon9.loadSet(pylonSets.g);
-        pylon10.loadSet(pylonSets.tgp2);
-        pylon11.loadSet(pylonSets.tgp3);
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.aim120WT);
+        pylon2.loadSet(pylonSets.aim9);
+        pylon3.loadSet(pylonSets.agm65x3);
+        pylon4.loadSet(pylonSets.a88);
+        pylon5.loadSet(pylonSets.fuel30);
+        pylon6.loadSet(pylonSets.a88);
+        pylon7.loadSet(pylonSets.agm65x3);
+        pylon8.loadSet(pylonSets.aim9);
+        pylon9.loadSet(pylonSets.aim120WT);
+        pylon10.loadSet(pylonSets.podSAtp);
+        pylon11.loadSet(pylonSets.podHarm);
         f16.reloadCannon();
     } else {
       screen.log.write(f16.msgB);
@@ -436,17 +629,17 @@ var a2g_oca = func {
 }
 
 # Peacetime training configuration
-var a2a_training = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.k2);
-        pylon2.loadSet(pylonSets.k);
+var training = func {
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.dumb2);
+        pylon2.loadSet(pylonSets.dumb1);
         pylon3.loadSet(pylonSets.empty);
         pylon4.loadSet(pylonSets.empty);
         pylon5.loadSet(pylonSets.empty);
         pylon6.loadSet(pylonSets.empty);
         pylon7.loadSet(pylonSets.empty);
-        pylon8.loadSet(pylonSets.k);
-        pylon9.loadSet(pylonSets.k2);
+        pylon8.loadSet(pylonSets.dumb1);
+        pylon9.loadSet(pylonSets.dumb2);
         pylon10.loadSet(pylonSets.empty);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();
@@ -457,8 +650,8 @@ var a2a_training = func {
 
 # Clean configuration
 var clean = func {
-    if (fcs != nil and getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW")) {
-        pylon1.loadSet(pylonSets.k);# F16 never has nothing on wingtips unless its fired off, its aerodynamics is designed to work better with something there.
+    if (fcs != nil and (getprop("payload/armament/msg") == FALSE or getprop("fdm/jsbsim/gear/unit[0]/WOW"))) {
+        pylon1.loadSet(pylonSets.dumb1);# F16 never has nothing on wingtips unless its fired off, its aerodynamics is designed to work better with something there.
         pylon2.loadSet(pylonSets.empty);
         pylon3.loadSet(pylonSets.empty);
         pylon4.loadSet(pylonSets.empty);
@@ -466,7 +659,7 @@ var clean = func {
         pylon6.loadSet(pylonSets.empty);
         pylon7.loadSet(pylonSets.empty);
         pylon8.loadSet(pylonSets.empty);
-        pylon9.loadSet(pylonSets.k);
+        pylon9.loadSet(pylonSets.dumb1);
         pylon10.loadSet(pylonSets.empty);
         pylon11.loadSet(pylonSets.empty);
         f16.reloadCannon();

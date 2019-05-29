@@ -2,7 +2,7 @@
 
 <PropertyList>
 
-	<path>agm84.ac</path>
+	<path>AGM-84.ac</path>
 
   <effect>
       <inherits-from>Aircraft/f16/Models/Effects/fuselage/model-combined-fuselage</inherits-from>
@@ -13,12 +13,18 @@
           <ambient-correction type="float">0.00</ambient-correction>
           <reflection-enabled type="int">0</reflection-enabled>
       </parameters>
-      <object-name>Obj_000001_mat0</object-name>
+      <object-name>AGM-84</object-name>
+      <object-name>AGM-84_Frontfins</object-name>
+      <object-name>AGM-84_Tailend</object-name>
+      <object-name>AGM-84_Tailfins</object-name>
   </effect>
 
   <animation>
     <type>select</type>
-    <object-name>Obj_000001_mat0</object-name>
+      <object-name>AGM-84</object-name>
+      <object-name>AGM-84_Frontfins</object-name>
+      <object-name>AGM-84_Tailend</object-name>
+      <object-name>AGM-84_Tailfins</object-name>
     <condition>
       <property>payload/armament/agm-84/flags/msl-id-200</property>
     </condition>
@@ -289,7 +295,10 @@
      </particlesystem>
 
 	<animation>
-  		<object-name>Obj_000001_mat0</object-name>
+  		<object-name>AGM-84</object-name>
+      <object-name>AGM-84_Frontfins</object-name>
+      <object-name>AGM-84_Tailend</object-name>
+      <object-name>AGM-84_Tailfins</object-name>
   		<enable-hot type="bool">false</enable-hot>
  	</animation>
 	
