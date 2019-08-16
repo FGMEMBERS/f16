@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
     <sim>
-        <aircraft-version>3.14</aircraft-version>
-        <minimum-fg-version>2018.1.1</minimum-fg-version>
+        <aircraft-version>3.15</aircraft-version>
+        <minimum-fg-version>2018.3</minimum-fg-version>
         <!-- enable "parkpos=AVAILABLE" option for the F-16 -->
         <dimensions>
             <radius-m type="double">10.0</radius-m>
@@ -15,6 +15,28 @@
             <path>/sim/dimensions/parkpos-offset-m</path>
             <path>/sim/aircraft-class</path>
             <path>/sim/aircraft-operator</path>
+            <path>/f16/avionics/c1-lat</path>
+            <path>/f16/avionics/c1-lon</path>
+            <path>/f16/avionics/c1-rad</path>
+            <path>/f16/avionics/c2-lat</path>
+            <path>/f16/avionics/c2-lon</path>
+            <path>/f16/avionics/c2-rad</path>
+            <path>/f16/avionics/c3-lat</path>
+            <path>/f16/avionics/c3-lon</path>
+            <path>/f16/avionics/c3-rad</path>
+            <path>/f16/avionics/c4-lat</path>
+            <path>/f16/avionics/c4-lon</path>
+            <path>/f16/avionics/c4-rad</path>
+            <path>/link16/wingman-1</path>
+            <path>/link16/wingman-2</path>
+            <path>/link16/wingman-3</path>
+            <!-- wingman #4 excluded on purpose -->
+            <path>/link16/wingman-5</path>
+            <path>/link16/wingman-6</path>
+            <path>/link16/wingman-7</path>
+            <path>/f16/avionics/gps-lat</path>
+            <path>/f16/avionics/gps-lon</path>
+            <path>/f16/avionics/gps-alt</path>
         </aircraft-data>
         <tags>
             <tag>fighter</tag>
@@ -92,7 +114,7 @@
             <fallback-model-index type="int">516</fallback-model-index>
             <f16>
                 <AIM-9L type="bool">true</AIM-9L>
-                <AIM-9L_dummy type="bool">false</AIM-9L_dummy>
+                <CATM-9L type="bool">false</CATM-9L>
                 <AIM-9_smokewinders type="bool">false</AIM-9_smokewinders>
                 <smokewinderR1 type="int">0</smokewinderR1>
                 <smokewinderR9 type="int">0</smokewinderR9>
@@ -102,7 +124,7 @@
                 <smokewinderB9 type="int">0</smokewinderB9>
                 <smokewinderW1 type="int">0</smokewinderW1>
                 <smokewinderW9 type="int">0</smokewinderW9>
-                <AIM-120C5 type="bool">false</AIM-120C5>
+                <AIM-120B type="bool">false</AIM-120B>
                 <wingmounts type="bool">true</wingmounts>
                 <ventraltank type="bool">false</ventraltank>
                 <wingtankL type="bool">false</wingtankL>
@@ -364,6 +386,15 @@
                             <dialog-name>scenario28</dialog-name>
                         </binding>
                     </item> 
+                    <item>
+                        <label>Preplanning</label>
+                        <enabled type="bool">true</enabled>
+                        <name>circles</name>
+                        <binding>
+                            <command>dialog-show</command>
+                            <dialog-name>circles</dialog-name>
+                        </binding>
+                    </item> 
                 </menu>
             </default>
         </menubar>
@@ -408,6 +439,7 @@
                 <float n="12" type="double">0</float>
                 <float n="13" type="double">0</float>
                 <float n="14" type="double">0</float><!-- scene red inverted -->
+                <float n="19" type="double">0</float><!-- afterburner engine fire transperancy -->
             </generic>
             <visibility-range-nm type="int">160</visibility-range-nm>
         </multiplay>
@@ -487,6 +519,10 @@
             <key>
                 <name>y</name>
                 <desc>Select next radar contact</desc>
+            </key>
+            <key>
+                <name>Ctrl-y</name>
+                <desc>Deselect radar contact</desc>
             </key>
             <key>
                 <name>S</name>
@@ -696,7 +732,7 @@ Bring this up in the menu.
 Select a difficulty.
 Aim with the '+' bore symbol in HUD on a enemy for 1 second to score a kill.
 Friendly fire is off.
-Its meant to be use without using missiles to simulate gun fight, but if you find it hard we recommend you practice on setting 0 with AIM-9.
+Its meant to be use without using missiles to simulate gun fight, but if you find it hard we recommend you practice on setting 0 with AIM-9L.
 Some of the settings will give you a wingman.
 To view the AI flying, switch to missile view and click the arrows in lower left corner.
 
@@ -965,7 +1001,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 </binding>
                 <binding>
                     <command>nasal</command>
-                    <script>screen.log.write("MPO "~(getprop("fdm/jsbsim/fcs/fbw-override")==1?"ON":"OFF"), 0.5, 0.5, 1);</script>
+                    <script>screen.log.write("Manual Pitch Override "~(getprop("fdm/jsbsim/fcs/fbw-override")==1?"ON":"OFF"), 0.5, 0.5, 1);</script>
                 </binding>
             </key>
             <key n="102">
@@ -1055,6 +1091,20 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                     <command>property-assign</command>
                     <property>sim/model/f16/instrumentation/radar-awg-9/select-target</property>
                     <value>1</value>
+                </binding>
+                <mod-ctrl>
+                    <binding>
+                        <command>nasal</command>
+                        <script>print("deselect");awg_9.active_u=nil;</script>
+                    </binding>
+                </mod-ctrl>
+            </key>
+            <key n="25">
+                <name>ctrl-y</name>
+                <desc>Target deselect</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>awg_9.active_u=nil;awg_9.active_u_callsign = nil;</script>
                 </binding>
             </key>
             <key n="82">
@@ -1152,7 +1202,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 </mod-ctrl>
             </key>
             <key n="50">
-                <name>CTRL-1</name>
+                <name>CTRL-2</name>
                 <mod-ctrl>
                     <desc>GCI dope</desc>
                     <binding>
@@ -1163,7 +1213,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 </mod-ctrl>
             </key>
             <key n="51">
-                <name>CTRL-1</name>
+                <name>CTRL-3</name>
                 <mod-ctrl>
                     <desc>GCI cutoff</desc>
                     <binding>
@@ -1601,6 +1651,12 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <auto-switch-target-allowed type="bool">true</auto-switch-target-allowed><!-- bug in m-code prevents from using this option atm. -->
                 <prowl-flight type="string">gyro-pitch</prowl-flight>
                 <switch-time-sec type="double">5</switch-time-sec>
+                <coolable type="bool">true</coolable>
+                <cool-time type="double">5</cool-time>
+                <cool-duration type="int">3600</cool-duration>
+                <warm-detect-range-nm type="double">6.5</warm-detect-range-nm>
+                <detect-range-nm type="double">9.7</detect-range-nm>
+                <ready-time type="double">0.5</ready-time>
             </aim-9>
             <aim-120>
                 <short-name type="string">A120B</short-name>
@@ -1635,7 +1691,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <DLZ type="bool">true</DLZ>
                 <DLZ-optimal-alt-feet type="double">30000</DLZ-optimal-alt-feet>
                 <DLZ-optimal-closing-mach type="double">2.0</DLZ-optimal-closing-mach>
-
+                <ready-time type="double">1.5</ready-time>
                 <reaquire type="bool">true</reaquire>
                 <lock-on-after-launch type="bool">true</lock-on-after-launch>
                 <auto-switch-target-allowed type="bool">false</auto-switch-target-allowed>
@@ -1686,13 +1742,142 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <reaquire type="bool">true</reaquire>
                 <lock-on-after-launch type="bool">false</lock-on-after-launch>
                 <auto-switch-target-allowed type="bool">false</auto-switch-target-allowed>
+                <ready-time type="double">1.5</ready-time>
             </aim-7>
+            <mk-82> 
+                <short-name type="string">B82</short-name>
+                <long-name type="string">MK-82 General Purpose Bomb</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
+                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 240 </FCS-field-deg>
+                <seeker-field-deg type="int"> 360 </seeker-field-deg>
+                <max-g type="double"> 1.5 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 500 </weight-launch-lbs>
+                <weight-warhead-lbs type="double"> 190 </weight-warhead-lbs>
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
+                <arming-time-sec type="double"> 4 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 275 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
+                <lateral-dps type="double"> -10 </lateral-dps>
+                <max-pitch-deg type="double">-90</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+            </mk-82>
+            <mk-83> 
+                <short-name type="string">B83</short-name>
+                <long-name type="string">MK-83 General Purpose Bomb</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
+                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 240 </FCS-field-deg>
+                <seeker-field-deg type="int"> 360 </seeker-field-deg>
+                <max-g type="double"> 1.5 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 1014 </weight-launch-lbs>
+                <weight-warhead-lbs type="double"> 445 </weight-warhead-lbs>
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <cross-section-sqft type="double"> 1.07744817 </cross-section-sqft><!-- the MK83 is 357 mm diam -->
+                <arming-time-sec type="double"> 5 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 300 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
+                <lateral-dps type="double"> -10 </lateral-dps>
+                <max-pitch-deg type="double">-90</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+            </mk-83>
+            <mk-84>
+                <short-name type="string">B84</short-name>
+                <long-name type="string">MK-84 General Purpose Bomb</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double">8 </max-fire-range-nm>
+                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 200 </FCS-field-deg>
+                <seeker-field-deg type="int"> 32 </seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <max-g type="double"> 1.8 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 2039 </weight-launch-lbs><!-- weapons file 2004 -->
+                <weight-warhead-lbs type="double"> 945 </weight-warhead-lbs><!-- weapons file 2004 -->
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <cross-section-sqft type="double"> 1.78886 </cross-section-sqft><!-- the MK84 which is the bomb part is 640 mm diam -->
+                <arming-time-sec type="double"> 6 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double"> 350 </max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1</deploy-time>
+                <lateral-dps type="double"> 10 </lateral-dps>
+                <max-pitch-deg type="double">-45</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <!-- the following 6 properties not used yet: -->
+                <release-limit-mach type="double"> 1.2 </release-limit-mach>
+                <release-limit-altitude type="double"> 45000 </release-limit-altitude>
+                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
+                <release-limit-roll type="double"> 90 </release-limit-roll>
+                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
+                <require-lock-to-fire type="bool">false</require-lock-to-fire>
+            </mk-84>
             <gbu-12>
                 <short-name type="string">GB12</short-name>
                 <long-name type="string">GBU-12 Paveway II</long-name>
                 <fire-msg type="string">Bombs away</fire-msg>
                 <class type="string">GMP</class>
-                <max-fire-range-nm type="double">12 </max-fire-range-nm>
+                <max-fire-range-nm type="double">15 </max-fire-range-nm>
                 <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
                 <guidance type="string">laser</guidance>
                 <navigation type="string">APN</navigation>
@@ -1709,9 +1894,9 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <weight-launch-lbs type="double"> 610 </weight-launch-lbs>
                 <weight-warhead-lbs type="double"> 190 </weight-warhead-lbs>
                 <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <drag-coeff type="double"> 0.013 </drag-coeff>
                 <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
-                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <arming-time-sec type="double"> 4 </arming-time-sec>
                 <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
                 <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
                 <all-aspect type="bool">true</all-aspect>
@@ -1759,7 +1944,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
                 <drag-coeff type="double"> 0.013 </drag-coeff>
                 <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
-                <arming-time-sec type="double"> 2 </arming-time-sec>
+                <arming-time-sec type="double"> 4 </arming-time-sec>
                 <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
                 <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
                 <all-aspect type="bool">true</all-aspect>
@@ -1805,9 +1990,9 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <weight-launch-lbs type="double"> 2039 </weight-launch-lbs><!-- weapons file 2004 -->
                 <weight-warhead-lbs type="double"> 945 </weight-warhead-lbs><!-- weapons file 2004 -->
                 <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <drag-coeff type="double"> 0.013 </drag-coeff>
                 <cross-section-sqft type="double"> 1.78886 </cross-section-sqft><!-- the MK84 which is the bomb part is 640 mm diam -->
-                <arming-time-sec type="double"> 2 </arming-time-sec>
+                <arming-time-sec type="double"> 6 </arming-time-sec>
                 <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
                 <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
                 <all-aspect type="bool">true</all-aspect>
@@ -1853,9 +2038,9 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <weight-launch-lbs type="double"> 2267 </weight-launch-lbs><!-- weapons file 1984 -->
                 <weight-warhead-lbs type="double"> 945 </weight-warhead-lbs><!-- weapons file 2004 -->
                 <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
+                <drag-coeff type="double"> 0.013 </drag-coeff>
                 <cross-section-sqft type="double"> 1.78886 </cross-section-sqft>
-                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <arming-time-sec type="double"> 6 </arming-time-sec>
                 <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
                 <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
                 <all-aspect type="bool">true</all-aspect>
@@ -1951,7 +2136,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <vol-search type="double">0.00</vol-search>
                 <vol-track type="double">1.00</vol-track>
                 <guidance type="string">heat</guidance><!--  -->
-                <navigation type="string">APN</navigation>                           
+                <navigation type="string">direct</navigation>                           
                 <all-aspect type="bool">true</all-aspect>
                 <class type="string">M</class>
                 <max-fire-range-nm type="double">30</max-fire-range-nm>              <!--  -->
@@ -1987,7 +2172,7 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <short-name type="string">AG154</short-name>
                 <long-name type="string">AGM-154A JSOW</long-name>
                 <fire-msg type="string">Greyhound</fire-msg>
-                <class type="string">P</class>
+                <class type="string">GP</class>
                 <max-fire-range-nm type="double">70</max-fire-range-nm>
                 <min-fire-range-nm type="double">0</min-fire-range-nm>
                 <guidance type="string">gps</guidance>
@@ -2012,8 +2197,8 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <drag-coeff type="double">0.02</drag-coeff>
                 <cross-section-sqft type="double">1.9121</cross-section-sqft>
                 <arming-time-sec type="double">2.5</arming-time-sec>
-                <min-speed-for-guiding-mach type="double">0</min-speed-for-guiding-mach>
-                <self-destruct-time-sec type="double">1100</self-destruct-time-sec>
+                <min-speed-for-guiding-mach type="double">0.3</min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double">400</self-destruct-time-sec>
                 <all-aspect type="bool">true</all-aspect>
                 <rail type="bool">false</rail>
                 <no-common-target type="bool">true</no-common-target>
@@ -2023,10 +2208,11 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <drop-time type="double">3.5</drop-time>
                 <deploy-time type="double">1.0</deploy-time>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
-                <!--terminal-alt-factor type="double">2</terminal-alt-factor>
-                <terminal-rise-time type="double">9.0</terminal-rise-time>
-                <terminal-dive-time type="double">6.0</terminal-dive-time-->
+                <terminal-alt-factor type="double">2</terminal-alt-factor>
+                <terminal-rise-time type="double">20.0</terminal-rise-time>
+                <terminal-dive-time type="double">9.0</terminal-dive-time>
                 <seeker-angular-speed-dps type="double">45</seeker-angular-speed-dps>
+                <ready-time type="double">3.5</ready-time>
             </agm-154a>
             <agm-158>
                 <short-name type="string">AG158</short-name>
@@ -2069,178 +2255,11 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <deploy-time type="double">1.0</deploy-time>
                 <hit-everything-nearby type="bool">true</hit-everything-nearby>
                 <terminal-alt-factor type="double">2</terminal-alt-factor>
-                <terminal-rise-time type="double">9.0</terminal-rise-time>
-                <terminal-dive-time type="double">6.0</terminal-dive-time>
+                <terminal-rise-time type="double">15.0</terminal-rise-time>
+                <terminal-dive-time type="double">9.0</terminal-dive-time>
                 <seeker-angular-speed-dps type="double">45</seeker-angular-speed-dps>
+                <ready-time type="double">3.5</ready-time>
             </agm-158>
-            <mk-82> 
-                <short-name type="string">B82</short-name>
-                <long-name type="string">MK-82 General Purpose Bomb</long-name>
-                <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GMP</class>
-                <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
-                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
-                <guidance type="string">unguided</guidance>
-                <navigation type="string">direct</navigation>
-                <loft-altitude type="int"> 0 </loft-altitude>
-                <terrain-follow type="bool">false</terrain-follow>
-                <FCS-field-deg type="int"> 240 </FCS-field-deg>
-                <seeker-field-deg type="int"> 360 </seeker-field-deg>
-                <max-g type="double"> 1.5 </max-g>
-                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
-                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
-                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
-                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
-                <weight-launch-lbs type="double"> 500 </weight-launch-lbs>
-                <weight-warhead-lbs type="double"> 190 </weight-warhead-lbs>
-                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
-                <cross-section-sqft type="double"> 0.63 </cross-section-sqft>
-                <arming-time-sec type="double"> 3 </arming-time-sec>
-                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
-                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
-                <all-aspect type="bool">true</all-aspect>
-                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
-                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
-                <rail type="bool">false</rail>
-                <max-report-distance type="double"> 275 </max-report-distance>
-                <vol-search type="double"> 0.075 </vol-search>
-                <vol-track type="double"> 0.25 </vol-track>
-                <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">1</drop-time>
-                <deploy-time type="double">1</deploy-time>
-                <lateral-dps type="double"> -10 </lateral-dps>
-                <max-pitch-deg type="double">-90</max-pitch-deg>
-                <hit-everything-nearby type="bool">true</hit-everything-nearby>
-            </mk-82>
-            <mk-83> 
-                <short-name type="string">B83</short-name>
-                <long-name type="string">MK-83 General Purpose Bomb</long-name>
-                <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GMP</class>
-                <max-fire-range-nm type="double"> 8 </max-fire-range-nm>
-                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
-                <guidance type="string">unguided</guidance>
-                <navigation type="string">direct</navigation>
-                <loft-altitude type="int"> 0 </loft-altitude>
-                <terrain-follow type="bool">false</terrain-follow>
-                <FCS-field-deg type="int"> 240 </FCS-field-deg>
-                <seeker-field-deg type="int"> 360 </seeker-field-deg>
-                <max-g type="double"> 1.5 </max-g>
-                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
-                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
-                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
-                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
-                <weight-launch-lbs type="double"> 1014 </weight-launch-lbs>
-                <weight-warhead-lbs type="double"> 445 </weight-warhead-lbs>
-                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
-                <cross-section-sqft type="double"> 1.07744817 </cross-section-sqft><!-- the MK83 is 357 mm diam -->
-                <arming-time-sec type="double"> 3 </arming-time-sec>
-                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
-                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
-                <all-aspect type="bool">true</all-aspect>
-                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
-                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
-                <rail type="bool">false</rail>
-                <max-report-distance type="double"> 300 </max-report-distance>
-                <vol-search type="double"> 0.075 </vol-search>
-                <vol-track type="double"> 0.25 </vol-track>
-                <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">1</drop-time>
-                <deploy-time type="double">1</deploy-time>
-                <lateral-dps type="double"> -10 </lateral-dps>
-                <max-pitch-deg type="double">-90</max-pitch-deg>
-                <hit-everything-nearby type="bool">true</hit-everything-nearby>
-            </mk-83>
-            <mk-84>
-                <short-name type="string">B84</short-name>
-                <long-name type="string">MK-84 General Purpose Bomb</long-name>
-                <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GMP</class>
-                <max-fire-range-nm type="double">8 </max-fire-range-nm>
-                <min-fire-range-nm type="double"> 0 </min-fire-range-nm>
-                <guidance type="string">unguided</guidance>
-                <navigation type="string">direct</navigation>
-                <loft-altitude type="int"> 0 </loft-altitude>
-                <terrain-follow type="bool">false</terrain-follow>
-                <FCS-field-deg type="int"> 200 </FCS-field-deg>
-                <seeker-field-deg type="int"> 32 </seeker-field-deg>
-                <reaquire type="bool">true</reaquire>
-                <max-g type="double"> 1.8 </max-g>
-                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
-                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
-                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
-                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
-                <weight-launch-lbs type="double"> 2039 </weight-launch-lbs><!-- weapons file 2004 -->
-                <weight-warhead-lbs type="double"> 945 </weight-warhead-lbs><!-- weapons file 2004 -->
-                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.012 </drag-coeff>
-                <cross-section-sqft type="double"> 1.78886 </cross-section-sqft><!-- the MK84 which is the bomb part is 640 mm diam -->
-                <arming-time-sec type="double"> 3 </arming-time-sec>
-                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
-                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
-                <all-aspect type="bool">true</all-aspect>
-                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
-                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
-                <rail type="bool">false</rail>
-                <max-report-distance type="double"> 350 </max-report-distance>
-                <vol-search type="double"> 0.075 </vol-search>
-                <vol-track type="double"> 0.25 </vol-track>
-                <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">1</drop-time>
-                <deploy-time type="double">1</deploy-time>
-                <lateral-dps type="double"> 10 </lateral-dps>
-                <max-pitch-deg type="double">-45</max-pitch-deg>
-                <hit-everything-nearby type="bool">true</hit-everything-nearby>
-                <!-- the following 6 properties not used yet: -->
-                <release-limit-mach type="double"> 1.2 </release-limit-mach>
-                <release-limit-altitude type="double"> 45000 </release-limit-altitude>
-                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
-                <release-limit-roll type="double"> 90 </release-limit-roll>
-                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
-                <require-lock-to-fire type="bool">false</require-lock-to-fire>
-            </mk-84>
-            <cbu-87> 
-                <short-name type="string">CB87</short-name>
-                <long-name type="string">CBU-87 Combined Effects Munition</long-name>
-                <fire-msg type="string">Bombs away</fire-msg>
-                <class type="string">GMP</class>
-                <max-fire-range-nm type="double">7</max-fire-range-nm>
-                <min-fire-range-nm type="double">0</min-fire-range-nm>
-                <guidance type="string">unguided</guidance>
-                <navigation type="string">direct</navigation>
-                <loft-altitude type="int"> 0 </loft-altitude>
-                <terrain-follow type="bool">false</terrain-follow>
-                <FCS-field-deg type="int"> 240 </FCS-field-deg>
-                <seeker-field-deg type="int"> 360 </seeker-field-deg>
-                <max-g type="double"> 1.5 </max-g>
-                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
-                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
-                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
-                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
-                <weight-launch-lbs type="double"> 950 </weight-launch-lbs>
-                <weight-warhead-lbs type="double"> 128 </weight-warhead-lbs>
-                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
-                <drag-coeff type="double"> 0.018 </drag-coeff>
-                <cross-section-sqft type="double"> 1.8094133 </cross-section-sqft>
-                <arming-time-sec type="double"> 2.6 </arming-time-sec>
-                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
-                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
-                <all-aspect type="bool">true</all-aspect>
-                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
-                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
-                <rail type="bool">false</rail>
-                <max-report-distance type="double">90</max-report-distance><!-- real: max 120x240 meter area, so 90 is average radius of that -->
-                <vol-search type="double"> 0.075 </vol-search>
-                <vol-track type="double"> 0.25 </vol-track>
-                <vol-track-weak type="double"> 0.175 </vol-track-weak>
-                <drop-time type="double">1</drop-time>
-                <deploy-time type="double">0.75</deploy-time>
-                <lateral-dps type="double"> -50 </lateral-dps>
-                <max-pitch-deg type="double">-90</max-pitch-deg>
-                <hit-everything-nearby type="bool">true</hit-everything-nearby>
-            </cbu-87>
             <agm-88>
                 <short-name type="string">AG88</short-name>
                 <long-name type="string">AGM-88 HARM</long-name>
@@ -2277,6 +2296,145 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
                 <class type="string">GM</class>
                 <fire-msg type="string">Sniper</fire-msg>
             </agm-88>
+            <cbu-87> 
+                <short-name type="string">CB87</short-name>
+                <long-name type="string">CBU-87 Combined Effects Munition</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double">7</max-fire-range-nm>
+                <min-fire-range-nm type="double">0</min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int"> 240 </FCS-field-deg>
+                <seeker-field-deg type="int"> 360 </seeker-field-deg>
+                <max-g type="double"> 1.5 </max-g>
+                <thrust-lbf-stage-1 type="double"> 0 </thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double"> 0 </thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double"> 0 </stage-1-duration-sec>
+                <stage-2-duration-sec type="double"> 0 </stage-2-duration-sec>
+                <weight-launch-lbs type="double"> 950 </weight-launch-lbs>
+                <weight-warhead-lbs type="double"> 128 </weight-warhead-lbs>
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.018 </drag-coeff>
+                <cross-section-sqft type="double"> 1.8094133 </cross-section-sqft>
+                <arming-time-sec type="double"> 3 </arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double"> 10000 </self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double">90</max-report-distance><!-- real: max 120x240 meter area, so 90 is average radius of that -->
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">0.75</deploy-time>
+                <lateral-dps type="double">-90</lateral-dps>
+                <max-pitch-deg type="double">-90</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+            </cbu-87>
+            <b61-7>
+                <short-name type="string">B61-7</short-name>
+                <long-name type="string">B61-7 Inert Training Body</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double">18</max-fire-range-nm>
+                <min-fire-range-nm type="double">0</min-fire-range-nm>
+                <guidance type="string">unguided</guidance>
+                <navigation type="string">direct</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int">200</FCS-field-deg>
+                <seeker-field-deg type="int">45</seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <max-g type="double">1.4</max-g>
+                <thrust-lbf-stage-1 type="double">0</thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double">0</thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double">0</stage-1-duration-sec>
+                <stage-2-duration-sec type="double">0</stage-2-duration-sec>
+                <weight-launch-lbs type="double">700</weight-launch-lbs>
+                <weight-warhead-lbs type="double">0</weight-warhead-lbs> <!-- Dummy version -->
+                <weight-fuel-lbm type="double">0</weight-fuel-lbm>
+                <drag-coeff type="double">0.013</drag-coeff>
+                <delta-drag-coeff-deploy type="double">20.00</delta-drag-coeff-deploy>
+                <cross-section-sqft type="double">1.1722</cross-section-sqft>
+                <arming-time-sec type="double">1200</arming-time-sec>
+                <min-speed-for-guiding-mach type="double"> 0 </min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double">1200</self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double">3200</max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1.5</drop-time>
+                <deploy-time type="double">3</deploy-time>
+                <lateral-dps type="double">20</lateral-dps>
+                <max-pitch-deg type="double">-45</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <inert type="bool">true</inert>
+                <release-limit-mach type="double">1.8</release-limit-mach>
+                <release-limit-altitude type="double">42000</release-limit-altitude>
+                <release-limit-g type="double">2.5</release-limit-g>
+                <release-limit-roll type="double">90</release-limit-roll>
+                <mounted-limit-g type="double">7.5</mounted-limit-g>
+                <require-lock-to-fire type="bool">true</require-lock-to-fire>
+                <ready-time type="double">25</ready-time>
+            </b61-7>
+            <b61-12>
+                <short-name type="string">B61-12</short-name>
+                <long-name type="string">B61-12 Test Flight Body</long-name>
+                <fire-msg type="string">Bombs away</fire-msg>
+                <class type="string">GMP</class>
+                <max-fire-range-nm type="double">25</max-fire-range-nm>
+                <min-fire-range-nm type="double">0</min-fire-range-nm>
+                <guidance type="string">gps</guidance>
+                <navigation type="string">APN</navigation>
+                <loft-altitude type="int"> 0 </loft-altitude>
+                <terrain-follow type="bool">false</terrain-follow>
+                <FCS-field-deg type="int">240</FCS-field-deg>
+                <seeker-field-deg type="int">90</seeker-field-deg>
+                <reaquire type="bool">true</reaquire>
+                <max-g type="double"> 1.9 </max-g>
+                <thrust-lbf-stage-1 type="double">0</thrust-lbf-stage-1>
+                <thrust-lbf-stage-2 type="double">0</thrust-lbf-stage-2>
+                <stage-1-duration-sec type="double">0</stage-1-duration-sec>
+                <stage-2-duration-sec type="double">0</stage-2-duration-sec>
+                <weight-launch-lbs type="double">700</weight-launch-lbs>
+                <weight-warhead-lbs type="double">0</weight-warhead-lbs> <!-- Dummy version -->
+                <weight-fuel-lbm type="double"> 0 </weight-fuel-lbm>
+                <drag-coeff type="double"> 0.010 </drag-coeff>
+                <cross-section-sqft type="double">1.1722</cross-section-sqft>
+                <arming-time-sec type="double">800</arming-time-sec>
+                <min-speed-for-guiding-mach type="double">0</min-speed-for-guiding-mach>
+                <self-destruct-time-sec type="double">800</self-destruct-time-sec>
+                <all-aspect type="bool">true</all-aspect>
+                <lock-on-sun-deg type="double"> 0 </lock-on-sun-deg>
+                <seeker-angular-speed-dps type="double"> 0 </seeker-angular-speed-dps>
+                <rail type="bool">false</rail>
+                <max-report-distance type="double">1700</max-report-distance>
+                <vol-search type="double"> 0.075 </vol-search>
+                <vol-track type="double"> 0.25 </vol-track>
+                <vol-track-weak type="double"> 0.175 </vol-track-weak>
+                <drop-time type="double">1</drop-time>
+                <deploy-time type="double">1.5</deploy-time>
+                <lateral-dps type="double">540</lateral-dps>
+                <max-pitch-deg type="double">-60</max-pitch-deg>
+                <hit-everything-nearby type="bool">true</hit-everything-nearby>
+                <inert type="bool">true</inert>
+                <release-limit-mach type="double"> 2.0 </release-limit-mach>
+                <release-limit-altitude type="double"> 45000 </release-limit-altitude>
+                <release-limit-g type="double"> 0 </release-limit-g><!-- no info on this -->
+                <release-limit-roll type="double"> 90 </release-limit-roll>
+                <mounted-limit-g type="double"> 7.5 </mounted-limit-g>
+                <require-lock-to-fire type="bool">false</require-lock-to-fire>
+                <ready-time type="double">25</ready-time>
+            </b61-12>
             <es>                    <!-- Ejection seat -->
                     <vol-search type="double">0.075</vol-search>
                     <vol-track type="double">0.25</vol-track>
@@ -2366,10 +2524,14 @@ For doing combat enable "MP Discharge messages". This might be considered spam o
         <wingman-2 type="string"></wingman-2>
         <wingman-3 type="string"></wingman-3>
         <wingman-4 type="string"></wingman-4>
+        <wingman-5 type="string"></wingman-5>
+        <wingman-6 type="string"></wingman-6>
+        <wingman-7 type="string"></wingman-7>
     </link16>
     <sound>
         <rwr-new type="bool">false</rwr-new>
         <rwr-launch type="string"></rwr-launch>
+        <rwr-launch-sam type="bool">false</rwr-launch-sam>
         <rwr-pri type="bool">false</rwr-pri>
         <rwr-unk type="bool">false</rwr-unk>
     </sound>
@@ -2403,6 +2565,19 @@ value. 18000=standard US transition altitude -->
             <gps-lat type="double">36.858</gps-lat>
             <gps-lon type="double">-115.3</gps-lon>
             <gps-alt type="double">4870</gps-alt>
+            <c1-lat type="double">0</c1-lat>
+            <c1-lon type="double">0</c1-lon>
+            <c1-rad type="double">0</c1-rad>
+            <c2-lat type="double">0</c2-lat>
+            <c2-lon type="double">0</c2-lon>
+            <c2-rad type="double">0</c2-rad>
+            <c3-lat type="double">0</c3-lat>
+            <c3-lon type="double">0</c3-lon>
+            <c3-rad type="double">0</c3-rad>
+            <c4-lat type="double">0</c4-lat>
+            <c4-lon type="double">0</c4-lon>
+            <c4-rad type="double">0</c4-rad>
+            <laser-code type="int">0000</laser-code>
         </avionics>
         <fcs>
             <autopilot-on type="int">0</autopilot-on> <!-- Ignored on Block 20+ -->
@@ -2493,10 +2668,10 @@ value. 18000=standard US transition altitude -->
             <file>Aircraft/f16/Nasal/zoom-views.nas</file>
             <file>Aircraft/f16/Nasal/f16.nas</file>
             <file>Aircraft/f16/Nasal/liveries.nas</file>
-            <file>Aircraft/f16/Nasal/tyresmoke.nas</file>
             <file>Aircraft/f16/Nasal/rain.nas</file>
             <file>Aircraft/f16/Nasal/vapor-lighting.nas</file>
             <file>Aircraft/f16/Nasal/mfd.nas</file>
+            <file>Aircraft/f16/Nasal/HUD/hud_math.nas</file>
             <file>Aircraft/f16/Nasal/HUD/HUD_main.nas</file>
             <file>Aircraft/f16/Nasal/MFD/MFD_main.nas</file>
             <!--<file>Aircraft/f16/Nasal/blackout.nas</file>-->

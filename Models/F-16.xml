@@ -307,6 +307,7 @@
       <object-name>Rudder.006</object-name>
       <object-name>Rudder</object-name>
       <object-name>VentralFins</object-name>
+      <object-name>AirIntake</object-name>
       <object-name>InternalFrontGearDoor</object-name>
       <object-name>ExternalFrontGearDoor</object-name>
       <object-name>ExternalRightMainDoor</object-name>
@@ -319,6 +320,22 @@
       <object-name>LWStation3</object-name>
       <object-name>ArresterHook</object-name>
       <object-name>Link16Antennas</object-name>
+      <object-name>FrontAftStrut</object-name>
+      <object-name>FrontLowerStrut</object-name>
+      <object-name>FrontTire</object-name>
+      <object-name>FrontUpperStrut</object-name>
+      <object-name>LeftLowerMainStrut</object-name>
+      <object-name>LeftMainTire</object-name>
+      <object-name>LeftUpperMainStrut</object-name>
+      <object-name>RightLowerMainStrut</object-name>
+      <object-name>RightMainTire</object-name>
+      <object-name>RightUpperMainStrut</object-name>
+      <object-name>LeftInnerStrut</object-name>
+      <object-name>LeftOuterLowerStrut</object-name>
+      <object-name>LeftOuterUpperStrut</object-name>
+      <object-name>RightInnerStrut</object-name>
+      <object-name>RightOuterLowerStrut</object-name>
+      <object-name>RightOuterUpperStrut</object-name>
  </effect>
 
  <effect>
@@ -333,7 +350,7 @@
           <lightmap-enabled type="int">1</lightmap-enabled>
           <lightmap-multi type="int">1</lightmap-multi>
       </parameters>
-      <object-name>Poly.001</object-name>
+      <object-name>Poly.001</object-name><!-- inner sidewalls of outlet -->
  </effect>
 
  <!-- glass effects, Cylinder.008 removed as HUD is factored out. -->
@@ -951,6 +968,28 @@
    <property>sim/multiplay/generic/bool[39]</property>
   </condition>
  </animation>
+ 
+ <animation>
+  <type>material</type>
+<!--  <condition>
+    <equals>
+      <property>/sim/rendering/rembrandt/enabled</property>
+      <value>0</value>
+    </equals>
+  </condition>-->
+  <object-name>InternalFlame</object-name>
+  <transparency>
+   <alpha-prop>sim/multiplay/generic/float[19]</alpha-prop>
+   <factor>0.75</factor>
+   <offset>0</offset>
+  </transparency>
+  <!--<emission>
+   <red>  0.0100</red>
+   <green>0.0050</green>
+   <blue> 0.0039</blue>
+   <factor-prop>engines/engine[0]/n1</factor-prop>
+  </emission>-->
+ </animation>
 
  <animation>
   <type>select</type>
@@ -1232,6 +1271,8 @@
   <type>translate</type>
   <object-name>FrontTire</object-name>
   <object-name>FrontLowerStrut</object-name>
+  <object-name>tyre-smoke-n</object-name>
+  <object-name>tyre-rain-n</object-name>
   <property>gear/gear/compression-norm</property>
   <factor>0.25</factor>
   <axis>
@@ -1489,6 +1530,8 @@
   <object-name>RightOuterUpperStrut</object-name>
   <object-name>RightUpperMainStrut</object-name>
   <object-name>RightLowerMainStrut</object-name>
+  <object-name>tyre-smoke-p</object-name>
+  <object-name>tyre-rain-p</object-name>
   <property>gear/gear[1]/compression-norm</property>
   <factor>20</factor>
   <center>
@@ -1651,6 +1694,8 @@
   <object-name>LeftOuterUpperStrut</object-name>
   <object-name>LeftUpperMainStrut</object-name>
   <object-name>LeftLowerMainStrut</object-name>
+  <object-name>tyre-smoke-s</object-name>
+  <object-name>tyre-rain-s</object-name>
   <property>gear/gear[2]/compression-norm</property>
   <factor>-20</factor>
   <center>

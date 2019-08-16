@@ -33,6 +33,8 @@ var F16_HUD = {
 
         obj.sy = sy;                        
         obj.sx = sx*0.695633;
+                  
+        HudMath.init([-4.53557,-0.07814,0.85608], [-4.72279,0.07924,0.66979], [sx,sy], [0,1.0], [0.695633,0.0], 0);
                           
         obj.canvas.addPlacement({"node": canvas_item});
         obj.canvas.setColorBackground(0.30, 1, 0.3, 0.00);
@@ -258,7 +260,23 @@ var F16_HUD = {
                                       }),
             props.UpdateManager.FromHashList(["master_arm", "altitude_ft", "roll", "groundspeed_kt", "density_altitude", "mach", "speed_down_fps", "speed_east_fps", "speed_north_fps"], 0.01, func(hdp)
                                       {
+                                          if (hdp.fcs_available) {
+                                            if (pylons.fcs.getDropMode() == 1) {
+                                                hdp.CCIP_active = 1;
+                                            } else {
+                                                hdp.CCIP_active = 0;
+                                            }
+                                          } else {
+                                              hdp.CCIP_active = 0;
+                                          }
                                           hdp.CCRP_active = obj.CCRP(hdp);
+                                          var lw = obj.CCIP(hdp);
+                                          if (lw==-1) {
+                                            obj.cciplow.setTranslation(hdp.VV_x+15,hdp.VV_y);
+                                            obj.cciplow.show();
+                                          } else {
+                                            obj.cciplow.hide();
+                                          }
                                       }),
             props.UpdateManager.FromHashList(["texUp","route_manager_active", "wp_bearing_deg", "heading","VV_x","VV_y"], 0.01, func(hdp)
                                              {
@@ -268,21 +286,21 @@ var F16_HUD = {
                                                      if (obj.wpbear!=nil) {
                                 
                                                          obj.wpbear=geo.normdeg180(obj.wpbear-hdp.heading);
-                                                         obj.thingX = obj.sx*0.5+obj.wpbear*obj.texelPerDegreeX;
+                                                         obj.tadpoleX = HudMath.getCenterPosFromDegs(obj.wpbear,0)[0];
 
-                                                         if (obj.thingX>obj.sx*0.66) {
-                                                             obj.thingX=obj.sx*0.66;
-                                                         } elsif (obj.thingX<obj.sx*0.33) {
-                                                             obj.thingX=obj.sx*0.33;
+                                                         if (obj.tadpoleX>obj.sx*0.20) {
+                                                             obj.tadpoleX=obj.sx*0.20;
+                                                         } elsif (obj.tadpoleX<-obj.sx*0.20) {
+                                                             obj.tadpoleX=-obj.sx*0.20;
                                                          }
-                                                         obj.thing.setTranslation(obj.thingX, obj.sy-obj.texels_up_into_hud+hdp.VV_y * obj.texelPerDegreeY);
-                                                         obj.thing.setRotation(obj.wpbear*D2R);
-                                                         obj.thing.show();
+                                                         obj.greatCircleSteeringCue.setTranslation(obj.tadpoleX, hdp.VV_y);
+                                                         obj.greatCircleSteeringCue.setRotation(obj.wpbear*D2R);
+                                                         obj.greatCircleSteeringCue.show();
                                                      } else {
-                                                         obj.thing.hide();
+                                                         obj.greatCircleSteeringCue.hide();
                                                      }
                                                  } else {
-                                                     obj.thing.hide();
+                                                     obj.greatCircleSteeringCue.hide();
                                                  }
                                              }
                                             ),
@@ -295,7 +313,7 @@ var F16_HUD = {
                                                      obj.boreSymbol.setTranslation(obj.sx/2,obj.sy-obj.texels_up_into_hud);
                                                      #obj.eegsGroup.setTranslation(obj.sx/2,obj.sy-obj.texels_up_into_hud);
                                                      #printf("bore %d,%d",obj.sx/2,obj.sy-obj.texels_up_into_hud);
-                                                     obj.offangle.setTranslation(obj.sx/2-10,obj.sy-obj.texels_up_into_hud);
+                                                     obj.locatorAngle.setTranslation(obj.sx/2-10,obj.sy-obj.texels_up_into_hud);
                                                      obj.boreSymbol.show();
                                                  }
                                                  obj.oldBore.hide();
@@ -311,18 +329,21 @@ var F16_HUD = {
             props.UpdateManager.FromHashList(["texUp","VV_x","VV_y","fpm"], 0.001, func(hdp)
                                       {
                                         if (hdp.fpm > 0) {
-                                            obj.VV.setTranslation (obj.sx*0.5+hdp.VV_x * obj.texelPerDegreeX, obj.sy-obj.texels_up_into_hud+hdp.VV_y * obj.texelPerDegreeY);
+                                            #obj.VV.setTranslation (obj.sx*0.5+hdp.VV_x * obj.texelPerDegreeX, obj.sy-obj.texels_up_into_hud+hdp.VV_y * obj.texelPerDegreeY);
+                                            obj.VV.setTranslation (hdp.VV_x, hdp.VV_y);
                                             obj.VV.show();
                                             obj.VV.update();
                                         } else {
                                             obj.VV.hide();
                                         }
-                                        obj.localizer.setTranslation (obj.sx*0.5+hdp.VV_x * obj.texelPerDegreeX, obj.sy-obj.texels_up_into_hud+hdp.VV_y * obj.texelPerDegreeY);
+                                        obj.localizer.setTranslation (hdp.VV_x, hdp.VV_y);
                                       }),
             props.UpdateManager.FromHashList(["rotary","hasGS","GSDeg","GSinRange","ILSDeg", "ILSinRange", "GSdist"], 0.01, func(hdp)
                                       {
                                         if (hdp.rotary == 0 or hdp.rotary == 3) {
-                                            if (hdp.ILSinRange and (hdp.GSdist == nil or hdp.GSdist < 20*NM2M)) {
+                                            #printf("ILSinRange %d GSdist %d", hdp.ILSinRange, hdp.GSdist == nil);
+                                            if (hdp.ILSinRange) {
+                                                #printf("ILS %d", hdp.ILSDeg);
                                                 obj.ilsGroup.setTranslation(4*clamp(hdp.ILSDeg,-5,5),0);
                                                 if (math.abs(hdp.ILSDeg)>5) {
                                                     obj.ils.hide();
@@ -334,7 +355,7 @@ var F16_HUD = {
                                                 
                                                 if (hdp.hasGS and hdp.GSinRange) {
                                                     obj.gsGroup.setTranslation(0,-20*hdp.GSDeg);
-                                                    #printf("GS %d ILS %d", hdp.GSDeg*10,hdp.ILSDeg,);
+                                                    #printf("GS %d", hdp.GSDeg*10);
                                                     if (math.abs(hdp.GSDeg)>0.99) {
                                                         obj.gs.hide();
                                                         obj.gsOff.show();
@@ -372,7 +393,8 @@ var F16_HUD = {
             props.UpdateManager.FromHashList(["fpm","texUp","gear_down","VV_x","VV_y", "wow", "ded"], 0.01, func(hdp)
                                       {
                                         if (hdp.gear_down and !hdp.wow) {
-                                          obj.bracket.setTranslation (obj.sx/2+hdp.VV_x * obj.texelPerDegreeX, obj.sy-obj.texels_up_into_hud+13 * obj.texelPerDegreeY);
+                                          obj.bracket.setTranslation (hdp.VV_x, HudMath.getCenterPosFromDegs(0,-13)[1]);
+                                          #obj.bracket.setTranslation (obj.sx/2+hdp.VV_x * obj.texelPerDegreeX, obj.sy-obj.texels_up_into_hud+13 * obj.texelPerDegreeY);
                                           obj.bracket.show();
                                           obj.roll_lines.hide();
                                           obj.roll_pointer.hide();
@@ -400,13 +422,22 @@ var F16_HUD = {
                                             #obj.ladder.setRotation (hdp.roll_rad);
                                             
                                             #obj.ladder.show();
-                                            
                                         
+                                        var result = HudMath.getDynamicHorizon(5,0.5,0.5,0.7,0.5);
+                                        obj.h_rot.setRotation(result[1]);
+                                        obj.horizon_group.setTranslation(result[0]);#place it on bore
+                                        obj.ladder_group.setTranslation(result[2]);
+                                        obj.ladder_group.show();
+                                        obj.ladder_group.update();
+                                        obj.horizon_group.update();
+                                        return;
                                         #############################
                                         # start new ladder:
                                         #############################
-                                        obj.fpi_x = hdp.VV_x * obj.texelPerDegreeX;
-                                        obj.fpi_y = hdp.VV_y * obj.texelPerDegreeY;
+                                        obj.fpi_x = hdp.VV_x;
+                                        obj.fpi_y = hdp.VV_y;
+                                        #obj.fpi_x = hdp.VV_x * obj.texelPerDegreeX;
+                                        #obj.fpi_y = hdp.VV_y * obj.texelPerDegreeY;
                                         obj.rot = -hdp.roll * D2R;
                                         
                                         obj.pos_y_rel = obj.fpi_y;#position from bore
@@ -441,9 +472,9 @@ var F16_HUD = {
 
 
                                         #obj.horizon_vertical = clamp(-math.cos(obj.fpi_angle-obj.rot)*obj.fpi_polar, -obj.sy*0, obj.sy*0.75);
-                                        obj.h_rot.setRotation(obj.rot);
-                                        obj.horizon_group.setTranslation(obj.sx*0.5, obj.sy-obj.texels_up_into_hud);#place it on bore
-                                        obj.ladder_group.setTranslation(obj.horizon_lateral, obj.texelPerDegreeY * hdp.pitch);
+                                        obj.h_rot.setRotation(result[1]);
+                                        obj.horizon_group.setTranslation(result[0]);#place it on bore
+                                        obj.ladder_group.setTranslation(result[2]);
                                         obj.ladder_group.show();
                                         obj.ladder_group.update();
                                         obj.horizon_group.update();
@@ -606,6 +637,8 @@ var F16_HUD = {
                                                      var submode = "";
                                                      if (hdp.CCRP_active) {
                                                         submode = "CCRP";
+                                                     } elsif (hdp.CCIP_active) {
+                                                        submode = "CCIP";
                                                      } elsif (hdp.submode == 1) {
                                                         submode = "BORE";
                                                      }
@@ -770,14 +803,8 @@ var F16_HUD = {
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
             append(obj.total, obj.boreSymbol);
-        obj.bracket = obj.svg.createChild("path")
-                .moveTo(0,-34)
-                .horiz(-10)
-                .vert(68)
-                .horiz(10)
-                .setStrokeLineWidth(1)
-                .setColor(0,1,0);
-                append(obj.total, obj.bracket);
+            
+            
         obj.speed_indicator = obj.svg.createChild("path")
                 .moveTo(0.25*sx*0.695633,sy*0.245)
                 .horiz(7)
@@ -950,21 +977,6 @@ append(obj.total, obj.speed_curr);
                 .setFont(HUD_FONT)
                 .setFontSize(9, 1.1);
                 append(obj.total, obj.ded4);
-        obj.offangle = obj.svg.createChild("text")# real name: locator line
-                .setText("0")
-                .setAlignment("right-center")
-                .setColor(0,1,0,1)
-                .setFont(HUD_FONT)
-                .setFontSize(9, 1.1);
-                append(obj.total, obj.offangle);
-        obj.trackLine = obj.svg.createChild("path")
-                .moveTo(0,0)
-                #.horiz(10)
-                .vert(-30)
-                .setStrokeLineWidth(1)
-                .setColor(0,1,0);
-
-            append(obj.total, obj.trackLine);
         obj.bombFallLine = obj.svg.createChild("path")
                 .moveTo(sx*0.5*0.695633,0)
                 #.horiz(10)
@@ -972,10 +984,11 @@ append(obj.total, obj.speed_curr);
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0).hide();
                 append(obj.total, obj.bombFallLine);
-        obj.solutionCue = obj.svg.createChild("path")
+        obj.solutionCue = obj.svg.createChild("path")#the moving line
                 .moveTo(sx*0.5*0.695633-5,0)
                 .horiz(10)
                 .setStrokeLineWidth(2)
+                .set("z-index",10005)
                 .setColor(0,1,0);
                 append(obj.total, obj.solutionCue);
         obj.ccrpMarker = obj.svg.createChild("path")
@@ -984,15 +997,7 @@ append(obj.total, obj.speed_curr);
                 .setStrokeLineWidth(1)
                 .setColor(0,1,0);
                 append(obj.total, obj.ccrpMarker);
-        obj.thing = obj.svg.createChild("path")
-            .moveTo(-2.5,0)
-            .arcSmallCW(2.5,2.5, 0, 2.5*2, 0)
-            .arcSmallCW(2.5,2.5, 0, -2.5*2, 0)
-            .moveTo(0,-2.5)
-            .vert(-10)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0);
-            append(obj.total, obj.thing);
+        
         var mr = 0.4;#milliradians
         obj.circle262 = obj.svg.createChild("path")#rdsearch (Allowable Steering Error Circle (ASEC))
             .moveTo(-262*mr,0)
@@ -1049,320 +1054,9 @@ append(obj.total, obj.speed_curr);
             #.set("z-index",10500)
             .setTranslation(sx*0.5*0.695633,sy*0.25);
             append(obj.total, obj.triangle120);
-        var boxRadius = 10;
-        var boxRadiusHalf = boxRadius*0.5;
-        var hairFactor = 0.8;
-        obj.radarLock = obj.svg.createChild("path")
-            .moveTo(-boxRadius*hairFactor,0)
-            .horiz(boxRadiusHalf*hairFactor)
-            .lineTo(0,boxRadiusHalf*hairFactor)
-            .moveTo(boxRadius*hairFactor,0)
-            .horiz(-boxRadiusHalf*hairFactor)
-            .lineTo(0,-boxRadiusHalf*hairFactor)
-            .moveTo(0,boxRadius*hairFactor)
-            .vert(-boxRadiusHalf*hairFactor)
-            .lineTo(boxRadiusHalf*hairFactor,0)
-            .moveTo(0,-boxRadius*hairFactor)
-            .vert(boxRadiusHalf*hairFactor)
-            .lineTo(-boxRadiusHalf*hairFactor,0)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0);
-            append(obj.total, obj.radarLock);
-        obj.irLock = obj.svg.createChild("path")
-            .moveTo(-boxRadius,0)
-            .lineTo(0,-boxRadius)
-            .lineTo(boxRadius,0)
-            .lineTo(0,boxRadius)
-            .lineTo(-boxRadius,0)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0);
-            append(obj.total, obj.irLock);
-        obj.irSearch = obj.svg.createChild("path")
-            .moveTo(-boxRadiusHalf,0)
-            .lineTo(0,-boxRadiusHalf)
-            .lineTo(boxRadiusHalf,0)
-            .lineTo(0,boxRadiusHalf)
-            .lineTo(-boxRadiusHalf,0)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0);
-            append(obj.total, obj.irSearch);
-        obj.target_locked.hide();
-        obj.target_locked = obj.svg.createChild("path")
-            .moveTo(-boxRadius,-boxRadius)
-            .vert(boxRadius*2)
-            .horiz(boxRadius*2)
-            .vert(-boxRadius*2)
-            .horiz(-boxRadius*2)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0);
-            append(obj.total, obj.target_locked);
+        
         obj.VV.hide();
         mr = mr*1.5;#incorrect, but else in FG it will seem too small.
-        obj.VV = obj.svg.createChild("path")
-            .moveTo(-5*mr,0)
-            .arcSmallCW(5*mr,5*mr, 0, 5*mr*2, 0)
-            .arcSmallCW(5*mr,5*mr, 0, -5*mr*2, 0)
-            .moveTo(-5*mr,0)
-            .horiz(-10*mr)
-            .moveTo(5*mr,0)
-            .horiz(10*mr)
-            .moveTo(0,-5*mr)
-            .vert(-5*mr)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0)
-            .set("z-index",11000);
-            #.setTranslation(sx*0.5*0.695633,sy*0.25);
-            append(obj.total, obj.VV);
-    obj.localizer = obj.svg.createChild("group");
-    
-    #eegs:
-    obj.eegsGroup = obj.svg.createChild("group");
-    obj.eegsRightX = [0,0,0,0,0,0,0,0,0,0];
-    obj.eegsRightY = [0,0,0,0,0,0,0,0,0,0];
-    obj.eegsLeftX = [0,0,0,0,0,0,0,0,0,0];
-    obj.eegsLeftY = [0,0,0,0,0,0,0,0,0,0];
-    obj.gunPos   = [[nil,nil],[nil,nil,nil],[nil,nil,nil,nil],[nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil]];
-    obj.eegsMe = {ac: geo.Coord.new(), eegsPos: geo.Coord.new(),shellPosX: [0,0,0,0,0,0,0,0,0,0],shellPosY: [0,0,0,0,0,0,0,0,0,0],shellPosDist: [0,0,0,0,0,0,0,0,0,0]};
-    obj.lastTime = systime();
-    obj.averageDt = 0.150;
-    obj.eegsLoop = maketimer(obj.averageDt, obj, obj.displayEEGS);
-    obj.eegsLoop.simulatedTime = 1;
-    
-    obj.ilsGroup  = obj.localizer.createChild("group");
-    obj.gsGroup   = obj.localizer.createChild("group");
-    obj.ils = obj.ilsGroup.createChild("path")
-            .moveTo(0,-20)
-            .vert(40)
-            .moveTo(-2,-20)
-            .horiz(4)
-            .moveTo(-2,20)
-            .horiz(4)
-            .moveTo(-2,-10)
-            .horiz(4)
-            .moveTo(-2,10)
-            .horiz(4)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0)
-            .set("z-index",11000);
-    obj.ilsOff = obj.ilsGroup.createChild("path")
-            .moveTo(0,-20)
-            .vert(4)
-            .moveTo(0,-12)
-            .vert(4)
-            .moveTo(0,-4)
-            .vert(8)
-            .moveTo(0,8)
-            .vert(4)
-            .moveTo(0,16)
-            .vert(4)
-            .moveTo(-2,-20)
-            .horiz(4)
-            .moveTo(-2,20)
-            .horiz(4)
-            .moveTo(-2,-10)
-            .horiz(4)
-            .moveTo(-2,10)
-            .horiz(4)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0)
-            .set("z-index",11000);
-    obj.gs = obj.gsGroup.createChild("path")
-            .moveTo(-20,0)
-            .horiz(40)
-            .moveTo(-20,-2)
-            .vert(4)
-            .moveTo(20,-2)
-            .vert(4)
-            .moveTo(-10,-2)
-            .vert(4)
-            .moveTo(10,-2)
-            .vert(4)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0)
-            .set("z-index",11000);
-    obj.gsOff = obj.gsGroup.createChild("path")
-            .moveTo(-20,0)
-            .horiz(4)
-            .moveTo(-12,0)
-            .horiz(4)
-            .moveTo(-4,0)
-            .horiz(8)
-            .moveTo(8,0)
-            .horiz(4)
-            .moveTo(16,0)
-            .horiz(4)            
-            
-            .moveTo(-20,-2)
-            .vert(4)
-            .moveTo(20,-2)
-            .vert(4)
-            .moveTo(-10,-2)
-            .vert(4)
-            .moveTo(10,-2)
-            .vert(4)
-            .setStrokeLineWidth(1)
-            .setColor(0,1,0)
-            .set("z-index",11000);
-#    obj.inv_v = obj.svg.createChild("path")
-#            .moveTo(0,0)
-#            .lineTo(-4,-5)
-#            .moveTo(0,0)
-#            .lineTo(4,5)
-#            .setStrokeLineWidth(1)
-#            .setColor(0,1,0)
-#            .set("z-index",11000);
-    append(obj.total, obj.ils);
-    append(obj.total, obj.ilsOff);
-    append(obj.total, obj.gs);
-    append(obj.total, obj.gsOff);
-#    append(obj.total, obj.inv_v);
-
-
-    obj.horizon_group = obj.svg.createChild("group")
-      .set("z-order", 1);
-    obj.ladder_group = obj.horizon_group.createChild("group");
-    obj.h_rot   = obj.horizon_group.createTransform();
-
-    # pitch lines
-    var pixelPerDegreeY = 15.43724802231049;
-    var pixelPerDegreeX = 16.70527172464148;
-    var distance = pixelPerDegreeY * 5;
-    var minuss = 0.125*sx*0.695633;
-    var minuso = 20*mr;
-    for(var i = 1; i <= 18; i += 1) # full drawn lines
-      append(obj.total, obj.ladder_group.createChild("path")
-         .moveTo(minuso, -i * distance)
-         .horiz(minuss)
-         .vert(minuso*0.5)
-
-         .moveTo(-minuso, -i * distance)
-         .horiz(-minuss)
-         .vert(minuso*0.5)
-         
-         .setStrokeLineWidth(1)
-         .setColor(0,0,0));
-    
-    for(var i = -18; i <= -1; i += 1) { # stipled lines
-      #var rad = me.extrapolate(-i*5,10,90,8,45)*D2R;#as per US manual pitch lines bend down from 8 to 45 degrees
-      append(obj.total, obj.ladder_group.createChild("path")
-                     .moveTo(minuso, -i * distance)
-                     .horiz(minuss*0.2)
-                     .moveTo(minuso+minuss*0.4, -i * distance)
-                     .horiz(minuss*0.2)
-                     .moveTo(minuso+minuss*0.8, -i * distance)
-                     .horiz(minuss*0.2)
-                     .vert(-minuso*0.5)
-
-                     .moveTo(-minuso, -i * distance)
-                     .horiz(-minuss*0.2)
-                     .moveTo(-minuso-minuss*0.4, -i * distance)
-                     .horiz(-minuss*0.2)
-                     .moveTo(-minuso-minuss*0.8, -i * distance)
-                     .horiz(-minuss*0.2)
-                     .vert(-minuso*0.5)
-
-                     .setStrokeLineWidth(1)
-                     .setColor(0,0,0));
-    }
-
-    #pitch line numbers
-    for(var i = -18; i <= 0; i += 1) {
-      if (i==0) continue;
-      append(obj.total, obj.ladder_group.createChild("text")
-         .setText(i*-5)
-         .setFontSize(9,1.1)
-         .setFont(HUD_FONT)
-         .setAlignment("right-center")
-         .setTranslation(-minuso-minuss-minuss*0.2, -i * distance)
-         .setColor(0,0,0));
-      append(obj.total, obj.ladder_group.createChild("text")
-         .setText(i*-5)
-         .setFontSize(9,1.1)
-         .setFont(HUD_FONT)
-         .setAlignment("left-center")
-         .setTranslation(minuso+minuss+minuss*0.2, -i * distance)
-         .setColor(0,0,0));
-    }
-    for(var i = 1; i <= 18; i += 1) {
-      if (i==0) continue;
-      append(obj.total, obj.ladder_group.createChild("text")
-         .setText(i*5)
-         .setFontSize(9,1.1)
-         .setFont(HUD_FONT)
-         .setAlignment("right-center")
-         .setTranslation(-minuso-minuss-minuss*0.2, -i * distance)
-         .setColor(0,0,0));
-      append(obj.total, obj.ladder_group.createChild("text")
-         .setText(i*5)
-         .setFontSize(9,1.1)
-         .setFont(HUD_FONT)
-         .setAlignment("left-center")
-         .setTranslation(minuso+minuss+minuss*0.2, -i * distance)
-         .setColor(0,0,0));
-    }
-
-    # approach line
-    var i = -0.5;
-    obj.appLine = obj.ladder_group.createChild("path")
-                     .moveTo(minuso, -i * distance)
-                     .horiz(minuss*0.2)
-                     .moveTo(minuso+minuss*0.4, -i * distance)
-                     .horiz(minuss*0.2)
-                     .moveTo(minuso+minuss*0.8, -i * distance)
-                     .horiz(minuss*0.2)
-
-                     .moveTo(-minuso, -i * distance)
-                     .horiz(-minuss*0.2)
-                     .moveTo(-minuso-minuss*0.4, -i * distance)
-                     .horiz(-minuss*0.2)
-                     .moveTo(-minuso-minuss*0.8, -i * distance)
-                     .horiz(-minuss*0.2)
-
-                     .setStrokeLineWidth(1)
-                     .setColor(0,0,0);
-    
-    append(obj.total, obj.appLine);
-
-    #Horizon line
-    append(obj.total, obj.ladder_group.createChild("path")
-                     .moveTo(-0.40*sx*0.695633, 0)
-                     .horiz(0.40*sx*0.695633-20*mr)
-                     .moveTo(20*mr, 0)
-                     .horiz(0.40*sx*0.695633)
-                     .setStrokeLineWidth(1)
-                     .setColor(0,0,0));
-
-    obj.tgpPointF = obj.svg.createChild("path")
-                     .moveTo(-10*mr, -10*mr)
-                     .horiz(20*mr)
-                     .vert(20*mr)
-                     .horiz(-20*mr)
-                     .vert(-20*mr)
-                     .moveTo(-1*mr,-1*mr)
-                     .horiz(2*mr)
-                     .moveTo(-1*mr,0*mr)
-                     .horiz(2*mr)
-                     .setStrokeLineWidth(1)
-                     .setColor(0,0,0);
-    obj.tgpPointC = obj.svg.createChild("path")
-                     .moveTo(-10*mr, -10*mr)
-                     .lineTo(10*mr, 10*mr)
-                     .moveTo(10*mr, -10*mr)
-                     .lineTo(-10*mr, 10*mr)
-                     .setStrokeLineWidth(1)
-                     .setColor(0,0,0);
-    append(obj.total, obj.tgpPointF);
-    append(obj.total, obj.tgpPointC);
-
-
-
-
-
-
-
-
-
-
 
         obj.initUpdate =1;
         
@@ -1393,7 +1087,422 @@ append(obj.total, obj.speed_curr);
                 .setFontSize(8, 1.0);
 
         obj.svg.setColor(0.3,1,0.3);
+        
+        ############################## new center origin stuff that used hud math #################
+        
+        
+        obj.centerOrigin = obj.canvas.createGroup()
+                           .setTranslation(HudMath.getCenterOrigin());
+        
+        obj.greatCircleSteeringCue = obj.centerOrigin.createChild("path")# nickname: tadpole
+            .moveTo(-2.5,0)
+            .arcSmallCW(2.5,2.5, 0, 2.5*2, 0)
+            .arcSmallCW(2.5,2.5, 0, -2.5*2, 0)
+            .moveTo(0,-2.5)
+            .vert(-10)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+        append(obj.total, obj.greatCircleSteeringCue);
+        
+        obj.pipperLine = obj.centerOrigin.createChild("group");
+        obj.pipperRadius = 15*mr;
+        obj.pipper = obj.centerOrigin.createChild("path")
+            .moveTo(-obj.pipperRadius,0)
+            .arcSmallCW(obj.pipperRadius,obj.pipperRadius, 0, obj.pipperRadius*2, 0)
+            .arcSmallCW(obj.pipperRadius,obj.pipperRadius, 0, -obj.pipperRadius*2, 0)
+            .moveTo(-2*mr,0)
+            .arcSmallCW(2*mr,2*mr, 0, 2*mr*2, 0)
+            .arcSmallCW(2*mr,2*mr, 0, -2*mr*2, 0)                   
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);                    
+        #obj.pipperCross = obj.centerOrigin.createChild("path")
+        #    .moveTo(-obj.pipperRadius,0)
+        #    .horiz(obj.pipperRadius*2)
+        #    .moveTo(0,-obj.pipperRadius)
+        #    .vert(obj.pipperRadius*2)
+        #    .setRotation(45*D2R)
+        #    .setStrokeLineWidth(1)
+        #    .setColor(0,1,0); 
+        append(obj.total, obj.pipper);
+        append(obj.total, obj.pipperLine);
+        var boxRadius = 10;
+        var boxRadiusHalf = boxRadius*0.5;
+        var hairFactor = 0.8;
+        obj.tgt_symbols = [];
+        for(var k = 0; k<obj.max_symbols;k+=1) {
+            obj.tgt = obj.centerOrigin.createChild("path")
+                .moveTo(-boxRadiusHalf,-boxRadiusHalf)
+                .vert(boxRadius)
+                .horiz(boxRadius)
+                .vert(-boxRadius)
+                .horiz(-boxRadius)
+                .setStrokeLineWidth(1)
+                .hide()
+                .setColor(0,1,0);
+            append(obj.tgt_symbols, obj.tgt);
+            append(obj.total, obj.tgt);
+        }
+        obj.radarLock = obj.centerOrigin.createChild("path")
+            .moveTo(-boxRadius*hairFactor,0)
+            .horiz(boxRadiusHalf*hairFactor)
+            .lineTo(0,boxRadiusHalf*hairFactor)
+            .moveTo(boxRadius*hairFactor,0)
+            .horiz(-boxRadiusHalf*hairFactor)
+            .lineTo(0,-boxRadiusHalf*hairFactor)
+            .moveTo(0,boxRadius*hairFactor)
+            .vert(-boxRadiusHalf*hairFactor)
+            .lineTo(boxRadiusHalf*hairFactor,0)
+            .moveTo(0,-boxRadius*hairFactor)
+            .vert(boxRadiusHalf*hairFactor)
+            .lineTo(-boxRadiusHalf*hairFactor,0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+        append(obj.total, obj.radarLock);
+        obj.irLock = obj.centerOrigin.createChild("path")
+            .moveTo(-boxRadius,0)
+            .lineTo(0,-boxRadius)
+            .lineTo(boxRadius,0)
+            .lineTo(0,boxRadius)
+            .lineTo(-boxRadius,0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+        append(obj.total, obj.irLock);
+        obj.irSearch = obj.centerOrigin.createChild("path")
+            .moveTo(-boxRadiusHalf,0)
+            .lineTo(0,-boxRadiusHalf)
+            .lineTo(boxRadiusHalf,0)
+            .lineTo(0,boxRadiusHalf)
+            .lineTo(-boxRadiusHalf,0)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0);
+        append(obj.total, obj.irSearch);
+        obj.target_locked.hide();
+        obj.target_locked = obj.centerOrigin.createChild("path")
+            .moveTo(-boxRadius,-boxRadius)
+            .vert(boxRadius*2)
+            .horiz(boxRadius*2)
+            .vert(-boxRadius*2)
+            .horiz(-boxRadius*2)
+            .setStrokeLineWidth(1)
+            .hide()
+            .setColor(0,1,0);
+        append(obj.total, obj.target_locked);
+        obj.locatorAngle = obj.svg.createChild("text")
+                .setText("0")
+                .setAlignment("right-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .setFontSize(9, 1.1);
+        append(obj.total, obj.locatorAngle);
+        obj.locatorLine = obj.centerOrigin.createChild("path")
+                .moveTo(0,0)
+                #.horiz(10)
+                .vert(-30)
+                .setStrokeLineWidth(1)
+                .setColor(0,1,0);
+        append(obj.total, obj.locatorLine);
+        
+        obj.tgpPointF = obj.centerOrigin.createChild("path")
+                     .moveTo(-10*mr, -10*mr)
+                     .horiz(20*mr)
+                     .vert(20*mr)
+                     .horiz(-20*mr)
+                     .vert(-20*mr)
+                     .moveTo(-1*mr,-1*mr)
+                     .horiz(2*mr)
+                     .moveTo(-1*mr,0*mr)
+                     .horiz(2*mr)
+                     .setStrokeLineWidth(1)
+                     .setColor(0,0,0);
+        obj.tgpPointC = obj.centerOrigin.createChild("path")
+                     .moveTo(-10*mr, -10*mr)
+                     .lineTo(10*mr, 10*mr)
+                     .moveTo(10*mr, -10*mr)
+                     .lineTo(-10*mr, 10*mr)
+                     .setStrokeLineWidth(1)
+                     .setColor(0,0,0);
+        append(obj.total, obj.tgpPointF);
+        append(obj.total, obj.tgpPointC);
+            
+        
+        var bracketsize = HudMath.getPosFromDegs(0,-13)[1]-HudMath.getPosFromDegs(0,-9)[1];#fudge factored for when raising seat it gets higher up in HUD where degrees are less. (is really 11 to 15)
+        obj.bracket = obj.centerOrigin.createChild("path")
+                .moveTo(0,-34)
+                .horiz(-10)
+                .vert(bracketsize)
+                .horiz(10)
+                .setStrokeLineWidth(1)
+                .setColor(0,1,0);
+        append(obj.total, obj.bracket);
+        
+        obj.cciplow = obj.centerOrigin.createChild("text")
+                .setText("LOW")
+                .setTranslation(0,0)
+                .setAlignment("left-center")
+                .setColor(0,1,0,1)
+                .setFont(HUD_FONT)
+                .hide()
+                .setFontSize(11, 1.4);
+        append(obj.total, obj.cciplow);
+        
+        obj.VV = obj.centerOrigin.createChild("path")
+            .moveTo(-5*mr,0)
+            .arcSmallCW(5*mr,5*mr, 0, 5*mr*2, 0)
+            .arcSmallCW(5*mr,5*mr, 0, -5*mr*2, 0)
+            .moveTo(-5*mr,0)
+            .horiz(-10*mr)
+            .moveTo(5*mr,0)
+            .horiz(10*mr)
+            .moveTo(0,-5*mr)
+            .vert(-5*mr)
+            .setStrokeLineWidth(1)
+            .setColor(0,1,0)
+            .set("z-index",11000);
+            #.setTranslation(sx*0.5*0.695633,sy*0.25);
+            append(obj.total, obj.VV);
+        obj.localizer = obj.centerOrigin.createChild("group");
+        
+        obj.ilsGroup  = obj.localizer.createChild("group");
+        obj.gsGroup   = obj.localizer.createChild("group");
+        obj.ils = obj.ilsGroup.createChild("path")
+                .moveTo(0,-20)
+                .vert(40)
+                .moveTo(-2,-20)
+                .horiz(4)
+                .moveTo(-2,20)
+                .horiz(4)
+                .moveTo(-2,-10)
+                .horiz(4)
+                .moveTo(-2,10)
+                .horiz(4)
+                .setStrokeLineWidth(1)
+                .setColor(0,1,0)
+                .set("z-index",11000);
+        obj.ilsOff = obj.ilsGroup.createChild("path")
+                .moveTo(0,-20)
+                .vert(4)
+                .moveTo(0,-12)
+                .vert(4)
+                .moveTo(0,-4)
+                .vert(8)
+                .moveTo(0,8)
+                .vert(4)
+                .moveTo(0,16)
+                .vert(4)
+                .moveTo(-2,-20)
+                .horiz(4)
+                .moveTo(-2,20)
+                .horiz(4)
+                .moveTo(-2,-10)
+                .horiz(4)
+                .moveTo(-2,10)
+                .horiz(4)
+                .setStrokeLineWidth(1)
+                .setColor(0,1,0)
+                .set("z-index",11000);
+        obj.gs = obj.gsGroup.createChild("path")
+                .moveTo(-20,0)
+                .horiz(40)
+                .moveTo(-20,-2)
+                .vert(4)
+                .moveTo(20,-2)
+                .vert(4)
+                .moveTo(-10,-2)
+                .vert(4)
+                .moveTo(10,-2)
+                .vert(4)
+                .setStrokeLineWidth(1)
+                .setColor(0,1,0)
+                .set("z-index",11000);
+        obj.gsOff = obj.gsGroup.createChild("path")
+                .moveTo(-20,0)
+                .horiz(4)
+                .moveTo(-12,0)
+                .horiz(4)
+                .moveTo(-4,0)
+                .horiz(8)
+                .moveTo(8,0)
+                .horiz(4)
+                .moveTo(16,0)
+                .horiz(4)            
+                
+                .moveTo(-20,-2)
+                .vert(4)
+                .moveTo(20,-2)
+                .vert(4)
+                .moveTo(-10,-2)
+                .vert(4)
+                .moveTo(10,-2)
+                .vert(4)
+                .setStrokeLineWidth(1)
+                .setColor(0,1,0)
+                .set("z-index",11000);
+    #    obj.inv_v = obj.svg.createChild("path")
+    #            .moveTo(0,0)
+    #            .lineTo(-4,-5)
+    #            .moveTo(0,0)
+    #            .lineTo(4,5)
+    #            .setStrokeLineWidth(1)
+    #            .setColor(0,1,0)
+    #            .set("z-index",11000);
+        append(obj.total, obj.ils);
+        append(obj.total, obj.ilsOff);
+        append(obj.total, obj.gs);
+        append(obj.total, obj.gsOff);
+    #    append(obj.total, obj.inv_v);
+
+
+        obj.horizon_group = obj.centerOrigin.createChild("group")
+          .set("z-order", 1);
+        obj.ladder_group = obj.horizon_group.createChild("group");
+        obj.h_rot   = obj.horizon_group.createTransform();
+
+        # pitch lines
+        var pixelPerDegreeY = HudMath.getPixelPerDegreeAvg(5.0);#15.43724802231049;
+        var pixelPerDegreeX = 16.70527172464148;
+        var distance = pixelPerDegreeY * 5;
+        var minuss = 0.125*sx*0.695633;
+        var minuso = 20*mr;
+        for(var i = 1; i <= 18; i += 1) # full drawn lines
+          append(obj.total, obj.ladder_group.createChild("path")
+             .moveTo(minuso, -i * distance)
+             .horiz(minuss)
+             .vert(minuso*0.5)
+
+             .moveTo(-minuso, -i * distance)
+             .horiz(-minuss)
+             .vert(minuso*0.5)
+             
+             .setStrokeLineWidth(1)
+             .setColor(0,0,0));
+        
+        for(var i = -18; i <= -1; i += 1) { # stipled lines
+          #var rad = me.extrapolate(-i*5,10,90,8,45)*D2R;#as per US manual pitch lines bend down from 8 to 45 degrees
+          append(obj.total, obj.ladder_group.createChild("path")
+                         .moveTo(minuso, -i * distance)
+                         .horiz(minuss*0.2)
+                         .moveTo(minuso+minuss*0.4, -i * distance)
+                         .horiz(minuss*0.2)
+                         .moveTo(minuso+minuss*0.8, -i * distance)
+                         .horiz(minuss*0.2)
+                         .vert(-minuso*0.5)
+
+                         .moveTo(-minuso, -i * distance)
+                         .horiz(-minuss*0.2)
+                         .moveTo(-minuso-minuss*0.4, -i * distance)
+                         .horiz(-minuss*0.2)
+                         .moveTo(-minuso-minuss*0.8, -i * distance)
+                         .horiz(-minuss*0.2)
+                         .vert(-minuso*0.5)
+
+                         .setStrokeLineWidth(1)
+                         .setColor(0,0,0));
+        }
+
+        #pitch line numbers
+        for(var i = -18; i <= 0; i += 1) {
+          if (i==0) continue;
+          append(obj.total, obj.ladder_group.createChild("text")
+             .setText(i*-5)
+             .setFontSize(9,1.1)
+             .setFont(HUD_FONT)
+             .setAlignment("right-center")
+             .setTranslation(-minuso-minuss-minuss*0.2, -i * distance)
+             .setColor(0,0,0));
+          append(obj.total, obj.ladder_group.createChild("text")
+             .setText(i*-5)
+             .setFontSize(9,1.1)
+             .setFont(HUD_FONT)
+             .setAlignment("left-center")
+             .setTranslation(minuso+minuss+minuss*0.2, -i * distance)
+             .setColor(0,0,0));
+        }
+        for(var i = 1; i <= 18; i += 1) {
+          if (i==0) continue;
+          append(obj.total, obj.ladder_group.createChild("text")
+             .setText(i*5)
+             .setFontSize(9,1.1)
+             .setFont(HUD_FONT)
+             .setAlignment("right-center")
+             .setTranslation(-minuso-minuss-minuss*0.2, -i * distance)
+             .setColor(0,0,0));
+          append(obj.total, obj.ladder_group.createChild("text")
+             .setText(i*5)
+             .setFontSize(9,1.1)
+             .setFont(HUD_FONT)
+             .setAlignment("left-center")
+             .setTranslation(minuso+minuss+minuss*0.2, -i * distance)
+             .setColor(0,0,0));
+        }
+
+        # approach line
+        var i = -0.5;
+        obj.appLine = obj.ladder_group.createChild("path")
+                         .moveTo(minuso, -i * distance)
+                         .horiz(minuss*0.2)
+                         .moveTo(minuso+minuss*0.4, -i * distance)
+                         .horiz(minuss*0.2)
+                         .moveTo(minuso+minuss*0.8, -i * distance)
+                         .horiz(minuss*0.2)
+
+                         .moveTo(-minuso, -i * distance)
+                         .horiz(-minuss*0.2)
+                         .moveTo(-minuso-minuss*0.4, -i * distance)
+                         .horiz(-minuss*0.2)
+                         .moveTo(-minuso-minuss*0.8, -i * distance)
+                         .horiz(-minuss*0.2)
+
+                         .setStrokeLineWidth(1)
+                         .setColor(0,0,0);
+        
+        append(obj.total, obj.appLine);
+
+        #Horizon line
+        append(obj.total, obj.ladder_group.createChild("path")
+                         .moveTo(-0.40*sx*0.695633, 0)
+                         .horiz(0.40*sx*0.695633-20*mr)
+                         .moveTo(20*mr, 0)
+                         .horiz(0.40*sx*0.695633)
+                         .setStrokeLineWidth(1)
+                         .setColor(0,0,0));
+        
+        #EEGS:
+        obj.eegsGroup = obj.centerOrigin.createChild("group");
+        obj.funnelParts = 17;#number of segments in funnel sides. If increase, remember to increase all relevant vectors also.
+        obj.eegsRightX = obj.makeVector(obj.funnelParts,0);
+        obj.eegsRightY = obj.makeVector(obj.funnelParts,0);
+        obj.eegsLeftX  = obj.makeVector(obj.funnelParts,0);
+        obj.eegsLeftY  = obj.makeVector(obj.funnelParts,0);
+        obj.gunPos   = nil;#[[nil,nil],[nil,nil,nil],[nil,nil,nil,nil],[nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil]];
+        obj.eegsMe = {ac: geo.Coord.new(), eegsPos: geo.Coord.new(),shellPosX: obj.makeVector(obj.funnelParts,0),shellPosY: obj.makeVector(obj.funnelParts,0),shellPosDist: obj.makeVector(obj.funnelParts,0)};
+        obj.lastTime = systime();
+        obj.averageDt = 0.100;
+        obj.eegsLoop = maketimer(obj.averageDt, obj, obj.displayEEGS);
+        obj.eegsLoop.simulatedTime = 1;
+        obj.resetGunPos();
+                          
         return obj;
+    },
+    
+    resetGunPos: func {
+        me.gunPos   = [];
+        for(i = 0;i < me.funnelParts;i+=1){
+          var tmp = [];
+          for(var myloopy = 0;myloopy <= i+1;myloopy+=1){
+            append(tmp,nil);
+          }
+          append(me.gunPos, tmp);
+        }
+    },
+    
+    makeVector: func (siz,content) {
+        var vec = setsize([],siz);
+        var k = 0;
+        while(k<siz) {
+            vec[k] = content;
+            k += 1;
+        }
+        return vec;
     },
 #
 #
@@ -1474,134 +1583,51 @@ append(obj.total, obj.speed_curr);
     },
 
     CCRP: func(hdp) {
-        if (pylons.fcs != nil and pylons.fcs.getSelectedWeapon() != nil and (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="MK-83" or pylons.fcs.getSelectedWeapon().type=="MK-84" or pylons.fcs.getSelectedWeapon().type=="GBU-12" or pylons.fcs.getSelectedWeapon().type=="GBU-31" or pylons.fcs.getSelectedWeapon().type=="GBU-54" or pylons.fcs.getSelectedWeapon().type=="GBU-24" or pylons.fcs.getSelectedWeapon().type=="CBU-87" or pylons.fcs.getSelectedWeapon().type=="AGM-154A") 
-            and hdp.active_u != nil and hdp.master_arm ==1 and pylons.fcs.getSelectedWeapon().status == armament.MISSILE_LOCK) {
-
-            if (pylons.fcs.getSelectedWeapon().type=="MK-82" or pylons.fcs.getSelectedWeapon().type=="MK-83") {
-                me.dt = 0.1;
-                me.maxFallTime = 20;
-            } else {
-                me.agl = (hdp.altitude_ft-hdp.active_u.get_altitude())*FT2M;
-                me.dt = me.agl*0.000025;#4000 ft = ~0.1
-                if (me.dt < 0.1) me.dt = 0.1;
-                me.maxFallTime = 45;
+        if (hdp.fcs_available and hdp.master_arm ==1) {
+            var trgt = armament.contactPoint;
+            if(trgt == nil and hdp.active_u != nil) {
+                trgt = hdp.active_u;
+            } elsif (trgt == nil) {
+                return 0;
             }
-            me.distCCRP = pylons.fcs.getSelectedWeapon().getCCRP(me.maxFallTime,me.dt);
-            if (me.distCCRP == nil) {
+            var selW = pylons.fcs.getSelectedWeapon();
+            if (selW != nil and !hdp.CCIP_active and 
+                (selW.type=="MK-82" or selW.type=="MK-83" or selW.type=="MK-84" or selW.type=="GBU-12" or selW.type=="GBU-31" or selW.type=="GBU-54" or selW.type=="GBU-24"
+                 or selW.type=="CBU-87" or selW.type=="AGM-154A" or selW.type=="B61-7" or selW.type=="B61-12") and selW.status == armament.MISSILE_LOCK ) {
+
+                if (selW.type=="MK-82" or selW.type=="MK-83" or selW.type=="MK-84" or selW.type=="CBU-87") {
+                    me.dt = 0.1;
+                    me.maxFallTime = 20;
+                } else {
+                    me.agl = (hdp.altitude_ft-trgt.get_altitude())*FT2M;
+                    me.dt = me.agl*0.000025;#4000 ft = ~0.1
+                    if (me.dt < 0.1) me.dt = 0.1;
+                    me.maxFallTime = 45;
+                }
+                me.distCCRP = pylons.fcs.getSelectedWeapon().getCCRP(me.maxFallTime,me.dt);
+                if (me.distCCRP == nil) {
+                    me.solutionCue.hide();
+                    me.ccrpMarker.hide();
+                    me.bombFallLine.hide();
+                    return 0;
+                }
+                me.distCCRP/=4000;
+                if (me.distCCRP > 0.75) {
+                    me.distCCRP = 0.75;
+                }
+                me.bombFallLine.setTranslation(trgt.get_relative_bearing()*me.texelPerDegreeX,0);
+                me.ccrpMarker.setTranslation(trgt.get_relative_bearing()*me.texelPerDegreeX,0);
+                me.solutionCue.setTranslation(trgt.get_relative_bearing()*me.texelPerDegreeX,me.sy*0.5-me.sy*0.5*me.distCCRP);
+                me.bombFallLine.show();
+                me.ccrpMarker.show();
+                me.solutionCue.show();
+                return 1;
+            } else {
                 me.solutionCue.hide();
                 me.ccrpMarker.hide();
                 me.bombFallLine.hide();
                 return 0;
             }
-            me.distCCRP/=4000;
-            if (me.distCCRP > 0.75) {
-                me.distCCRP = 0.75;
-            }
-            me.bombFallLine.setTranslation(hdp.active_u.get_relative_bearing()*me.texelPerDegreeX,0);
-            me.ccrpMarker.setTranslation(hdp.active_u.get_relative_bearing()*me.texelPerDegreeX,0);
-            me.solutionCue.setTranslation(hdp.active_u.get_relative_bearing()*me.texelPerDegreeX,me.sy*0.5-me.sy*0.5*me.distCCRP);
-            me.bombFallLine.show();
-            me.ccrpMarker.show();
-            me.solutionCue.show();
-            return 1;
-
-
-
-
-            me.agl = (hdp.altitude_ft-hdp.active_u.get_altitude())*FT2M;
-            #me.agl = getprop("position/altitude-agl-ft")*FT2M;
-            me.alti = hdp.altitude_ft*FT2M;
-            me.roll = hdp.roll;
-            me.vel = hdp.groundspeed_kt*0.5144;#m/s
-            me.dens = hdp.density_altitude;
-            me.mach = hdp.mach;
-            me.speed_down_fps = hdp.speed_down_fps;
-            me.speed_east_fps = hdp.speed_east_fps;
-            me.speed_north_fps = hdp.speed_north_fps;
-
-            
-
-            me.t = 0.0;
-            
-            me.altC = me.agl;
-            me.vel_z = -me.speed_down_fps*FT2M;#positive upwards
-            me.fps_z = -me.speed_down_fps;
-            me.vel_x = math.sqrt(me.speed_east_fps*me.speed_east_fps+me.speed_north_fps*me.speed_north_fps)*FT2M;
-            me.fps_x = me.vel_x * M2FT;
-            me.bomb = pylons.fcs.getSelectedWeapon();
-
-            me.rs = me.bomb.rho_sndspeed(me.dens-(me.agl/2)*M2FT);
-            me.rho = me.rs[0];
-            me.Cd = me.bomb.drag(me.mach);
-            me.mass = me.bomb.weight_launch_lbm / armament.slugs_to_lbm;
-            me.q = 0.5 * me.rho * me.fps_z * me.fps_z;
-            me.deacc = (me.Cd * me.q * me.bomb.ref_area_sqft) / me.mass;
-
-            while (me.altC > 0 and me.t <= me.maxFallTime) {#16 secs is max fall time according to manual
-              me.t += me.dt;
-              me.acc = -9.81 + me.deacc * FT2M;
-              me.vel_z += me.acc * me.dt;
-              me.altC = me.altC + me.vel_z*me.dt+0.5*me.acc*me.dt*me.dt;
-            }
-            #printf("predict fall time=%0.1f", me.t);
-
-            if (me.t >= me.maxFallTime) {
-              me.solutionCue.hide();
-              me.ccrpMarker.hide();
-              me.bombFallLine.hide();
-              return 0;
-            }
-            #t -= 0.75 * math.cos(pitch*D2R);            # fudge factor
-
-            me.q = 0.5 * me.rho * me.fps_x * me.fps_x;
-            me.deacc = (me.Cd * me.q * me.bomb.ref_area_sqft) / me.mass;
-            me.acc = -me.deacc * FT2M;
-            
-            me.fps_x_final = me.t*me.acc+me.fps_x;# calc final horz speed
-            me.fps_x_average = (me.fps_x-(me.fps_x-me.fps_x_final)*0.5);
-            me.mach_average = me.fps_x_average / me.rs[1];
-            
-            me.Cd = me.bomb.drag(me.mach_average);
-            me.q = 0.5 * me.rho * me.fps_x_average * me.fps_x_average;
-            me.deacc = (me.Cd * me.q * me.bomb.ref_area_sqft) / me.mass;
-            me.acc = -me.deacc * FT2M;
-            me.dist = me.vel_x*me.t+0.5*me.acc*me.t*me.t;
-
-            me.ac = geo.aircraft_position();
-            me.ccipPos = geo.Coord.new(me.ac);
-
-            # we calc heading from composite speeds, due to alpha and beta might influence direction bombs will fall:
-            me.vectorMag = math.sqrt(me.speed_east_fps*me.speed_east_fps+me.speed_north_fps*me.speed_north_fps);
-            if (me.vectorMag == 0) {
-                me.vectorMag = 0.0001;
-            }
-            me.heading = -math.asin(me.speed_north_fps/me.vectorMag)*R2D+90;#divide by vector mag, to get normalized unit vector length
-            if (me.speed_east_fps/me.vectorMag < 0) {
-              me.heading = -me.heading;
-              while (me.heading > 360) {
-                me.heading -= 360;
-              }
-              while (me.heading < 0) {
-                me.heading += 360;
-              }
-            }
-            me.ccipPos.apply_course_distance(me.heading, me.dist);
-            #var elev = geo.elevation(ac.lat(), ac.lon());
-            #printf("Will fall %0.1f NM ahead of aircraft.", me.dist*M2NM);
-            me.elev = me.alti-me.agl;#faster
-            me.ccipPos.set_alt(me.elev);
-            
-            me.distCCRP = me.ccipPos.distance_to(hdp.active_u.get_Coord())/4000;
-            if (me.distCCRP > 0.75) {
-                me.distCCRP = 0.75;
-            }
-            me.bombFallLine.setTranslation(hdp.active_u.get_relative_bearing()*me.texelPerDegreeX,0);
-            me.ccrpMarker.setTranslation(hdp.active_u.get_relative_bearing()*me.texelPerDegreeX,0);
-            me.solutionCue.setTranslation(hdp.active_u.get_relative_bearing()*me.texelPerDegreeX,me.sy*0.5-me.sy*0.5*me.distCCRP);
-            me.bombFallLine.show();
-            me.ccrpMarker.show();
-            me.solutionCue.show();
-            return 1;
         } else {
             me.solutionCue.hide();
             me.ccrpMarker.hide();
@@ -1610,15 +1636,99 @@ append(obj.total, obj.speed_curr);
         }
     },
     
+    CCIP: func (hdp) {
+        me.showPipper = 0;
+        me.showPipperCross = 0;
+        if(hdp.CCIP_active) {
+            if (hdp.fcs_available and hdp.master_arm ==1) {
+                var selW = pylons.fcs.getSelectedWeapon();
+                if (selW != nil and (selW.type=="MK-82" or selW.type=="MK-83" or selW.type=="MK-84" or selW.type=="GBU-12" or selW.type=="GBU-31" or selW.type=="GBU-54" or selW.type=="GBU-24" or selW.type=="CBU-87")) {
+
+                    me.ccipPos = pylons.fcs.getSelectedWeapon().getCCIPadv(18,0.20);
+                    if (me.ccipPos == nil) {
+                        me.pipper.setVisible(me.showPipper);
+                        me.pipperLine.setVisible(me.showPipper);
+                        return 0;
+                    }
+                    me.showme = TRUE;
+                    
+                    #me.myOwnPos = geo.aircraft_position();
+                    #me.xyz = {"x":me.myOwnPos.x(),                  "y":me.myOwnPos.y(),                 "z":me.myOwnPos.z()};
+                    #me.dir = {"x":me.ccipPos[0].x()-me.myOwnPos.x(),  "y":me.ccipPos[0].y()-me.myOwnPos.y(), "z":me.ccipPos[0].z()-me.myOwnPos.z()};
+                    #me.v = get_cart_ground_intersection(me.xyz, me.dir);
+                    #if (me.v != nil) {
+                    #    me.terrain = geo.Coord.new();
+                    #    me.terrain.set_latlon(me.v.lat, me.v.lon, me.v.elevation);
+                    #    me.maxDist = me.myOwnPos.direct_distance_to(me.ccipPos[0])-1;
+                    #    me.terrainDist = me.myOwnPos.direct_distance_to(me.terrain);
+                    #    if (me.terrainDist < me.maxDist) {
+                    #        me.showme = FALSE;
+                    #    }
+                    #} else {
+                    #    me.showme = FALSE;
+                    #}
+                    me.hud_pos = HudMath.getPosFromCoord(me.ccipPos[0]);
+                    if(me.hud_pos != nil) {
+                        me.pos_x = me.hud_pos[0];
+                        me.pos_y = me.hud_pos[1];
+                        #printf("HUDMath  %.1f", HudMath.dir_x);
+                        #printf("Aircraft %.1f", hdp.heading);
+                        #printf("dist=%0.1f (%3d , %3d)", dist, pos_x, pos_y);
+
+                        #if(me.pos_x > (512/1024)*canvasWidth) {
+                        #  me.showme = FALSE;
+                        #} elsif(me.pos_x < -(512/1024)*canvasWidth) {
+                        #  me.showme = FALSE;
+                        #} elsif(me.pos_y > (512/1024)*canvasWidth) {
+                        #  me.showme = FALSE;
+                        #} elsif(me.pos_y < -(512/1024)*canvasWidth) {
+                        #  me.showme = FALSE;
+                        #}
+
+                        if(me.showme == TRUE) {
+                            me.pipperLine.removeAllChildren();
+                            me.bPos = [hdp.VV_x,hdp.VV_y]; #HudMath.getBorePos(); 
+                            me.llx  = me.pos_x-me.bPos[0];
+                            me.lly  = me.pos_y-me.bPos[1];
+                            me.ll = math.sqrt(me.llx*me.llx+me.lly*me.lly);
+                            if (me.ll != 0) {
+                                me.pipAng = math.acos(me.llx/me.ll);
+                                #printf("angle %d  %d,%d",me.pipAng*R2D,me.llx,me.lly);
+                                if (me.lly < 0) {
+                                    me.pipAng *= -1;
+                                }
+                                me.pipperLine.createChild("path")
+                                    .moveTo(me.bPos)
+                                    .lineTo(me.pos_x-math.cos(me.pipAng)*me.pipperRadius, me.pos_y-math.sin(me.pipAng)*me.pipperRadius)
+                                    .setStrokeLineWidth(1)
+                                    .setColor(me.color)
+                                    .update();
+                                me.pipper.setTranslation(me.pos_x, me.pos_y);
+                                #me.pipperCross.setTranslation(me.pos_x, me.pos_y);
+                                me.showPipperCross = !me.ccipPos[1];
+                                me.pipper.update();
+                                #me.pipperCross.update();
+                                me.showPipper = 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        me.pipper.setVisible(me.showPipper);
+        #me.pipperCross.setVisible(0);#me.showPipperCross);
+        me.pipperLine.setVisible(me.showPipper);
+        return me.showPipperCross?-1:1;
+    },
+    
     displayEEGS: func() {
         #note: this stuff is expensive like hell to compute, but..lets do it anyway.
         
-        var funnelParts = 10;#max 10
         var st = systime();
         me.eegsMe.dt = st-me.lastTime;
         if (me.eegsMe.dt > me.averageDt*3) {
             me.lastTime = st;
-            me.gunPos   = [[nil,nil],[nil,nil,nil],[nil,nil,nil,nil],[nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil]];
+            me.resetGunPos();
             me.eegsGroup.removeAllChildren();
         } else {
             #printf("dt %05.3f",me.eegsMe.dt);
@@ -1635,7 +1745,7 @@ append(obj.total, obj.speed_curr);
             me.eegsMe.ac = geo.aircraft_position();
             me.eegsMe.allow = 1;
             
-            for (var l = 0;l < funnelParts;l+=1) {
+            for (var l = 0;l < me.funnelParts;l+=1) {
                 # compute display positions of funnel on hud
                 var pos = me.gunPos[l][l+1];
                 if (pos == nil) {
@@ -1643,8 +1753,8 @@ append(obj.total, obj.speed_curr);
                 } else {
                     var ac  = me.gunPos[l][l][1];
                     pos     = me.gunPos[l][l][0];
-                    me.eegsMe.u_dev_rad  = (90-awg_9.deviation_normdeg(me.eegsMe.hdg,   ac.course_to(pos)))  * D2R;
-                    me.eegsMe.u_elev_rad = (90-awg_9.deviation_normdeg(me.eegsMe.pitch, math.atan2(pos.alt()-ac.alt(),ac.distance_to(pos))*R2D))  * D2R;
+                    #me.eegsMe.u_dev_rad  = (90-awg_9.deviation_normdeg(me.eegsMe.hdg,   ac.course_to(pos)))  * D2R;
+                    #me.eegsMe.u_elev_rad = (90-awg_9.deviation_normdeg(me.eegsMe.pitch, math.atan2(pos.alt()-ac.alt(),ac.distance_to(pos))*R2D))  * D2R;
                     #if (l==0) {
                     #    #printf("prev %.2f alt %.2f our-pitch %.2f our-alt %.2f",math.atan2(pos.alt()-me.eegsMe.ac.alt(),pos.distance_to(me.eegsMe.ac))*R2D-me.eegsMe.pitch,pos.alt(),me.eegsMe.pitch, me.eegsMe.ac.alt());
                     #    printf("seen bearing %.2f from heading %.2f", me.eegsMe.ac.course_to(pos[0]), me.eegsMe.hdg);
@@ -1652,19 +1762,20 @@ append(obj.total, obj.speed_curr);
                         #pos.dump();
                     #    print();
                     #}
-                    me.eegsMe.devs = me.develev_to_devroll(hdp, me.eegsMe.u_dev_rad, me.eegsMe.u_elev_rad);
-                    me.eegsMe.combined_dev_deg    =  me.eegsMe.devs[0];
-                    me.eegsMe.combined_dev_length =  me.eegsMe.devs[1];
-                    me.eegsMe.xcS = me.sx/2                     + (me.pixelPerMeterX * me.eegsMe.combined_dev_length * math.sin(me.eegsMe.combined_dev_deg*D2R));
-                    me.eegsMe.ycS = me.sy-me.texels_up_into_hud - (me.pixelPerMeterY * me.eegsMe.combined_dev_length * math.cos(me.eegsMe.combined_dev_deg*D2R));
+                    #me.eegsMe.devs = me.develev_to_devroll(hdp, me.eegsMe.u_dev_rad, me.eegsMe.u_elev_rad);
+                    #me.eegsMe.combined_dev_deg    =  me.eegsMe.devs[0];
+                    #me.eegsMe.combined_dev_length =  me.eegsMe.devs[1];
+                    #me.eegsMe.xcS = me.sx/2                     + (me.pixelPerMeterX * me.eegsMe.combined_dev_length * math.sin(me.eegsMe.combined_dev_deg*D2R));
+                    #me.eegsMe.ycS = me.sy-me.texels_up_into_hud - (me.pixelPerMeterY * me.eegsMe.combined_dev_length * math.cos(me.eegsMe.combined_dev_deg*D2R));
+                    me.eegsMe.posTemp = HudMath.getPosFromCoord(pos,ac);
                     me.eegsMe.shellPosDist[l] = ac.direct_distance_to(pos)*M2FT;
-                    me.eegsMe.shellPosX[l] = me.eegsMe.xcS;
-                    me.eegsMe.shellPosY[l] = me.eegsMe.ycS;
+                    me.eegsMe.shellPosX[l] = me.eegsMe.posTemp[0];#me.eegsMe.xcS;
+                    me.eegsMe.shellPosY[l] = me.eegsMe.posTemp[1];#me.eegsMe.ycS;
                 }
             }
             if (me.eegsMe.allow) {
                 # draw the funnel
-                for (var k = 0;k<funnelParts;k+=1) {
+                for (var k = 0;k<me.funnelParts;k+=1) {
                     var halfspan = math.atan2(35*0.5,me.eegsMe.shellPosDist[k])*R2D*me.texelPerDegreeX;#35ft average fighter wingspan
                     me.eegsRightX[k] = me.eegsMe.shellPosX[k]-halfspan;
                     me.eegsRightY[k] = me.eegsMe.shellPosY[k];
@@ -1672,7 +1783,7 @@ append(obj.total, obj.speed_curr);
                     me.eegsLeftY[k]  = me.eegsMe.shellPosY[k];
                 }
                 me.eegsGroup.removeAllChildren();
-                for (var i = 0; i < funnelParts-1; i+=1) {
+                for (var i = 1; i < me.funnelParts-1; i+=1) {#changed to i=1 as we dont need funnel to start so close
                     me.eegsGroup.createChild("path")
                         .moveTo(me.eegsRightX[i], me.eegsRightY[i])
                         .lineTo(me.eegsRightX[i+1], me.eegsRightY[i+1])
@@ -1706,7 +1817,7 @@ append(obj.total, obj.speed_curr);
             #printf("%d,%d",0,0);
             #print("-----");
             
-            for (var j = 0;j < funnelParts;j+=1) {
+            for (var j = 0;j < me.funnelParts;j+=1) {
                 
                 #calc new speed
                 me.eegsMe.Cd = drag(me.eegsMe.vel/ me.eegsMe.rs[1],0.193);#0.193=cd
@@ -1757,7 +1868,7 @@ append(obj.total, obj.speed_curr);
     },
 
     update : func(hdp) {
-
+        HudMath.reCalc();
 #
 # short cut the whole thing if the display is turned off
 #        if (!hdp.hud_display or !hdp.hud_serviceable) {
@@ -1799,11 +1910,12 @@ append(obj.total, obj.speed_curr);
         }
 #Text windows on the HUD (F-16)
 #               1 
-#
-# 2 nav/arm         3 fuel/callsign
+#                   10 ALOW
+# 2 nav/arm         3 callsign
 # 7 mach            4 eta/altitude
 # 8 g               5 waypoint/slant range
-# 9 weap/aoa        6 type
+# 9 weap/aoa        6 type/tacan
+# 11 fuel
 
 # velocity vector
         #340,260
@@ -1811,8 +1923,12 @@ append(obj.total, obj.speed_curr);
         me.pixelPerMeterX = (340*0.695633)/0.15627;
         me.pixelPerMeterY = 260/(me.Hz_t-me.Hz_b);
         me.submode = 0;
-
-        if (hdp.wow0) {
+        
+        if (1) {
+            var vvpos = HudMath.getFlightPathIndicatorPos();
+            hdp.VV_x = vvpos[0];
+            hdp.VV_y = vvpos[1];
+        } elsif (hdp.wow0) {
             me.vectorMag = math.sqrt(hdp.speed_east_fps*hdp.speed_east_fps+hdp.speed_north_fps*hdp.speed_north_fps);
             if (me.vectorMag == 0) {
                 me.vectorMag = 0.0001;
@@ -1943,6 +2059,10 @@ append(obj.total, obj.speed_curr);
                         hdp.window9_txt = sprintf("%d AG154", pylons.fcs.getAmmo());
                     } elsif (hdp.weapon_selected == "CBU-87") {
                         hdp.window9_txt = sprintf("%d CB87", pylons.fcs.getAmmo());
+                    } elsif (hdp.weapon_selected == "B61-7") {
+                        hdp.window9_txt = sprintf("%d B617", pylons.fcs.getAmmo());
+                    } elsif (hdp.weapon_selected == "B61-12") {
+                        hdp.window9_txt = sprintf("%d B6112", pylons.fcs.getAmmo());
                     } else hdp.window9_txt = "";
                     
 
@@ -1999,9 +2119,25 @@ append(obj.total, obj.speed_curr);
                     hdp.window4_txt = "";
                     hdp.window5_txt = "";
                 }
-                
+                var knob = getprop("sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob");
                 if (hdp.gear_down and !hdp.wow) {
                     hdp.window6_txt = sprintf("A%d", hdp.approach_speed);
+                } elsif ((knob==0 or knob == 1) and getprop("instrumentation/tacan/in-range")) {
+                    # show tacan distance and mag heading. (not authentic like this, saw a paper on putting Tacan in hud, but not sure if it was done for F16)
+                    var tcnDist = getprop("instrumentation/tacan/indicated-distance-nm");
+                    if (tcnDist >= 10) {
+                        # tacan can under right conditions be 3 digits
+                        tcnDist = sprintf("%d", tcnDist);
+                    } else {
+                        tcnDist = sprintf("%.1f", tcnDist);
+                    }
+                    hdp.window6_txt = sprintf("%s TCN%03d",tcnDist,geo.normdeg(hdp.headingMag+getprop("instrumentation/tacan/bearing-relative-deg")));
+                } elsif ((knob==2 or knob == 3) and getprop("instrumentation/adf/in-range")) {
+                    # show adf mag heading.
+                    hdp.window6_txt = sprintf("ADF%03d",geo.normdeg(hdp.headingMag+getprop("instrumentation/adf/indicated-bearing-deg")));
+                } elsif ((knob==2 or knob == 3) and getprop("instrumentation/nav[0]/in-range") and !getprop("instrumentation/nav[0]/nav-loc")) {
+                    # show vor mag heading.
+                    hdp.window6_txt = sprintf("VOR%03d",geo.normdeg(getprop("orientation/heading-deg")-getprop("orientation/heading-magnetic-deg")+getprop("instrumentation/nav[0]/radials/target-auto-hdg-deg")));
                 } else {
                     hdp.window6_txt = "";
                 }
@@ -2067,7 +2203,7 @@ append(obj.total, obj.speed_curr);
         
 
 
-        me.trackLineShow = 0;
+        me.locatorLineShow = 0;
 #        if (hdp.FrameCount == 1 or hdp.FrameCount == 3 or me.initUpdate == 1) {
             me.target_idx = 0;
             me.designated = 0;
@@ -2088,7 +2224,7 @@ append(obj.total, obj.speed_curr);
             hdp.weapon_selected = pylons.fcs.selectedType;
             if (hdp.weapon_selected == "AIM-120" or hdp.weapon_selected == "AIM-7") {
                 if (!pylons.fcs.isLock()) {
-                    me.radarLock.setTranslation(me.sx/2, me.sy*0.25+262*0.4*0.5);
+                    me.radarLock.setTranslation(0, -me.sy*0.25+262*0.3*0.5);
                     me.rdL = 1;
                 }                
             } elsif (!pylons.fcs.isLock() and hdp.weapon_selected == "AIM-9") {
@@ -2097,10 +2233,10 @@ append(obj.total, obj.speed_curr);
                     if (aim != nil) {
                         me.submode = 1;
                         var coords = aim.getSeekerInfo();
-                        me.irSearch.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                        me.irSearch.setTranslation(HudMath.getCenterPosFromDegs(coords[0],coords[1]));
                     }
                 } else {
-                    me.irSearch.setTranslation(me.sx/2, me.sy*0.25);
+                    me.irSearch.setTranslation(0, -me.sy*0.25);
                 }
                 me.irS = 1;
             } elsif (pylons.fcs.isLock() and hdp.weapon_selected == "AIM-9" and pylons.bore) {
@@ -2108,7 +2244,7 @@ append(obj.total, obj.speed_curr);
                 if (aim != nil) {
                     var coords = aim.getSeekerInfo();
                     if (coords != nil) {
-                        me.irLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                        me.irLock.setTranslation(HudMath.getCenterPosFromDegs(coords[0],coords[1]));
                         me.irL = 1;
                     }
                 }
@@ -2126,27 +2262,30 @@ append(obj.total, obj.speed_curr);
                       me.model = me.u.ModelType;
 
                     if (me.target_idx < me.max_symbols) {
+                        me.echoPos = HudMath.getPosFromCoord(me.u.get_Coord(0));
+                        #print(HudMath.dir_x);
                         me.tgt = me.tgt_symbols[me.target_idx];
                         if (me.tgt != nil) {
                             me.tgt.setVisible(me.u.get_display());
-                            me.u_dev_rad = (90-me.u.get_deviation(hdp.heading))  * D2R;
-                            me.u_elev_rad = (90-me.u.get_total_elevation( hdp.pitch))  * D2R;
-                            me.devs = me.develev_to_devroll(hdp, me.u_dev_rad, me.u_elev_rad);
-                            me.combined_dev_deg = me.devs[0];
-                            me.combined_dev_length =  me.devs[1];
+                            #me.u_dev_rad = (90-me.u.get_deviation(hdp.heading))  * D2R;
+                            #me.u_elev_rad = (90-me.u.get_total_elevation( hdp.pitch))  * D2R;
+                            #me.devs = me.develev_to_devroll(hdp, me.u_dev_rad, me.u_elev_rad);
+                            #me.combined_dev_deg = me.devs[0];
+                            #me.combined_dev_length =  me.devs[1];
                             #me.clamped = me.devs[2];
-                            me.yc = ht_yco + (ht_ycf * me.combined_dev_length * math.cos(me.combined_dev_deg*D2R));
-                            me.xc = ht_xco + (ht_xcf * me.combined_dev_length * math.sin(me.combined_dev_deg*D2R));
-
-                            me.clamped = me.yc > me.sy*0.5 or me.yc < -me.sy*0.5+me.hozizon_line_offset_from_middle_in_svg*me.sy or me.xc > me.sx *0.5 or me.xc < -me.sx*0.5; # outside HUD
-
+                            #me.yc = ht_yco + (ht_ycf * me.combined_dev_length * math.cos(me.combined_dev_deg*D2R));
+                            #me.xc = ht_xco + (ht_xcf * me.combined_dev_length * math.sin(me.combined_dev_deg*D2R));
+                            
+                            #me.clamped = me.yc > me.sy*0.5 or me.yc < -me.sy*0.5+me.hozizon_line_offset_from_middle_in_svg*me.sy or me.xc > me.sx *0.5 or me.xc < -me.sx*0.5; # outside HUD
+                            me.clamped = HudMath.isCenterPosClamped(me.echoPos[0],me.echoPos[1]);
+                            
                             if (hdp.active_u != nil and hdp.active_u.Callsign != nil and me.u.Callsign != nil and me.u.Callsign.getValue() == hdp.active_u.Callsign.getValue()) {
                                 me.target_locked.setVisible(1);
                                 me.tgt.hide();
-                                me.xcS = me.sx/2                     + (me.pixelPerMeterX * me.combined_dev_length * math.sin(me.combined_dev_deg*D2R));
-                                me.ycS = me.sy-me.texels_up_into_hud - (me.pixelPerMeterY * me.combined_dev_length * math.cos(me.combined_dev_deg*D2R));
-                                me.target_locked.setTranslation (me.xcS, me.ycS);
-                                
+                                #me.xcS = me.sx/2                     + (me.pixelPerMeterX * me.combined_dev_length * math.sin(me.combined_dev_deg*D2R));
+                                #me.ycS = me.sy-me.texels_up_into_hud - (me.pixelPerMeterY * me.combined_dev_length * math.cos(me.combined_dev_deg*D2R));
+                                #me.target_locked.setTranslation (me.xcS, me.ycS);
+                                me.target_locked.setTranslation (me.echoPos);
                                 if (pylons.fcs != nil and pylons.fcs.isLock()) {
                                     #me.target_locked.setRotation(45*D2R);
                                     if (hdp.weapon_selected == "AIM-120" or hdp.weapon_selected == "AIM-7" or hdp.weapon_selected == "AIM-9") {
@@ -2154,8 +2293,11 @@ append(obj.total, obj.speed_curr);
                                         if (aim != nil) {
                                             var coords = aim.getSeekerInfo();
                                             if (coords != nil) {
-                                                me.irLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
-                                                me.radarLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                                                me.seekPos = HudMath.getCenterPosFromDegs(coords[0],coords[1]);
+                                                #me.irLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                                                #me.radarLock.setTranslation(me.sx/2+me.texelPerDegreeX*coords[0],me.sy-me.texels_up_into_hud-me.texelPerDegreeY*coords[1]);
+                                                me.irLock.setTranslation(me.seekPos);
+                                                me.radarLock.setTranslation(me.seekPos);
                                             }
                                         }
                                     }
@@ -2169,17 +2311,19 @@ append(obj.total, obj.speed_curr);
                                         me.triangle65.setRotation(D2R*(hdp.active_u.get_heading()-hdp.heading));
                                         me.irL = 1;
                                         me.irT = 1;
-                                    }                                    
+                                    }
                                 } else {
                                     #me.target_locked.setRotation(0);
                                 }
                                 if (me.clamped) {
-                                    me.trackLine.setTranslation(me.sx/2,me.sy-me.texels_up_into_hud);
-                                    me.trackLine.setRotation(me.combined_dev_deg*D2R);
+                                    #me.locatorLine.setTranslation(me.sx/2,me.sy-me.texels_up_into_hud);
+                                    #me.locatorLine.setRotation(me.combined_dev_deg*D2R);
+                                    me.locatorLine.setTranslation(HudMath.getBorePos());
+                                    me.locatorLine.setRotation(HudMath.getPolarFromCenterPos(me.echoPos[0],me.echoPos[1])[0]);
                                     me.dev_h_d = me.u.get_deviation(hdp.heading);
                                     me.dev_e_d = me.u.get_total_elevation(hdp.pitch);
-                                    me.offangle.setText(sprintf("%d", math.sqrt(me.dev_h_d*me.dev_h_d+me.dev_e_d*me.dev_e_d)));
-                                    me.trackLineShow = 1;
+                                    me.locatorAngle.setText(sprintf("%d", math.sqrt(me.dev_h_d*me.dev_h_d+me.dev_e_d*me.dev_e_d)));
+                                    me.locatorLineShow = 1;
                                 }
                             } else {
                                 #
@@ -2187,7 +2331,7 @@ append(obj.total, obj.speed_curr);
                                 if (hdp.symbol_reject)
                                   me.tgt.setVisible(0);
                             }
-                            me.tgt.setTranslation (me.xc, me.yc);
+                            me.tgt.setTranslation (me.echoPos);
                             me.tgt.update();
                             if (ht_debug)
                               printf("%-10s %f,%f [%f,%f,%f] :: %f,%f",me.callsign,me.xc,me.yc, me.devs[0], me.devs[1], me.devs[2], me.u_dev_rad*D2R, me.u_elev_rad*D2R); 
@@ -2210,8 +2354,8 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
         
         #print(me.irS~" "~me.irL);
 
-        me.trackLine.setVisible(me.trackLineShow);
-        me.offangle.setVisible(me.trackLineShow);
+        me.locatorLine.setVisible(me.locatorLineShow);
+        me.locatorAngle.setVisible(me.locatorLineShow);
 
         
 
@@ -2292,11 +2436,14 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
 
         if (tgp.flir_updater.click_coord_cam != nil and getprop("f16/avionics/tgp-lock")) {# hdp.tgp_mounted and 
             if (getprop("sim/view[102]/heading-offset-deg")==0 and getprop("sim/view[102]/pitch-offset-deg")==-30 and armament.contactPoint != nil) {
-                var b = geo.normdeg180(armament.contactPoint.get_relative_bearing());
-                var p = armament.contactPoint.getElevation()-hdp.pitch;
-                var y = me.clamp(-p*me.texelPerDegreeY+me.sy-me.texels_up_into_hud,me.sy*0.05,me.sy*0.95);
-                var x = me.clamp(b*me.texelPerDegreeX+me.sx*0.5,me.sx*0.025,me.sx*0.975);
-                if (y == me.sy*0.05 or y == me.sy*0.95 or x == me.sx*0.025 or x == me.sx*0.975) {
+                #var b = geo.normdeg180(armament.contactPoint.get_relative_bearing());
+                #var p = armament.contactPoint.getElevation()-hdp.pitch;
+                var xy = HudMath.getPosFromCoord(armament.contactPoint.get_Coord());
+                var y = me.clamp(xy[1],-me.sy*0.40,me.sy*0.40);
+                var x = me.clamp(xy[0],-me.sx*0.45,me.sx*0.45);
+                #var y = me.clamp(-p*me.texelPerDegreeY+me.sy-me.texels_up_into_hud,me.sy*0.05,me.sy*0.95);
+                #var x = me.clamp(b*me.texelPerDegreeX+me.sx*0.5,me.sx*0.025,me.sx*0.975);
+                if (y != xy[1] or x != xy[0]) {
                     me.tgpPointC.setTranslation(x,y);
                     me.tgpPointC.show();
                 } else {
@@ -2307,9 +2454,12 @@ else print("[ERROR]: HUD too many targets ",me.target_idx);
             } else {
                 var b = geo.normdeg180(getprop("sim/view[102]/heading-offset-deg"));
                 var p = getprop("sim/view[102]/pitch-offset-deg");
-                var y = me.clamp(-p*me.texelPerDegreeY+me.sy-me.texels_up_into_hud,me.sy*0.05,me.sy*0.95);
-                var x = me.clamp(b*me.texelPerDegreeX+me.sx*0.5,me.sx*0.025,me.sx*0.975);
-                if (y == me.sy*0.05 or y == me.sy*0.95 or x == me.sx*0.025 or x == me.sx*0.975) {
+                var xy = HudMath.getCenterPosFromDegs(b,p);
+                var y = me.clamp(xy[1],-me.sy*0.40,me.sy*0.40);
+                var x = me.clamp(xy[0],-me.sx*0.45,me.sx*0.45);
+                #var y = me.clamp(-p*me.texelPerDegreeY+me.sy-me.texels_up_into_hud,me.sy*0.05,me.sy*0.95);
+                #var x = me.clamp(b*me.texelPerDegreeX+me.sx*0.5,me.sx*0.025,me.sx*0.975);
+                if (y != xy[1] or x != xy[0]) {
                     me.tgpPointC.setTranslation(x,y);
                     me.tgpPointC.show();
                 } else {

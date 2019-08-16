@@ -357,9 +357,10 @@ var MFD_Device =
         svg.blep = setsize([],svg.maxB);
         for (var i = 0;i<svg.maxB;i+=1) {
             svg.blep[i] = svg.p_RDR.createChild("path")
-                    .moveTo(0,0)
-                    .vert(4)
-                    .setStrokeLineWidth(4)
+                    .moveTo(0,-4)
+                    .vert(8)
+                    .setStrokeLineWidth(8)
+                    .set("z-index",10)
                     .hide();
         }
         svg.rangUp = svg.p_RDR.createChild("path")
@@ -426,6 +427,7 @@ var MFD_Device =
                             .moveTo(0,-10)
                             .vert(-10)
                             .setColor(1,1,0)
+                            .set("z-index",20)
                             .setStrokeLineWidth(2);
             svg.lockAlt = svg.lock.createChild("text")
                 .setTranslation(0, 25)
@@ -489,6 +491,12 @@ var MFD_Device =
            .setCenter(0, -482*0.5)
            .setColor(0.5,0.5,1)
            .setStrokeLineWidth(1);
+        svg.silent = svg.p_RDR.createChild("text")
+           .setTranslation(0, -482*0.25)
+           .setAlignment("center-center")
+           .setText("SILENT")
+           .setFontSize(15, 1.0)
+           .setColor(1.0,1.0,0.5);
     },
 
     addRadar: func {
@@ -517,9 +525,9 @@ var MFD_Device =
                 } elsif (eventi == 17) {
                     me.ppp.selectPage(me.my.p_SMS);
                 } elsif (eventi == 15) {
-                    me.ppp.selectPage(me.my.p_VSD);
-                } elsif (eventi == 18) {
-                    me.ppp.selectPage(me.my.pjitds_1);
+                    me.ppp.selectPage(me.my.p_WPN);
+                #} elsif (eventi == 18) {
+                #    me.ppp.selectPage(me.my.pjitds_1);
                 } elsif (eventi == 16) {
                     me.ppp.selectPage(me.my.p_HSD);
                 } elsif (eventi == 2) {
@@ -569,6 +577,9 @@ var MFD_Device =
                 }
                 me.plc = plc;
                 me.root.ant_bottom.setTranslation(me.wdt*0.5-(me.az/120)*me.wdt*0.5+(me.az/120)*me.wdt*math.abs(me.fwd-me.plc),0);
+                me.root.silent.hide();
+            } else {
+                me.root.silent.show();
             }
             if (noti.FrameCount != 1 and noti.FrameCount != 3)
                 return;
@@ -607,26 +618,31 @@ var MFD_Device =
                     continue;
                 }
                 me.distPixels = contact.get_range()*(482/awg_9.range_radar2);
-
-                me.root.blep[me.i].setColor(1,1,1);
+                me.cs = contact.get_Callsign();
+                me.blue = me.cs == getprop("link16/wingman-1") or me.cs == getprop("link16/wingman-2") or me.cs == getprop("link16/wingman-3") or me.cs == getprop("link16/wingman-4") or me.cs == getprop("link16/wingman-5") or me.cs == getprop("link16/wingman-6") or me.cs == getprop("link16/wingman-7");
+                me.root.blep[me.i].setColor(me.blue?[0.5,1,0.5]:[1,1,1]);
                 me.root.blep[me.i].setTranslation(me.wdt*0.5*geo.normdeg180(contact.get_relative_bearing())/60,-me.distPixels);
                 me.root.blep[me.i].show();
                 me.root.blep[me.i].update();
-                if (contact==awg_9.active_u or (awg_9.active_u != nil and contact.get_Callsign() == awg_9.active_u.get_Callsign() and contact.ModelType==awg_9.active_u.ModelType)) {
+                
+                
+                
+                me.desig = contact==awg_9.active_u or (awg_9.active_u != nil and contact.get_Callsign() == awg_9.active_u.get_Callsign() and contact.ModelType==awg_9.active_u.ModelType);
+                if (me.desig) {
                     me.rot = contact.get_heading();
                     if (me.rot == nil) {
                         #can happen in transition between TWS to RWS
                         #me.root.lock.hide();
                     } else {
                         me.lockAlt = sprintf("%02d", contact.get_altitude()*0.001);
-                        me.root.lockAlt.setText(me.lockAlt);
                         me.lockInfo = sprintf("%4d   %+4d", contact.get_Speed(), contact.get_closure_rate());
+                        me.root.lockAlt.setText(me.lockAlt);
                         me.root.lockInfo.setText(me.lockInfo);
                         me.root.lockInfo.show();
                         me.rot = me.rot-getprop("orientation/heading-deg")-geo.normdeg180(contact.get_relative_bearing());
                         me.root.lock.setTranslation(276*0.795*geo.normdeg180(contact.get_relative_bearing())/60,-me.distPixels);
-                        me.cs = contact.get_Callsign();
-                        if (getprop("link16/wingman-1")==me.cs or getprop("link16/wingman-2")==me.cs or getprop("link16/wingman-3")==me.cs) {
+                        
+                        if (me.blue) {
                             me.root.lockFRot.setRotation(me.rot*D2R);
                             me.root.lockFRot.show();
                             me.root.lockRot.hide();
@@ -743,6 +759,14 @@ var MFD_Device =
                 .setAlignment("left-center")
                 .setColor(1,1,1)
                 .setFontSize(20, 1.0);
+        
+        #svg.drop = svg.p_SMS.createChild("text")
+        #        .setTranslation(276*0.795*0.65, -482*0.5-225)
+        #        .setText("CCRP")
+        #        .setAlignment("center-top")
+        #        .setColor(1,1,1)
+        #        .setFontSize(16, 1.0);        
+        
         svg.p1f = svg.p_SMS.createChild("path")
            .moveTo(-276*0.795, -482*0.5+75)
            .vert(-30)
@@ -904,9 +928,14 @@ var MFD_Device =
                     }
                     pylons.fcs.selectPylon(4);
                 } elsif (eventi == 15) {
-                    me.ppp.selectPage(me.my.p_VSD);
-                } elsif (eventi == 18) {
-                    me.ppp.selectPage(me.my.pjitds_1);
+                    me.ppp.selectPage(me.my.p_WPN);
+                #} elsif (eventi == 18) {
+                #    me.ppp.selectPage(me.my.pjitds_1);
+                } elsif (eventi == 14) {
+                    if (getprop("sim/variant-id") == 0) {
+                        return;
+                    }
+                    pylons.fcs.setDropMode(!pylons.fcs.getDropMode());
                 } elsif (eventi == 16) {
                     me.ppp.selectPage(me.my.p_HSD);
                 }
@@ -941,6 +970,13 @@ var MFD_Device =
             me.root.p7f.setVisible(sel==6);
             me.root.p8f.setVisible(sel==7);
             me.root.p9f.setVisible(sel==8);
+
+            #var pT = "CCRP";
+            #if (pylons.fcs != nil) {
+            #    var nm = pylons.fcs.getDropMode();
+            #    if (nm == 1) pT = "CCIP";
+            #}
+            #me.root.drop.setText(pT);
 
             var pT = "--------";
             if (pylons.pylon1 != nil) {
@@ -1006,6 +1042,296 @@ var MFD_Device =
             me.root.p9.setText(pT);
         };
     },
+    
+    setupWPN: func (svg) {
+        svg.p_WPN = me.canvas.createGroup()
+                .setTranslation(276*0.795,482);#552,482 , 0.795 is for UV map
+
+        
+        
+        svg.drop = svg.p_WPN.createChild("text")
+                .setTranslation(276*0.795*-0.30, -482*0.5-225)
+                .setText("")
+                .setAlignment("center-top")
+                .setColor(1,1,1)
+                .setFontSize(16, 1.0);    
+                
+        svg.eegs = svg.p_WPN.createChild("text")
+                .setTranslation(276*0.795*0.325, -482*0.5-225)
+                .setText("")
+                .setAlignment("center-top")
+                .setColor(1,1,1)
+                .setFontSize(16, 1.0);       
+        
+        svg.weap = svg.p_WPN.createChild("text")
+                .setTranslation(276*0.795, -482*0.5-135)
+                .setText("")
+                .setAlignment("right-center")
+                .setColor(1,1,1)
+                .setFontSize(20, 1.0);
+                
+        svg.ready = svg.p_WPN.createChild("text")
+                .setTranslation(276*0.795, -482*0.5+0)
+                .setText("")
+                .setAlignment("right-center")
+                .setColor(1,1,1)
+                .setFontSize(20, 1.0);
+        
+        svg.cool = svg.p_WPN.createChild("text")
+                .setTranslation(276*0.795, -482*0.5+140)
+                .setText("")
+                .setAlignment("right-center")
+                .setColor(1,1,1)
+                .setFontSize(20, 1.0);
+                
+        svg.rangUpA = svg.p_WPN.createChild("path")
+                    .moveTo(-276*0.795,-482*0.5-105-27.5)
+                    .horiz(30)
+                    .lineTo(-276*0.795+15,-482*0.5-105-27.5-15)
+                    .lineTo(-276*0.795,-482*0.5-105-27.5)
+                    .setStrokeLineWidth(2)
+                    .hide()
+                    .setColor(1,1,1);
+        svg.rangA = svg.p_WPN.createChild("text")
+                .setTranslation(-276*0.795, -482*0.5-105)
+                .setAlignment("left-center")
+                .setColor(1,1,1)
+                .hide()
+                .setFontSize(20, 1.0);
+        svg.rangDownA = svg.p_WPN.createChild("path")
+                    .moveTo(-276*0.795,-482*0.5-105+27.5)
+                    .horiz(30)
+                    .lineTo(-276*0.795+15,-482*0.5-105+27.5+15)
+                    .lineTo(-276*0.795,-482*0.5-105+27.5)
+                    .setStrokeLineWidth(2)
+                    .hide()
+                    .setColor(1,1,1);
+                
+        svg.coolFrame = svg.p_WPN.createChild("path")
+           .moveTo(276*0.795, -482*0.5+140+12)
+           .vert(-24)
+           .horiz(-60)
+           .vert(24)
+           .horiz(60)
+           .setColor(1,1,1)
+           .setStrokeLineWidth(1)
+           .hide();
+    },
+    
+    addWPN: func {
+        var svg = {getElementById: func (id) {return me[id]},};
+        me.setupWPN(svg);
+        me.PFD.addWPNPage = func(svg, title, layer_id) {   
+            var np = PFD_Page.new(svg, title, layer_id, me);
+            append(me.pages, np);
+            me.page_index[layer_id] = np;
+            np.setVisible(0);
+            return np;
+        };
+        me.p_WPN = me.PFD.addWPNPage(svg, "WPN", "p_WPN");
+        me.p_WPN.root = svg;
+        me.p_WPN.wdt = 552*0.795;
+        me.p_WPN.fwd = 0;
+        me.p_WPN.plc = 0;
+        me.p_WPN.ppp = me.PFD;
+        me.p_WPN.my = me;
+        me.p_WPN.notifyButton = func (eventi) {
+            if (eventi != nil) {
+                if (eventi == 10) {
+                    me.ppp.selectPage(me.my.p_RDR);
+                } elsif (eventi == 5) {
+                    if (getprop("sim/variant-id") == 0) {
+                        return;
+                    }
+                    pylons.fcs.cycleLoadedWeapon();
+                } elsif (eventi == 0) {
+                    if (getprop("sim/variant-id") == 0) {
+                        return;
+                    }
+                    if (me.wpnType == "fall") {
+                        me.at = 1;
+                    }
+                } elsif (eventi == 1) {
+                    if (getprop("sim/variant-id") == 0) {
+                        return;
+                    }
+                    if (me.wpnType == "fall") {
+                        me.at = -1;
+                    }
+                } elsif (eventi == 9) {
+                    if (getprop("sim/variant-id") == 0) {
+                        return;
+                    }                    
+                    if (me.wpnType=="heat") {
+                        me.cooling = !pylons.fcs.getSelectedWeapon().isCooling();
+                        foreach(var snake;pylons.fcs.getAllOfType("AIM-9")) {
+                            snake.setCooling(me.cooling);
+                        }                        
+                    }                    
+                } elsif (eventi == 17) {
+                    me.ppp.selectPage(me.my.p_SMS);
+                #} elsif (eventi == 18) {
+                #    me.ppp.selectPage(me.my.pjitds_1);
+                } elsif (eventi == 11) {
+                    if (getprop("sim/variant-id") == 0) {
+                        return;
+                    }
+                    if (me.wpnType == "fall") {
+                        pylons.fcs.setDropMode(!pylons.fcs.getDropMode());
+                    }
+                } elsif (eventi == 16) {
+                    me.ppp.selectPage(me.my.p_HSD);
+                }
+# Menu Id's
+#  CRM
+#   10  11  12  13  14
+# 0                    5            
+# 1                    6            
+# 2                    7            
+# 3                    8            
+# 4                    9            
+#   15  16  17  18  19
+#  VSD HSD WPN SIT
+            }
+        };
+        me.p_WPN.update = func (noti) {
+            if (noti.FrameCount != 3)
+                return;
+            if (getprop("sim/variant-id") == 0) {
+                return;
+            }
+            
+            if (me["at"]== nil) {
+                me.at = 0;
+            }
+            me.wpn = pylons.fcs.getSelectedWeapon();
+            me.pylon = pylons.fcs.getSelectedPylon();
+            
+            me.wpnType = "";
+            me.cool = "";
+            me.eegs = "";
+            me.ready = "";
+            me.coolFrame = 0;
+            me.downA = 0;
+            me.upA = 0;
+            me.armtimer = "";
+            me.drop = "";
+            if (me.wpn != nil and me.pylon != nil) {
+                if (me.wpn.type == "MK-82" or me.wpn.type == "MK-83" or me.wpn.type == "MK-84" or me.wpn.type == "GBU-12" or me.wpn.type == "GBU-24" or me.wpn.type == "GBU-54" or me.wpn.type == "CBU-87" or me.wpn.type == "GBU-31" or me.wpn.type == "B61-7" or me.wpn.type == "B61-12") {
+                    me.wpnType ="fall";
+                    var nm = pylons.fcs.getDropMode();
+                    if (nm == 1) me.drop = "CCIP";
+                    if (nm == 0) me.drop = "CCRP";
+                    me.eegs = "A-G";
+                    me.wpn.arming_time += me.at;
+                    if (me.wpn.arming_time < 0) {
+                        me.wpn.arming_time = 0;
+                    } elsif (me.wpn.arming_time > 20) {
+                        me.wpn.arming_time = 20;
+                    }
+                    if (me.at != 0) {
+                        foreach(var bomb;pylons.fcs.getAllOfType(me.wpn.type)) {
+                            bomb.arming_time = me.wpn.arming_time;
+                        }
+                    }
+                    me.armtime = me.wpn.arming_time;
+                    me.downA = me.armtime>0;
+                    me.upA = me.armtime<20;
+                    me.armtimer = sprintf("AD %.2fSEC",me.armtime);#arming delay
+                    me.cool = "SGL";#as opposed to PAIR
+                    if (me.pylon.operableFunction != nil and !me.pylon.operableFunction()) {
+                        me.ready = "FAIL";
+                    } elsif (me.wpn.status <= armament.MISSILE_STARTING){
+                        me.ready = "INIT";
+                    } else {
+                        me.ready = "READY";
+                    }
+                } elsif (me.wpn.type == "AGM-65" or me.wpn.type == "AGM-84" or me.wpn.type == "AGM-119" or me.wpn.type == "AGM-154A" or me.wpn.type == "AGM-158") {
+                    me.wpnType ="ground";
+                    me.eegs = "A-G";
+                    if (me.pylon.operableFunction != nil and !me.pylon.operableFunction()) {
+                        me.ready = "FAIL";
+                    } elsif (me.wpn.status <= armament.MISSILE_STARTING){
+                        me.ready = "INIT";
+                    } else {
+                        me.ready = "READY";
+                    }
+                } elsif (me.wpn.type == "AGM-88") {
+                    me.wpnType ="anti-rad";
+                    me.eegs = "A-G";
+                    me.drop = getprop("f16/stores/harm-mounted")?"HAD":"HAS";
+                    if (me.pylon.operableFunction != nil and !me.pylon.operableFunction()) {
+                        me.ready = "FAIL";
+                    } elsif (me.wpn.status <= armament.MISSILE_STARTING){
+                        me.ready = "INIT";
+                    } else {
+                        me.ready = "READY";
+                    }
+                } elsif (me.wpn.type == "AIM-9") {
+                    me.wpnType ="heat";
+                    me.cool = me.wpn.getWarm()==0?"COOL":"WARM";
+                    me.eegs = "A-A";
+                    me.coolFrame = me.wpn.isCooling()==1?1:0;                    
+                    me.drop = "SLAV";
+                    if (me.pylon.operableFunction != nil and !me.pylon.operableFunction()) {
+                        me.ready = "FAIL";
+                    } elsif (me.wpn.status <= armament.MISSILE_STARTING){
+                        me.ready = "INIT";
+                    } else {
+                        me.ready = "READY";
+                    }
+                } elsif (me.wpn.type == "AIM-120" or me.wpn.type == "AIM-7") {
+                    me.wpnType ="air";
+                    me.drop = "SLAV";
+                    me.eegs = "A-A";
+                    if (me.pylon.operableFunction != nil and !me.pylon.operableFunction()) {
+                        me.ready = "FAIL";
+                    } elsif (me.wpn.status <= armament.MISSILE_STARTING){
+                        me.ready = "INIT";
+                    } else {
+                        me.ready = "READY";
+                    }
+                } elsif (me.wpn.type == "20mm Cannon") {
+                    me.wpnType ="gun";
+                    me.eegs = "EEGS";
+                    if (me.pylon.operableFunction != nil and !me.pylon.operableFunction()) {
+                        me.ready = "FAIL";
+                    } else {
+                        me.ready = "READY";
+                    }
+                } else {
+                    print(me.wpn.type~" not supported in WPN page.");
+                    me.wpnType ="void";
+                }
+                me.myammo = pylons.fcs.getAmmo();
+                if (me.wpn.type == "20mm Cannon") {
+                    if (me.myammo ==0) me.myammo = "0";
+                    elsif (me.myammo <10) me.myammo = "1";
+                    else me.myammo = ""~int(me.myammo*0.1);
+                } elsif (me.myammo==1) {
+                    me.myammo = "";
+                } else {
+                    me.myammo = ""~me.myammo;
+                }
+                me.root.weap.setText(me.myammo~me.wpn.typeShort);
+                if (!getprop("controls/armament/master-arm")) {
+                    me.ready = "";#TODO: ?
+                }
+            } else {
+                me.root.weap.setText("");
+            }
+            me.root.drop.setText(me.drop);  
+            me.root.cool.setText(me.cool);
+            me.root.eegs.setText(me.eegs);
+            me.root.ready.setText(me.ready);
+            me.root.coolFrame.setVisible(me.coolFrame);
+            me.root.rangDownA.setVisible(me.downA);
+            me.root.rangUpA.setVisible(me.upA);
+            me.root.rangA.setText(me.armtimer);
+            me.root.rangA.setVisible(me.upA or me.downA);
+            me.at = 0;
+        };
+    },
 
     setupHSD: func (svg) {
         svg.p_HSD = me.canvas.createGroup();
@@ -1024,6 +1350,7 @@ var MFD_Device =
         svg.innerRadius  = svg.outerRadius*0.3333;
         #var innerTick    = 0.85*innerRadius*math.cos(45*D2R);
         #var outerTick    = 1.15*innerRadius*math.cos(45*D2R);
+        
 
         svg.conc = svg.p_HSDc.createChild("path")
             .moveTo(svg.innerRadius,0)
@@ -1149,6 +1476,46 @@ var MFD_Device =
 #           .lineTo(0, -482)
 #           .setColor(0.5,0.5,1)
 #           .setStrokeLineWidth(1);
+
+
+        
+        
+        svg.c1 = svg.p_HSDc.createChild("path")
+            .moveTo(-50,0)
+            .arcSmallCW(50,50, 0,  50*2, 0)
+            .arcSmallCW(50,50, 0, -50*2, 0)
+            .setStrokeLineWidth(1)
+            .set("z-index",2)
+            .hide()
+            .setColor(1,0,0);
+        svg.c2 = svg.p_HSDc.createChild("path")
+            .moveTo(-50,0)
+            .arcSmallCW(50,50, 0,  50*2, 0)
+            .arcSmallCW(50,50, 0, -50*2, 0)
+            .setStrokeLineWidth(1)
+            .set("z-index",2)
+            .hide()
+            .setColor(1,0,0);
+        svg.c3 = svg.p_HSDc.createChild("path")
+            .moveTo(-50,0)
+            .arcSmallCW(50,50, 0,  50*2, 0)
+            .arcSmallCW(50,50, 0, -50*2, 0)
+            .setStrokeLineWidth(1)
+            .set("z-index",2)
+            .hide()
+            .setColor(1,1,0);
+        svg.c4 = svg.p_HSDc.createChild("path")
+            .moveTo(-50,0)
+            .arcSmallCW(50,50, 0,  50*2, 0)
+            .arcSmallCW(50,50, 0, -50*2, 0)
+            .setStrokeLineWidth(1)
+            .set("z-index",2)
+            .hide()
+            .setColor(0,1,0);
+
+
+
+
         svg.centered = 0;
         svg.coupled = 0;
         svg.range_cen = 40;
@@ -1235,9 +1602,9 @@ var MFD_Device =
                 } elsif (eventi == 17) {
                     me.ppp.selectPage(me.my.p_SMS);
                 } elsif (eventi == 15) {
-                    me.ppp.selectPage(me.my.p_VSD);
-                } elsif (eventi == 18) {
-                    me.ppp.selectPage(me.my.pjitds_1);
+                    me.ppp.selectPage(me.my.p_WPN);
+                #} elsif (eventi == 18) {
+                #    me.ppp.selectPage(me.my.pjitds_1);
                 } elsif (eventi == 10) {
                     me.ppp.selectPage(me.my.p_RDR);
                 } elsif (eventi == 2) {
@@ -1335,9 +1702,9 @@ var MFD_Device =
                         me.legBearing = geo.aircraft_position().course_to(me.wpC)-getprop("orientation/heading-deg");#relative
                         me.legDistance = geo.aircraft_position().distance_to(me.wpC)*M2NM;
                         if (me.root.centered) {
-                            me.legRangePixels = me.root.mediumRadius*(me.legDistance/me.root.range_cen);;
+                            me.legRangePixels = me.root.mediumRadius*(me.legDistance/me.root.range_cen);
                         } else {
-                            me.legRangePixels = me.root.outerRadius*(me.legDistance/me.root.range_dep);;
+                            me.legRangePixels = me.root.outerRadius*(me.legDistance/me.root.range_dep);
                         }
                         me.legX = me.legRangePixels*math.sin(me.legBearing*D2R);
                         me.legY = -me.legRangePixels*math.cos(me.legBearing*D2R);
@@ -1365,19 +1732,104 @@ var MFD_Device =
                         me.prevY = me.legY;
                     }
                 }
+                
+                for (var u = 0;u<2;u+=1) {
+                    if (lines[u] != nil) {
+                        # lines
+                        me.plan = lines[u];
+                        me.planSize = me.plan.getPlanSize();
+                        me.prevX = nil;
+                        me.prevY = nil;
+                        for (me.j = 0; me.j <= me.planSize;me.j+=1) {
+                            if (me.j == me.planSize) {
+                                if (me.planSize > 2) {
+                                    me.wp = me.plan.getWP(0);
+                                } else {
+                                    continue;
+                                }
+                            } else {
+                                me.wp = me.plan.getWP(me.j);
+                            }
+                            me.wpC = geo.Coord.new();
+                            me.wpC.set_latlon(me.wp.lat,me.wp.lon);
+                            me.legBearing = geo.aircraft_position().course_to(me.wpC)-getprop("orientation/heading-deg");#relative
+                            me.legDistance = geo.aircraft_position().distance_to(me.wpC)*M2NM;
+                            if (me.root.centered) {
+                                me.legRangePixels = me.root.mediumRadius*(me.legDistance/me.root.range_cen);;
+                            } else {
+                                me.legRangePixels = me.root.outerRadius*(me.legDistance/me.root.range_dep);;
+                            }
+                            me.legX = me.legRangePixels*math.sin(me.legBearing*D2R);
+                            me.legY = -me.legRangePixels*math.cos(me.legBearing*D2R);
+                            if (me.prevX != nil) {
+                                me.root.cone.createChild("path")
+                                    .moveTo(me.legX,me.legY)
+                                    .lineTo(me.prevX,me.prevY)
+                                    .setStrokeLineWidth(1)
+                                    .setStrokeDashArray([10, 10])
+                                    .set("z-index",4)
+                                    .setColor(0.9,0.9,0.9)
+                                    .update();
+                            }
+                            me.prevX = me.legX;
+                            me.prevY = me.legY;
+                        }
+                    }
+                }
+                
                 me.root.cone.update();
+                
+                for (var l = 1; l<=4;l+=1) {
+                    # threat circles
+                    me.la = getprop("f16/avionics/c"~l~"-lat");
+                    me.lo = getprop("f16/avionics/c"~l~"-lon");
+                    me.ra = getprop("f16/avionics/c"~l~"-rad");
+                    
+                    if (l==1) me.ci = me.root.c1;
+                    elsif (l==2) me.ci = me.root.c2;
+                    elsif (l==3) me.ci = me.root.c3;
+                    elsif (l==4) me.ci = me.root.c4;
+                    
+                    if (me.la != nil and me.lo != nil and me.ra != nil and me.ra > 0) {
+                        me.wpC = geo.Coord.new();
+                        me.wpC.set_latlon(me.la,me.lo);
+                        me.legBearing = geo.aircraft_position().course_to(me.wpC)-getprop("orientation/heading-deg");#relative
+                        me.legDistance = geo.aircraft_position().distance_to(me.wpC)*M2NM;
+                        me.legRadius  = me.ra;
+                        if (me.root.centered) {
+                            me.legRangePixels = me.root.mediumRadius*(me.legDistance/me.root.range_cen);
+                            me.legScale = me.root.mediumRadius*(me.legRadius/me.root.range_cen)/50;
+                        } else {
+                            me.legRangePixels = me.root.outerRadius*(me.legDistance/me.root.range_dep);
+                            me.legScale = me.root.outerRadius*(me.legRadius/me.root.range_dep)/50;
+                        }
+                        
+                        me.legX = me.legRangePixels*math.sin(me.legBearing*D2R);
+                        me.legY = -me.legRangePixels*math.cos(me.legBearing*D2R);
+                        me.ci.setTranslation(me.legX,me.legY);
+                        me.ci.setScale(me.legScale);
+                        me.ci.setStrokeLineWidth(1/me.legScale);
+                        me.ci.show();
+                    } else {
+                        me.ci.hide();
+                    }
+                }
             }
+            
             foreach(contact; awg_9.tgts_list) {
-                if (contact.get_display() == 0) {
+                me.cs = contact.get_Callsign();
+                me.blue = me.cs == getprop("link16/wingman-1") or me.cs == getprop("link16/wingman-2") or me.cs == getprop("link16/wingman-3") or me.cs == getprop("link16/wingman-4") or me.cs == getprop("link16/wingman-5") or me.cs == getprop("link16/wingman-6") or me.cs == getprop("link16/wingman-7");
+                me.desig = contact==awg_9.active_u or (awg_9.active_u != nil and contact.get_Callsign() == awg_9.active_u.get_Callsign() and contact.ModelType==awg_9.active_u.ModelType);
+                if (contact.get_display() == 0 or !(me.desig or me.blue)) {
                     continue;
                 }
                 me.distPixels = (contact.get_range()/awg_9.range_radar2)*me.rdrRangePixels;
 
-                me.root.blep[me.i].setColor(1,1,1);
+                me.root.blep[me.i].setColor(me.blue?[0,0,1]:[1,1,1]);
                 me.root.blep[me.i].setTranslation(me.distPixels*math.sin(contact.get_relative_bearing()*D2R),-me.distPixels*math.cos(contact.get_relative_bearing()*D2R));
                 me.root.blep[me.i].show();
                 me.root.blep[me.i].update();
-                if (contact==awg_9.active_u or (awg_9.active_u != nil and contact.get_Callsign() == awg_9.active_u.get_Callsign() and contact.ModelType==awg_9.active_u.ModelType)) {
+                if (me.desig) {
                     me.rot = contact.get_heading();
                     if (me.rot == nil) {
                         #can happen in transition between TWS to RWS
@@ -1390,8 +1842,8 @@ var MFD_Device =
                         me.root.lockInfo.show();
                         me.rot = me.rot-getprop("orientation/heading-deg");
                         me.root.lock.setTranslation(me.distPixels*math.sin(contact.get_relative_bearing()*D2R),-me.distPixels*math.cos(contact.get_relative_bearing()*D2R));
-                        me.cs = contact.get_Callsign();
-                        if (getprop("link16/wingman-1")==me.cs or getprop("link16/wingman-2")==me.cs or getprop("link16/wingman-3")==me.cs) {
+                        
+                        if (me.blue) {
                             me.root.lockFRot.setRotation(me.rot*D2R);
                             me.root.lockFRot.show();
                             me.root.lockRot.hide();
@@ -1423,6 +1875,7 @@ var MFD_Device =
         me.addRadar();
         me.addSMS();
         me.addHSD();
+        me.addWPN();
         me.p1_1 = me.PFD.addPage("Aircraft Menu", "p1_1");
 
         me.p1_1.update = func(notification)
@@ -1452,11 +1905,11 @@ var MFD_Device =
         #9 droptank
         me.p1_3.S10 = MFD_Station.new(me.PFDsvg, 10);
 
-        if (me.model_element == "MFDimage1") {
-            me.pjitds_1 =  PFD_NavDisplay.new(me.PFD,"Situation", "mfd-sit-1", "pjitds_1", "jtids_main");
-        } else {
-            me.pjitds_1 =  PFD_NavDisplay.new(me.PFD,"Situation", "mfd-sit-2", "pjitds_1", "jtids_main");
-        }
+        #if (me.model_element == "MFDimage1") {
+        #    me.pjitds_1 =  PFD_NavDisplay.new(me.PFD,"Situation", "mfd-sit-1", "pjitds_1", "jtids_main");
+        #} else {
+        #    me.pjitds_1 =  PFD_NavDisplay.new(me.PFD,"Situation", "mfd-sit-2", "pjitds_1", "jtids_main");
+        #}
         # use the radar range as the ND range.
 
         me.p_spin_recovery = me.PFD.addPage("Spin recovery", "p_spin_recovery");
@@ -1614,20 +2067,25 @@ var MFD_Device =
 #        me.p1_1.addMenuItem(12, "HSD", me.p_HSD);
 
         me.p_RDR.addMenuItem(17, "SMS", me.p_SMS);
-        me.p_RDR.addMenuItem(15, "VSD", me.p_VSD);
-        me.p_RDR.addMenuItem(18, "SIT", me.pjitds_1);
+        me.p_RDR.addMenuItem(15, "WPN", me.p_WPN);
+        #me.p_RDR.addMenuItem(18, "SIT", me.pjitds_1);
         me.p_RDR.addMenuItem(16, "HSD", me.p_HSD);
         me.p_RDR.addMenuItem(19, "TGP", nil);
 
         me.p_HSD.addMenuItem(17, "SMS", me.p_SMS);
-        me.p_HSD.addMenuItem(15, "VSD", me.p_VSD);
-        me.p_HSD.addMenuItem(18, "SIT", me.pjitds_1);
+        me.p_HSD.addMenuItem(15, "WPN", me.p_WPN);
+        #me.p_HSD.addMenuItem(18, "SIT", me.pjitds_1);
         me.p_HSD.addMenuItem(10, "CRM", me.p_RDR);
         me.p_HSD.addMenuItem(19, "TGP", nil);
+        
+        me.p_WPN.addMenuItem(17, "SMS", me.p_SMS);
+        me.p_WPN.addMenuItem(10, "CRM", me.p_RDR);
+        me.p_WPN.addMenuItem(19, "TGP", nil);
+        me.p_WPN.addMenuItem(16, "HSD", me.p_HSD);
 
-        me.p_SMS.addMenuItem(18, "SIT", me.pjitds_1);
+        #me.p_SMS.addMenuItem(18, "SIT", me.pjitds_1);
         me.p_SMS.addMenuItem(10, "CRM", me.p_RDR);
-        me.p_SMS.addMenuItem(15, "VSD", me.p_VSD);
+        me.p_SMS.addMenuItem(15, "WPN", me.p_WPN);
         me.p_SMS.addMenuItem(16, "HSD", me.p_HSD);
         me.p_SMS.addMenuItem(19, "TGP", nil);
 #        me.p_SMS.addMenuItem(16, "TIM", me.p1_1);
@@ -1656,20 +2114,20 @@ var MFD_Device =
 
 #        me.pjitds_1.addMenuItem(9, "M", me.p1_1);
         #me.pjitds_1.addMenuItem(0, "ARMT", me.p1_2);
-        me.pjitds_1.addMenuItem(15, "VSD", me.p_VSD);
-        me.pjitds_1.addMenuItem(10, "CRM", me.p_RDR);
-        me.pjitds_1.addMenuItem(16, "HSD", me.p_HSD);
-        me.pjitds_1.addMenuItem(17, "SMS", me.p_SMS);
-        me.pjitds_1.addMenuItem(19, "TGP", nil);
+        #me.pjitds_1.addMenuItem(15, "VSD", me.p_VSD);
+        #me.pjitds_1.addMenuItem(10, "CRM", me.p_RDR);
+        #me.pjitds_1.addMenuItem(16, "HSD", me.p_HSD);
+        #me.pjitds_1.addMenuItem(17, "SMS", me.p_SMS);
+        #me.pjitds_1.addMenuItem(19, "TGP", nil);
 
         #me.p_VSD.addMenuItem(0, "ARMT", me.p1_2);
-        me.p_VSD.addMenuItem(18, "SIT", me.pjitds_1);
+        #me.p_VSD.addMenuItem(18, "SIT", me.pjitds_1);
 #        me.p_VSD.addMenuItem(4, "M", me.p1_1);
 #        me.p_VSD.addMenuItem(9, "M", me.p1_1);
-        me.p_VSD.addMenuItem(10, "CRM", me.p_RDR);
-        me.p_VSD.addMenuItem(17, "SMS", me.p_SMS);
-        me.p_VSD.addMenuItem(16, "HSD", me.p_HSD);
-        me.p_VSD.addMenuItem(19, "TGP", nil);
+        #me.p_VSD.addMenuItem(10, "CRM", me.p_RDR);
+        #me.p_VSD.addMenuItem(17, "SMS", me.p_SMS);
+        #me.p_VSD.addMenuItem(16, "HSD", me.p_HSD);
+        #me.p_VSD.addMenuItem(19, "TGP", nil);
     },
 
     update : func(notification)
@@ -1750,3 +2208,14 @@ f16_mfd = F16MfdRecipient.new("F16-MFD");
 #LowerMFD = f16_mfd.LowerMFD;
 
 emesary.GlobalTransmitter.Register(f16_mfd);
+
+var lines = [nil,nil];
+
+var loadLine = func  (no,path) {
+    printf("Attempting to load route %s to act as lines %d in HSD.", path, no);
+  
+    call(func {lines[no] = createFlightplan(path);}, nil, var err = []);
+    if (size(err) or lines[no] == nil) {
+        print(err[0]);
+    }
+};

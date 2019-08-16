@@ -151,6 +151,49 @@
 				<factor>-0.01</factor>
 			</volume>
 		</engine_fan>
+		<engine_fan>
+			<name>external fan 2</name>
+			<path>Aircraft/f16/Sounds/FGUK/f16-whine.wav</path>
+			<mode>looped</mode>
+			<condition>
+				<greater-than>
+					<property>engines/engine/n2</property>
+					<value>5</value>
+				</greater-than>
+				<not>
+					<property>sim/current-view/internal</property>
+				</not>
+				<less-than>
+					<property>engines/engine/n1</property>
+					<value>100.0</value>
+				</less-than>
+			</condition>
+			<reference-dist>100</reference-dist>
+			<max-dist>4000</max-dist>
+			<position>
+				<x>0.6</x>
+				<y>0.01</y>
+				<z>-0.37</z>
+			</position>
+			<orientation>
+				<x>-0.98</x>
+				<y>0.0</y>
+				<z>-0.17</z>
+				<inner-angle>60.0</inner-angle>
+				<outer-angle>200.0</outer-angle>
+				<outer-gain>0.65</outer-gain>
+			</orientation>
+			<pitch>
+				<property>engines/engine/n1</property>
+				<offset>1.0</offset>
+				<factor>0.004</factor>
+			</pitch>
+			<volume>
+				<property>engines/engine/n1</property>
+				<offset>0.35</offset>
+				<factor>-0.01</factor>
+			</volume>
+		</engine_fan>
 		<exhaust>
 			<name>turbine internal</name>
 			<path>Sounds/jet.wav</path>
@@ -408,7 +451,7 @@
 		</squeal>
 		<stall>
 			<name>stall</name>
-			<path>Aircraft/f16/Sounds/betty/warning.wav</path>
+			<path>Aircraft/f16/Sounds/stall.wav</path>
 			<mode>looped</mode>
 			<type>avionics</type>
 			<condition>
@@ -981,7 +1024,6 @@
 						<value>20</value>
 					</greater-than>
 				</or>
-				<property>sim/current-view/internal</property>
 				<property>payload/armament/aim-9/sound-on-off</property>
 			</condition>
 			<pitch>
@@ -993,6 +1035,9 @@
 			</pitch>
 			<volume>
 				<property>payload/armament/aim-9/sound-volume</property>
+			</volume>
+			<volume>
+				<property>sim/current-view/internal</property>
 			</volume>
 		</lock-tone>
 		<lock-tone>
@@ -1209,6 +1254,68 @@
 				<factor>1</factor>
 			</volume>
 		</lock-tone>
+		<lock-tone>
+			<name>aim-154a-signal</name>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/betty/lock.wav</path>
+			<mode>once</mode>
+			<condition>
+				<or>
+					<greater-than>
+						<property>fdm/jsbsim/elec/bus/emergency-dc-1</property>
+						<value>20</value>
+					</greater-than>
+					<greater-than>
+						<property>fdm/jsbsim/elec/bus/emergency-dc-2</property>
+						<value>20</value>
+					</greater-than>
+				</or>
+				<property>payload/armament/agm-154a/sound-on-off</property>
+				<equals>
+					<property>payload/armament/agm-154a/sound-volume</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<!--<pitch>
+                <factor>1.8</factor>
+                <max>2</max>
+            </pitch>-->
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+			</volume>
+		</lock-tone>
+		<lock-tone>
+			<name>aim-158-signal</name>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/betty/lock.wav</path>
+			<mode>once</mode>
+			<condition>
+				<or>
+					<greater-than>
+						<property>fdm/jsbsim/elec/bus/emergency-dc-1</property>
+						<value>20</value>
+					</greater-than>
+					<greater-than>
+						<property>fdm/jsbsim/elec/bus/emergency-dc-2</property>
+						<value>20</value>
+					</greater-than>
+				</or>
+				<property>payload/armament/agm-158/sound-on-off</property>
+				<equals>
+					<property>payload/armament/agm-158/sound-volume</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<!--<pitch>
+                <factor>1.8</factor>
+                <max>2</max>
+            </pitch>-->
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+			</volume>
+		</lock-tone>
 		<avionics>
 			<path>Sounds/avionics-400Hz.wav</path>
 			<mode>looped</mode>
@@ -1237,7 +1344,7 @@
 			</condition>
 			<volume>
 				<property>/sim/current-view/internal</property>
-				<factor>0.030</factor>
+				<factor>0.033</factor>
 			</volume>
 		</avionics>
 		<flare>
@@ -2004,12 +2111,86 @@
 						<value type="string" />
 					</equals>
 				</not>
+				<not>
+					<equals>
+						<property>sound/rwr-launch-sam</property>
+						<value>1</value>
+					</equals>
+				</not>
 			</condition>
 			<volume>
 				<property>/sim/current-view/internal</property>
 				<factor>1</factor>
 			</volume>
 		</rwr>
+		<rwr>
+			<name>rwr-sam-launch</name>
+			<path>Aircraft/f16/Sounds/rwr-sam-launch.wav</path>
+			<mode>once</mode>
+			<type>avionics</type>
+			<condition>
+				<or>
+					<greater-than>
+						<property>fdm/jsbsim/elec/bus/emergency-dc-1</property>
+						<value>20</value>
+					</greater-than>
+					<greater-than>
+						<property>fdm/jsbsim/elec/bus/emergency-dc-2</property>
+						<value>20</value>
+					</greater-than>
+				</or>
+				<not>
+					<equals>
+						<property>sound/rwr-launch</property>
+						<value type="string" />
+					</equals>
+				</not>
+				<not>
+					<equals>
+						<property>sound/rwr-launch-sam</property>
+						<value>0</value>
+					</equals>
+				</not>
+			</condition>
+			<volume>
+				<property>/sim/current-view/internal</property>
+				<factor>1</factor>
+			</volume>
+		</rwr>
+		<radar-standby>
+			<name>radar-standby</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/caution.wav</path>
+			<condition>
+				<equals>
+					<property>instrumentation/radar/radar-standby</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</radar-standby>
+		<radar-active>
+			<name>radar-active</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/caution.wav</path>
+			<condition>
+				<equals>
+					<property>instrumentation/radar/radar-standby</property>
+					<value>0</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</radar-active>
 		<thunder1>
 			<name>thunder1</name>
 			<mode>once</mode>
@@ -2102,6 +2283,108 @@
                 <factor>1.3</factor>
             </volume>
         </air-brakes>
+        <drag-chute>
+			<name>drag-chute</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/caution.wav</path>
+			<condition>
+				<equals>
+					<property>f16/chute/enable</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</drag-chute>
+		<refuel-door>
+			<name>refuel-door-on</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/caution.wav</path>
+			<condition>
+				<equals>
+					<property>systems/refuel/serviceable</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</refuel-door>
+		<refuel-door>
+			<name>refuel-door-off</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/caution.wav</path>
+			<condition>
+				<equals>
+					<property>systems/refuel/serviceable</property>
+					<value>0</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</refuel-door>
+        <boom-contact>
+			<name>boom-contact</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/boom_contact.wav</path>
+			<condition>
+				<equals>
+					<property>systems/refuel/contact</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</boom-contact>
+		<boom-report>
+			<name>boom-report</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/caution.wav</path>
+			<condition>
+				<equals>
+					<property>systems/refuel/contact</property>
+					<value>1</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</boom-report>
+		<boom-disc>
+			<name>boom-disc</name>
+			<mode>once</mode>
+			<type>avionics</type>
+			<path>Aircraft/f16/Sounds/caution.wav</path>
+			<condition>
+				<equals>
+					<property>systems/refuel/contact</property>
+					<value>0</value>
+				</equals>
+			</condition>
+			<volume>
+				<property>sim/current-view/internal</property>
+				<factor>1</factor>
+				<max>1</max>
+			</volume>
+		</boom-disc>
 		<gamma>
 			<name>gamma</name>
 			<path>Aircraft/f16/Sounds/missile.wav</path>

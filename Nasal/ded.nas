@@ -26,35 +26,35 @@ var callInit = func {
   line1 = dedGroup.createChild("text")
         .setFontSize(13, 1)
         .setColor(color)
-        .setAlignment("left-bottom")
+        .setAlignment("left-bottom-baseline")
         .setFont("LiberationFonts/LiberationMono-Bold.ttf")
         .setText("LINE 1            LINE 1")
         .setTranslation(55, 128*0.2);
   line2 = dedGroup.createChild("text")
         .setFontSize(13, 1)
         .setColor(color)
-        .setAlignment("left-bottom")
+        .setAlignment("left-bottom-baseline")
         .setFont("LiberationFonts/LiberationMono-Bold.ttf")
         .setText("LINE 2            LINE 2")
         .setTranslation(55, 128*0.3);
   line3 = dedGroup.createChild("text")
         .setFontSize(13, 1)
         .setColor(color)
-        .setAlignment("left-bottom")
+        .setAlignment("left-bottom-baseline")
         .setFont("LiberationFonts/LiberationMono-Bold.ttf")
         .setText("LINE 3            LINE 3")
         .setTranslation(55, 128*0.4);
   line4 = dedGroup.createChild("text")
         .setFontSize(13, 1)
         .setColor(color)
-        .setAlignment("left-bottom")
+        .setAlignment("left-bottom-baseline")
         .setFont("LiberationFonts/LiberationMono-Bold.ttf")
         .setText("LINE 4            LINE 4")
         .setTranslation(55, 128*0.5);
   line5 = dedGroup.createChild("text")
         .setFontSize(13, 1)
         .setColor(color)
-        .setAlignment("left-bottom")
+        .setAlignment("left-bottom-baseline")
         .setFont("LiberationFonts/LiberationMono-Bold.ttf")
         .setText("LINE 5            LINE 5")
         .setTranslation(55, 128*0.6);
@@ -63,16 +63,23 @@ var callInit = func {
 var pTACAN= 0;
 var pALOW = 1;
 var pSTPT = 2;
+var pTIME = 3;
 var pIFF  = 4;
 var pCNI  = 5;
 var pBINGO= 6;
 var pMAGV = 7;
 var pLINK = 8;
+var pLASER= 9;
+var pCM   = 10;
+var pCRUS = 11;
+var pLIST = 100;#excluded from random
 
-var page = pCNI;
+var page = int(rand()*11.99);#random page at startup
 var comm = 0;
 
 var text = ["","","","",""];
+
+var scroll = 0;
 
 var loop_ded = func {# one line is max 24 chars
     var no = getprop("autopilot/route-manager/current-wp")+1;
@@ -83,7 +90,7 @@ var loop_ded = func {# one line is max 24 chars
     }
     if (page == pSTPT) {
       var fp = flightplan();
-      
+      var TOS = "--:--:--";
       var lat = "";
       var lon = "";
       var alt = -1;
@@ -96,20 +103,98 @@ var loop_ded = func {# one line is max 24 chars
           if (alt == nil) {
             alt = -1;
           }
+          var hour   = getprop("sim/time/utc/hour"); 
+          var minute = getprop("sim/time/utc/minute");
+          var second = getprop("sim/time/utc/second");
+          var eta    = getprop("autopilot/route-manager/wp/eta");
+          if (eta == nil or getprop("autopilot/route-manager/wp/eta-seconds")>3600*24) {
+            #
+          } elsif (getprop("autopilot/route-manager/wp/eta-seconds")>3600) {
+            eta = split(":",eta);
+            minute += num(eta[1]);
+            var addOver = 0;
+            if (minute > 59) {
+              addOver = 1;
+              minute -= 60;
+            }
+            hour += num(eta[0])+addOver;
+            while (hour > 23) {
+              hour -= 24;
+            }
+            TOS = sprintf("%02d:%02d:%02d",hour,minute,second);
+          } else {
+            eta = split(":",eta);
+            second += num(eta[1]);
+            var addOver = 0;
+            if (second > 59) {
+              addOver = 1;
+              second -= 60;
+            }
+            minute += num(eta[0])+addOver;
+            addOver = 0;
+            if (minute > 59) {
+              addOver = 1;
+              minute -= 60;
+            }
+            hour += addOver;
+            while (hour > 23) {
+              hour -= 24;
+            }
+            TOS = sprintf("%02d:%02d:%02d",hour,minute,second);   
+          }          
         }
       }
+      
       text[0] = sprintf("         STPT %s    AUTO",no);
       text[1] = sprintf("      LAT  %s",lat);
       text[2] = sprintf("      LNG  %s",lon);
-      text[3] = sprintf("     ELEV  %5dFT",alt);
-      text[4] = sprintf("      TOS  %s","VOID");
+      text[3] = sprintf("     ELEV  % 5dFT",alt);
+      text[4] = sprintf("      TOS  %s",TOS);
+    } elsif (page == pCRUS) {
+      var fuel   = "";
+      var fp = flightplan();
+      var maxS = "";
+      if (fp != nil) {
+        var max = fp.getPlanSize();
+        if (max > 0) {
+          maxS =""~max;
+          var ete    = getprop("autopilot/route-manager/ete");
+          if (ete != nil and ete > 0) {
+            var pph = getprop("engines/engine[0]/fuel-flow_pph");
+            if (pph == nil) pph = 0;
+            fuel = sprintf("% 6dLBS",pph*(ete/3600));
+            if (size(fuel)>9) {
+              fuel = "999999LBS";
+            }
+          }
+        }
+      }
+      var windkts = getprop("environment/wind-speed-kt");
+      var winddir = getprop("environment/wind-from-heading-deg");
+      if (windkts == nil or winddir == nil) {
+        windkts = -1;
+        winddir = -1;
+      }
+      windkts = sprintf("% 3dKTS",getprop("environment/wind-speed-kt"));
+      winddir = sprintf("%03d\xc2\xb0",getprop("environment/wind-from-heading-deg"));
+      text[0] = sprintf("     CRUS  RNG  ",no);
+      text[1] = sprintf("     STPT  %s  ",maxS);
+      text[2] = sprintf("     FUEL %s",fuel);#fuel used to get to last steerpoint at current fuel consumption.
+      text[3] = sprintf("                        ");
+      text[4] = sprintf("     WIND  %s %s",winddir,windkts);
     } elsif (page == pTACAN) {
       var ilsOn  = (getprop("sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob") == 0 or getprop("sim/model/f16/controls/navigation/instrument-mode-panel/mode/rotary-switch-knob") == 3)?"ON ":"OFF";
-      var freq   = getprop("instrumentation/tacan/frequencies/selected-mhz");
+      #var freq   = getprop("instrumentation/tacan/frequencies/selected-mhz");
+      var freq   = getprop("instrumentation/nav[0]/frequencies/selected-mhz");
       var chan   = getprop("instrumentation/tacan/frequencies/selected-channel");
       var band   = getprop("instrumentation/tacan/frequencies/selected-channel[4]");
-      var course = getprop("instrumentation/tacan/in-range")?getprop("instrumentation/tacan/indicated-bearing-true-deg"):-1;
-      course = course==-1?"":sprintf("%d\xc2\xb0",course);
+      #var course = getprop("instrumentation/tacan/in-range")?getprop("instrumentation/tacan/indicated-bearing-true-deg"):-1;
+      var course = (getprop("instrumentation/nav[0]/in-range") and getprop("instrumentation/nav[0]/nav-loc"))?geo.normdeg(getprop("orientation/heading-deg")-getprop("orientation/heading-magnetic-deg")+getprop("instrumentation/nav[0]/heading-deg")):-1;
+      if (course == -1) {
+        course = "---.--";
+      } else {
+        course = sprintf("%06.2f\xc2\xb0",course);
+      }
       text[0] = sprintf("    TCN REC      ILS %s",ilsOn);
       text[1] = sprintf("                        ");
       text[2] = sprintf("               CMD STRG ");
@@ -126,7 +211,7 @@ var loop_ded = func {# one line is max 24 chars
         type = target.get_model();
       }
       var friend = "";
-      if (sign != "" and (sign == getprop("link16/wingman-1") or sign == getprop("link16/wingman-2") or sign == getprop("link16/wingman-3") or sign == getprop("link16/wingman-4"))) {
+      if (sign != "" and (sign == getprop("link16/wingman-1") or sign == getprop("link16/wingman-2") or sign == getprop("link16/wingman-3") or sign == getprop("link16/wingman-4") or sign == getprop("link16/wingman-5") or sign == getprop("link16/wingman-6") or sign == getprop("link16/wingman-7"))) {
         friend = "WINGMAN";
       } elsif (sign != "") {
         friend = "NO CONN";
@@ -136,18 +221,26 @@ var loop_ded = func {# one line is max 24 chars
       text[1] = sprintf("                        ");
       text[2] = sprintf("PILOT   %s",sign);
       text[3] = sprintf("ID      %s",type);
-      text[4] = sprintf("Link16  %s",friend);
+      text[4] = sprintf("LINK16  %s",friend);
     } elsif (page == pLINK) {
       text[0] = sprintf(" XMT 40 INTRAFLIGHT  %s ",no);
+      
       var last = 0;
-      if (getprop("link16/wingman-4")!="") last = 4;
+      if (getprop("link16/wingman-7")!="") last = 7;
+      elsif (getprop("link16/wingman-6")!="") last = 6;
+      elsif (getprop("link16/wingman-5")!="") last = 5;
+      elsif (getprop("link16/wingman-4")!="") last = 4;
       elsif (getprop("link16/wingman-3")!="") last = 3;
       elsif (getprop("link16/wingman-2")!="") last = 2;
       elsif (getprop("link16/wingman-1")!="") last = 1;
-      text[1] = sprintf("#1 %7s      COMM VHF",getprop("link16/wingman-1"));
-      text[2] = sprintf("#2 %7s      DATA 16K",getprop("link16/wingman-2"));
-      text[3] = sprintf("#3 %7s      OWN  #0 ",getprop("link16/wingman-3"));
-      text[4] = sprintf("#4 %7s      LAST #%d ",getprop("link16/wingman-4"),last);
+      scroll += 0.25;
+      if (scroll >= last-3) scroll = 0;
+      var wingmen = [getprop("link16/wingman-1"),getprop("link16/wingman-2"),getprop("link16/wingman-3"),getprop("link16/wingman-4"),getprop("link16/wingman-5"),getprop("link16/wingman-6"),getprop("link16/wingman-7")];
+      var used = subvec(wingmen,int(scroll),4);
+      text[1] = sprintf("#%d %7s      COMM VHF",int(scroll+1),used[0]);
+      text[2] = sprintf("#%d %7s      DATA 16K",int(scroll+2),used[1]);
+      text[3] = sprintf("#%d %7s      OWN  #0 ",int(scroll+3),used[2]);
+      text[4] = sprintf("#%d %7s      LAST #%d ",int(scroll+4),used[3],last);
     } elsif (page == pALOW) {
       var alow = getprop("f16/settings/cara-alow");
       var floor = getprop("f16/settings/msl-floor");
@@ -174,10 +267,10 @@ var loop_ded = func {# one line is max 24 chars
       text[3] = sprintf("  TOTAL    %5dLBS      ",total);
       text[4] = sprintf("                        ");
     } elsif (page == pMAGV) {
-      var amount = getprop("instrumentation/gps/magnetic-bug-error-deg");
+      var amount = geo.normdeg180(getprop("orientation/heading-deg")-getprop("orientation/heading-magnetic-deg"));
       if (amount != nil) {
         var letter = "W";
-        if (amount <0) {
+        if (amount <0) {#no longer sure, this is correct..
           letter = "E";
           amount = math.abs(amount);
         }
@@ -185,10 +278,39 @@ var loop_ded = func {# one line is max 24 chars
       } else {
         text[2] = sprintf("         GPS OFFLINE");
       }
-      text[0] = sprintf("       MAGV  AUTO       ");
+      text[0] = sprintf("       MAGV  AUTO   %s  ",no);
       text[1] = sprintf("                        ");
       text[3] = sprintf("                        ");
       text[4] = sprintf("                        ");
+    } elsif (page == pLASER) {
+      var code = getprop("f16/avionics/laser-code");
+      var arm = getprop("controls/armament/laser-arm-dmd");
+      text[0] = sprintf("         LASER      %s   ",no);
+      text[1] = sprintf("   TGP CODE    %04d     ",code);
+      text[2] = sprintf("   LST CODE    %04d     ",code);
+      text[3] = sprintf("   A-G: CMBT  A-A: TRNG ");
+      text[4] = sprintf("   LASER ST TIME  16 SEC");
+    } elsif (page == pTIME) {
+      var time   = getprop("/sim/time/gmt-string");
+      text[0] = sprintf("        TIME      %s     ",no);
+      text[1] = sprintf("  SYSTEM     %s",time);
+      text[2] = sprintf("  HACK       00:00:00   ");
+      text[3] = sprintf("  DELTA TOS  00:00:00   ");
+      text[4] = sprintf("                        ");
+    } elsif (page == pCM) {
+      # this page is not authentic, but since the in cockpit display is defunc, pilot need to know these values so I put them into a DED page.
+      var flares   = getprop("ai/submodels/submodel[0]/count");
+      text[0] = sprintf("      CNTM       %s    ",no);
+      text[1] = sprintf("  CHAFF     %3d",flares);
+      text[2] = sprintf("  FLARE     %3d",flares);
+      text[3] = sprintf("                        ");
+      text[4] = sprintf("                        ");
+    } elsif (page == pLIST) {
+      text[0] = sprintf("        LIST      %s     ",no);
+      text[1] = sprintf(" 1ILS  2ALOW 3MAGV COM1 ");
+      text[2] = sprintf(" 4STPT 5CRUS 6TIME COM2 ");
+      text[3] = sprintf(" 7DLNK 8LASR 9CNTM IFF  ");
+      text[4] = sprintf("             0BNGO LIST ");
     }
     line1.setText(text[0]);
     line2.setText(text[1]);
@@ -236,6 +358,26 @@ var magv = func {
 
 var link16 = func {
   page = pLINK;
+}
+
+var laser = func {
+  page = pLASER;
+}
+
+var time = func {
+  page = pTIME;
+}
+
+var list = func {
+  page = pLIST;
+}
+
+var counter = func {
+  page = pCM;
+}
+
+var cruise = func {
+  page = pCRUS;
 }
 
 ## these methods taken from JA37:
